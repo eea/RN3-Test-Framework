@@ -1,0 +1,44 @@
+{
+  "name": "e2e-tests",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "cypress": "cypress",
+    "cypress:run": "cypress run --spec cypress/integration/*.feature",
+    "test:all": "cypress run --spec \"**/*.features\"",
+    "test:each": "cypress run --browser chrome --spec \"**/*.feature\"",
+    "cypress:browser": "cypress run --browser chrome --spec \"**/*.feature\" --reporter mochawesome",
+    "cypress:report": "cypress run --browser chrome --spec \"**/*.features\" --reporter mochawesome",
+    "cypress:sanity": "cypress run -e TAGS=@sanity --browser chrome --spec \"**/*.features\" --reporter mochawesome"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "cypress": "^4.11.0",
+    "cypress-cucumber-preprocessor": "^1.16.2",
+    "cypress-file-upload": "^3.5.3",
+    "mochawesome": "^4.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "reporter": "mochawesome",
+    "reporterOptions": {
+      "overwrite": false,
+      "json": false,
+      "timestamp": "mmddyyyy_HHMMss"
+    },
+    "testFiles": "**/*.{feature,features}",
+    "screenshotsFolder": "cypress/report/mochawesome-report/assets",
+    "video": false,
+    "ignoreTestFiles": ["*.js", "*.md"],
+    "defaultCommandTimeout": 30000,
+    "env": {
+      "default": "http://reportnet3.altia.es/"
+    }
+  }
+  

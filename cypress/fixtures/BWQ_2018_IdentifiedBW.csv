@@ -1,0 +1,4 @@
+BWID|BWName|ShortName|Longitude_BW|Latitude_BW|Coordsys_BW|GroupID|RBDID|RBDName|RBDSUID|RBDSUName|WBID|WBName|NWUnitID|NWUnitName|BWKey|Year_BW|AccessKey|BWType|Change|Closed|BWaterCat|SpecGeoCon
+AT3150000200160020|Hallstättersee, Untersee|123|2213.6479|472.6086|ETRS89|12|AT1000|Donau|AT1200|Donau unterhalb Jochenstein|ATOK4501200|Hallstätter See|12|12|Bad Goisern|2018|AT3150000200160020|1|N|N|L|N
+AT3150000400240010|Offensee, Ebensee|123|13.8393|47.7514|ETRS89|antonio|AT1000|Donau|AT1200|Donau unterhalb Jochenstein|ATOK4500600|Offensee|dataTest|dataTest|Ebensee|2018|AT3150000400240010|1|N|N|L|N
+AT3150000400270010|Traunsee, Rindbach|123|13.7907|47.8112|ETRS89|123|AT1000|Donau|AT1200|Donau unterhalb Jochenstein|ATOK4500500|Traunsee|123|123|Ebensee|2018|AT3150000400270010|1|N|N|L|N
