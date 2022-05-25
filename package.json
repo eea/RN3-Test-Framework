@@ -17,8 +17,9 @@
     "test:all": "cypress run --spec \"**/*.features\"",
     "test:each": "cypress run --browser chrome --spec \"**/*.feature\"",
     "cypress:browser": "cypress run --browser chrome --spec \"**/*.feature\" --reporter mochawesome",
-    "cypress:report": "cypress run --browser chrome --spec \"**/*.features\" --reporter mochawesome",
-    "cypress:sanity": "cypress run -e TAGS=@sanity --browser chrome --spec \"**/*.features\" --reporter mochawesome"
+    "cypress:report": "cypress run --browser chrome --headed --spec \"**/reportnetDocuments.feature\" --reporter mochawesome",
+    "cypress:sanity": "cypress run -e TAGS=@sanity --browser chrome --spec \"**/*.features\" --reporter mochawesome",
+    "cypress:dashboard": "cypress run --browser chrome --headed --spec \"**/reportnetDocuments.feature\" --reporter mochawesome --record --key d0f90743-6dc8-4fa8-bb2d-13ffd871e55f"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,7 +37,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^4.11.0",
+    "cypress": "^9.2.0",
     "cypress-cucumber-preprocessor": "^1.16.2",
     "cypress-file-upload": "^3.5.3",
     "mochawesome": "^4.1.0"

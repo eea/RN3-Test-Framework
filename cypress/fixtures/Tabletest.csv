@@ -1,0 +1,3 @@
+Field name,PK,Required,ReadOnly,Field description,Field type,Extra information
+tabletestf2,true,true,false,description 2,NUMBER_INTEGER,
+tabletestf3,false,false,false,description 3,TEXT,

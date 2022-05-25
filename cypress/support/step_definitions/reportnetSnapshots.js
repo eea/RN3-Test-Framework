@@ -6,7 +6,7 @@ const setDialog = option => {
 };
 
 Then("I can save a copy with description {string}", (description) => {
-    cy.get("input[name=createSnapshotDescription]").type(description);
+    cy.get("#createSnapshotDescription").type(description);
     cy.get('[class^=SnapshotSliderBar_create] >button').click({force:true});
     setDialog("Yes");
 });

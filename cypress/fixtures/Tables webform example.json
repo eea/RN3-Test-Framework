@@ -1,0 +1,1 @@
+{"tables":[{"name":"My_table","label":"General information","title":"General information","multipleRecords":false,"elements":[{"type":"FIELD","name":"Name","title":"Name"},{"type":"FIELD","name":"Surname","title":"Surname"}]}]}

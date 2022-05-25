@@ -16,9 +16,10 @@ Then("I can see the dataset schema {string}", (fields) => {
 
 Then("I can {string} a dataset schema with name {string}", (action, name) => {
   if(action === "create") {
-    cy.get('li:visible>a').contains('New empty dataset schema').click({force:true})
+    cy.get('[class*=BigButton_bigButton] > > ul>li').contains('New empty dataset schema').click({force:true})
     cy.get("input[name=datasetSchemaName]").clear().type(name);
     cy.get('button:contains(Create)').click({force:true})
+    cy.wait(4000)
   } else if(action === 'rename') {
     cy.contains('DS-Test').dblclick()
     cy.wait(500)
@@ -26,12 +27,14 @@ Then("I can {string} a dataset schema with name {string}", (action, name) => {
     cy.wait(500)
   } else if(action === 'delete') {
     cy.get('.pi-caret-down:last').click()
-    cy.get('li:visible>a').contains('Delete').click({force:true})
+    cy.get('[class*=BigButton_bigButton] > > >>li').contains('Delete').click({force:true})
     setDialog("Yes")
   } else if(action === 'clone') {
-    cy.get('li:visible>a').contains('Clone all schemas from dataflow').click({force:true})
+    cy.get('[class*=BigButton_bigButton] > > ul>li').contains('Clone all schemas from dataflow').click({force:true})
     cy.get('[class*=p-datatable-row]:contains('+name+')>td>[class*=TableViewSchemas_checkColum] > .p-checkbox ').click({force:true})
     cy.get('button:contains(Clone selected dataflow)').click({force:true})
+  } else if(action === 'import') {
+    cy.get('[class*=BigButton_bigButton] > > ul>li').contains('Import schema').click({force:true})
   }
 })
   
@@ -40,23 +43,28 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   cy.get('.p-tabview-title:last').click({force:true})
   cy.get('input:visible[placeholder="Table name"]').clear().type(name + "{enter}",{force:true})
   cy.wait(1000)
-  cy.contains(name).click({force:true})
+  cy.contains(name.replace('*/+','')).click({force:true})
   cy.get('textarea[placeholder="Table description"]').type(description,{force:true})
   fields.rawTable.map(fields => {
     cy.wait(1000)
     cy.get('input:visible:last').should('have.attr', 'placeholder', 'Field name').type(fields[0],{force:true})
     cy.wait(500)
     if(fields[4]==="true") {
-      cy.get('[class*=FieldDesigner_checkPK]:last').click()
+      cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:first').click()
     }
-    cy.get('.p-inputtextarea:last').type(fields[1])
+    if(fields[5]==="true") {
+      cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:last').click()
+    }
+    cy.get('#_description').should('have.attr', 'placeholder', 'Field description').type(fields[1])
     cy.wait(500)
     cy.get('[class^=FieldDesigner] > .p-dropdown:last').click({force:true})
     cy.get('li:visible>div>span').contains(fields[2]).click({force:true})
     cy.wait(500)
-    if(fields[2] === 'Single select') {
+    if(fields[2] === 'Single select' || fields[2] ==='Multiple select') {
+      let options = fields[3].replaceAll("{enter}", "; ");
       fillFields(fields[3])
       setDialog("Save")
+      cy.get(`[class*=FieldDesigner_codelistButton]:contains(${options})`)
     } else if(fields[2] === 'Attachment') {
       fillFields(fields[3])
       cy.get('[class*=AttachmentEditor_maxSizeWrapper] > :nth-child(3)').dblclick({force:true})
@@ -66,9 +74,18 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   })
 })
 
-And("I can define a field as a foreign key to table {string}", (table) => {
+And("I can select a {string} {string} with label field {string} and linked field {string} and master field {string} for dataflow {string}", (type, table, label, linked, master, dataflow) => {
   cy.wait(1000)
+  if(type==="Link"){
   cy.get("[aria-label='"+table+"']").click()
+  label && cy.get('.p-dialog-content .p-dropdown').eq(0).click() && cy.get(`.p-input-overlay-visible:contains(${label})`).click()
+  linked && cy.get('.p-dialog-content .p-dropdown').eq(1).click() && cy.get(`.p-input-overlay-visible:contains(${linked})`).click()
+  master && cy.get('.p-dialog-content .p-dropdown').eq(2).click() && cy.get(`.p-input-overlay-visible:contains(${master})`).click()
+} else {
+  cy.get('[class*=LinkSelector_referenceDataflowsDropdownWrapper]> .p-dropdown').click()
+  cy.contains(dataflow).click()
+  cy.get("[aria-label='"+table+"']").click()
+}
   setDialog("Save")
   cy.wait(1000)
 })
@@ -76,10 +93,52 @@ And("I can define a field as a foreign key to table {string}", (table) => {
 And("I can create a unique constraint with table {string} and field {string}", (table, field) => {
   cy.get('[aria-label="' + table + '"]').click()
   cy.get('.p-listbox-item:last').click()
-  cy.get('[data-tip="true"] > .p-button > .p-button-text').click({force:true})
+  cy.get('button:contains(Create):visible:last').click({force:true})
 })
 
 And("the unique constraint {string} is {string} on the list", (unique, property) => {
   cy.wait(2000)
   cy.get('.p-datatable-tbody:contains('+unique+')').should(property)
+})
+
+And("I can change on {string} the type of field {string} on table {string} to {string}", (dataset, field, table, type) => {
+  cy.get(`p:contains(${dataset}):first`).parent().click()
+  cy.get(`.p-tabview-title:contains(${table})`).click()
+  cy.get(`[class*=FieldDesigner_draggableFieldDiv]:contains(${field}) >>> .p-dropdown:contains(Link)`).click()
+  cy.get('li:visible>div>span').contains(type).click({force:true})
+})
+
+And("I can see the fields and configurations {string}", (readonly, data) => {
+  data.rawTable.map(field => {
+    cy.get(`.p-tabview-title:contains(${field[0]})`).click()
+    readonly==='true' ? cy.get(`#${field[1]}`).should('be.disabled') : cy.get(`#${field[1]}`) 
+    cy.get(`[class*=FieldDesigner_]:contains(${field[2]})`)
+    cy.get(`[class*=FieldDesigner_draggableFieldDiv] >>> .p-dropdown:contains(${field[3]})`)
+    if(field[4] === 'required') {
+      cy.get(`[class*=FieldDesigner_draggableFieldDiv]:contains(${field[2]})  >>> [class*=FieldDesigner] > .p-checkbox-box:first`).should('have.attr','aria-checked', 'true')
+    } else if(field[4] === 'Read only table') {
+      cy.get('[class*=FieldsDesigner_switchDiv] > :nth-child(1) > > .p-checkbox-box').should('have.attr','aria-checked', 'true')
+    } else if(field[4] === 'Prefilled') {
+      cy.get('[class*=FieldsDesigner_switchDiv] > :nth-child(2) > > .p-checkbox-box').should('have.attr','aria-checked', 'true')
+    } else if(field[4] === 'Fixed number of records') {
+      cy.get('[class*=FieldsDesigner_switchDiv] > :nth-child(3) > > .p-checkbox-box').should('have.attr','aria-checked', 'true')
+    }
+  })
+})
+
+And("the cell with {string} {string} is disabled", (field, text) => {
+  field === 'name' && cy.get(`#${text}`).should('be.disabled')
+  field === 'description' && cy.contains(text).should('be.disabled')
+  field === 'type' && cy.get(`[class*=FieldDesigner_draggableFieldDiv] >>> .p-dropdown:contains(${text})>>input`).should('be.disabled')
+})
+
+And("I delete dataset data {string} tables", (type) => {
+  if(type === 'with prefilled') {
+    cy.get('#arePrefilledTablesDeleted > .p-checkbox-box').click()
+  } 
+  cy.contains('Yes').click();
+})
+
+And("the table {string} does not exists" ,(table) => {
+  cy.contains(table).should('be.not.visible')
 })

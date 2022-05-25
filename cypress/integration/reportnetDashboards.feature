@@ -8,7 +8,7 @@ Then the "action" "Dashboards" is "<visible>"
 
   Examples: 
     | user          | password | visible     | 
-    | testprovider  | 1234     | not.visible | 
+    | testprovider  | 1234     | not.exist | 
     | testcustodian | 1234     | be.visible  | 
 
 

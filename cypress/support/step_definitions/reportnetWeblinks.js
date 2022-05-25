@@ -1,8 +1,11 @@
-And("I add a webkink with description {string} and url {string}", (description, url) => {
+And("I add a weblink with description {string} and url {string} marked as {string}", (description, url, isPublic) => {
     cy.get("input[name=description]").type(description);
     cy.wait(500)
     cy.get("input[name=url]").type(url);
+    if(isPublic === 'public')
+      cy.get('#isPublic').click();
     cy.get("span.pi-plus:last").click();
+    cy.wait(2000)
   }
 );
 

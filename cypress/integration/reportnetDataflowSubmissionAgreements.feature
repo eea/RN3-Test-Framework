@@ -45,42 +45,13 @@ And the dataflow list has <total> items
     | testcustodian | 1234     | obligationTitle | information | 1     |
 
 
-# # REP-416 REP-415
-# Scenario Outline: As a Reportnet User I can clear filters in the dataflow list by instrument and obligation
-
-# Given I'm logged at Reportnet page as user "<user>" and password "<password>"
-# And the dataflow list has 2 items
-# Then I can filter by "<type>" with "<filter>"
-# And the dataflow list has <total> items
-# Then I can clear "<clear>" filters
-# And the dataflow list has 2 items
-
-#   Examples: 
-#     | user          | password | type            | filter      | clear           | total |
-#     | testcustodian | 1234     | legalInstrument | air         | legalInstrument | 1     | 
-#     | testcustodian | 1234     | obligationTitle | information | obligationTitle | 1     |
-
-
-# # REP-416 REP-415
-# Scenario Outline: As a Reportnet User I can sort the dataflow list by instrument and obligation
-
-# Given I'm logged at Reportnet page as user "<user>" and password "<password>"
-# And I sort the dataflow list by "<field>"
-# Then The first dataflow is "<first>" and the last dataflow is "<last>"
-
-#   Examples: 
-#     | user          | password | field           | first                            | last                       |
-#     | testcustodian | 1234     | legalInstrument | Submission Agreement Test Edited | Dataflow Reportnet Testing |
-#     | testcustodian | 1234     | obligationTitle | Submission Agreement Test Edited | Dataflow Reportnet Testing |
-
-
 # REP-416 REP-415
 Scenario: As a data custodian I can add a new dataflow by searching obligations
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
 And the "action" "Create new dataflow" is "be.visible"
 Then I can "Create" a dataflow with name "Submission Agreement Search Test" and description "Description submission agreement search test" and obligation "Report on Critical Thresholds and Target Loads for Air Pollutant Impacts on Ecosystems (ICP M&M)" with "filters"
-| Spain | Air pollution | CCE - Coordination Center for Effects | | Report |
+| Spain | Air pollution | Coordination Center for Effects | | Report |
 
 
 # REP-416 REP-415
