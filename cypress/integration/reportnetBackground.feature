@@ -163,7 +163,7 @@ And I can click on element "DS-Test"
 And I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
  | Field1 | Field 1 description | Number - Integer | | |
  | Field2 | Field 2 description | Link | | |
-And I can select a "Link" "Table1 - Field1" with label field "" and linked field "" and master field "" for dataflow ""
+And I can select a "Link" "Table1 - Field1" with label field "" and linked field "" and master field "" and ignore case "" for dataflow ""
 And I change to "Tabular data" mode
 And I can add a record 
 |1| |

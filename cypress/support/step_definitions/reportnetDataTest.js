@@ -115,6 +115,18 @@ And("I can click on element {string}", element =>  {
   cy.wait(1000)
 });
 
+And("I can click on the button with text {string}",(element) =>  {
+  cy.wait(4000)
+  cy.get('button').contains(element).click()
+  cy.wait(1000)
+});
+
+And("I can check on the checkbox ignore case", element =>  {
+  cy.wait(4000)
+  cy.get('#ignoreCaseInLinks_check').click() 
+  cy.wait(1000)
+});
+
 And("I can click on the tab {string}", element =>  {
   cy.wait(4000)
   cy.get('span:contains('+element+')').first().parent().click({force:true})
