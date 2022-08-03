@@ -142,12 +142,56 @@ And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table4", description "description Table4" and with following fields
   | table4f1 | description 1 | Number |
   | table4f2 | description 2 | Link   |
-And I can select a "Link" "Table1 - table1f1" with label field "" and linked field "table4f1" and master field "table1f2" for dataflow ""
+And I can select a "Link" "Table1 - table1f1" with label field "" and linked field "table4f1" and master field "table1f2" and ignore case "" for dataflow ""
 And I change to "Tabular data" mode
 And I reload the page
 And I can add a record
   | 1 | link | 1 |
 
+
+# REP-145184
+@sanity
+Scenario: As a data custodian I can ignore case in links tables while filling a dataset schema
+
+Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+And I can click on "DatasetSchema Test"
+And I can click on element "DS-Test2"
+And I can fill a dataset schema with name "Table10", description "description Table10" and with following fields
+| table10f1 | description 1 | Text |  | true  |
+| table10f2 | description 2 | Text |  | false |
+And I change to "Tabular data" mode
+And I can add a record
+  | key1 | test1 |
+And I can add a record
+  | key2 | test2 |
+And I can fill a dataset schema with name "Table11", description "description Table11" and with following fields
+| table11f1 | description 1 | Text |  | true  |
+| table11f2 | description 2 | Link |  | false |
+And I can select a "Link" "Table10 - table10f1" with label field "table10f2" and linked field "" and master field "" and ignore case "" for dataflow ""
+And I change to "Tabular data" mode
+And the "button" "Import table data" is "be.enabled"
+And I import a file "test3.csv"
+And I see the message: "SUCCESS"
+And the "button" "Validate" is "be.enabled"
+And I see the message: "SUCCESS"
+And I reload the page
+And I can see the field "Key2" has 2 error
+And the "button" "Show validations" is "be.visible"
+And the code rule "TC30" with message "The value is not a valid member of the referenced list." is visible on the list of validations
+And I can click on the button with text "Close"
+And I change to "Design" mode
+And I can click on the button with text "Table10 - table10f1"
+And I can check on the checkbox ignore case
+And I can click on the button with text "Save"
+And I change to "Tabular data" mode
+And the "button" "Import table data" is "be.enabled"
+And I check replace data
+And I import a file "test3.csv"
+And I see the message: "SUCCESS"
+And the "button" "Validate" is "be.enabled"
+And I see the message: "SUCCESS"
+And I reload the page
+Then I can see the field "Key2" has 0 error
 
 # REP-1439
 @sanity
@@ -159,7 +203,7 @@ And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table7", description "description Table7" and with following fields
   | table7f1 | description 1 | Number        |
   | table7f2 | description 2 | External link |
-And I can select a "External link" "Table1 - code" with label field "" and linked field "table4f1" and master field "table1f2" for dataflow "Reference dataflow 2"
+And I can select a "External link" "Table1 - code" with label field "" and linked field "table4f1" and master field "table1f2" and ignore case "" for dataflow "Reference dataflow 2"
 And I change to "Tabular data" mode
 And I reload the page
 And I can add a record

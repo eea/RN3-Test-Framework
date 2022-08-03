@@ -74,14 +74,19 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   })
 })
 
-And("I can select a {string} {string} with label field {string} and linked field {string} and master field {string} for dataflow {string}", (type, table, label, linked, master, dataflow) => {
+
+And("I can select a {string} {string} with label field {string} and linked field {string} and master field {string} and ignore case {string} for dataflow {string}", (type, table, label, linked, master, ignore, dataflow) => {
   cy.wait(1000)
   if(type==="Link"){
   cy.get("[aria-label='"+table+"']").click()
   label && cy.get('.p-dialog-content .p-dropdown').eq(0).click() && cy.get(`.p-input-overlay-visible:contains(${label})`).click()
   linked && cy.get('.p-dialog-content .p-dropdown').eq(1).click() && cy.get(`.p-input-overlay-visible:contains(${linked})`).click()
   master && cy.get('.p-dialog-content .p-dropdown').eq(2).click() && cy.get(`.p-input-overlay-visible:contains(${master})`).click()
-} else {
+    if(ignore==="true") {
+      cy.get('#ignoreCaseInLinks_check').click() 
+    }
+  } 
+  else {
   cy.get('[class*=LinkSelector_referenceDataflowsDropdownWrapper]> .p-dropdown').click()
   cy.contains(dataflow).click()
   cy.get("[aria-label='"+table+"']").click()
