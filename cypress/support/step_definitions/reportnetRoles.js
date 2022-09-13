@@ -1,4 +1,4 @@
-import { And } from "cypress-cucumber-preprocessor/steps";
+import { And, Then } from "cypress-cucumber-preprocessor/steps";
 
 Then("I can {string} a Data provider with Representative of {string} and account {string} and Data provider {string}", (action, representative, account, provider) => {
     if(action === "add") {
@@ -164,3 +164,5 @@ And("I can see the status for the {string} dataset", (dataset) => {
   cy.get(`[class*=BigButtonList_datasetItem]>:contains(${dataset})>>.fa-check-circle`).click({force:true})
   cy.contains("Final feedback")
 })
+
+

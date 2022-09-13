@@ -42,7 +42,7 @@ Given(
     cy.get("input[type=text]").type(user);
     cy.get("input[type=password]").type(password);
     cy.get("#kc-login").click();
-    cy.wait(1000)
+    cy.wait(2000)
   }
 );
 

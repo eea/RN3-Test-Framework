@@ -37,9 +37,9 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^9.2.0",
-    "cypress-cucumber-preprocessor": "^1.16.2",
-    "cypress-file-upload": "^3.5.3",
-    "mochawesome": "^4.1.0"
+    "cypress": "^9.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-file-upload": "^5.0.8",
+    "mochawesome": "^7.1.3"
   }
 }

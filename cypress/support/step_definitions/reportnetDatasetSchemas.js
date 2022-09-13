@@ -1,3 +1,5 @@
+const { And, Then } = require("cypress-cucumber-preprocessor/steps");
+
 Then("I can see the dataset schema {string}", (fields) => {
     fields.split(',').map(f => {cy.contains(f)});
   });
