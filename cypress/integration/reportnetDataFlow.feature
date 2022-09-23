@@ -1,7 +1,7 @@
 Feature: Reportnet Dataflow - As an existing user on the Repornet system I want to test the actions with dataflow data
 
 
-@sanity
+@sanity @ignore
 Scenario: As a data custodian I can add a new data flow
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -16,6 +16,7 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
 
 
 # REP-1192 REP-1312 REP-1432 REP-1275
+@ignore
 Scenario Outline: As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page
@@ -38,6 +39,7 @@ And I login as user "testcustodian" and password "1234"
 
 
 # REP-1242 REP-1432 REP-1275
+@ignore
 Scenario: As a public user I can see the list of dataflows by country
 
 Given I'm in Reportnet page
@@ -50,6 +52,7 @@ And I login as user "testcustodian" and password "1234"
 
 
 @sanity
+@ignore
 Scenario: As a data custodian I can edit a data flow
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -57,7 +60,7 @@ And I can click on "New Test"
 And the "action" "Edit" is "be.visible"
 Then I can "Save" a dataflow with name "Test edited" and description "old description Test2" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
 
-
+@ignore
 Scenario Outline: As a Reportnet User I can see the roles on the dataflow list
 
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
@@ -70,6 +73,7 @@ Then I can see the "<role>" on "Dataflow Reportnet Testing"
 
 
 #REP-822
+@ignore
 Scenario: As a reporter, I can see the status of the dataflows
 
 Given I'm logged at Reportnet page as user "testprovider" and password "1234"
@@ -77,6 +81,7 @@ Then I can see the "Delivery status" on "Dataflow Reportnet Testing"
 
 
 #REP-1994
+@ignore
 Scenario Outline: As a Reportnet User I can filter the dataflow list
 
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
@@ -93,6 +98,7 @@ And the dataflow list has <total> items
 
 
 #REP-1994
+@ignore
 Scenario Outline: As a Reportnet User I can clear filters in the dataflow list
 
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
@@ -110,6 +116,7 @@ And the dataflow list has 2 items
 
 
 # REP-1141
+@ignore
 Scenario Outline: As a user, I want to be able to pin and unpin some dataflows in the dataflow list.
 
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
@@ -124,6 +131,7 @@ And I see the message: "<message>"
 
 
 #REP-1994
+@ignore
 Scenario Outline: As a Reportnet User I can sort the dataflow list
 
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
@@ -139,7 +147,7 @@ Then The first dataflow is "<first>" and the last dataflow is "<last>"
 
 
 # REP-1210
-@sanity
+@sanity @ignore
 Scenario Outline: As a custodian, I can Close/open release process
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "<password>"
@@ -162,6 +170,7 @@ Then the button "Release to data collection" is "<visibility>"
 
 
 #REP-1367
+@ignore
 Scenario: As a requester (custodian/steward), in an open dataflow I am able to create more unique constraints
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -173,6 +182,7 @@ Then the table Unique constraints has 2 records
 
 
 #REP-1496
+@ignore
 @sanity
 Scenario: As a registered user I can import a zip file through an external integration
 
@@ -194,6 +204,7 @@ Then I see the notification "Loaded data completed at DS-Test" in the notificati
 
 
 @sanity
+@ignore
 Scenario: As a data custodian I can delete a data flow
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -205,6 +216,7 @@ And I see the message: "SUCCESS"
 
 #REP-413
 @sanity
+@ignore
 Scenario: As a data provider I can create a API-KEY
 
 Given I'm logged at Reportnet page as user "testprovider" and password "1234"
@@ -216,6 +228,7 @@ And new API-key is created
 
 
 #REP-1322
+@ignore
 Scenario: As a registered user I can export with an option (zip XLSX + attachments)
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -228,6 +241,7 @@ And I see the message: "SUCCESS"
 
 
 #REP-1206
+@ignore
 Scenario: As a registered user I can export with an option (zip CVS + attachments)
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -240,6 +254,7 @@ And I see the message: "SUCCESS"
 
 
 #REP-1396
+@ignore
 Scenario: As a registered user I can export with an option (.xlsx with validations)
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -253,6 +268,7 @@ And I see the message: "SUCCESS"
 
 #REP-1438 REP-1605
 @sanity
+@ignore
 Scenario: As a custodian/steward, I want to be able to create a Reference dataflow.
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -289,6 +305,7 @@ And the "action" "Referencing dataflows" is "be.visible"
 
 
 #REP-1438
+@ignore
 Scenario: As a custodian/steward, I want to be able to update data in a reference dataset if it is marked as updatable.
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -307,6 +324,7 @@ And I "can not" update the cell with the text "test2" to the text "test4" in a "
 
 #REP-1604
 @sanity
+@ignore
 Scenario: As a admin, I want to be able to create a Business dataflow.
 
 Given I'm logged at Reportnet page as user "test.admin" and password "1234"
@@ -320,6 +338,7 @@ And I can "Add" a editor "testcustodian@reportnet.net" with permissions "CUSTODI
 
 #REP-1689
 @sanity
+@ignore
 Scenario: As a custodian, I want to be able to create a Citizen and science dataflow.
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -329,6 +348,7 @@ Then I can "Create" a dataflow with name "Citizen test dataflow" and description
 
 
 #REP-1647
+@ignore
 Scenario: As an admin, I want to be able to see all dataflows.
 
 Given I'm logged at Reportnet page as user "test.admin" and password "1234"
@@ -349,6 +369,7 @@ Then I can click on "Citizen test"
 
 
 #REP-1687
+@ignore
 Scenario: As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -388,6 +409,7 @@ And I login as user "testcustodian" and password "1234"
 
 
 #REP-1755
+@ignore
 Scenario Outline: As a custodian or provider, I should not be able to manage requesters in a Business dataflow
 
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
@@ -402,6 +424,7 @@ And the "action" "Manage requesters" is "not.exist"
 
 
 #REP-1841
+@ignore
 Scenario: As a Custodian I want to be able to assign a Lead Reporter whose email doesn't exist to a Dataflow
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -414,6 +437,7 @@ Then I can see a tag next to the invalid lead reporter email
 
 
 #REP-1841
+@ignore
 Scenario: As a Lead Reporter I want to be able to assign a Reporter whose email doesn't exist to a Dataflow
 
 Given I'm logged at Reportnet page as user "testleadreporter" and password "1234"
@@ -425,6 +449,7 @@ Then I can see a tag next to the invalid reporter email
 
 
 #REP-2161
+@ignore
 Scenario: As a custodian/steward I can enable to automatically delete reporter data and snapshots with technical acceptance of delivery
 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
@@ -434,6 +459,7 @@ Then I can check enable automatic delete reporter data and snaphots
 
 
 #REP-2231
+@ignore
 Scenario Outline: As a user I can/cannot edit a dataflow name
 
 Given I'm logged at Reportnet page as user "<user>" and password "1234"
@@ -445,3 +471,29 @@ Examples:
     | dataflowName               | dataflowNameEdited                 | user          | action       |
     | Dataflow Reportnet Testing | Dataflow Reportnet Testing edited  | test.admin    | can edit     |
     | Dataflow Reportnet Testing | Dataflow Reportnet Testing edited  | testcustodian | cannot edit  | 
+
+
+#REP-153679
+Scenario: As a admin, I want to be able to select countries in a Business dataflow.
+
+Given I'm logged at Reportnet page as user "test.admin" and password "1234"
+And I can click on tab "Business dataflows"
+And the "action" "Create new dataflow" is "be.visible"
+Then I can "Create" a business dataflow with name "Business dataflow countries" and description "new description Business Test countries" and obligation "(C) Information on the assessment regime (Article 7)" and company "Countries" with fmeUser "Reportnet3"
+Then I can click on "Business dataflow countries"
+And the "action" "Manage requesters" is "be.visible"
+And I can "Add" a editor "te.custodian@reportnet.com" with permissions "CUSTODIAN"
+
+
+Scenario Outline: As a custodian I want to be able to manage lead reporters with representative of countries
+
+Given I'm logged at Reportnet page as user "test.custodian" and password "b{IPs8e?N6"
+And I can filter by "name" with "<dataflowName>"
+And I can click on "<dataflowName>"
+Examples: 
+    | dataflowName               | dataflowNameEdited                 | 
+    | Dataflow Reportnet Testing | Dataflow Reportnet Testing edited  |
+And I can click on element "Manage lead reporters"
+Then representative should contain 'Countries'
+And representing field should include all countries
+

@@ -14,7 +14,7 @@
     "ignoreTestFiles": ["*.js", "*.md"],
     "defaultCommandTimeout": 50000,
     "env": {
-      "default": "https://sandbox.reportnet.europa.eu/"
+      "default": "https://test.reportnet.europa.eu/",
+      "TAGS": "not @ignore"
     }
-    
   }

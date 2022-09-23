@@ -1,4 +1,5 @@
 const { After, And, Given, Before, Then } = require("cypress-cucumber-preprocessor/steps");
+//import homePage from "../../pages/homePage";
 
 const setDialog = option => {
    cy.contains(option)
@@ -38,6 +39,7 @@ Given(
   "I'm logged at Reportnet page as user {string} and password {string}",
   (user, password) => {
     cy.visit(Cypress.env("default"));
+    //homePage.clickonLoginLink();
     cy.contains('Login').click()
     cy.get("input[type=text]").type(user);
     cy.get("input[type=password]").type(password);
@@ -178,7 +180,7 @@ And("I can toggle publicly available check", () => {
 And("I import a file {string}", file => {
   const fileName = file;
   cy.fixture(fileName).then(fileContent => {
-    cy.get("input[type=file]:first").upload({
+    cy.get("input[type=file]:first").attachFile({
       fileContent,
       fileName,
       mimeType: "text/plain"
@@ -783,3 +785,16 @@ And ("I can see the step {string} is finished", (step) => {
     cy.get("[class*=Step_stepLabel]:contains('Imported data')")
   }
 });
+
+
+Then ("representative should contain Countries", () =>{
+  cy.get('.ManageLeadReporters_dataProvidersDropdown__1CF6Z label span').contains("Countries")
+})
+
+And ("representing field should include all countries",()=>{
+    cy.fixture('countries').then(function(testcountries) {
+    this.testcountries = testcountries
+  })
+    cy.get('[class="ManageLeadReporters_selectDataProvider__1roIt"] option').each(($ele, i) => {
+      expect($ele).to.have.text(this.testcountries.dropdownValues[i])})
+  })
