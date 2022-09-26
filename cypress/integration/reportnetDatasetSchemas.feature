@@ -5,7 +5,7 @@ Scenario Outline: As a Reportnet User I can see Dataset Schemas to dataflow
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
 And I can click on "Dataset Reportnet Testing"
 And I can click on element "Dataflow help"
-And I can click on the tab "Dataset schemas"
+And I click on the tab "Dataset schemas"
 Then I can see the dataset schema "<datasetName>"
 
 Examples:
@@ -19,7 +19,7 @@ Scenario Outline: As a data custodian I can see Dataset Schemas to dataflow
 Given I'm logged at Reportnet page as user "<user>" and password "<password>"
 And I can click on "Dataset Reportnet Testing"
 And I can click on element "Dataflow help"
-And I can click on the tab "Dataset schemas"
+And I click on the tab "Dataset schemas"
 Then I can see the dataset schema "<datasetName>"
 And I can see the dataset schema "<tableSchemaName>"
 And I can see the dataset schema "<tableFields>"

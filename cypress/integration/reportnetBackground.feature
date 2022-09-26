@@ -44,7 +44,7 @@ Scenario: As a data custodian I can see the integration to FME is already create
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-And I can click on the tab "External integrations"
+And I click on the tab "External integrations"
 And The integration "Export EU Dataset" is "be.visible" on the list of external integrations
 
 
@@ -54,7 +54,7 @@ Scenario: As a custodian/steward, I want to be able to configure schema in the E
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-And I can click on the tab "External integrations"
+And I click on the tab "External integrations"
 Then I can "Edit" the new external integration "Export EU Dataset"
 | schema | dbo |
 
@@ -66,7 +66,7 @@ Scenario: As a custodian, I want to configure an integration to pre-filled data 
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-And I can click on the tab "External integrations"
+And I click on the tab "External integrations"
 When I can click on "Create external integration"
 Then I can "Create" the new external integration ""
 | Test External integration | Test description | ReportNetTesting | prefilling.fmw | EXPORT | csv | p1 | 1 |
@@ -79,7 +79,7 @@ Scenario: As a custodian, I want to configure an integration with duplicated nam
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-And I can click on the tab "External integrations"
+And I click on the tab "External integrations"
 When I can click on "Create external integration"
 Then I can "Create" the new external integration "duplicated"
 | Test External integration | Test description | ReportNetTesting | prefilling.fmw | EXPORT | csv | p1 | 1 |
@@ -91,7 +91,7 @@ Scenario: As a custodian,  I see the list of external exports with the name
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-And I can click on the tab "Export dataset data"
+And I click on the tab "Export dataset data"
 Then I can see the list of external "exports" with the name "Test External integration"
 
 
@@ -323,7 +323,7 @@ Scenario: As a custodian, I can allow multiple extensions in external integratio
 Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-And I can click on the tab "External integrations"
+And I click on the tab "External integrations"
 When I can click on "Create external integration"
 Then I can "Create" the new external integration ""
 | Test External integration multiple extension | Test description | ReportNetTesting | prefilling.fmw | IMPORT | csv, zip | p1 | 1 |

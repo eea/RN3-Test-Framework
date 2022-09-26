@@ -338,7 +338,7 @@ Scenario: As a steward support, I want to be able to upload, edit and delete web
 Given I'm logged at Reportnet page as user "teststewardsupport" and password "1234"
 And I can click on "Roles Reportnet Testing"
 And I can click on element "Dataflow help"
-And I can click on the tab "Web links"
+And I click on the tab "Web links"
 And the "button" "Add" is "be.enabled"
 When I add a weblink with description "Test webLink" and url "www.google.es" marked as "private"
 Then the table "Web links" has 1 records

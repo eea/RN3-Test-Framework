@@ -28,10 +28,19 @@ const lastDayOfMonth = () => {
   const date = new Date(today.getFullYear(), today.getMonth(), 0);
   return today.getDate()
 }
+let bddGeneratedValues = new Map();
+Before(() => {
+  console.log("start execution");
+});
+
+
 
 After(() => {
+  bddGeneratedValues.clear();
   cy.get(".fa-power-off:first").click({ force: true });
-  setDialog("Yes")
+  setDialog("Yes");
+  console.log("end execution");
+
 });
 
 
@@ -129,7 +138,7 @@ And("I can check on the checkbox ignore case", element => {
   cy.wait(1000)
 });
 
-And("I can click on the tab {string}", element => {
+And("I click on the tab {string}", element => {
   cy.wait(4000)
   cy.get('span:contains(' + element + ')').first().parent().click({ force: true })
   cy.wait(1000)
@@ -338,8 +347,6 @@ Then("I can {string} a business dataflow with name {string} and description {str
   cy.get("#dataflowName").clear().type(name);
   cy.get("#dataflowDescription").clear().type(description);
   cy.get('[class*=ManageBusinessDataflow_search] > .p-button').click({ force: true })
-
-
   cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
   cy.get('button:contains(OK):visible').click({ force: true })
   cy.get('[class*=ManageBusinessDataflow_groupOfCompaniesWrapper] > .p-dropdown-label').click({ force: true })
@@ -780,6 +787,15 @@ And("I can see the step {string} is finished", (step) => {
   }
 });
 
+And("I click on close button", () => {
+  cy.get('.p-button-text.p-c').contains("Close").click({ force: true })
+})
+
+And("I logout", () => {
+  cy.get(".fa-power-off:first").click({ force: true });
+  setDialog("Yes")
+})
+
 Then("representative should contain Countries", () => {
   cy.get('.ManageLeadReporters_dataProvidersDropdown__1CF6Z label span').contains("Countries")
 })
@@ -793,3 +809,28 @@ And("representing field should include all {string}", file => {
     })
   });
 });
+
+Then("I create a business dataflow with name {string} and description {string} and obligation {string} and company {string} with fmeUser {string}", (name, description, obligation, company, fmeUser) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2,7);
+  const typeValue = name+dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get("#dataflowDescription").clear().type(description);
+  cy.get('[class*=ManageBusinessDataflow_search] > .p-button').click({ force: true })
+  cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+  cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('[class*=ManageBusinessDataflow_groupOfCompaniesWrapper] > .p-dropdown-label').click({ force: true })
+  cy.contains(company).click({ force: true })
+  cy.get('[class*=ManageBusinessDataflow_fmeUsersWrapper] > .p-dropdown-label').click({ force: true })
+  cy.contains(fmeUser).click({ force: true })
+  cy.get(".p-button-text:contains('Create')").click({ force: true })
+  cy.wait(5000);
+});
+
+And("I click on {string}", name => {
+  cy.wait(1000);
+  bddGeneratedValues.get(name)
+  cy.contains(bddGeneratedValues.get(name)).click({ force: true })
+  cy.wait(1000);
+})
