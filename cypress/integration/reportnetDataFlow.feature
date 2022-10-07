@@ -492,5 +492,19 @@ Then I can click on element "Manage lead reporters"
 And representative should contain Countries
 And representing field should include all "countries.json"
 
+#REP-154980
+Scenario: As a lead reporter I want to be able to see the label for ongoing imports
+
+Given I'm logged at Reportnet page as user "te.custodian" and password "1234"
+And the "action" "Create new dataflow" is "be.visible"
+Then I "Create" a dataflow with name "Test import message" and description "test import message" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I can click on "Test import message"
+And the "action" "Manage requesters" is "be.visible"
+And I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
+And I click on close button 
+And I logout
+And I'm logged at Reportnet page as user "test.provider" and password "1234"
+
+
 
 
