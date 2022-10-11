@@ -842,4 +842,17 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   console.log(bddGeneratedValues);
   cy.get("#dataflowName").clear().type(typeValue);
   cy.get("#dataflowDescription").clear().type(description);
-  cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })});
+  cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
+  cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+  cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.wait(5000)})
+
+  Then ("I click on the import dataset data button", ()=>{
+    cy.get('.p-button-text.p-c').contains("Import dataset data").click()
+    cy.get('.p-menuitem-link null MenuItem_menuItem__M5zV1').contains('ZIP (.csv for each table)').click({force: true})
+  })
+
+  And ("Import is locked is visible", ()=>{
+    cy.get('.p-button-text.p-c').contains("Import is locked").should('be.viible')
+  })
