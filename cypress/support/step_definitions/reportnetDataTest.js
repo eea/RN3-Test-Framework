@@ -188,15 +188,18 @@ And("I can toggle publicly available check", () => {
 
 And("I import a file {string}", file => {
   const fileName = file;
-  cy.fixture(fileName).then(fileContent => {
+  cy.fixture(fileName).then(fileContent => { 
     cy.get("input[type=file]:first").attachFile({
       fileContent,
       fileName,
-      mimeType: "text/plain"
-    });
+      mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', encoding:'utf8'
+    })
   });
-  cy.contains("Upload").click();
-  cy.wait(1000)
+  cy.log("print length" + file.length)
+  cy.log("print size" + file.size)
+  cy.wait(5000)
+  cy.contains("Upload").click().debug()
+  cy.wait(2000)
 });
 
 And("I delete the table data", () => {
@@ -849,10 +852,11 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.wait(5000)})
 
   Then ("I click on the import dataset data button", ()=>{
-    cy.get('.p-button-text.p-c').contains("Import dataset data").click()
-    cy.get('.p-menuitem-link null MenuItem_menuItem__M5zV1').contains('ZIP (.csv for each table)').click({force: true})
+    cy.get('.p-button-text.p-c').contains('Import dataset data').click()
+    cy.get('.p-toolbar-group-left .p-menuitem-link').contains('ZIP (.csv for each table)').click({force:true})
   })
 
   And ("Import is locked is visible", ()=>{
-    cy.get('.p-button-text.p-c').contains("Import is locked").should('be.viible')
+    cy.get('.pi.pi-spin.pi-spinner  p-c.p-button-icon-left').contains('Import is locked').should('be.visible')
+    //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
   })
