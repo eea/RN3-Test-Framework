@@ -186,17 +186,21 @@ And("I can toggle publicly available check", () => {
 })
 
 
-And("I import a file {string}", file => {
+And("I import a {string} file {string}", (filetype, file) => {
   const fileName = file;
-  cy.fixture(fileName).then(fileContent => {
-    cy.get("input[type=file]:first").attachFile({
-      fileContent,
-      fileName,
-      mimeType: "text/plain"
-    });
+  const fileType = filetype;
+  cy.fixture(fileName).then(fileContent => { 
+  
+cy.get('input[type="file"]').attachFile(fileName,{ mimeType: 'application/' + fileType + '' 
+    //cy.get("input[type=file]:first").attachFile({
+     // fileContent:fileContent.toString(),
+    //  fileName:fileName,
+     // mimeType:'application/zip'
+    })
   });
-  cy.contains("Upload").click();
-  cy.wait(1000)
+  cy.wait(2000)
+  cy.contains("Upload").click().debug()
+  cy.wait(2000)
 });
 
 And("I delete the table data", () => {
@@ -833,4 +837,27 @@ And("I click on {string}", name => {
   bddGeneratedValues.get(name)
   cy.contains(bddGeneratedValues.get(name)).click({ force: true })
   cy.wait(1000);
-})
+});
+
+Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2,7);
+  const typeValue = name+dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get("#dataflowDescription").clear().type(description);
+  cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
+  cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+  cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.wait(5000)})
+
+  Then ("I click on the import dataset data button", ()=>{
+    cy.get('.p-button-text.p-c').contains('Import dataset data').click()
+    cy.get('.p-toolbar-group-left .p-menuitem-link').contains('ZIP (.csv for each table)').click({force:true})
+  })
+
+  And ("Import is locked is visible", ()=>{
+    cy.get('.pi.pi-spin.pi-spinner  p-c.p-button-icon-left').contains('Import is locked').should('be.visible')
+    //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
+  })

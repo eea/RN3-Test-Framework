@@ -474,9 +474,10 @@ Examples:
 
 
 #REP-153679
+@ignore
 Scenario: As a admin, I want to be able to select countries in a Business dataflow.
 
-Given I'm logged at Reportnet page as user "test.admin" and password "b{IPs8e?N6"
+Given I'm logged at Reportnet page as user "reportnet_admin" and password "admin"
 And I can click on tab "Business dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow test countries" and description " Business dataflow test countries" and obligation "(C) Information on the assessment regime (Article 7)" and company "Countries" with fmeUser "Reportnet3"
@@ -491,6 +492,29 @@ And I click on "Business dataflow test countries"
 Then I can click on element "Manage lead reporters"
 And representative should contain Countries
 And representing field should include all "countries.json"
+
+#REP-154980
+
+Scenario: As a lead reporter I want to be able to see the label for ongoing imports
+
+Given I'm logged at Reportnet page as user "te.custodian" and password "1234"
+And the "action" "Create new dataflow" is "be.visible"
+Then I "Create" a reporting dataflow with name "Test import message" and description "test import message" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I click on "Test import message"
+And the "action" "Manage requesters" is "be.visible"
+And I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
+And I click on close button
+And I logout
+And I'm logged at Reportnet page as user "test.provider" and password "1234"
+And I click on "Test import message"
+And I can click on element "New schema"
+And I can "create" a dataset schema with name "test import status"
+And I can click on element "test import status"
+And I can fill a dataset schema with name "Test2", description "Test2" and with following fields
+| Test2 | testt | Text | | true  |
+Then I click on the import dataset data button
+And I import a "zip" file "Test2.zip"
+
 
 
 
