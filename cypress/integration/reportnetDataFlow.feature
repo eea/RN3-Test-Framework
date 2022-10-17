@@ -513,7 +513,7 @@ And I can click on element "test import status"
 And I can fill a dataset schema with name "Test2", description "Test2" and with following fields
 | Test2 | testt | Text | | true  |
 Then I click on the import dataset data button
-And I import a file "Test2.zip"
+And I import a "zip" file "Test2.zip"
 
 
 

@@ -186,18 +186,19 @@ And("I can toggle publicly available check", () => {
 })
 
 
-And("I import a file {string}", file => {
+And("I import a {string} file {string}", (filetype, file) => {
   const fileName = file;
+  const fileType = filetype;
   cy.fixture(fileName).then(fileContent => { 
-    cy.get("input[type=file]:first").attachFile({
-      fileContent,
-      fileName,
-      mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', encoding:'utf8'
+  
+cy.get('input[type="file"]').attachFile(fileName,{ mimeType: 'application/' + fileType + '' 
+    //cy.get("input[type=file]:first").attachFile({
+     // fileContent:fileContent.toString(),
+    //  fileName:fileName,
+     // mimeType:'application/zip'
     })
   });
-  cy.log("print length" + file.length)
-  cy.log("print size" + file.size)
-  cy.wait(5000)
+  cy.wait(2000)
   cy.contains("Upload").click().debug()
   cy.wait(2000)
 });
