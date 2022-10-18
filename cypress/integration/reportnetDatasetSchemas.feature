@@ -1,22 +1,35 @@
 Feature: Reportnet Dataset Schemas - As an existing user on the Repornet system I want to test the Dataset Schemas page
 @ignore
-Scenario Outline: As a Reportnet User I can see Dataset Schemas to dataflow
+Scenario Outline: As Data Custodian I can see Dataset Schemas to dataflow
 
-Given I'm logged at Reportnet page as user "<user>" and password "<password>"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "Dataset Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Dataset schemas"
 Then I can see the dataset schema "<datasetName>"
 
 Examples:
-  | user          | password | datasetName |
-  | testprovider  | 1234     | DS-Test     |
-  | testcustodian | 1234     | DS-Test     |
+  | datasetName |
+  | DS-Test     |
+
+Scenario Outline: As Data Provider I can see Dataset Schemas to dataflow
+
+Given I'm logged at Reportnet page as "userProvider"
+And I can click on "Dataset Reportnet Testing"
+And I can click on element "Dataflow help"
+And I click on the tab "Dataset schemas"
+Then I can see the dataset schema "<datasetName>"
+
+Examples:
+  | datasetName |
+  | DS-Test     |
+
+
 
 @ignore
 Scenario Outline: As a data custodian I can see Dataset Schemas to dataflow
 
-Given I'm logged at Reportnet page as user "<user>" and password "<password>"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "Dataset Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Dataset schemas"
@@ -25,14 +38,14 @@ And I can see the dataset schema "<tableSchemaName>"
 And I can see the dataset schema "<tableFields>"
 
 Examples:
-  | user          | password | datasetName | tableSchemaName | tableFields   |
-  | testcustodian | 1234     | DS-Test     | Table1          | Field1,Field2 |
+  | datasetName | tableSchemaName | tableFields   |
+  | DS-Test     | Table1          | Field1,Field2 |
 
 
 @sanity @ignore
 Scenario: As a custodian/steward, I want to be able to create a Reference dataflow.
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "Reference dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 Then I can "Create" a reference dataflow with name "Reference dataflow 2" and description "new description Reference Test"
@@ -51,7 +64,7 @@ And I see the message: "SUCCESS"
 @sanity
 Scenario: As a data custodian I can create new dataflow and dataset schema
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
 And I can "Create" a dataflow with name "DatasetSchema Test" and description "Description New Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I can click on "DatasetSchema Test"
@@ -63,7 +76,7 @@ And I can click on "DS-Test"
 @sanity
 Scenario: As a data custodian I can rename a dataset schema
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can "rename" a dataset schema with name "DS-Test2"
 Then I can click on "DS-Test2"
@@ -71,7 +84,7 @@ Then I can click on "DS-Test2"
 @ignore
 Scenario: No dashboard when there is no data
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then the "button" "Dashboards" is "be.disabled"
@@ -80,7 +93,7 @@ Then the "button" "Dashboards" is "be.disabled"
 @sanity
 Scenario: As a data custodian I can fill a dataset schema
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
@@ -100,7 +113,7 @@ And I can add a record
 @ignore
 Scenario: As a user I can filter data
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 And I change to "Tabular data" mode
@@ -113,7 +126,7 @@ Then the dataset table "Table1" has 1 records
 @ignore
 Scenario: As a data custodian I can fill a dataset schema with a single select
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
@@ -125,7 +138,7 @@ Then I can fill a dataset schema with name "Table2", description "description Ta
 @sanity
 Scenario: As a data custodian I can check a field as a pk
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table3", description "description Table3" and with following fields
@@ -137,7 +150,7 @@ Then I can fill a dataset schema with name "Table3", description "description Ta
 @sanity @ignore
 Scenario: As a data custodian I can fill a dataset schema with a link configuring the label of the linked fields and the conditional fields
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table4", description "description Table4" and with following fields
@@ -154,7 +167,7 @@ And I can add a record
 @sanity
 Scenario: As a data custodian I can ignore case in links tables while filling a dataset schema
 
-Given I'm logged at Reportnet page as user "test.custodian" and password "b{IPs8e?N6"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 And I can fill a dataset schema with name "Table10", description "description Table10" and with following fields
@@ -198,7 +211,7 @@ Then I can see the field "Key2" has 0 error
 @sanity @ignore
 Scenario: As a custodian/steward, I want to be able to create an external link to a reference dataset inside a reference dataflow.
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table7", description "description Table7" and with following fields
@@ -215,7 +228,7 @@ And I can add a record
 @sanity @ignore
 Scenario: As a data custodian I can fill a dataset schema with a URL, Phone Number, Attachment, Line, Polygon, DateTime
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table5", description "description Table5" and with following fields
@@ -233,7 +246,7 @@ Then I can fill a dataset schema with name "Table5", description "description Ta
 # REP-820
 Scenario: As a custodian, I want the point as the PoC
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 And I can fill a dataset schema with name "Table6", description "description Table6" and with following fields
@@ -248,7 +261,7 @@ Then I can update the point cell "35, 35" to EPSG "LAEA-ETRS89 - 3035" and see t
 @sanity
 Scenario: As a data custodian I can manage UNIQUE constraints in tables
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 When I can click on "Add unique constraint"
@@ -261,7 +274,7 @@ And the unique constraint "table3f2" is "be.visible" on the list
 @sanity
 Scenario: As a data custodian I can import a schema
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "import" a dataset schema with name "Dataflow Reportnet Testing"
@@ -283,7 +296,7 @@ And the code rule "testName" is "be.visible" on the list of rules
 # REP-1185
 Scenario: As a Custodian, I want to be able to manage the external integrations for all datasets in all datasets in reporting.
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "Dataset Reportnet Testing"
 When I can click on element "DS-Test"
 Then the cell with "name" "Field1" is disabled
@@ -297,7 +310,7 @@ And the "button" "QC rules" is "be.visible"
 # REP-696
 @sanity
 Scenario: As a Custodian, I want to clone all schemas from other dataflow (from my dataflows)
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "clone" a dataset schema with name "Dataset Reportnet Testing"
@@ -308,7 +321,7 @@ Then I can click on element "CLONE_DS-Test"
 # REP-1320
 Scenario: As a user I can see the schemas by name in dataflow page
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 Then the first dataset is "CLONE_DS-Test" and last is "IMPORTED_DS-Test"
 
@@ -316,7 +329,7 @@ Then the first dataset is "CLONE_DS-Test" and last is "IMPORTED_DS-Test"
 #REP-1360
 Scenario: As a requester, the characters to create table and fields are limited
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 When I can fill a dataset schema with name "Table*/+test", description "description Tabletest" and with following fields
@@ -328,7 +341,7 @@ Then the table "Tabletest" has 0 records
 @sanity
 Scenario: As a  custodian/steward/editor write I can Import CSV to create/update/replace schemas
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "create" a dataset schema with name "DS-Import"
@@ -349,7 +362,7 @@ Then I can see the fields and configurations "<readonly>"
 @sanity
 Scenario: As a  custodian/steward/editor write I can Export CSV to create/update/replace schemas
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Import"
 When I can click on "Export definition"
@@ -358,7 +371,7 @@ When I can click on "Export definition"
 #REP-1323
 Scenario: As a custodian I can delete the dataset data (but prefilled tables)
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 When the "button" "Delete dataset data" is "be.enabled"
@@ -392,7 +405,7 @@ Then the table "Table7" has 0 records
 #REP-1323
 Scenario: As a custodian I can delete the dataset data (with prefilled tables)
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 When the "button" "Delete dataset data" is "be.enabled"
@@ -407,7 +420,7 @@ Then the table "Table1" has 0 records
 @ignore
 Scenario: As a data custodian I can delete a dataset schema
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And I can "delete" a dataset schema with name "DS-Test2"
 Then the "button" "DS-Test2" is "not.exist"
@@ -415,7 +428,7 @@ Then the "button" "DS-Test2" is "not.exist"
 @ignore
 Scenario: As a data custodian I can delete a data flow
 
-Given I'm logged at Reportnet page as user "testcustodian" and password "1234"
+Given I'm logged at Reportnet page as "userCustodian"
 And I can click on "DatasetSchema Test"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "DatasetSchema Test"

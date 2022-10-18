@@ -1,4 +1,4 @@
-const { After, And, Given, Before, Then } = require("cypress-cucumber-preprocessor/steps");
+const {And, Given, Before, Then, After } = require("cypress-cucumber-preprocessor/steps");
 //import homePage from "../../pages/homePage";
 
 const setDialog = option => {
@@ -33,38 +33,36 @@ Before(() => {
   console.log("start execution");
 });
 
-
-
 After(() => {
-  bddGeneratedValues.clear();
   cy.get(".fa-power-off:first").click({ force: true });
   setDialog("Yes");
   console.log("end execution");
+  })
 
-});
-
+//Given(
+//  "I'm logged at Reportnet page as user {string} and password {string}",
+// (user, password) => {
+  //  cy.viewport("iphone-7")
+    //cy.visit(Cypress.env("default"));
+    //homePage.clickonLoginLink();
+    //cy.contains('Login').click()
+    //cy.get("input[type=text]").type(user);
+    //cy.get("input[type=password]").type(password);
+    //cy.get("#kc-login").click();
+    //cy.wait(2000)
+  //}
+//);
 
 Given(
-  "I'm logged at Reportnet page as user {string} and password {string}",
-  (user, password) => {
+  "I'm logged at Reportnet page as {string}",
+  (user) => {
     cy.visit(Cypress.env("default"));
     //homePage.clickonLoginLink();
     cy.contains('Login').click()
-    cy.get("input[type=text]").type(user);
-    cy.get("input[type=password]").type(password);
+    cy.get("input[type=text]").type(Cypress.env(user).username);
+    cy.get("input[type=password]").type(Cypress.env(user).password);
     cy.get("#kc-login").click();
     cy.wait(2000)
-  }
-);
-
-And(
-  "I login as user {string} and password {string}",
-  (user, password) => {
-    cy.contains('Login').click()
-    cy.get("input[type=text]").type(user);
-    cy.get("input[type=password]").type(password);
-    cy.get("#kc-login").click();
-    cy.wait(1000)
   }
 );
 
@@ -196,6 +194,20 @@ cy.get('input[type="file"]').attachFile(fileName,{ mimeType: 'application/' + fi
      // fileContent:fileContent.toString(),
     //  fileName:fileName,
      // mimeType:'application/zip'
+    })
+  });
+  cy.wait(2000)
+  cy.contains("Upload").click().debug()
+  cy.wait(2000)
+});
+
+And("I import a file {string}",  file => {
+  const fileName = file;
+    cy.fixture(fileName).then(fileContent => {
+      cy.get("input[type=file]:first").attachFile({
+      fileContent:fileContent.toString(),
+      fileName:fileName,
+      mimeType:'application/zip'
     })
   });
   cy.wait(2000)
@@ -832,7 +844,7 @@ Then("I create a business dataflow with name {string} and description {string} a
   cy.wait(5000);
 });
 
-And("I click on {string}", name => {
+And("I click on {string}", (name) => {
   cy.wait(1000);
   bddGeneratedValues.get(name)
   cy.contains(bddGeneratedValues.get(name)).click({ force: true })
