@@ -5,8 +5,8 @@ Scenario: As a data custodian I can add a new data flow
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-Then I can "Create" a dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
-And I can click on "Roles Reportnet Testing"
+Then I "Create" a reporting dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I click on "Roles Reportnet Testing"
 And I can click on element "New schema"
 And I can "create" a dataset schema with name "DS-Test"
 And I can click on "DS-Test"
@@ -16,7 +16,7 @@ And I can click on "DS-Test"
 Scenario: As a data custodian I can add a Data provider
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
 
@@ -24,7 +24,7 @@ Then I can "add" a Data provider with Representative of "EEA Member countries" a
 Scenario: As a data custodian I can edit a Data provider
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "edit" a Data provider with Representative of "EEA Member countries" and account "test.custodian@reportnet.net" and Data provider "France"
 
@@ -32,7 +32,7 @@ Then I can "edit" a Data provider with Representative of "EEA Member countries" 
 Scenario: As a data custodian I can delete a Data provider
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "delete" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "France"
 
@@ -41,7 +41,7 @@ Then I can "delete" a Data provider with Representative of "EEA Member countries
 Scenario: As a CUSTODIAN or STEWARD, I want to share access rights with editors in my dataflow
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
 When I can "Add" a editor "test.provider@abc.com" with permissions "EDITOR WRITE"
 And The user logout
@@ -56,7 +56,7 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
 Scenario: As a data custodian I can add a Data provider
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
 
@@ -65,7 +65,7 @@ Then I can "add" a Data provider with Representative of "EEA Member countries" a
 Scenario: As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I see the message: "SUCCESS"
@@ -76,12 +76,12 @@ And I see the message: "SUCCESS"
 Scenario: As a LEAD REPORTER, I want to share access rights with reporters for a dataflow
 
 Given I'm logged at Reportnet page as "userProvider"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And the "action" "Manage reporters" is "be.visible"
 When I can "Add" a editor "test.custodian2@abc.com" with permissions "REPORTER WRITE"
 And The user logout
 And I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "DS-Test"
 
 
@@ -90,7 +90,7 @@ And I can click on element "DS-Test"
 Scenario: As a data custodian I can add more representatives when a DC is already created
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "addLast" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Belgium"
 And I reload the page
@@ -101,20 +101,21 @@ And I can click on element "Belgium"
 
 
 # REP-987 REP-1349
+@ignore
 Scenario: As a custodian I can see all the users of the dataflow for this country
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
 And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
-| national.spain@reportnet.net   | NATIONAL COORDINATOR |
-| test.custodian@abc.com   | CUSTODIAN            |
+| test.custodian2@abc.com   | CUSTODIAN            |
 | test.custodian2@abc.com   | REPORTER WRITE       |
 | test.provider@abc.com     | LEAD REPORTER        |
 
 
 # REP-1349
+@ignore
 Scenario: As a NC I can see all the users of the dataflow for this country
 
 Given I'm logged at Reportnet page as "userNC"
@@ -129,8 +130,8 @@ Then I can see the specified record in the table
 # REP-1349
 Scenario: As a reporter I can see all the users of the dataflow for this country
 
-Given I'm logged at Reportnet page as user "test.provider@abc.com" and password "b{IPs8e?N6"
-And I can click on "Roles Reportnet Testing"
+Given I'm logged at Reportnet page as "userProvider"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
 And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
@@ -141,8 +142,8 @@ Then I can see the specified record in the table
 @sanity
 Scenario: As a LEAD REPORTER, I want to release data with validations passed.
 
-Given I'm logged at Reportnet page as user "test.provider" and password "b{IPs8e?N6"
-And I can click on "Roles Reportnet Testing"
+Given I'm logged at Reportnet page as "userProvider"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
 And I can click on element "DS-Test"
 And I can add a record
@@ -157,7 +158,7 @@ And I see the message: "SUCCESS"
 #REP-2230
 Scenario Outline: As a reporter in multiple providers inside a dataflow, I can see the status for each provider in dataflow list and inside the dataflow
 
-Given I'm logged at Reportnet page as user "test.provider" and password "b{IPs8e?N6"
+Given I'm logged at Reportnet page as "userProvider"
 And I can see the "<delivery status>" on "Roles Reportnet Testing"
 And I can click on "Roles Reportnet Testing"
 Then I can see the status for the "Spain" dataset
@@ -171,21 +172,21 @@ Then I can see the status for the "Spain" dataset
 Scenario: As a custodian, I want to see the list of current custodians/stewards and be able to add custodians/stewards/observers.
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "testleadreporter@reportnet.net" with permissions "STEWARD"
 And I can see the specified record in the table
 | testleadreporter@reportnet.net | STEWARD |
-And I can "Add" a editor "testobserver@reportnet.net" with permissions "OBSERVER"
+And I can "Add" a editor "test.observer@abc.com" with permissions "OBSERVER"
 And I can see the specified record in the table
-| testobserver@reportnet.net | OBSERVER |
+| test.observer@abc.com | OBSERVER |
 And The user logout
-Then I'm logged at Reportnet page as "userProvider"
-And I can click on "Roles Reportnet Testing"
+Then I'm logged at Reportnet page as "userLeadReporter"
+And  I click on "Roles Reportnet Testing"
 And I can click on element "DS-Test"
 And The user logout
 And I'm logged at Reportnet page as "userObserver"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Dashboards"
 And I can see the Release status dashboard and Validation dashboards
 And I can go to the dataflow page
@@ -200,7 +201,7 @@ And the "button" "Copy Data Collections to EU Datasets" is "not.exist"
 Scenario: As a observer user I am able to see (read only) help
 
 Given I'm logged at Reportnet page as "userObserver"
-When I can click on "Roles Reportnet Testing"
+When I click on "Roles Reportnet Testing"
 Then I can click on element "Dataflow help"
 And the table "Supporting documents" has 0 records
 And I can go to the dataflow page
@@ -229,23 +230,23 @@ And I can go to the dataflow page
 Scenario: As a custodian, I want to see the list of current custodians/stewards and be able to remove observer users for a dataflow.
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
-When I can "delete" a editor "testobserver@reportnet.net" with permissions "OBSERVER"
+When I can "delete" a editor " test.observer@abc.com" with permissions "OBSERVER"
 And The user logout
 And I'm logged at Reportnet page as "userObserver"
-Then The dataflow "Roles Reportnet Testing" doesn't exist
+Then The reporting Dataflow "Roles Reportnet Testing" doesn't exist
 
 
 # REP-1336 REP-1858
 Scenario: As a custodian, I want to see the list of all users in a dataflow
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And the "action" "Users list by country" is "be.visible"
 Then I can see the specified records in the table
 
-    | CUSTODIAN     | test.custodian@abc.com   |         |
+    | CUSTODIAN     | test.custodian2@abc.com   |         |
     | LEAD REPORTER | test.provider@abc.com     | Belgium |
     | LEAD REPORTER | test.provider@abc.com     | Spain   |
     | STEWARD | testleadreporter@reportnet.net       |         |
@@ -257,7 +258,7 @@ And I see the message: "SUCCESS"
 Scenario: As an admin, I want to be able to see a helpdesk inside a dataflow containing info about all the datasets
 
 Given I'm logged at Reportnet page as "userAdmin"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And the "action" "Datasets info" is "be.visible"
 Then I can see the specified records in the table
     | DS-Test                   | Design dataset    |              |
@@ -273,7 +274,7 @@ Then I can see the specified records in the table
 Scenario: As a custodian, I want to be able to add a new role called STEWARD SUPPORT in manage requesters
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I can click on "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "teststewardsupport@reportnet.net" with permissions "STEWARD SUPPORT"
 And I can see the specified record in the table
@@ -283,8 +284,8 @@ And I can see the specified record in the table
 # REP-2046
 Scenario: As a steward support, I want to be able to edit data in a test dataset
 
-Given I'm logged at Reportnet page as "userStewardSupport"
-And I can click on "Roles Reportnet Testing"
+Given I'm logged at Reportnet page as "userLeadReporter"
+And I click on "Roles Reportnet Testing"
 When I can click on element "Test dataset"
 And I can click on element "Test Dataset - DS-Test"
 Then I can add a record 
@@ -295,8 +296,8 @@ And I delete the dataset table row 1
 # REP-2046
 Scenario: As a steward support, I want to be able to manage Technical feedback/Manual technical acceptance
 
-Given I'm logged at Reportnet page as "userStewardSupport"
-And I can click on "Roles Reportnet Testing"
+Given I'm logged at Reportnet page as "userLeadReporter"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Manual technical acceptance"
 When I see the datasets with manual technical acceptance for dataflow "Roles Reportnet Testing"
 Then I can change the dataset "Spain" to status "Technically accepted" and message "status changed"
@@ -312,8 +313,8 @@ Then I can "delete" the message "Test message"
 # REP-2046
 Scenario: As a steward support, I want to be able to upload, edit, download and delete documents
 
-Given I'm logged at Reportnet page as "userStewardSupport"
-And I can click on "Roles Reportnet Testing"
+Given I'm logged at Reportnet page as "userLeadReporter"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Dataflow help"
 And the "button" "Upload" is "be.enabled"
 When I "upload" the document "test.csv" with description "test description" and language "English" marked as "private"
@@ -335,8 +336,8 @@ Then the table "Supporting documents" has 0 records
 # REP-2046
 Scenario: As a steward support, I want to be able to upload, edit and delete weblinks
 
-Given I'm logged at Reportnet page as "userStewardSupport"
-And I can click on "Roles Reportnet Testing"
+Given I'm logged at Reportnet page as "userLeadReporter"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
 And the "button" "Add" is "be.enabled"
@@ -350,8 +351,8 @@ Then the table "Web links" has 0 records
 # REP-2046
 Scenario: As a steward support, I want to be able to manage lead reporters
 
-Given I'm logged at Reportnet page as "userStewardSupport"
-And I can click on "Roles Reportnet Testing"
+Given I'm logged at Reportnet page as "userLeadReporter"
+And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 And I can "addToCountry" a Data provider with Representative of "EEA Member countries" and account "testleadreporter@reportnet.net" and Data provider "Belgium"
 And I can click on element "Manage lead reporters"
@@ -370,7 +371,7 @@ Then I can add a national coordinator with email "testobserver@reportnet.net" fo
 # REP-2229
 Scenario: As a user designed as national coordinator I can see all the dataflows from a country
 
-Given I'm logged at Reportnet page as "userObserver"
+Given I'm logged at Reportnet page as "userObserver2"
 And I can filter by "Role" with "NATIONAL COORDINATOR"
 Then I can click on "Roles Reportnet Testing"
 

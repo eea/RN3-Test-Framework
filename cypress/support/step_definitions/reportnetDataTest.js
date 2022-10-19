@@ -118,6 +118,12 @@ And("The dataflow {string} doesn't exist", (dataflow) => {
   cy.contains(dataflow).should('be.not.exist')
 })
 
+Then ("The reporting Dataflow {string} doesn't exist", (name)=>{
+  bddGeneratedValues.get(name)
+  cy.contains(bddGeneratedValues.get(name)).should('be.not.exist')
+});
+
+
 And("I can click on element {string}", element => {
   cy.wait(1000);
   cy.get('p:contains(' + element + '):first').parent().click()

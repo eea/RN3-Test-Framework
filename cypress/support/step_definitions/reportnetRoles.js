@@ -96,7 +96,7 @@ And("I can {string} a editor {string} with permissions {string}",(action, editor
     cy.get(".p-button > .p-button-text:contains(Save)").click({force:true})
     cy.wait(5000)
   } else {
-    cy.get('.p-datatable-tbody > tr:contains(testobserver) >>>[class*=ActionsColumn_deleteRowButton] > .p-button-text').click({force:true})
+    cy.get('.p-datatable-tbody > tr:contains(test.observer) >>>[class*=ActionsColumn_deleteRowButton] > .p-button-text').click({force:true})
     cy.get(".p-button > .p-button-text:contains(Yes)").click({force:true})
     cy.wait(5000)
   }
