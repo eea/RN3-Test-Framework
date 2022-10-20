@@ -213,7 +213,7 @@ And("I import a file {string}",  file => {
       cy.get("input[type=file]:first").attachFile({
       fileContent:fileContent.toString(),
       fileName:fileName,
-      mimeType:'application/zip'
+      mimeType:'csv/plain'
     })
   });
   cy.wait(2000)
@@ -388,11 +388,13 @@ And("I can {string} a reference dataflow with name {string} and description {str
 
 Then("I can delete the dataflow {string}", (name) => {
   cy.wait(3000)
+  bddGeneratedValues.get(name)
   cy.contains("Delete this dataflow").click({ force: true });
-  cy.get("input:visible").type(name, { force: true });
+  cy.get("input:visible").type(bddGeneratedValues.get(name), { force: true });
   cy.wait(1000)
   cy.get('.p-button-danger:visible').click()
 })
+
 
 Then("I can click on the option {string}", (name) => {
   cy.contains(name).click()
@@ -869,6 +871,19 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.get('button:contains(OK):visible').click({ force: true })
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000)})
+
+  Then("I {string} a reference dataflow with name {string} and description {string}", (action, name, description) => {
+    const dynamicallyGeneratedName = Math.random().toString(36).substring(2,7);
+    const typeValue = name+dynamicallyGeneratedName;
+    bddGeneratedValues.set(name, typeValue);
+    console.log(bddGeneratedValues);
+    cy.get("#dataflowName").clear().type(typeValue);
+    cy.get("#dataflowDescription").clear().type(description);
+    cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
+    //cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+    cy.get('button:contains(OK):visible').click({ force: true })
+    cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+    cy.wait(5000)})
 
   Then ("I click on the import dataset data button", ()=>{
     cy.get('.p-button-text.p-c').contains('Import dataset data').click()
