@@ -255,6 +255,7 @@ And I see the message: "SUCCESS"
 
 
 # REP-1478
+@ignore
 Scenario: As an admin, I want to be able to see a helpdesk inside a dataflow containing info about all the datasets
 
 Given I'm logged at Reportnet page as "userAdmin"
@@ -276,15 +277,15 @@ Scenario: As a custodian, I want to be able to add a new role called STEWARD SUP
 Given I'm logged at Reportnet page as "userCustodian2"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "teststewardsupport@reportnet.net" with permissions "STEWARD SUPPORT"
+And I can "Add" a editor "test.stewardsupport@abc.com" with permissions "STEWARD SUPPORT"
 And I can see the specified record in the table
-| teststewardsupport@reportnet.net | STEWARD SUPPORT |
+| test.stewardsupport@abc.com| STEWARD SUPPORT |
 
 
 # REP-2046
 Scenario: As a steward support, I want to be able to edit data in a test dataset
 
-Given I'm logged at Reportnet page as "userLeadReporter"
+Given I'm logged at Reportnet page as "userStewardSupport"
 And I click on "Roles Reportnet Testing"
 When I can click on element "Test dataset"
 And I can click on element "Test Dataset - DS-Test"
@@ -296,7 +297,7 @@ And I delete the dataset table row 1
 # REP-2046
 Scenario: As a steward support, I want to be able to manage Technical feedback/Manual technical acceptance
 
-Given I'm logged at Reportnet page as "userLeadReporter"
+Given I'm logged at Reportnet page as "userStewardSupport"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manual technical acceptance"
 When I see the datasets with manual technical acceptance for dataflow "Roles Reportnet Testing"
@@ -313,7 +314,7 @@ Then I can "delete" the message "Test message"
 # REP-2046
 Scenario: As a steward support, I want to be able to upload, edit, download and delete documents
 
-Given I'm logged at Reportnet page as "userLeadReporter"
+Given I'm logged at Reportnet page as "userStewardSupport"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Dataflow help"
 And the "button" "Upload" is "be.enabled"
@@ -336,7 +337,7 @@ Then the table "Supporting documents" has 0 records
 # REP-2046
 Scenario: As a steward support, I want to be able to upload, edit and delete weblinks
 
-Given I'm logged at Reportnet page as "userLeadReporter"
+Given I'm logged at Reportnet page as "userStewardSupport"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
@@ -351,7 +352,7 @@ Then the table "Web links" has 0 records
 # REP-2046
 Scenario: As a steward support, I want to be able to manage lead reporters
 
-Given I'm logged at Reportnet page as "userLeadReporter"
+Given I'm logged at Reportnet page as "userStewardSupport"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 And I can "addToCountry" a Data provider with Representative of "EEA Member countries" and account "testleadreporter@reportnet.net" and Data provider "Belgium"
@@ -381,13 +382,5 @@ Scenario: As an admin I can not filter by role
 
 Given I'm logged at Reportnet page as "userAdmin"
 Then I can not filter by "role"
-
-
-# sREP-2220
-Scenario: As an admin I can see the job log for validations
-
-Given I'm logged at Reportnet page as "userAdmin"
-And the "action" "Validations status" is "be.visible"
-Then I can see the list of validations and a refresh button
      
 
