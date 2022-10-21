@@ -71,9 +71,10 @@ Given("I'm in Reportnet page", () => {
   //cy.visit('https://rn3test.eionet.europa.eu/');  //=>TEST
 })
 
-And("I {string} see the publicly dataflow {string}", (visibility, dataflow) => {
+And("I {string} see the publicly dataflow {string}", (visibility, name) => {
   if (visibility === 'can') {
-    cy.contains(dataflow)
+    bddGeneratedValues.get(name)
+    cy.contains(bddGeneratedValues.get(name))
   } else {
     cy.get(`[class*=PublicFrontpage_currentDataflows] > :nth-child(2) > div:contains(${dataflow})`).should('be', 'not.visible')
   }
@@ -203,7 +204,7 @@ cy.get('input[type="file"]').attachFile(fileName,{ mimeType: 'application/' + fi
     })
   });
   cy.wait(2000)
-  cy.contains("Upload").click().debug()
+  cy.contains("Upload").click()
   cy.wait(2000)
 });
 
@@ -217,7 +218,7 @@ And("I import a file {string}",  file => {
     })
   });
   cy.wait(2000)
-  cy.contains("Upload").click().debug()
+  cy.contains("Upload").click()
   cy.wait(2000)
 });
 
@@ -857,6 +858,13 @@ And("I click on {string}", (name) => {
   bddGeneratedValues.get(name)
   cy.contains(bddGeneratedValues.get(name)).click({ force: true })
   cy.wait(1000);
+});
+
+And ("I can click on {string}", (name)=>{
+  cy.wait(1000);
+  cy.contains(name).click({ force: true })
+  cy.wait(1000)
+
 });
 
 Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
