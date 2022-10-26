@@ -20,9 +20,6 @@ And I can click on element "Manage lead reporters"
 And I can see the representative "Spain" "test.provider@abc.com"
 And I click on close button
 And I can go to the dataflow page
-And I can click on element "Create data collections"
-Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
-And I see the message: "SUCCESS"
 And the "action" "Manage requesters" is "be.visible"
 When I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
 

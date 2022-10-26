@@ -44,13 +44,13 @@ Then(/^I can download the document$/, () => {
   And("I upload the webform from file {string}", (file) => {  
     const fileName = file;
     cy.fixture(fileName).then(fileContent => {
-      cy.get("input[type=file]:first").upload({
+      cy.get("input[type=file]:first").attachFile({
         fileContent,
         fileName,
         mimeType: "text/plain"
       });
     });
-   cy.get("[data-for=confirmBtn]:contains(Create)").click()
+   cy.get("[data-for=confirmBtn]:contains('Create')").click()
    cy.wait(2000)
   }
 );

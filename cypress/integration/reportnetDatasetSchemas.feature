@@ -112,9 +112,9 @@ And I can fill a dataset schema with name "Table10", description "description Ta
 | table10f2 | description 2 | Text |  | false |
 And I change to "Tabular data" mode
 And I can add a record
-  | key1 | test1 |
+  | Key1 | Test1 |
 And I can add a record
-  | key2 | test2 |
+  | Key2 | Test2 |
 And I can fill a dataset schema with name "Table11", description "description Table11" and with following fields
 | table11f1 | description 1 | Text |  | true  |
 | table11f2 | description 2 | Link |  | false |

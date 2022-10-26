@@ -1,4 +1,4 @@
-const {And, Given, Before, Then, After } = require("cypress-cucumber-preprocessor/steps");
+const { And, Given, Before, Then, After } = require("cypress-cucumber-preprocessor/steps");
 //import homePage from "../../pages/homePage";
 
 const setDialog = option => {
@@ -37,20 +37,20 @@ After(() => {
   cy.get(".fa-power-off:first").click({ force: true });
   setDialog("Yes");
   console.log("end execution");
-  })
+})
 
 //Given(
 //  "I'm logged at Reportnet page as user {string} and password {string}",
 // (user, password) => {
-  //  cy.viewport("iphone-7")
-    //cy.visit(Cypress.env("default"));
-    //homePage.clickonLoginLink();
-    //cy.contains('Login').click()
-    //cy.get("input[type=text]").type(user);
-    //cy.get("input[type=password]").type(password);
-    //cy.get("#kc-login").click();
-    //cy.wait(2000)
-  //}
+//  cy.viewport("iphone-7")
+//cy.visit(Cypress.env("default"));
+//homePage.clickonLoginLink();
+//cy.contains('Login').click()
+//cy.get("input[type=text]").type(user);
+//cy.get("input[type=password]").type(password);
+//cy.get("#kc-login").click();
+//cy.wait(2000)
+//}
 //);
 
 Given(
@@ -119,7 +119,7 @@ And("The dataflow {string} doesn't exist", (dataflow) => {
   cy.contains(dataflow).should('be.not.exist')
 })
 
-Then ("The reporting Dataflow {string} doesn't exist", (name)=>{
+Then("The reporting Dataflow {string} doesn't exist", (name) => {
   bddGeneratedValues.get(name)
   cy.contains(bddGeneratedValues.get(name)).should('be.not.exist')
 });
@@ -194,13 +194,14 @@ And("I can toggle publicly available check", () => {
 And("I import a {string} file {string}", (filetype, file) => {
   const fileName = file;
   const fileType = filetype;
-  cy.fixture(fileName).then(fileContent => { 
-  
-cy.get('input[type="file"]').attachFile(fileName,{ mimeType: 'application/' + fileType + '' 
-    //cy.get("input[type=file]:first").attachFile({
-     // fileContent:fileContent.toString(),
-    //  fileName:fileName,
-     // mimeType:'application/zip'
+  cy.fixture(fileName).then(fileContent => {
+
+    cy.get('input[type="file"]').attachFile(fileName, {
+      mimeType: 'application/' + fileType + ''
+      //cy.get("input[type=file]:first").attachFile({
+      // fileContent:fileContent.toString(),
+      //  fileName:fileName,
+      // mimeType:'application/zip'
     })
   });
   cy.wait(2000)
@@ -208,13 +209,13 @@ cy.get('input[type="file"]').attachFile(fileName,{ mimeType: 'application/' + fi
   cy.wait(2000)
 });
 
-And("I import a file {string}",  file => {
+And("I import a file {string}", file => {
   const fileName = file;
-    cy.fixture(fileName).then(fileContent => {
-      cy.get("input[type=file]:first").attachFile({
-      fileContent:fileContent.toString(),
-      fileName:fileName,
-      mimeType:'csv/plain'
+  cy.fixture(fileName).then(fileContent => {
+    cy.get("input[type=file]:first").attachFile({
+      fileContent: fileContent.toString(),
+      fileName: fileName,
+      mimeType: 'csv/plain'
     })
   });
   cy.wait(2000)
@@ -781,13 +782,45 @@ And("I can see the list of webforms", (fields) => {
   cy.get(`tr:contains(${data[0]}):contains(${data[1]})`)
 })
 
+And("I can see the updated list of webforms {string}", (name) => {
+let nametable = bddGeneratedValues.get(name)
+ cy.get('.p-dialog-content .p-paginator-page').then(listing => {
+  const listingCount = Cypress.$(listing).length;
+  cy.log("Edw einai to length " +listingCount)
+  for (var i = 0; i < listingCount ; i++) {
+    if (cy.get('.p-dialog-content .p-paginator-next').should('be.enabled')) {
+      cy.get('.p-dialog-content .p-datatable-row').each(($row) => {
+        if (cy.wrap($row).get('td').contains(nametable)) {
+            cy.log("Here is the webfrom " +nametable)
+        }
+        else {
+          cy.get(('.p-paginator-next')).should('be.enabled').click()
+        }
+
+      })
+
+    }
+  }
+
+
+  }
+    )
+})
+
+
+
+
+
 And("I can add a new webform {string} and {string}", (name, type) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
   cy.contains("Add").click({ force: true })
-  cy.get("#name").type(name)
-  cy.get("#type").click({ force: true })
+  cy.get("#name").clear().type(typeValue);
+  cy.get("#type").click({ force: true });
   cy.get('.p-dropdown-items').contains(type).click({ force: true })
-  cy.contains("Create").click({ force: true })
-  cy.contains("Yes").click({ force: true })
+  cy.contains('Create').click({ force: true })
+  cy.contains('Yes').click({ force: true })
 })
 
 Then("I {string} a dataflow with name {string}", (action, name) => {
@@ -836,8 +869,8 @@ And("representing field should include all {string}", file => {
 });
 
 Then("I create a business dataflow with name {string} and description {string} and obligation {string} and company {string} with fmeUser {string}", (name, description, obligation, company, fmeUser) => {
-  const dynamicallyGeneratedName = Math.random().toString(36).substring(2,7);
-  const typeValue = name+dynamicallyGeneratedName;
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
   bddGeneratedValues.set(name, typeValue);
   console.log(bddGeneratedValues);
   cy.get("#dataflowName").clear().type(typeValue);
@@ -860,16 +893,16 @@ And("I click on {string}", (name) => {
   cy.wait(1000);
 });
 
-And ("I can click on {string}", (name)=>{
-  cy.wait(1000);
-  cy.contains(name).click({ force: true })
-  cy.wait(1000)
+//And ("I can click on {string}", (name)=>{
+//cy.wait(1000);
+//cy.contains(name).click({ force: true })
+//cy.wait(1000)
 
-});
+//});
 
 Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
-  const dynamicallyGeneratedName = Math.random().toString(36).substring(2,7);
-  const typeValue = name+dynamicallyGeneratedName;
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
   bddGeneratedValues.set(name, typeValue);
   console.log(bddGeneratedValues);
   cy.get("#dataflowName").clear().type(typeValue);
@@ -878,27 +911,29 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
   cy.get('button:contains(OK):visible').click({ force: true })
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
-  cy.wait(5000)})
+  cy.wait(5000)
+})
 
-  Then("I {string} a reference dataflow with name {string} and description {string}", (action, name, description) => {
-    const dynamicallyGeneratedName = Math.random().toString(36).substring(2,7);
-    const typeValue = name+dynamicallyGeneratedName;
-    bddGeneratedValues.set(name, typeValue);
-    console.log(bddGeneratedValues);
-    cy.get("#dataflowName").clear().type(typeValue);
-    cy.get("#dataflowDescription").clear().type(description);
-    cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
-    //cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
-    cy.get('button:contains(OK):visible').click({ force: true })
-    cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
-    cy.wait(5000)})
+Then("I {string} a reference dataflow with name {string} and description {string}", (action, name, description) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get("#dataflowDescription").clear().type(description);
+  cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
+  //cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+  cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.wait(5000)
+})
 
-  Then ("I click on the import dataset data button", ()=>{
-    cy.get('.p-button-text.p-c').contains('Import dataset data').click()
-    cy.get('.p-toolbar-group-left .p-menuitem-link').contains('ZIP (.csv for each table)').click({force:true})
-  })
+Then("I click on the import dataset data button", () => {
+  cy.get('.p-button-text.p-c').contains('Import dataset data').click()
+  cy.get('.p-toolbar-group-left .p-menuitem-link').contains('ZIP (.csv for each table)').click({ force: true })
+})
 
-  And ("Import is locked is visible", ()=>{
-    cy.get('.pi.pi-spin.pi-spinner  p-c.p-button-icon-left').contains('Import is locked').should('be.visible')
-    //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
-  })
+And("Import is locked is visible", () => {
+  cy.get('.pi.pi-spin.pi-spinner  p-c.p-button-icon-left').contains('Import is locked').should('be.visible')
+  //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
+})
