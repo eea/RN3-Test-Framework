@@ -5,9 +5,8 @@ Scenario: As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
-When I can "Create" a dataflow with name "Weblinks Reportnet Testing" and description "Dataflow weblinks test" and obligation "Agenda 21 National Report" with "filters"
-| | | | | Agenda |
-And I can click on "Weblinks Reportnet Testing"
+When I "Create" a reporting dataflow with name "Weblinks Reportnet Testing" and description "Dataflow weblinks test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I click on "Weblinks Reportnet Testing"
 And I can click on element "New schema"
 And I can "create" a dataset schema with name "DS-Test"
 When I can click on element "DS-Test"
@@ -28,7 +27,7 @@ Then I can see the representative "Spain" "test.provider@abc.com"
 Scenario: As a data custodian I can add weblinks to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
-And I can click on "Weblinks Reportnet Testing"
+And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
 And the "button" "Add" is "be.enabled"
@@ -42,7 +41,7 @@ And The first record is "New webLink" and the last record is "Test webLink"
 Scenario: As a data custodian I can edit weblinks to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
-And I can click on "Weblinks Reportnet Testing"
+And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
 Then I can update the weblink with the description "Edit weblink" to the text "www.google2.com"
@@ -51,7 +50,7 @@ Then I can update the weblink with the description "Edit weblink" to the text "w
 Scenario: As a data custodian I can remove weblinks to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
-And I can click on "Weblinks Reportnet Testing"
+And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
 When I "delete" the row 1
@@ -62,7 +61,7 @@ Then the table "Web links" has 1 records
 Scenario: As a custodian/steward, I want to be able to set the links as public
 
 Given I'm logged at Reportnet page as "userCustodian"
-And I can click on "Weblinks Reportnet Testing"
+And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
 And the "button" "Add" is "be.enabled"
@@ -73,7 +72,7 @@ When I add a weblink with description "Public webLink" and url "www.google.es" m
 Scenario: As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as "userCustodian"
-And I can click on "Weblinks Reportnet Testing"
+And I click on "Weblinks Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I see the message: "SUCCESS"

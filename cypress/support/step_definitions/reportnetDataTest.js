@@ -783,18 +783,21 @@ And("I can see the list of webforms", (fields) => {
 })
 
 And("I can see the updated list of webforms {string}", (name) => {
-let nametable = bddGeneratedValues.get(name)
+cy.wait(1000)
+bddGeneratedValues.get(name)
  cy.get('.p-dialog-content .p-paginator-page').then(listing => {
   const listingCount = Cypress.$(listing).length;
   cy.log("Edw einai to length " +listingCount)
   for (var i = 0; i < listingCount ; i++) {
     if (cy.get('.p-dialog-content .p-paginator-next').should('be.enabled')) {
       cy.get('.p-dialog-content .p-datatable-row').each(($row) => {
-        if (cy.wrap($row).get('td').contains(nametable)) {
-            cy.log("Here is the webfrom " +nametable)
+        //cy.log($row)
+        if (cy.wrap($row).get('td').contains(bddGeneratedValues.get(name))) {
+          
+            cy.log("Here is the webfrom")
         }
         else {
-          cy.get(('.p-paginator-next')).should('be.enabled').click()
+          cy.get(('.p-dialog .p-paginator-next')).click({force: true})
         }
 
       })
@@ -819,8 +822,9 @@ And("I can add a new webform {string} and {string}", (name, type) => {
   cy.get("#name").clear().type(typeValue);
   cy.get("#type").click({ force: true });
   cy.get('.p-dropdown-items').contains(type).click({ force: true })
-  cy.contains('Create').click({ force: true })
-  cy.contains('Yes').click({ force: true })
+  //cy.contains('Create').click()
+  //cy.contains('Yes').click()
+  
 })
 
 Then("I {string} a dataflow with name {string}", (action, name) => {

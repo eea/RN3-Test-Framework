@@ -50,7 +50,8 @@ Then(/^I can download the document$/, () => {
         mimeType: "text/plain"
       });
     });
-   cy.get("[data-for=confirmBtn]:contains('Create')").click()
-   cy.wait(2000)
+    cy.wait(2000)
+    cy.get("[data-for=confirmBtn] button").click({force: true})
+   
   }
 );

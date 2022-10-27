@@ -45,3 +45,4 @@ And I can add a new webform "test" and "Tables"
 And the "button" "Select file" is "be.enabled"
 And I upload the webform from file "Tables webform example.json"
 Then I can see the updated list of webforms "test"
+
