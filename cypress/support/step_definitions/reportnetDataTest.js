@@ -72,6 +72,7 @@ Given("I'm in Reportnet page", () => {
 })
 
 And("I {string} see the publicly dataflow {string}", (visibility, name) => {
+  cy.wait(500)
   if (visibility === 'can') {
     bddGeneratedValues.get(name)
     cy.contains(bddGeneratedValues.get(name))
@@ -81,8 +82,9 @@ And("I {string} see the publicly dataflow {string}", (visibility, name) => {
 })
 
 
-And("I can see for dataflow {string} the instrument {string}, status {string}", (dataflow, instrument, status) => {
-  cy.get(`[class*=PublicDataflows_content] > div:contains(${dataflow})`)
+And("I can see for dataflow {string} the instrument {string}, status {string}", (name, instrument, status) => {
+  bddGeneratedValues.get(name)
+  cy.get(`[class*=PublicDataflows_content] > div:contains(${bddGeneratedValues.get(name)})`)
   cy.get(`[class*=PublicDataflows_content] > div:contains(${dataflow}):contains(${instrument})`)
   cy.get(`[class*=PublicDataflows_content] > div:contains(${dataflow}):contains(${status})`)
 })
@@ -104,9 +106,9 @@ And("I can see the dataflows page", () => {
 });
 
 And("I can click on {string}", element => {
-  cy.wait(1000);
+  cy.wait(1500);
   cy.contains(element).click({ force: true })
-  cy.wait(1000);
+  cy.wait(1500);
 })
 
 And("I can click on tab {string}", element => {
