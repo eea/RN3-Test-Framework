@@ -20,7 +20,7 @@ Scenario: As a data custodian I can edit a data flow
 Given I'm logged at Reportnet page as 'userCustodian'
 And I click on "New Test"
 And the "action" "Edit" is "be.visible"
-Then I "Save" a dataflow with name "Test edited" and description "old description Test2" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
+Then I can "Save" a dataflow with name "Test edited" and description "old description Test2" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
 
 
 #REP-1994
@@ -58,25 +58,13 @@ And the dataflow list has 2 items
     | description | dataflow  | 1     |
 
 
-# REP-1141
-@ignore
-Scenario Outline: As a user, I want to be able to pin some dataflows in the dataflow list.
-
-Given I'm logged at Reportnet page as 'userCustodian'
-Then I can pin the dataflow "<Test edited>"
-And I see the message: "message"
-
-  Examples:
-    | pin   | dataflow    | message                        |
-    | pin   | Test edited | You have pinned the dataflow   |
-    | unpin | Test edited | You have unpinned the dataflow |
 
 # REP-1141
 Scenario: As a user, I want to be able to pin some dataflows in the dataflow list.
 
 Given I'm logged at Reportnet page as 'userCustodian'
 Then I can pin the dataflow "Test edited"
-And I see the message for pinned dataflows "Test edited"
+And I see the message for pinned dataflow "Test edited"
 
   
 
@@ -85,8 +73,8 @@ And I see the message for pinned dataflows "Test edited"
 Scenario: As a user, I want to be able to unpin some dataflows in the dataflow list.
 
 Given I'm logged at Reportnet page as 'userCustodian'
-Then I can "unpin" the dataflow "Test edited"
-And I see the message: "message"
+Then I can pin the dataflow "Test edited"
+And I see the message for pinned dataflow "Test edited"
  
 
 

@@ -235,6 +235,13 @@ And("I see the message: {string}", message => {
   cy.contains(message)
 });
 
+And("I see the message for pinned dataflow {string}", (name) => {
+  bddGeneratedValues.get(name)
+  cy.wait(1500)
+  cy.contains(message)
+  cy.contains("You have pinned the dataflow" , bddGeneratedValues.get(name))
+});
+
 And("I click on the notification {string} link", message => {
   cy.contains(message)
     .find("a[href]")
@@ -340,7 +347,11 @@ And("I paste the data from file {string}", function (file) {
 });
 
 Then("I can {string} a dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
-  cy.get("#dataflowName").clear().type(name);
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
   cy.get("#dataflowDescription").clear().type(description);
   cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
 
@@ -417,9 +428,10 @@ Then("I can clear dataflow filters", () => {
   cy.get('[class*=Filters_resetButton]').children().click({ force: true })
 })
 
-Then("I can filter by {string} with {string}", (field, filter) => {
+Then("I can filter by {string} with {string}", (field, filter,name) => {
+  bddGeneratedValues.get(name)
   if (field === 'name' || field === 'description' || field === "legalInstrument" || field === "obligationTitle" || field === "dataflowName") {
-    cy.get(`[id='${field}_input']`).type(filter)
+    cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
   } else if (field === 'expirationDate') {
     cy.get(`[id='${field}_input']`).click({ force: true })
     cy.get('.p-datepicker-month').select(getMonth(), { force: true })
@@ -473,9 +485,18 @@ And("the first dataset is {string} and last is {string}", (first, last) => {
   cy.get(`[class*=BigButtonList_datasetItem]> :nth-child(6):contains(${last})`)
 })
 
-And("I can {string} the dataflow {string}", (pin, dataflow) => {
-  cy.get('[class*=containerLink]:first:contains(' + dataflow + ')').trigger('mouseover')
-  cy.get('[class*=DataflowsItem_pinContainer]:first').click()
+//And("I can {string} the dataflow {string}", (pin, dataflow) => {
+  
+  //cy.get('[class*=containerLink]:first:contains(' + dataflow + ')').trigger('mouseover')
+  //cy.get('[class*=DataflowsItem_pinContainer]:first').click()
+//})
+
+And("I can pin the dataflow {string}", (name) => {
+  bddGeneratedValues.get(name)
+  //cy.get('[class*=containerLink]').contains(bddGeneratedValues.get(name))
+  cy.get(`[class*=containerLink]:contains(${bddGeneratedValues.get(name)}) ~ div`).click()
+  //cy.get('[class*=containerLink]:first:contains(' + dataflow + ')').trigger('mouseover')
+  //cy.get('[class*=DataflowsItem_pinContainer]:first').click()
 })
 
 And("I change to {string} mode", (mode) => {
