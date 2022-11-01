@@ -5,7 +5,7 @@ Scenario: As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as 'userCustodian'
 And the "action" "Create new dataflow" is "be.visible"
-Then I can "Create" a dataflow with name "Submission Agreement Test" and description "Description submission agreement test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a dataflow with name "Submission Agreement Test" and description "Description submission agreement test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 
 
 # REP-416 REP-415
@@ -14,7 +14,7 @@ Scenario: As a data custodian I can edit the obligations on a dataflow
 Given I'm logged at Reportnet page as 'userCustodian'
 And I can click on "Submission Agreement Test"
 And the "action" "Edit" is "be.visible"
-Then I can "Save" a dataflow with name "Submission Agreement Test Edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
+Then I "Save" a dataflow with name "Submission Agreement Test Edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
 
 
 # REP-416 REP-415
@@ -57,7 +57,7 @@ Scenario: As a data custodian I can add a new dataflow by searching obligations
 
 Given I'm logged at Reportnet page as 'userCustodian'
 And the "action" "Create new dataflow" is "be.visible"
-Then I can "Create" a dataflow with name "Submission Agreement Search Test" and description "Description submission agreement search test" and obligation "Report on Critical Thresholds and Target Loads for Air Pollutant Impacts on Ecosystems (ICP M&M)" with "filters"
+Then I "Create" a dataflow with name "Submission Agreement Search Test" and description "Description submission agreement search test" and obligation "Report on Critical Thresholds and Target Loads for Air Pollutant Impacts on Ecosystems (ICP M&M)" with "filters"
 | Spain | Air pollution | Coordination Center for Effects | | Report |
 
 
