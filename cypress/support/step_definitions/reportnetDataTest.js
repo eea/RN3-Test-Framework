@@ -198,13 +198,10 @@ And("I import a {string} file {string}", (filetype, file) => {
   const fileType = filetype;
   cy.fixture(fileName).then(fileContent => {
 
-    cy.get('input[type="file"]').attachFile(fileName, {
+    cy.get('input[type="file"]').attachFile(fileName, 
+      {
       mimeType: 'application/' + fileType + ''
-      //cy.get("input[type=file]:first").attachFile({
-      // fileContent:fileContent.toString(),
-      //  fileName:fileName,
-      // mimeType:'application/zip'
-    })
+      })
   });
   cy.wait(2000)
   cy.contains("Upload").click()
@@ -850,18 +847,6 @@ And("I can add a new webform {string} and {string}", (name, type) => {
   
 })
 
-Then("I {string} a dataflow with name {string}", (action, name) => {
-  if (action === "can edit") {
-    cy.contains('Edit').click({ force: true })
-    cy.get("#dataflowName").clear().type(name)
-    cy.get('.p-button-text:contains(Save)').click({ force: true })
-    cy.wait(3000)
-  }
-  else if (action === "cannot edit") {
-    cy.get('Edit').should('not.exist')
-    cy.wait(2000)
-  }
-});
 
 And("I can see the step {string} is finished", (step) => {
   if (step === "Validate data") {

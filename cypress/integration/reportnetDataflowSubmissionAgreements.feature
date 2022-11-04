@@ -5,16 +5,23 @@ Scenario: As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as 'userCustodian'
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a dataflow with name "Submission Agreement Test" and description "Description submission agreement test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a reporting dataflow with name "Submission Agreement Test" and description "Description submission agreement test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 
+# REP-416 REP-415
+Scenario: As a data custodian the dataflow properties must show the information from ROD3
+
+Given I'm logged at Reportnet page as 'userCustodian'
+When I click on "Submission Agreement Test"
+Then the "action" "Properties" is "be.visible"
+And I can see the information from ROD3 with obligation "(C) Information on the assessment regime (Article 7)" and instrument "Air Quality Directive IPR"
 
 # REP-416 REP-415
 Scenario: As a data custodian I can edit the obligations on a dataflow 
 
 Given I'm logged at Reportnet page as 'userCustodian'
-And I can click on "Submission Agreement Test"
+And I click on "Submission Agreement Test"
 And the "action" "Edit" is "be.visible"
-Then I "Save" a dataflow with name "Submission Agreement Test Edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
+Then I can "Save" a dataflow with name "Submission Agreement Test Edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
 
 
 # REP-416 REP-415
@@ -25,8 +32,8 @@ Then I can see the "<submission>" on "Dataflow Reportnet Testing"
 
   Examples: 
     | submission                | 
-    | UNCED Agenda 21           | 
-    | Agenda 21 National Report |
+    | (C) Information on the assessment regime (Article 7) | 
+    | (C) Information on the assessment regime (Article 7) |
     
 Scenario Outline: As a Data Provider User I can see the instruments and obligations on the dataflow list
 
@@ -35,10 +42,11 @@ Then I can see the "<submission>" on "Dataflow Reportnet Testing"
 
   Examples: 
     | submission                | 
-    | UNCED Agenda 21           | 
-    | Agenda 21 National Report |
+    | (C) Information on the assessment regime (Article 7) | 
+    | (C) Information on the assessment regime (Article 7) |
 
 # REP-416 REP-415
+@ignore
 Scenario Outline: As a Reportnet User I can filter the dataflow list by instruments and obligations 
 
 Given I'm logged at Reportnet page as 'userCustodian'
@@ -57,18 +65,7 @@ Scenario: As a data custodian I can add a new dataflow by searching obligations
 
 Given I'm logged at Reportnet page as 'userCustodian'
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a dataflow with name "Submission Agreement Search Test" and description "Description submission agreement search test" and obligation "Report on Critical Thresholds and Target Loads for Air Pollutant Impacts on Ecosystems (ICP M&M)" with "filters"
-| Spain | Air pollution | Coordination Center for Effects | | Report |
-
-
-# REP-416 REP-415
-Scenario: As a data custodian the dataflow properties must show the information from ROD3
-
-Given I'm logged at Reportnet page as 'userCustodian'
-And I can click on "Submission Agreement Test"
-And the "action" "Properties" is "be.visible"
-Then I can see the information from ROD3 with obligation "(C) Preliminary information on the assessment regime (Article 7)" and instrument "Air Quality Directive IPR"
-
+Then I "Create" a reporting dataflow with name "Submission Agreement Search Test" and description "Description submission agreement search test" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "filters"
 
 # REP-416 REP-415
 Scenario: As a data custodian I can delete a data flow Submission Agreement Test Edited
@@ -84,7 +81,7 @@ And I see the message: "SUCCESS"
 Scenario: As a data custodian I can delete a data flow Submission Agreement Search Test
 
 Given I'm logged at Reportnet page as 'userCustodian'
-And I can click on "Submission Agreement Search Test"
+And I click on "Submission Agreement Search Test"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "Submission Agreement Search Test"
 And I see the message: "SUCCESS"
