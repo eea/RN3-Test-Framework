@@ -187,7 +187,7 @@ Scenario: As a custodian, I want to be able to create a Citizen and science data
 Given I'm logged at Reportnet page as 'userCustodian'
 And I can click on tab "Citizen science dataflows"
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a dataflow with name "Citizen test dataflow" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a citizen dataflow with name "Citizen test dataflow" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 
 
 #REP-1647
