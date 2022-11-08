@@ -425,7 +425,7 @@ Then("I can clear dataflow filters", () => {
   cy.get('[class*=Filters_resetButton]').children().click({ force: true })
 })
 
-Then("I can filter by {string} with {string}", (field, filter,name) => {
+Then("I can filter by {string} with {string}", (field,name) => {
   bddGeneratedValues.get(name)
   if (field === 'name' || field === 'description' || field === "legalInstrument" || field === "obligationTitle" || field === "dataflowName") {
     cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
@@ -771,6 +771,19 @@ And("I filter by value {string}", (value) => {
   cy.get(".p-float-label > > .pi-search").click()
 
 })
+
+Then("I {string} a dataflow with name {string}", (action, name) => {
+  if (action === "can edit") {
+    cy.contains('Edit').click({ force: true })
+    cy.get("#dataflowName").clear().type(name)
+    cy.get('.p-button-text:contains(Save)').click({ force: true })
+    cy.wait(3000)
+  }
+  else if (action === "cannot edit") {
+    cy.get('Edit').should('not.exist')
+    cy.wait(2000)
+  }
+});
 
 And("I {string} the reference dataset", (action) => {
   cy.get('#referenceDatasetUpdatableCheckbox > .p-checkbox-box').click()
