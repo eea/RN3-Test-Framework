@@ -1,6 +1,6 @@
-const {  And, Then } = require("cypress-cucumber-preprocessor/steps");
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-And('the validations status button is {string}', (visibility_status)=>{
+When('the validations status button is {string}', (visibility_status)=>{
     if (visibility_status=="visible")
     {
       cy.get('[data-for="validationsStatus"]').should('be.visible')
@@ -16,7 +16,7 @@ And('the validations status button is {string}', (visibility_status)=>{
     cy.wait(1000)
   })
   
-  And ('the validations status window is {string}', (display_status)=>{
+  When('the validations status window is {string}', (display_status)=>{
     if (display_status=="displayed")
     {
       cy.get('[class="p-dialog-title"]').should('be.visible')
@@ -27,7 +27,7 @@ And('the validations status button is {string}', (visibility_status)=>{
     })
   
   
-And('dataset column has clickable links', ()=>
+When('dataset column has clickable links', ()=>
     {
     cy.get('.p-datatable-wrapper tbody tr:nth-child(1) td:nth-child(2) a')
         .should('have.attr','href')
@@ -39,20 +39,20 @@ Then ('the validations status button is not visible',()=>
     cy.get('[class="p-dialog-title"]').should('not.exist')
   })
 
-  And ('the link redirects to the reporting dataset', () =>{
+  When ('the link redirects to the reporting dataset', () =>{
 
     cy.get('.p-datatable-wrapper tbody tr:nth-child(1) td:nth-child(2) a').click()
 
   })
 
-  And ('I get the dataflow ID from the url',()=>{
+  When ('I get the dataflow ID from the url',()=>{
     cy.url().then(url => {
       let id = url.split('/')[4]
       cy.wrap(id).as('id')
     })
   })
 
-  And ('I filter by dataflowId in the validation status window',(field)=>{
+  When ('I filter by dataflowId in the validation status window',(field)=>{
     if (field === 'dataflowId') {
       cy.get('@id').then(dataflowId => {
         cy.get(`[id='${field}_input']`).type(dataflowId)

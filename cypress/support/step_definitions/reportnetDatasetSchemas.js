@@ -1,4 +1,4 @@
-const { And, Then } = require("cypress-cucumber-preprocessor/steps");
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Then("I can see the dataset schema {string}", (fields) => {
     fields.split(',').map(f => {cy.contains(f)});
@@ -77,7 +77,7 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
 })
 
 
-And("I can select a {string} {string} with label field {string} and linked field {string} and master field {string} and ignore case {string} for dataflow {string}", (type, table, label, linked, master, ignore, dataflow) => {
+Then("I can select a {string} {string} with label field {string} and linked field {string} and master field {string} and ignore case {string} for dataflow {string}", (type, table, label, linked, master, ignore, dataflow) => {
   cy.wait(1000)
   if(type==="Link"){
   cy.get("[aria-label='"+table+"']").click()
@@ -97,25 +97,25 @@ And("I can select a {string} {string} with label field {string} and linked field
   cy.wait(1000)
 })
 
-And("I can create a unique constraint with table {string} and field {string}", (table, field) => {
+Then("I can create a unique constraint with table {string} and field {string}", (table, field) => {
   cy.get('[aria-label="' + table + '"]').click()
   cy.get('.p-listbox-item:last').click()
   cy.get('button:contains(Create):visible:last').click({force:true})
 })
 
-And("the unique constraint {string} is {string} on the list", (unique, property) => {
+Then("the unique constraint {string} is {string} on the list", (unique, property) => {
   cy.wait(2000)
   cy.get('.p-datatable-tbody:contains('+unique+')').should(property)
 })
 
-And("I can change on {string} the type of field {string} on table {string} to {string}", (dataset, field, table, type) => {
+Then("I can change on {string} the type of field {string} on table {string} to {string}", (dataset, field, table, type) => {
   cy.get(`p:contains(${dataset}):first`).parent().click()
   cy.get(`.p-tabview-title:contains(${table})`).click()
   cy.get(`[class*=FieldDesigner_draggableFieldDiv]:contains(${field}) >>> .p-dropdown:contains(Link)`).click()
   cy.get('li:visible>div>span').contains(type).click({force:true})
 })
 
-And("I can see the fields and configurations {string}", (readonly, data) => {
+Then("I can see the fields and configurations {string}", (readonly, data) => {
   data.rawTable.map(field => {
     cy.get(`.p-tabview-title:contains(${field[0]})`).click()
     readonly==='true' ? cy.get(`#${field[1]}`).should('be.disabled') : cy.get(`#${field[1]}`) 
@@ -133,19 +133,19 @@ And("I can see the fields and configurations {string}", (readonly, data) => {
   })
 })
 
-And("the cell with {string} {string} is disabled", (field, text) => {
+Then("the cell with {string} {string} is disabled", (field, text) => {
   field === 'name' && cy.get(`#${text}`).should('be.disabled')
   field === 'description' && cy.contains(text).should('be.disabled')
   field === 'type' && cy.get(`[class*=FieldDesigner_draggableFieldDiv] >>> .p-dropdown:contains(${text})>>input`).should('be.disabled')
 })
 
-And("I delete dataset data {string} tables", (type) => {
+Then("I delete dataset data {string} tables", (type) => {
   if(type === 'with prefilled') {
     cy.get('#arePrefilledTablesDeleted > .p-checkbox-box').click()
   } 
   cy.contains('Yes').click();
 })
 
-And("the table {string} does not exists" ,(table) => {
+Then("the table {string} does not exists" ,(table) => {
   cy.contains(table).should('be.not.visible')
 })

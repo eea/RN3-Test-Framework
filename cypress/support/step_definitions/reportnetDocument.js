@@ -1,3 +1,4 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Then(/^I can download the document$/, () => {
      //const expectedFileName = 'test.csv';
@@ -20,9 +21,9 @@ Then(/^I can download the document$/, () => {
       cy.get('#isPublic').click();
        
       const fileName = file;
-      cy.fixture(fileName).then(fileContent => {
-        cy.get("input[type=file]:first").attachFile({
-          fileContent,
+      cy.fixture(fileName).then(contents => {
+        cy.get("input[type=file]:first").selectFile({
+          contents,
           fileName,
           mimeType: "text/plain"
         });
@@ -37,15 +38,15 @@ Then(/^I can download the document$/, () => {
   );
 
 
-  And("I see the {string} input with error",(input) => {
+  When("I see the {string} input with error",(input) => {
       cy.get(`[id=${input}]`).should('have.css', 'border-color','rgb(218, 33, 49)')
   })
 
-  And("I upload the webform from file {string}", (file) => {  
+  When("I upload the webform from file {string}", (file) => {  
     const fileName = file;
-    cy.fixture(fileName).then(fileContent => {
-      cy.get("input[type=file]:first").attachFile({
-        fileContent,
+    cy.fixture(fileName).then(contents => {
+      cy.get("input[type=file]:first").selectFile({
+        contents,
         fileName,
         mimeType: "text/plain"
       });

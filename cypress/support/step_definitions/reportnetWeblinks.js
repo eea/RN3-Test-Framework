@@ -1,4 +1,6 @@
-And("I add a weblink with description {string} and url {string} marked as {string}", (description, url, isPublic) => {
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+
+When("I add a weblink with description {string} and url {string} marked as {string}", (description, url, isPublic) => {
     cy.get("input[name=description]").type(description);
     cy.wait(500)
     cy.get("input[name=url]").type(url);
