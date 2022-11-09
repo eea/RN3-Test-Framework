@@ -196,17 +196,36 @@ When("I can toggle publicly available check", () => {
 When("I import a {string} file {string}", (filetype, file) => {
   const fileName = file;
   const fileType = filetype;
-  cy.fixture(fileName).then(contents => {
-
-    cy.get('input[type="file"]').selectFile(fileName, 
+  //cy.fixture(fileName).then(contents => {
+    cy.fixture(fileName, { encoding: null }).as('myFixture')
+    //cy.get('input[type="file"]').selectFile(fileName, 
+    cy.get('input[type="file"]').selectFile('@myFixture', 
       {
-      mimeType: 'application/' + fileType + ''
-      })
-  });
+      mimeType: 'application/' + fileType + '',
+      force: true
+    }
+      )
   cy.wait(2000)
   cy.contains("Upload").click()
   cy.wait(2000)
-});
+
+
+  });
+
+  //And("I import a {string} file {string}", (filetype, file) => {
+    //const fileName = file;
+    //const fileType = filetype;
+    //cy.fixture(fileName).then(fileContent => {
+      //cy.get('input[type="file"]').attachFile(fileName, 
+        //{
+       // mimeType: 'application/' + fileType + ''
+       // })
+    //});
+    //cy.wait(2000)
+    //cy.contains("Upload").click()
+    //cy.wait(2000)
+  //});
+  
 
 When("I import a file {string}", file => {
   const fileName = file;

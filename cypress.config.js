@@ -16,6 +16,7 @@ reporterOptions: {
     saveAllAttempts: false,
     },
 
+    fixturesFolder: 'cypress/fixtures',
     screenshotsFolder:  'cypress/reports/html/screenshots',
     video: false,
     projectId: 'rujz2d',
