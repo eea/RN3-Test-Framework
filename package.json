@@ -18,10 +18,10 @@
     "cypress:run": "cypress run --spec cypress/integration/*.feature",
     "test:all": "cypress run --spec \"**/*.features\"",
     "test:each": "cypress run --browser chrome --spec \"**/*.feature\"",
-    "cypress:browser": "cypress run --browser chrome --spec \"**/validationStatus.feature\" --reporter mochawesome",
-    "cypress:report": "cypress run --browser chrome --headed --spec \"**/reportnetDocuments.feature\" --reporter mochawesome",
-    "cypress:sanity": "cypress run -e TAGS=@sanity --browser chrome --spec \"**/*.features\" --reporter mochawesome",
-    "cypress:dashboard": "cypress run --browser chrome --headed --spec \"**/reportnetDocuments.feature\" --reporter mochawesome --record --key d0f90743-6dc8-4fa8-bb2d-13ffd871e55f"
+    "cypress:browser": "cypress run --browser electron --headed  --spec \"**/validationStatus.feature",
+    "cypress:report": "cypress run --browser chrome --headed --spec \"**/reportnetDocuments.feature",
+    "cypress:sanity": "cypress run -e TAGS=@sanity --browser chrome --spec \"**/*.features",
+    "cypress:dashboard": "cypress run --browser chrome --headed --spec \"**/reportnetDocuments.feature\" --record --key d0f90743-6dc8-4fa8-bb2d-13ffd871e55f"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,7 +42,6 @@
     "@badeball/cypress-cucumber-preprocessor": "^13.1.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
     "cypress": "^10.11.0",
-    "cypress-file-upload": "^4.1.1",
     "cypress-mochawesome-reporter": "^3.2.3",
     "esbuild": "^0.15.13"
   }

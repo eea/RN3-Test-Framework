@@ -18,7 +18,7 @@ import './commands'
 import 'cypress-mochawesome-reporter/register';
 
 Cypress.Screenshot.defaults({
-    screenshotOnRunFailure: false
+    screenshotOnRunFailure: true
   })
 
 Cypress.on('uncaught:exception', (err, runnable) => {
