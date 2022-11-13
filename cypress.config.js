@@ -3,6 +3,7 @@ const mochareport =  require('cypress-mochawesome-reporter/plugin');
 const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin;
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
+const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
 
 module.exports = defineConfig({
@@ -34,6 +35,7 @@ reporterOptions: {
           on("file:preprocessor", bundler);
           await addCucumberPreprocessorPlugin(on, config);
           mochareport(on);
+          allureWriter(on, config);
           
           return config
         },   
@@ -41,7 +43,8 @@ reporterOptions: {
       },
 
       env: {
-        TAGS: 'not @ignore'
+        TAGS: 'not @ignore',
+        allureReuseAfterSpec: true
       },
       
     });
