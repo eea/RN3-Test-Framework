@@ -37,12 +37,12 @@ Then I can delete the dataflow "Webform Test"
 Scenario: As an admin I can manage webforms
 
 Given I'm logged at Reportnet page as "userAdmin"
-When the "action" "Manage webforms" is "be.visible"
+And the "action" "Manage webforms" is "be.visible"
 And I can see the list of webforms
     | Governance Regulation | PaMs   |
     | National Systems      | Q&A    |
 And I can add a new webform "test" and "Tables"
 And the "button" "Select file" is "be.enabled"
-And I upload the webform from file "Tables webform example.json"
+When I upload the webform from file "Tables webform example.json"
 Then I can see the updated list of webforms "test"
 

@@ -196,9 +196,7 @@ When("I can toggle publicly available check", () => {
 When("I import a {string} file {string}", (filetype, file) => {
   const fileName = file;
   const fileType = filetype;
-  //cy.fixture(fileName).then(contents => {
     cy.fixture(fileName, { encoding: null }).as('myFixture')
-    //cy.get('input[type="file"]').selectFile(fileName, 
     cy.get('input[type="file"]').selectFile('@myFixture', 
       {
       mimeType: 'application/' + fileType + '',
@@ -208,9 +206,7 @@ When("I import a {string} file {string}", (filetype, file) => {
   cy.wait(2000)
   cy.contains("Upload").click()
   cy.wait(2000)
-
-
-  });
+});
 
   //And("I import a {string} file {string}", (filetype, file) => {
     //const fileName = file;
@@ -233,7 +229,8 @@ When("I import a file {string}", file => {
     cy.get("input[type=file]:first").selectFile({
       contents: contents.toString(),
       fileName: fileName,
-      mimeType: 'csv/plain'
+      mimeType: 'csv/plain',
+      force: true
     })
   });
   cy.wait(2000)
@@ -835,32 +832,28 @@ When("I can see the list of webforms", (fields) => {
 })
 
 When("I can see the updated list of webforms {string}", (name) => {
-cy.wait(1000)
-bddGeneratedValues.get(name)
- cy.get('.p-dialog-content .p-paginator-page').then(listing => {
-  const listingCount = Cypress.$(listing).length;
-  cy.log("Edw einai to length " +listingCount)
-  for (var i = 0; i < listingCount ; i++) {
-    if (cy.get('.p-dialog-content .p-paginator-next').should('be.enabled')) {
-      cy.get('.p-dialog-content .p-datatable-row').each(($row) => {
-        //cy.log($row)
-        if (cy.wrap($row).get('td').contains(bddGeneratedValues.get(name))) {
-          
-            cy.log("Here is the webfrom")
-        }
-        else {
-          cy.get(('.p-dialog .p-paginator-next')).click({force: true})
-        }
-
-      })
-
-    }
-  }
-
-
-  }
-    )
+ let dataflow = bddGeneratedValues.get(name)
+ findInPage(dataflow)
 })
+
+function findInPage(dataflow) {
+  let found = false;
+
+  cy.get('.p-dialog-content .p-datatable-row').each(($row) => {   
+    if ($row.find('td:first-child').text() == dataflow) {
+      found = true;
+      cy.log("found")
+    }
+  }).then(() => {
+    if (found == false) {
+      cy.log("not found")
+      cy.get('.p-dialog-content .p-paginator-next').should('not.be.disabled')
+      cy.get('.p-dialog-content .p-paginator-next').click()
+      findInPage(dataflow)
+    }
+ })
+}
+
 
 When("I can add a new webform {string} and {string}", (name, type) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
@@ -990,6 +983,6 @@ Then("I click on the import dataset data button", () => {
 })
 
 When("Import is locked is visible", () => {
-  cy.get('.pi.pi-spin.pi-spinner  p-c.p-button-icon-left').contains('Import is locked').should('be.visible')
+  cy.get('.p-toolbar-group-left button:first-child .p-button-text').contains('Import is locked').should('be.visible')
   //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
 })

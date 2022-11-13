@@ -44,15 +44,16 @@ Then(/^I can download the document$/, () => {
 
   When("I upload the webform from file {string}", (file) => {  
     const fileName = file;
-    cy.fixture(fileName).then(contents => {
-      cy.get("input[type=file]:first").selectFile({
-        contents,
+    //cy.fixture(fileName).then(contents => {
+      cy.fixture(fileName, { encoding: null }).as('myFixture')
+      //cy.get("input[type=file]:first").selectFile({
+        cy.get('input[type="file"]').selectFile('@myFixture',{
         fileName,
-        mimeType: "text/plain"
-      });
-    });
+        mimeType: "text/plain",
+        force: true
+      })
     cy.wait(2000)
     cy.get("[data-for=confirmBtn] button").click({force: true})
-   
+
   }
 );
