@@ -151,7 +151,6 @@ Scenario: In the public page I can see the automatically created export file if 
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow"
 And I "can" see the publicly dataflow "Dataset Reportnet Testing"
-And I can see for dataflow "Dataset Reportnet Testing" the instrument "Agenda 21 National Report", status "Open"
 When I click on "Dataset Reportnet Testing"
 Then the public table "Reporting datasets" has 1 records
 And I'm logged at Reportnet page as 'userCustodian'
@@ -163,7 +162,7 @@ Scenario Outline: As a public user I can see the list of all dataflows marked as
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow"
 Then I "can" see the publicly dataflow "Dataset Reportnet Testing"
-And I can see for dataflow "Dataset Reportnet Testing" the instrument "Agenda 21 National Report", status "Open"
+And I can see for dataflow "Dataset Reportnet Testing" the instrument "Air Quality Directive IPR", status "Open"
 And I can see the information on "Dataset Reportnet Testing" with "<country>" "<type>" "<technicalAcceptance>"
 And I'm logged at Reportnet page as 'userCustodian'
 

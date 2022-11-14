@@ -225,14 +225,13 @@ When("I import a {string} file {string}", (filetype, file) => {
 
 When("I import a file {string}", file => {
   const fileName = file;
-  cy.fixture(fileName).then(contents => {
-    cy.get("input[type=file]:first").selectFile({
-      contents: contents.toString(),
-      fileName: fileName,
-      mimeType: 'csv/plain',
+  //cy.fixture(fileName).then(contents => {
+    cy.fixture(fileName, { encoding: null }).as('myFixture')
+    cy.get('input[type="file"]').selectFile('@myFixture',{
+      fileName,
+      mimeType: "csv/plain",
       force: true
     })
-  });
   cy.wait(2000)
   cy.contains("Upload").click()
   cy.wait(2000)

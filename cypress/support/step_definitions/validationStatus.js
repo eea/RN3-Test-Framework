@@ -42,6 +42,7 @@ Then ('the validations status button is not visible',()=>
   When ('the link redirects to the reporting dataset', () =>{
 
     cy.get('.p-datatable-wrapper tbody tr:nth-child(1) td:nth-child(2) a').click()
+    cy.contains('Design').should('not.exist')
 
   })
 

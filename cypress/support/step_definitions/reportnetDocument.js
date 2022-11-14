@@ -21,16 +21,13 @@ Then(/^I can download the document$/, () => {
       cy.get('#isPublic').click();
        
       const fileName = file;
-      cy.fixture(fileName).then(contents => {
-        cy.get("input[type=file]:first").selectFile({
-          contents,
+      //cy.fixture(fileName).then(contents => {
+        cy.fixture(fileName, { encoding: null }).as('myFixture')
+        cy.get("input[type=file]:first").selectFile('@myFixture',{
           fileName,
-          mimeType: "text/plain"
-        });
-      });
-      //cy.wait(2000)
-      //cy.get("span.pi-plus").click({force: true})
-      //cy.contains("Upload").click({force: true})
+          mimeType: "text/plain",
+          force: true
+        })
       cy.wait(2000)
       action === 'upload' ? cy.get("span.pi-plus").click({force: true}) : cy.contains("Save").click()
       cy.wait(2000)

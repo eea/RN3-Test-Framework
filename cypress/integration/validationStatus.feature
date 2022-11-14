@@ -1,8 +1,7 @@
 Feature: Validations status button - As an existing user on the Repornet system I want to test the validations status button
 
 #REP-151313
-@ignore
-Scenario Outline:  As a Data Custodian I can see the validations status window
+Scenario Outline: a) As a Data Custodian I can see the validations status window
 
 Given I'm logged at Reportnet page as "userCustodian"
 And the validations status button is "visible"
@@ -16,8 +15,7 @@ Examples:
    |visible          | displayed     |
 
 
-@ignore
-Scenario Outline:  As an Admin I can see the validations status window
+Scenario Outline: b) As an Admin I can see the validations status window
 
 Given I'm logged at Reportnet page as "userAdmin"
 When the validations status button is "visible"
@@ -29,14 +27,14 @@ Examples:
    |visibility_status| display_status|
    |visible          | displayed     |  
      
-@ignore
-Scenario: As an Observer I cannot see the validations status window
+     
+Scenario: c) As an Observer I cannot see the validations status window
 
 Given I'm logged at Reportnet page as "userObserver"
 Then the validations status button is not visible
 
 #REP-151313
-Scenario:  As a Data Custodian I can redirect to the reporting dataset from the validation status window
+Scenario: d) As a Data Custodian I can redirect to the reporting dataset from the validation status window
 
 Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"

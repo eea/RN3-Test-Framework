@@ -1,7 +1,6 @@
 Feature: Reportnet WebForm - As an existing user on the Repornet system I want to test the WebForms configuration
 
 # REP-903 REP-921
-@ignore
 Scenario: As a data custodian I can create new dataflow and dataset schema with a webform table
 
 Given I'm logged at Reportnet page as "userCustodian"
@@ -13,7 +12,6 @@ And I can "create" a dataset schema with name "DS-Test"
 
 
 # REP-903 REP-921
-@ignore
 Scenario: As a custodian, I want to configure the webform used in each dataset
 
 Given I'm logged at Reportnet page as "userCustodian"
@@ -24,7 +22,7 @@ And I select the "Governance Regulation Art. 13" webform developed in the system
 When I change to "Webform" mode
 Then I will see the webform configured
 
-@ignore
+
 Scenario: As a data custodian I can delete a data flow
 
 Given I'm logged at Reportnet page as "userCustodian"
