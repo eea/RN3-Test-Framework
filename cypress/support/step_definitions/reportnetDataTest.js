@@ -440,7 +440,39 @@ Then("I can clear dataflow filters", () => {
   cy.get('[class*=Filters_resetButton]').children().click({ force: true })
 })
 
-Then("I can filter by {string} with {string}", (field,name) => {
+Then("I can filter by {string} with {string}", (field,filter) => {
+  //bddGeneratedValues.get(name)
+  if (field === 'name' || field === 'description' || field === "legalInstrument" || field === "obligationTitle" || field === "dataflowName") {
+    cy.get(`[id='${field}_input']`).type(filter)
+  } else if (field === 'expirationDate') {
+    cy.get(`[id='${field}_input']`).click({ force: true })
+    cy.get('.p-datepicker-month').select(getMonth(), { force: true })
+    cy.get('td>span:visible').contains(new RegExp("^" + getDay() + "$")).should('not.have.class', 'p-datepicker-other-month').click()
+    cy.get('td>span:visible').contains(new RegExp("^" + lastDayOfMonth() + "$")).click()
+    //cy.get('td>span:visible:contains('+new RegExp('^' + 5 + '$')+')')//contains('+getDay()+'):last').click()
+    //cy.get('td>span:visible:contains('+lastDayOfMonth()+'):last').click()
+  } else if (field === "searchInput") {
+    cy.get(`input[id=${field}]`).type(filter)
+  }
+  else if (field === 'Status') {
+    cy.get('#status_dropdown').click().children().contains(filter).click()
+    cy.wait(3000)
+  }
+  else if (field === 'Role') {
+    cy.get('#userRole_dropdown').click().children().contains(filter).click()
+    cy.wait(3000)
+  }
+  else {
+    cy.get(`div[id=${field}]`).click({ force: true })
+    cy.contains(new RegExp("^" + filter + "$", "g")).click({ force: true })
+  }
+  cy.wait(1000)
+  cy.get('[class*=Filters_filterButton]').children().click({ force: true })
+  cy.wait(2000)
+})
+
+
+Then("I can filter obligation dataflow by {string} with {string}", (field,name) => {
   bddGeneratedValues.get(name)
   if (field === 'name' || field === 'description' || field === "legalInstrument" || field === "obligationTitle" || field === "dataflowName") {
     cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
@@ -470,6 +502,10 @@ Then("I can filter by {string} with {string}", (field,name) => {
   cy.get('[class*=Filters_filterButton]').children().click({ force: true })
   cy.wait(2000)
 })
+
+
+
+
 
 Then("I can filter QCs by {string} with {string}", (field, filter) => {
   if (field === "searchInput") {
@@ -504,6 +540,20 @@ When("the first dataset is {string} and last is {string}", (first, last) => {
 //})
 
 When("I can pin the dataflow {string}", (name) => {
+  bddGeneratedValues.get(name)
+  //cy.get('[class*=containerLink]').contains(bddGeneratedValues.get(name))
+  cy.get(`[class*=containerLink]:contains(${bddGeneratedValues.get(name)}) ~ div`).click()
+  //cy.get('[class*=containerLink]:first:contains(' + dataflow + ')').trigger('mouseover')
+  //cy.get('[class*=DataflowsItem_pinContainer]:first').click()
+})
+
+When ("I can {string} the dataflow {string}",(pin, dataflow) => {
+  cy.get('[class*=containerLink]:first:contains('+dataflow+')').trigger('mouseover')
+  cy.get('[class*=DataflowsItem_pinContainer]:first').click()
+})
+
+
+When("I can pin the generated dataflow {string}", (name) => {
   bddGeneratedValues.get(name)
   //cy.get('[class*=containerLink]').contains(bddGeneratedValues.get(name))
   cy.get(`[class*=containerLink]:contains(${bddGeneratedValues.get(name)}) ~ div`).click()
@@ -922,6 +972,13 @@ When("I click on {string}", (name) => {
   cy.wait(1000);
   bddGeneratedValues.get(name)
   cy.contains(bddGeneratedValues.get(name)).click({ force: true })
+  cy.wait(1000);
+});
+
+When("I click on data collection {string}", (name) => {
+  cy.wait(1000);
+  bddGeneratedValues.get(name)
+  cy.get('[class^=DataflowsItem-]').contains(bddGeneratedValues.get(name)).click({ force: true })
   cy.wait(1000);
 });
 
