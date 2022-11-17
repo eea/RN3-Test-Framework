@@ -1,4 +1,4 @@
-import { And, Then } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Then("I can {string} a Data provider with Representative of {string} and account {string} and Data provider {string}", (action, representative, account, provider) => {
     if(action === "add") {
@@ -75,19 +75,19 @@ Then("I can {string} a Data provider with Representative of {string} and account
     cy.get('button:contains(Close):visible').click({force:true})
   });
 
-  And("I can add datasets for new Representatives",() => {
+  When("I can add datasets for new Representatives",() => {
     cy.get('button:contains(Create):visible').click({force:true})
     cy.wait(1000)
   })
 
-And("I can {string} Lead reporters",(action) => {
+When("I can {string} Lead reporters",(action) => {
     cy.get('#buttonExportImport > .p-button-text').click()
     cy.wait(1000)
     cy.get('[data-for="'+action+' lead reporters"] > .p-menuitem-link > span').click({force: true})
     cy.wait(2000)
   })
 
-And("I can {string} a editor {string} with permissions {string}",(action, editor, permission) => {
+When("I can {string} a editor {string} with permissions {string}",(action, editor, permission) => {
   if(action === 'Add'){
     cy.contains(action).click()
     cy.get("[id=rolesDropdown]").click();
@@ -107,36 +107,37 @@ Then("I can see a tag next to the invalid lead reporter email", () => {
   cy.wait(2000)
 })
 
+
 Then("I can see a tag next to the invalid reporter email", () => {
   cy.get(':nth-child(1) > :nth-child(1) > [class*=ShareRights_accountWrapper] > .svg-inline--fa')
   cy.wait(2000)
 })
 
-And("I can see the representative {string} {string}", (country, email) => {
+When("I can see the representative {string} {string}", (country, email) => {
   cy.get(`tr:contains(${country})`)
   cy.get(`tr:contains(${country})>>> input:first`).should('have.attr','value',email)
 })
 
-And("I can see the specified record in the table", (fields) => {
+When("I can see the specified record in the table", (fields) => {
   cy.wait(1000)
   fields.rawTable.map((data) => {
     cy.get(`.p-datatable-tbody>tr:contains(${data[0]}):contains(${data[1]})`)
   })
 })
 
-And("I can see the specified records in the table", (fields) => {
+When("I can see the specified records in the table", (fields) => {
   cy.wait(1000)
   fields.rawTable.map((data) => {
     cy.get(`.p-datatable-tbody>tr:contains(${data[0]}):contains(${data[1]}):contains(${data[2]})`)
   })
 })
 
-And("I can check enable automatic delete reporter data and snaphots", () => {
+When("I can check enable automatic delete reporter data and snaphots", () => {
   cy.get(".p-dialog:contains(Automatic delete)>> .p-checkbox").click({force:true})
   cy.contains("Save").click();
 })
 
-And("I can add a national coordinator with email {string} for country {string}", (email, country) => {
+When("I can add a national coordinator with email {string} for country {string}", (email, country) => {
   cy.get('[class *= ManageNationalCoordinators_buttonsDialogFooter] > .p-button-primary > .p-button-text').click({force:true})
   cy.wait(1000)
   cy.get('#name').type(email)
@@ -148,19 +149,19 @@ And("I can add a national coordinator with email {string} for country {string}",
   cy.get('.p-dialog-content').contains(email).siblings().contains(country)
 })
 
-And("I can not filter by {string}", (filter) => {
+When("I can not filter by {string}", (filter) => {
   if(filter === "role") {
     cy.get('#userRole_dropdown').should('not.exist')
     cy.wait(3000)
   }
 })
 
-And("I can see the list of validations and a refresh button", () => {
+When("I can see the list of validations and a refresh button", () => {
   cy.get("[class*=ValidationsStatuses_dialogContent]").should('be.visible')
   cy.contains("Refresh").click({force:true})
 })
 
-And("I can see the status for the {string} dataset", (dataset) => {
+When("I can see the status for the {string} dataset", (dataset) => {
   cy.get(`[class*=BigButtonList_datasetItem]>:contains(${dataset})>>.fa-check-circle`).click({force:true})
   cy.contains("Final feedback")
 })

@@ -1,7 +1,7 @@
 Feature: Reportnet QC Rules - As an existing user on the Repornet system I want to test the actions with QC Rules
 
 @sanity
-Scenario: As a data custodian I can add a new data flow with DS
+Scenario: a) As a data custodian I can add a new data flow with DS
 
 Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
@@ -19,7 +19,7 @@ And I can fill a dataset schema with name "Table2", description "description Tab
 
 #REP-1408 REP-1437
 
-Scenario: As a data custodian in desing dataset and table is marked as mandatory, an automatic QC is created and will be blocker
+Scenario: b) As a data custodian in desing dataset and table is marked as mandatory, an automatic QC is created and will be blocker
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -35,8 +35,7 @@ And the "fieldsDesigner" "Mandatory" is "not.be.checked"
 
 
 #REP-384 REP-459
-@sanity
-Scenario: As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
+Scenario: c) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -52,8 +51,7 @@ And the new qc rule "qc1 'Test'" is "correct"
 
 
 #REP-384
-@sanity
-Scenario: As a data custodian I can validate the fields with the new rule (quotes control on inputs)
+Scenario: d) As a data custodian I can validate the fields with the new rule (quotes control on inputs)
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -70,7 +68,7 @@ And I can see the field "Field1" has 2 error
 
 
 # REP-1395
-Scenario: As a user, I want to be able to download the validation information (QC checks results grouped).
+Scenario: e) As a user, I want to be able to download the validation information (QC checks results grouped).
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -82,7 +80,7 @@ And I see the message: "SUCCESS"
 
 
 #REP-431 REP-1129
-Scenario: As a data custodian I can edit QC Rules
+Scenario: f) As a data custodian I can edit QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -100,7 +98,7 @@ And the qcRules list has 3 items
    
 
 #REP-1644 #REP-1837
-Scenario: As a data custodian I want to include SQL fields in a message
+Scenario: g) As a data custodian I want to include SQL fields in a message
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -128,7 +126,7 @@ Then the code rule "SQLMsgTest" with message "Value: <field1> doesn't match the 
 
 
 # REP-460
-Scenario Outline: As a data custodian I can filter QC Rules
+Scenario Outline: h) As a data custodian I can filter QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -142,7 +140,7 @@ Examples:
    | levelError  | INFO   | 1     |
 
 
-Scenario Outline: As a data custodian I can filter QC Rules
+Scenario Outline:i) As a data custodian I can filter QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -156,7 +154,7 @@ Examples:
    | searchInput | number | 2     |
 
 # REP-384
-Scenario: As a data custodian I can delete a QC Rule
+Scenario: j) As a data custodian I can delete a QC Rule
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -168,8 +166,7 @@ And the code rule "SQLMsgTest" is "not.exist" on the list of rules
 
 
 # REP-292
-@sanity
-Scenario: As a data custodian I can create Row QC Rule
+Scenario: k) As a data custodian I can create Row QC Rule
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -184,8 +181,7 @@ And the code rule "rc1" is "be.visible" on the list of rules
 
 
 # REP-694
-@sanity
-Scenario: As a data custodian I can create table constraint
+Scenario: l) As a data custodian I can create table constraint
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -200,8 +196,7 @@ And the code rule "ds1" is "be.visible" on the list of rules
 
 
 # REP-874 
-
-Scenario: As a Custodian, I want to be able to create QCs based on SQL sentences
+Scenario: m) As a Custodian, I want to be able to create QCs based on SQL sentences
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -216,8 +211,7 @@ And the code rule "sqlRule" is "be.visible" on the list of rules
 
 
 # REP-930 
-
-Scenario: As a custodian, I want to validate SQL QCs with a button in the list of Qcs (correct SQLs)
+Scenario: n) As a custodian, I want to validate SQL QCs with a button in the list of Qcs (correct SQLs)
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -228,8 +222,7 @@ And I see the message: "SUCCESS"
 
 
 # REP-1580
-
-Scenario: As a user, I want to download QC list in CSV
+Scenario: o) As a user, I want to download QC list in CSV
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -240,8 +233,7 @@ And I see the message: "SUCCESS"
 
 
 # REP-930
-
-Scenario: As a custodian, I want to validate SQL QCs with a button in the list of Qcs (incorrect SQLs)
+Scenario: p) As a custodian, I want to validate SQL QCs with a button in the list of Qcs (incorrect SQLs)
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -258,8 +250,7 @@ And I see the message: "The rule sqlIncorrectRule is not valid"
 
 
 # REP-930
-
-Scenario: As a custodian, I want to see a warning when I am going to create the data collection in case I have invalid QCs and/or disabled Qcs
+Scenario: q) As a custodian, I want to see a warning when I am going to create the data collection in case I have invalid QCs and/or disabled Qcs
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -271,8 +262,7 @@ Then I can create data collections with a technical acceptance step for the repo
 
 
 # REP-2038
-
-Scenario: As a custodian, I want to know the total cost of a SQL QC
+Scenario: r) As a custodian, I want to know the total cost of a SQL QC
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -286,8 +276,7 @@ And I can "Evaluate" a table relation "SQL sentence" with fields
 
 
 # REP-2045
-
-Scenario: As a custodian, I want to run a SQL QC
+Scenario: s) As a custodian, I want to run a SQL QC
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -301,8 +290,7 @@ And I can "Run" a table relation "SQL sentence" with fields
 
 
 # REP-2041
-
-Scenario: As a data custodian I can see the geometry error generated by ST_TRANSFORM
+Scenario: t) As a data custodian I can see the geometry error generated by ST_TRANSFORM
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -322,7 +310,7 @@ Then the code rule "" with message "Unsupported SRID" is visible on the list of 
 Then the code rule "" with message "The value does not follow the expected syntax for a valid multipolygon <reason>" is visible on the list of validations
 
 
-Scenario: As a data custodian I can delete a data flow
+Scenario: u) As a data custodian I can delete a data flow
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
@@ -331,7 +319,7 @@ Then I can delete the dataflow "New Dataflow Rules Test"
 And I see the message: "SUCCESS"
 
 
-Scenario: As a data custodian I can add a new data flow with obligations
+Scenario: v) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
@@ -352,7 +340,7 @@ And I can click on element "Manage lead reporters"
 And I can see the representative "Spain" "test.provider@abc.com"
 
 
-Scenario: As a data custodian I can create data collections
+Scenario: w) As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Rules historic changes Test"
@@ -362,7 +350,8 @@ And I see the message: "SUCCESS"
 
 
 #REP-384 REP-459
-Scenario: As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
+@ignore
+Scenario: x) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Rules historic changes Test"
@@ -378,7 +367,8 @@ And the new qc rule "qc1 'Test'" is "correct"
 
 
 #REP-431 REP-1129
-Scenario: As a data custodian I can edit QC Rules
+@ignore
+Scenario: y) As a data custodian I can edit QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Rules historic changes Test"
@@ -396,7 +386,8 @@ And the qcRules list has 3 items
 
 
 #REP-2048 REP-2162
-Scenario: As a data custodian I can see the historic changes on each QC
+@ignore
+Scenario: z) As a data custodian I can see the historic changes on each QC
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Rules historic changes Test"

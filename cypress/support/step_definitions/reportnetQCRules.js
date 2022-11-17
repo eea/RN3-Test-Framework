@@ -1,3 +1,5 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+
 Then("I can {string} the field constraint rule with fields",(action, fields) => {
     if(action === 'edit') {
         cy.get('[class*=BodyCell_actionTemplate] > :nth-child(3) > .p-button-text:last').click({force:true})
@@ -18,7 +20,7 @@ Then("I can {string} the field constraint rule with fields",(action, fields) => 
   
 })
 
-And("I can {string} a {string} with a {string} with fields", (action, type, subtype, fields) => {
+When("I can {string} a {string} with a {string} with fields", (action, type, subtype, fields) => {
     cy.contains("Expression").click({force:true})
     if(action === 'Create') {
         cy.get('.p-dropdown-label:contains(Select type):visible').click({force:true})
@@ -50,20 +52,20 @@ And("I can {string} a {string} with a {string} with fields", (action, type, subt
     }
 })
 
-And("the code rule {string} is {string} on the list of rules", (code, property) =>{
+When("the code rule {string} is {string} on the list of rules", (code, property) =>{
     cy.wait(2000)
     cy.get('.p-dialog-content').scrollTo('bottomLeft')
     cy.get('.p-datatable-wrapper').scrollTo('left')
     cy.contains(code).should(property)
 })
 
-And("I can delete the rule {string}",(codeRule) => {
+When("I can delete the rule {string}",(codeRule) => {
     cy.get('[class*=QCList_deleteRowButton] > .p-button-text:last').click({force:true})
     cy.get('.p-button-text:contains(Yes):visible').click({force:true})
     cy.wait(2000)
 })
 
-And("the new qc rule {string} is {string}", (codeRule, type) => {
+When("the new qc rule {string} is {string}", (codeRule, type) => {
     const property = type ==="correct" ? 'check' : ''
     cy.get('.p-dialog-content').scrollTo('bottomLeft')
     cy.get('.p-datatable-wrapper').scrollTo('left')
@@ -75,7 +77,7 @@ Then("the qcRules list has {int} items",(total) => {
     cy.get(".p-datatable-row:visible").should("have.length", total);
 })
 
-And("I can {string} a row constraint with fields",(action, fields) => {
+When("I can {string} a row constraint with fields",(action, fields) => {
     const dataFields = fields.rawTable[0];
     cy.get('[id*=createValidation__table]:visible').click({force:true})
     cy.get('.p-dropdown-item:visible').contains(dataFields[0]).click({force:true})
@@ -86,7 +88,7 @@ And("I can {string} a row constraint with fields",(action, fields) => {
     cy.get('[id*=createValidation__errorType]:visible').type(dataFields[5]).click({force:true})
 })
 
-And("I can {string} a expression with fields", (action, fields) =>{
+When("I can {string} a expression with fields", (action, fields) =>{
     cy.contains("Expression").click({force:true})
     cy.get('.p-dropdown-label:visible:contains(Select type)').click()
     cy.contains('Field comparison').click()
@@ -102,7 +104,7 @@ And("I can {string} a expression with fields", (action, fields) =>{
     })
 })
 
-And("I can {string} a table relation {string} with fields", (action,type, fields) => {
+When("I can {string} a table relation {string} with fields", (action,type, fields) => {
     cy.get('a[role=tab]').contains(/Table relations|Expression/g).click({force:true})
     if(action === 'Create' || action === 'Evaluate' || action === 'Run') {
         cy.get('.p-dropdown-label:contains(Select type):visible').click({force:true})
@@ -145,16 +147,16 @@ And("I can {string} a table relation {string} with fields", (action,type, fields
 })
 
 
-And("the code rule {string} with message {string} is visible on the list of validations",(code, message) => {
+When("the code rule {string} with message {string} is visible on the list of validations",(code, message) => {
     cy.get(`.p-datatable-wrapper > table>.p-datatable-tbody>tr:contains(${code}):contains(${message})`)
 })
 
-And ("I can view the historic changes of the rule {string}", (rule) => {
+When("I can view the historic changes of the rule {string}", (rule) => {
     cy.get('[class*=BodyCell_actionTemplate] > :nth-child(4) > .p-button-text:last').click({force:true})
 
 })
 
-And("I can see the history with following fields",(fields) => {
+When("I can see the history with following fields",(fields) => {
     const data = fields.rawTable[0]
     cy.get(`.p-datatable-row:contains(${data[0]})`)
     data[1] === 'true' && cy.get(`.p-datatable-row:contains(testcustodian) > :nth-child(3) svg[data-icon=check]`)

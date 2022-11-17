@@ -1,4 +1,5 @@
 
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 const setDialog = option => {
   cy.get('button:contains(Yes):visible').click()
@@ -20,7 +21,7 @@ Then("I can {string} a dataset copy", (action) => {
   setDialog("Yes");
 });
 
-And("The snapshot list has {} record(s)", (snapshots) => {
+When("The snapshot list has {} record(s)", (snapshots) => {
   cy.get("[class*=SnapshotItem_listItemData]").should("have.length", snapshots);
   cy.wait(2000)
 });
