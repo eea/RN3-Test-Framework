@@ -1,3 +1,5 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+
 Then("I can {string} the category {string} with description {string}",(action, category,description) => {
     if(action === 'delete') {
       cy.get('.pi-trash:last').click({force:true})

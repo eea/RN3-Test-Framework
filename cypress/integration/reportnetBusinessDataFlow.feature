@@ -2,18 +2,18 @@ Feature: Business Dataflow - As an existing user on the Repornet system I want t
 
 #REP-1604
 @sanity
-Scenario: As a admin, I want to be able to create a Business dataflow.
+Scenario: a) As an admin, I want to be able to create a Business dataflow.
 
 Given I'm logged at Reportnet page as 'userAdmin'
 And I can click on tab "Business dataflows"
 And the "action" "Create new dataflow" is "be.visible"
-Then I create a business dataflow with name "Business dataflow1" and description "new descri ption Business Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Company Group 1" with fmeUser "Reportnet3"
+Then I create a business dataflow with name "Business dataflow1" and description "new description Business Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Company Group 1" with fmeUser "Reportnet3"
 Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "test.custodian@abc.com" with permissions "CUSTODIAN"
 
 #REP-1687
-Scenario: As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
+Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
 
 Given I'm logged at Reportnet page as 'userCustodian'
 And I can click on tab "Business dataflows"
@@ -43,7 +43,8 @@ And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I see the message: "SUCCESS"
 
-Scenario Outline: As a provider, I should not be able to manage requesters in a Business dataflow
+
+Scenario Outline: c) As a provider, I should not be able to manage requesters in a Business dataflow
 
 Given I'm logged at Reportnet page as 'userProvider'
 And I can click on tab "Business dataflows"
@@ -54,7 +55,8 @@ And the "action" "Manage requesters" is "<visible>"
     | visible|
     | not.exist|
 
-Scenario:  As a public user I can see the list of all dataflows marked as publicly available
+
+Scenario:  d) As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow"
@@ -64,10 +66,8 @@ Then the public table "Documents" has 1 records
 And I'm logged at Reportnet page as "userCustodian"
 
 
-
-
 #REP-1841
-Scenario: As a Custodian I want to be able to assign a Lead Reporter whose email doesn't exist to a Dataflow
+Scenario: e) As a Custodian I want to be able to assign a Lead Reporter whose email doesn't exist to a Dataflow
 
 Given I'm logged at Reportnet page as 'userCustodian'
 And I can click on tab "Business dataflows"
@@ -79,7 +79,7 @@ Then I can see a tag next to the invalid lead reporter email
 
 
 #REP-153679
-Scenario: As a admin, I want to be able to select countries in a Business dataflow.
+Scenario: f) As an admin, I want to be able to select countries in a Business dataflow.
 
 Given I'm logged at Reportnet page as 'userAdmin'
 And I can click on tab "Business dataflows"
@@ -98,8 +98,7 @@ And representative should contain Countries
 And representing field should include all "countries.json"
 
 #REP-154980
-
-Scenario: As a lead reporter I want to be able to see the label for ongoing imports
+Scenario: g) As a lead reporter I want to be able to see the label for ongoing imports
 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And the "action" "Create new dataflow" is "be.visible"

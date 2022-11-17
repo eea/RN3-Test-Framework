@@ -1,8 +1,10 @@
-And("I select the country {string}",(name) => {
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+
+Then("I select the country {string}",(name) => {
   cy.get(`.p-listbox-item:contains(${name})`).click({force:true})
 });
 
-And("I can {string} the message {string}",(action, message) => {
+Then("I can {string} the message {string}",(action, message) => {
   cy.wait(1000)
   if(action === 'send') {
     cy.get('#feedbackSender').type(message)
@@ -14,7 +16,7 @@ And("I can {string} the message {string}",(action, message) => {
   cy.wait(1000)
 })
   
-And("I can see the message received {string}",(message) => { 
+Then("I can see the message received {string}",(message) => { 
   cy.get(`[class*=Message_messageTextWrapper]:last:contains(${message})`)
 })
 
@@ -31,11 +33,11 @@ When("I create a system notification with {string} message and {string} level an
   cy.wait(1000)
 })
 
-And("I see the notification {string} in the system notifications list", (message) => { 
+Then("I see the notification {string} in the system notifications list", (message) => { 
   cy.get('.p-datatable-row:last:contains('+message+')')
 })
 
-And("I see the notification {string} in the notification received list", (message) => { 
+Then("I see the notification {string} in the notification received list", (message) => { 
   cy.get('.p-datatable-row:contains('+message+')')
 })
 

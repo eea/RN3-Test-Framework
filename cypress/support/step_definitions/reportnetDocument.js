@@ -1,3 +1,4 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Then(/^I can download the document$/, () => {
      //const expectedFileName = 'test.csv';
@@ -20,16 +21,13 @@ Then(/^I can download the document$/, () => {
       cy.get('#isPublic').click();
        
       const fileName = file;
-      cy.fixture(fileName).then(fileContent => {
-        cy.get("input[type=file]:first").attachFile({
-          fileContent,
+      //cy.fixture(fileName).then(contents => {
+        cy.fixture(fileName, { encoding: null }).as('myFixture')
+        cy.get("input[type=file]:first").selectFile('@myFixture',{
           fileName,
-          mimeType: "text/plain"
-        });
-      });
-      //cy.wait(2000)
-      //cy.get("span.pi-plus").click({force: true})
-      //cy.contains("Upload").click({force: true})
+          mimeType: "text/plain",
+          force: true
+        })
       cy.wait(2000)
       action === 'upload' ? cy.get("span.pi-plus").click({force: true}) : cy.contains("Save").click()
       cy.wait(2000)
@@ -37,21 +35,22 @@ Then(/^I can download the document$/, () => {
   );
 
 
-  And("I see the {string} input with error",(input) => {
+  When("I see the {string} input with error",(input) => {
       cy.get(`[id=${input}]`).should('have.css', 'border-color','rgb(218, 33, 49)')
   })
 
-  And("I upload the webform from file {string}", (file) => {  
+  When("I upload the webform from file {string}", (file) => {  
     const fileName = file;
-    cy.fixture(fileName).then(fileContent => {
-      cy.get("input[type=file]:first").attachFile({
-        fileContent,
+    //cy.fixture(fileName).then(contents => {
+      cy.fixture(fileName, { encoding: null }).as('myFixture')
+      //cy.get("input[type=file]:first").selectFile({
+        cy.get('input[type="file"]').selectFile('@myFixture',{
         fileName,
-        mimeType: "text/plain"
-      });
-    });
+        mimeType: "text/plain",
+        force: true
+      })
     cy.wait(2000)
     cy.get("[data-for=confirmBtn] button").click({force: true})
-   
+
   }
 );

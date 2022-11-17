@@ -2,7 +2,7 @@ Feature: Reportnet Documents - As an existing user on the Repornet system I want
 
 
 @sanity
-Scenario: As a data custodian I can add a new data flow with obligations
+Scenario: a) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
@@ -22,10 +22,9 @@ Then I can "add" a Data provider with Representative of "EEA Member countries" a
 And I can click on element "Manage lead reporters"
 And I can see the representative "Spain" "test.provider@abc.com"
 
-
 # REP-1229
 @sanity
-Scenario: As a data custodian I can add documents to dataflow
+Scenario: b) As a data custodian I can add documents to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Document Reportnet Testing"
@@ -45,7 +44,7 @@ And The first record is "table description" and the last record is "test descrip
 
 
 # REP-1416
-Scenario: As a data custodian I can not upload documents with empty fields
+Scenario: c) As a data custodian I can not upload documents with empty fields
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Document Reportnet Testing"
@@ -55,7 +54,7 @@ When I "upload" the document "Table1.csv" with description " " and language "Eng
 And I see the "descriptionDocumentFileUpload" input with error
 
 
-Scenario: As a data custodian I can edit documents to dataflow
+Scenario: d) As a data custodian I can edit documents to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Document Reportnet Testing"
@@ -68,7 +67,7 @@ And the table "Supporting documents" has 2 records
 
 
 @sanity
-Scenario: As a Reportnet User I can download documents
+Scenario: e) As a Reportnet User I can download documents
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Document Reportnet Testing"
@@ -77,7 +76,7 @@ Then I can download the document
 
 
 
-Scenario: As a data custodian I can delete documents to dataflow
+Scenario: f) As a data custodian I can delete documents to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Document Reportnet Testing"
@@ -88,7 +87,7 @@ Then the table "Supporting documents" has 1 records
 
 
 #REP-1685
-Scenario: As a custodian/steward, I want to be able to set the documents as public
+Scenario: g) As a custodian/steward, I want to be able to set the documents as public
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Document Reportnet Testing"
@@ -98,7 +97,7 @@ When I "upload" the document "test.csv" with description "public document" and l
 
 
 @sanity
-Scenario: As a data custodian I can create data collections
+Scenario: h) As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Document Reportnet Testing"
@@ -108,12 +107,10 @@ And I see the message: "SUCCESS"
 
 
 #REP-1685
-Scenario: As a custodian/steward I can see all the public documents in the dataflow public page as extra information if the dataflow is public
+Scenario: i) As a custodian/steward I can see all the public documents in the dataflow public page as extra information if the dataflow is public
 
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow status and download reported data"
 And I "can" see the publicly dataflow "Document Reportnet Testing"
-And I can see for dataflow "Document Reportnet Testing" the instrument "(C) Information on the assessment regime (Article 7)", status "Open"
-When I click on "Document Reportnet Testing"
 Then the public table "Documents" has 1 records
 And I'm logged at Reportnet page as "userCustodian"
