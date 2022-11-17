@@ -121,7 +121,6 @@ And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
 And the "button" "Import table data" is "be.enabled"
 And I import a file "test.csv"
-# And I can see the step "Import data" is finished
 Then I see the message: "SUCCESS"
 
 
@@ -155,6 +154,7 @@ And I'm logged at Reportnet page as 'userCustodian'
 
 
 # REP-1432
+@ignore
 Scenario Outline: l) As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page
@@ -170,6 +170,7 @@ And I'm logged at Reportnet page as 'userCustodian'
 
 
 #REP-822 #REP-1669 #REP-2284
+@ignore
 Scenario: m) As a custodian, I can see the manual technical acceptance dialogue
 
 Given I'm logged at Reportnet page as 'userCustodian'
@@ -185,13 +186,7 @@ And the "action" "Notifications" is "be.visible"
 Then I see the notification "DS-Test changed to Technically accepted" in the notification received list
 
 
-#REP-822
-Scenario: n) As a lead reporter, I can see the message received of this country about changed status
 
-Given I'm logged at Reportnet page as 'userProvider'
-And I click on "Dataset Reportnet Testing"
-When I can click on element "Technical feedback"
-Then I can see the message received "status changed"
 
 
 #REP-873 #REP-1771
@@ -351,50 +346,9 @@ Examples:
   | DS-Test     |
 
 
-Scenario Outline: zc) As a data custodian I can see Dataset Schemas to dataflow
-
-Given I'm logged at Reportnet page as "userCustodian"
-And I click on "Dataset Reportnet Testing"
-And I can click on element "Dataflow help"
-And I click on the tab "Dataset schemas"
-Then I can see the dataset schema "<datasetName>"
-And I can see the dataset schema "<tableSchemaName>"
-And I can see the dataset schema "<tableFields>"
-
-Examples:
-  | datasetName | tableSchemaName | tableFields   |
-  | DS-Test     | Table1          | Field1,Field2 |
 
 
-# REP-1185
-Scenario: zd) As a Custodian, I want to be able to manage the external integrations for all datasets in all datasets in reporting.
-
-Given I'm logged at Reportnet page as "userCustodian"
-And I click on "Dataset Reportnet Testing"
-When I can click on element "DS-Test"
-Then the cell with "name" "Field1" is disabled
-And the cell with "description" "Field 1 description" is disabled
-And the cell with "type" "Number - Integer" is disabled
-And publicly available check is "not.be.disabled"
-And the "button" "External integrations" is "be.visible"
-And the "button" "QC rules" is "be.visible"
 
 
-Scenario: ze) As a custodian/steward, I want to be able to create a Reference dataflow.
-
-Given I'm logged at Reportnet page as "userCustodian"
-And I can click on "Reference dataflows"
-And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reference dataflow with name "Reference dataflow 2" and description "new description Reference Test"
-And I click on "Reference dataflow 2"
-And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Reference-Test"
-And I can click on element "DS-Reference-Test"
-Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
-  | code  | code description  | Number - Integer |  | true  |
-  | label | label description | Text             |  | false |
-And I can go to the dataflow page
-And I can create reference datasets
-And I see the message: "SUCCESS"
 
 

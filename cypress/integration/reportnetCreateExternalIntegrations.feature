@@ -1,4 +1,4 @@
-Feature: External Integrations testing
+Feature: External Integrations - As an existing user on the Repornet system I want to test the actions with external integrations
 
 Scenario: a) As a data custodian I can add a new data flow with obligations
 

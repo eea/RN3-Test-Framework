@@ -350,6 +350,7 @@ And I see the message: "SUCCESS"
 
 
 #REP-384 REP-459
+@ignore
 Scenario: x) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
 Given I'm logged at Reportnet page as "userCustodian"
@@ -366,6 +367,7 @@ And the new qc rule "qc1 'Test'" is "correct"
 
 
 #REP-431 REP-1129
+@ignore
 Scenario: y) As a data custodian I can edit QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian"
@@ -384,6 +386,7 @@ And the qcRules list has 3 items
 
 
 #REP-2048 REP-2162
+@ignore
 Scenario: z) As a data custodian I can see the historic changes on each QC
 
 Given I'm logged at Reportnet page as "userCustodian"

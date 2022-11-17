@@ -1,7 +1,7 @@
 Feature: Reportnet Web links - As an existing user on the Repornet system I want to test the actions with Web links
 
 @sanity
-Scenario: As a data custodian I can add a new data flow with obligations
+Scenario: a) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
@@ -24,7 +24,7 @@ Then I can see the representative "Spain" "test.provider@abc.com"
 
 # REP-1229
 @sanity
-Scenario: As a data custodian I can add weblinks to dataflow
+Scenario: b) As a data custodian I can add weblinks to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
@@ -38,7 +38,7 @@ Then the table "Web links" has 2 records
 And The first record is "New webLink" and the last record is "Test webLink"
 
 
-Scenario: As a data custodian I can edit weblinks to dataflow
+Scenario: c) As a data custodian I can edit weblinks to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
@@ -47,7 +47,7 @@ And I click on the tab "Web links"
 Then I can update the weblink with the description "Edit weblink" to the text "www.google2.com"
 
 
-Scenario: As a data custodian I can remove weblinks to dataflow
+Scenario: d) As a data custodian I can remove weblinks to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
@@ -58,7 +58,7 @@ Then the table "Web links" has 1 records
 
 
 #REP-1685
-Scenario: As a custodian/steward, I want to be able to set the links as public
+Scenario: e) As a custodian/steward, I want to be able to set the links as public
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
@@ -69,7 +69,7 @@ When I add a weblink with description "Public webLink" and url "www.google.es" m
 
 
 @sanity
-Scenario: As a data custodian I can create data collections
+Scenario: f) As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
@@ -79,7 +79,7 @@ And I see the message: "SUCCESS"
 
 
 #REP-1685
-Scenario: As a custodian/steward I can see all the public links in the dataflow public page as extra information if the dataflow is public
+Scenario: g) As a custodian/steward I can see all the public links in the dataflow public page as extra information if the dataflow is public
 
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow"

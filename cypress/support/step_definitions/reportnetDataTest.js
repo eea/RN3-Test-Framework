@@ -229,7 +229,7 @@ When("I import a file {string}", file => {
     cy.fixture(fileName, { encoding: null }).as('myFixture')
     cy.get('input[type="file"]').selectFile('@myFixture',{
       fileName,
-      mimeType: "csv/plain",
+      mimeType: "text/plain",
       force: true
     })
   cy.wait(2000)
@@ -366,7 +366,6 @@ Then("I can {string} a dataflow with name {string} and description {string} and 
   cy.get("#dataflowName").clear().type(typeValue);
   cy.get("#dataflowDescription").clear().type(description);
   cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
-
   if (filtered === "filters") {
     filters.rawTable.map((data) => {
       data[0] !== "" && cy.get('[id=countries]:first').click({ force: true })
@@ -1026,9 +1025,6 @@ Then("I {string} a reference dataflow with name {string} and description {string
   console.log(bddGeneratedValues);
   cy.get("#dataflowName").clear().type(typeValue);
   cy.get("#dataflowDescription").clear().type(description);
-  cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
-  //cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
-  cy.get('button:contains(OK):visible').click({ force: true })
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000)
 })
