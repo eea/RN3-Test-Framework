@@ -522,6 +522,14 @@ When("I sort the dataflow list by {string}", (field) => {
   cy.get('[class*=Filters_dataflowsFilters]').get(':nth-child(' + sortPositions.indexOf(field) + ') > .p-button > .pi').first().click({ force: true })
 })
 
+When("I filter the dataflow list by {string} with {string}", (field, name) => {
+  bddGeneratedValues.get(name)
+  cy.wait(2000)
+  if (field === 'name') {
+    cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
+    cy.get('.p-button-text.p-c').contains('Filter').click({force:true})}
+  })
+
 When("The first dataflow is {string} and the last dataflow is {string}", (first, last) => {
   cy.get('[class*=containerLink]:first:contains(' + first + ')')
   cy.get('[class*=containerLink]:last:contains(' + last + ')')
