@@ -34,6 +34,12 @@ When("I can change the visual {string} from {string} to {string}",(option, oldFo
     }      
 })
 
+When("I can change the visual rows to {string}",(format) => {   
+    cy.wait(2000)
+    cy.get(`.p-datatable .p-paginator-left-content-rowsPerPage .p-dropdown`).click({force:true})
+    cy.get(`.p-dropdown-panel .p-dropdown-item:contains(${format})`).click({force:true}) 
+})
+
 When("I can go to the list dataflows page",() => {
     cy.wait(1000)
     cy.get('.p-menuitem-link > .p-menuitem-text:contains(Dataflows)').click({force:true})

@@ -55,10 +55,11 @@ Then I can fill a dataset schema with name "T1", description "description T1" an
 Scenario: e) As a data custodian I can create new field constraint QC Rules
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-When the "button" "QC rules" is "be.visible"
-Then I can "create" the field constraint rule with fields
+Then the "button" "QC rules" is "be.visible"
+And I can "create" the field constraint rule with fields
 | Table1 | Field1 | blocker Test | testName | Field type NUMBER | Message Info | Blocker |
 And I can "Create" a "Field comparison" with a "" with fields
  | false  | AND | Number | <= | 100  |
@@ -68,11 +69,12 @@ And the code rule "blocker Test" is "be.visible" on the list of rules
 Scenario: f) As a data custodian I want to be able to set a design dataset as reference dataset
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 Then I can click on element "New schema"
 And I can "create" a dataset schema with name "Reference data"
 And I can click on element "Reference data"
-Then I can fill a dataset schema with name "Information", description "description Information" and with following fields
+And I can fill a dataset schema with name "Information", description "description Information" and with following fields
  | code  | description 1 | Text | | true |
  | label | description 2 | Text | | true |
 And I change to "Tabular data" mode
@@ -93,9 +95,10 @@ And the "button" "Configure webform" is "be.disabled"
 Scenario: g) As a data custodian I can fill a read only (and prefill) dataset schema 
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
-And I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
+Then I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
  | Field1 | Field 1 description | Number - Integer | | |
  | Field2 | Field 2 description | Link | | |
 And I can select a "Link" "Table1 - Field1" with label field "" and linked field "" and master field "" and ignore case "" for dataflow ""
@@ -182,6 +185,27 @@ When I select the country "Spain"
 Then I can "send" the message "Test communication"
 And I can "send" the message "Test message"
 
+# REP-191
+Scenario: l) As a Reportnet User I can change the default rows per page
+
+Given  I'm logged at Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I can click on "Dataflow Reportnet Testing"
+And I can click on element "Spain"
+And I can click on element "DS-Test"
+And the "button" "Import table data" is "be.enabled"
+And I import a file "testPagination.csv"
+And I reload the page
+And I am in "DS-Test" dataset
+And the dataset table "Table1" has 5 records
+And I can see the user profile page
+When I can change the visual rows to "10"
+And the "action" "Dataflows" is "be.visible"
+And I can click on "Dataflow Reportnet Testing"
+And I can click on element "Spain"
+And I can click on element "DS-Test"
+Then the dataset table "Table1" has 10 records
+
 
 # REP-1027 
 Scenario: n) As a data provider I don't have access to these new datasets
@@ -203,6 +227,7 @@ Then the "button" "Import table data" is "be.disabled"
 Scenario: p) As a data custodian I can export EU Datasets
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 Then I can click on element "Export EU datasets"
 
@@ -223,10 +248,10 @@ Then the dataset table "Table3" has 2 records
 
 
 #REP-458
-@ignore
 Scenario: r) As a data provider I can see the prefilled table
 
 Given I'm logged at Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
 And I can click on element "DS-Test"
@@ -236,6 +261,7 @@ Then the dataset table "Table3" has 2 records
 Scenario: s) As a custodian, I want to be able to communicate with lead reporters of a country.
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Technical feedback"
 When I select the country "Spain" 
@@ -243,10 +269,10 @@ Then I can "send" the message "Test communication"
 And I can "send" the message "Test message"
 
 #REP-1314
-@ignore
 Scenario: t) As a custodian, I can delete a message
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Technical feedback"
 When I select the country "Spain"
@@ -257,7 +283,8 @@ Then I can "delete" the message "Test message"
 Scenario: u) As a custodian, I can attach a file
 
 Given I'm logged at Reportnet page as 'userCustodian'
-And I click on data collection "Dataflow Reportnet Testing"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I click on "Dataflow Reportnet Testing"
 And I can click on element "Technical feedback"
 When I select the country "Spain" 
 And the "button" "Attach file" is "be.enabled"
@@ -290,17 +317,163 @@ Then I delete a system notification with "testMessage" message
 Scenario Outline: y) As a provider I cannot see the dashboards
 
 Given I'm logged at Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
-Then the "action" "Dashboards" is "<visible>"
+Then the "Dashboards" is "visible"
 
   Examples: 
-  | visible     | 
-  | not.exist   | 
+  | visibility_status     | 
+  | visible               | 
 
 Scenario: z) As a data custodian I see the Validation dashboards and Release status
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Dashboards"
 Then I can see the Release status dashboard and Validation dashboards
 
+# REP-1192 REP-1312 REP-1432 REP-1275
+@ignore
+Scenario Outline: za) As a public user I can see the list of all dataflows marked as publicly available
+
+Given I'm in Reportnet page
+And I can click on "View by obligation dataflow"
+And I can filter obligation dataflow by "name" with "Dataflow Reportnet Testing"
+And I can see for dataflow "Dataflow Reportnet Testing" the instrument "Air Quality Directive IPR", status "Open"
+And I can see the information on "Dataflow Reportnet Testing" with "<country>" "<type>" "<technicalAcceptance>"
+And I'm logged at Reportnet page as "userCustodian"
+
+ Examples: 
+    | country            | type                 | technicalAcceptance |
+    | Finland            | not released         |                     |
+    | France             | not released         |                     |
+    | Spain              | not released         |                     |
+    | Reference datasets | reference data       |                     |
+    | Finland            | technical acceptance |                     |
+    | France             | technical acceptance | Pending             |
+    | Spain              | technical acceptance | Pending             |
+
+
+Scenario Outline: zc) As a Data Custodian I can see the roles on the dataflow list
+
+Given I'm logged at Reportnet page as 'userCustodian'
+Then I can see the "<role>" on "Dataflow Reportnet Testing"
+
+  Examples:
+    | role      |
+    | CUSTODIAN |
+
+
+Scenario Outline: zd) As a Data Data Provider I can see the roles on the dataflow list
+
+Given I'm logged at Reportnet page as "userProvider"
+Then I can see the "<role>" on "Dataflow Reportnet Testing"
+
+  Examples:
+    | role      |
+    | CUSTODIAN  |
+
+#REP-822
+Scenario: ze) As a reporter, I can see the status of the dataflows
+
+Given I'm logged at Reportnet page as "userProvider"
+Then I can see the "Delivery status" on "Dataflow Reportnet Testing"
+
+# REP-1210
+Scenario Outline: zf) As a custodian, I can Close/open release process
+
+Given I'm logged at Reportnet page as 'userCustodian'
+And I can see the "<status>" on "<dataflow>"
+And I can click on "<dataflow>"
+And the "action" "Releasing status" is "be.visible"
+When I click the check to "<action>" the reporting
+And I can go to the list dataflows page
+And I can see the "<nextStatus>" on "<dataflow>"
+And The user logout
+And I'm logged at Reportnet page as 'userProvider'
+And I click on "Dataflow Reportnet Testing"
+And I can click on element "Spain"
+Then the button "Release to data collection" is "<visibility>"
+
+  Examples:
+    | status | nextStatus | dataflow                   | action | visibility  |
+    | OPEN   | CLOSED     | Dataflow Reportnet Testing | close  | not.exist |
+    | CLOSED | OPEN       | Dataflow Reportnet Testing | open   | visible     |
+
+#REP-1367
+Scenario: zg) As a requester (custodian/steward), in an open dataflow I am able to create more unique constraints
+
+Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I can click on "Dataflow Reportnet Testing"
+And I can click on element "DS-Test"
+And the "button" "Unique constraints" is "be.visible"
+Then I can add unique constraint on "Table4" with "Field1"
+Then the table Unique constraints has 2 records
+
+#REP-413
+@sanity
+Scenario: zh) As a data provider I can create a API-KEY
+
+Given I'm logged at Reportnet page as 'userProvider'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I click on "Dataflow Reportnet Testing"
+And I can click on element "Spain"
+And the "action" "API-key" is "be.visible"
+Then the "button" "Generate new API-key" is "be.enabled"
+And new API-key is created
+
+#REP-1322
+Scenario: zi) As a registered user I can export with an option (zip XLSX + attachments)
+
+Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I can click on "Dataflow Reportnet Testing"
+And I can click on element "Spain"
+And I can click on element "DS2"
+Then the "button" "Export dataset data" is "be.enabled"
+And I can export dataset data "ZIP (.xlsx + attachments)"
+And I see the message: "SUCCESS"
+
+#REP-1841
+Scenario: zj) As a Lead Reporter I want to be able to assign a Reporter whose email doesn't exist to a Dataflow
+
+Given I'm logged at Reportnet page as 'userProvider'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I can click on "Dataflow Reportnet Testing"
+And I can click on element "Spain"
+And the "action" "Manage reporters" is "be.visible"
+When I can "Add" a editor "temporaryReporter@reportnet.net" with permissions "REPORTER WRITE"
+Then I can see a tag next to the invalid reporter email
+
+
+#REP-2161
+Scenario: zk) As a custodian/steward I can enable to automatically delete reporter data and snapshots with technical acceptance of delivery
+
+Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I click on "Dataflow Reportnet Testing"
+When the "action" "Automatic delete" is "be.visible"
+Then I can check enable automatic delete reporter data and snaphots
+
+#REP-2231
+Scenario Outline: zl) As a Custodian I cannot edit a dataflow name
+
+Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I click on "Dataflow Reportnet Testing"
+Then I "<action>" a dataflow with name "<dataflowNameEdited>" 
+
+Examples: 
+    | dataflowName               | dataflowNameEdited                 | action       |
+    | Dataflow Reportnet Testing | Dataflow Reportnet Testing edited  | cannot edit  | 
+
+Scenario Outline: zm) As an Admin I can edit a dataflow name
+
+Given I'm logged at Reportnet page as 'userAdmin'
+And I can filter by "name" with "<dataflowName>"
+And I can click on "<dataflowName>"
+Then I can "Save" a dataflow with name "Dataflow Reportnet Testing edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
+
+	

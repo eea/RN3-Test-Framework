@@ -10,7 +10,7 @@ Then("I can {string} the message {string}",(action, message) => {
     cy.get('#feedbackSender').type(message)
     cy.get('.p-button-text:contains(Send)').click()
   } else {
-    cy.get(`[class*=ListMessages_scrollMessagesWrapper]>:contains(${message})>.svg-inline--fa`).click()
+    cy.get(`[class*=ListMessages_scrollMessagesWrapper]>:contains(${message}):first>.svg-inline--fa`).click({multiple:true})
     cy.contains('Yes').click()
   }
   cy.wait(1000)

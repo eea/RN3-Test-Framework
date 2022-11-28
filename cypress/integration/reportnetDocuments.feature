@@ -110,7 +110,9 @@ And I see the message: "SUCCESS"
 Scenario: i) As a custodian/steward I can see all the public documents in the dataflow public page as extra information if the dataflow is public
 
 Given I'm in Reportnet page
-And I can click on "View by obligation dataflow status and download reported data"
-And I "can" see the publicly dataflow "Document Reportnet Testing"
-Then the public table "Documents" has 1 records
+When I can click on "View by obligation dataflow"
+Then I "can" see the publicly dataflow "Document Reportnet Testing"
+And I click on "Document Reportnet Testing"
+And the public table "Documents" has 1 records
 And I'm logged at Reportnet page as "userCustodian"
+

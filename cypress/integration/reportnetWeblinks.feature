@@ -84,7 +84,6 @@ Scenario: g) As a custodian/steward I can see all the public links in the datafl
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow"
 And I "can" see the publicly dataflow "Weblinks Reportnet Testing"
-And I can see for dataflow "Weblinks Reportnet Testing" the instrument "Agenda 21 National Report", status "Open"
-And I can click on "Weblinks Reportnet Testing"
+And I click on "Weblinks Reportnet Testing"
 Then the public table "Web links" has 1 records
 And I'm logged at Reportnet page as "userCustodian"
