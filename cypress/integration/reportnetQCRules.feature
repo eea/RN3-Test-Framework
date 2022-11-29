@@ -38,6 +38,7 @@ And the "fieldsDesigner" "Mandatory" is "not.be.checked"
 Scenario: c) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
 Given I'm logged at Reportnet page as "userCustodian"
+When I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -184,6 +185,7 @@ And the code rule "rc1" is "be.visible" on the list of rules
 Scenario: l) As a data custodian I can create table constraint
 
 Given I'm logged at Reportnet page as "userCustodian"
+When I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -199,6 +201,7 @@ And the code rule "ds1" is "be.visible" on the list of rules
 Scenario: m) As a Custodian, I want to be able to create QCs based on SQL sentences
 
 Given I'm logged at Reportnet page as "userCustodian"
+When I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
