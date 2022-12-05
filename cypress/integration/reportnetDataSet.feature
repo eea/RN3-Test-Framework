@@ -193,11 +193,12 @@ Then I see the notification "DS-Test changed to Technically accepted" in the not
 Scenario: o) As a data custodian I can see the historic releases
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
-When I click in a button "Historic releases" inside "Data Collection - DS-Test" context menu
+And I click in a button "Historic releases" inside "Data Collection - DS-Test" context menu
 Then the table "Historic releases for Data Collection - DS-Test" has 1 records
 And I click in a button "Historic releases" inside "Data Collection - DS-Test" context menu
-Then I can click on the link to be redirected to another page
+And I can click on the link to be redirected to another page
 And the table "Table1" has 1 records
 
 
@@ -324,6 +325,7 @@ And I "can not" change to public in the visibility modal
 Scenario Outline: za) As Data Custodian I can see Dataset Schemas to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Dataset schemas"

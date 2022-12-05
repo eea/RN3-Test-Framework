@@ -199,12 +199,12 @@ And I reload the page
 And I am in "DS-Test" dataset
 And the dataset table "Table1" has 5 records
 And I can see the user profile page
-When I can change the visual rows to "10"
+Then I can change the visual rows to "10"
 And the "action" "Dataflows" is "be.visible"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
 And I can click on element "DS-Test"
-Then the dataset table "Table1" has 10 records
+And the dataset table "Table1" has 10 records
 
 
 # REP-1027 
@@ -472,8 +472,8 @@ Examples:
 Scenario Outline: zm) As an Admin I can edit a dataflow name
 
 Given I'm logged at Reportnet page as 'userAdmin'
-And I can filter by "name" with "<dataflowName>"
-And I can click on "<dataflowName>"
+And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I click on "Dataflow Reportnet Testing"
 Then I can "Save" a dataflow with name "Dataflow Reportnet Testing edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
 
 	

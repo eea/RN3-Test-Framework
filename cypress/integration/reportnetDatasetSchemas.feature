@@ -238,7 +238,6 @@ Given I'm logged at Reportnet page as "userCustodian"
 And I click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "create" a dataset schema with name "DS-Import"
-And I reload the page
 And I can click on element "DS-Import"
 And I can fill a dataset schema with name "Tabletest", description "description Tabletest" and with following fields
   | tabletestf1 | description 1 | Number - Integer |  | false |

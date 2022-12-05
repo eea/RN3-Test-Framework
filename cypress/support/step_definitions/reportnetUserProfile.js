@@ -36,7 +36,7 @@ When("I can change the visual {string} from {string} to {string}",(option, oldFo
 
 When("I can change the visual rows to {string}",(format) => {   
     cy.wait(2000)
-    cy.get(`.p-datatable .p-paginator-left-content-rowsPerPage .p-dropdown`).click({force:true})
+    cy.get(`.settings-change-settings-help-step #rowsPage`).click({force:true})
     cy.get(`.p-dropdown-panel .p-dropdown-item:contains(${format})`).click({force:true}) 
 })
 

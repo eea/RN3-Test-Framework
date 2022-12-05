@@ -118,7 +118,6 @@ And I see the message: "SUCCESS"
 Scenario: h) As a custodian I want to be able to filter reference dataflows
 
 Given I'm logged at Reportnet page as 'userCustodian'
-And I can go to the list dataflows page
 And I can click on "Reference dataflows"
 And I can filter by "name" with "Reference dataflow1"
 And I can click on "Reference dataflow1"
