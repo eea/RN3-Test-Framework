@@ -60,9 +60,9 @@ Scenario: f) As a data custodian I can add a Data provider
 
 Given I'm logged at Reportnet page as "userCustodian"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
-And I click on "Roles Reportnet Testing"
+Then I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+And I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
 
 
 @sanity
@@ -194,7 +194,9 @@ And I can see the specified record in the table
 And I can "Add" a editor "test.observer@abc.com" with permissions "OBSERVER"
 And I can see the specified record in the table
 | test.observer@abc.com | OBSERVER |
-And The user logout
+
+
+Scenario: oa) As a custodian, I want to see the list of current custodians/stewards and be able to add custodians/stewards/observers.
 Then I'm logged at Reportnet page as "userLeadReporter"
 And  I click on "Roles Reportnet Testing"
 And I can click on element "DS-Test"
@@ -307,7 +309,7 @@ Scenario: u) As a steward support, I want to be able to edit data in a test data
 Given I'm logged at Reportnet page as "userStewardSupport"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
-When I can click on element "Test dataset"
+And I can click on element "Test dataset"
 And I can click on element "Test Dataset - DS-Test"
 Then I can add a record 
 | 101 | |
@@ -365,11 +367,11 @@ And I click on "Roles Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
 And the "button" "Add" is "be.enabled"
-When I add a weblink with description "Test webLink" and url "www.google.es" marked as "private"
-Then the table "Web links" has 1 records
-Then I can update the weblink with the description "Edit weblink" to the text "www.google2.com"
-When I "delete" the row 1
-Then the table "Web links" has 0 records
+Then I add a weblink with description "Test webLink" and url "www.google.es" marked as "private"
+And the table "Web links" has 1 records
+And I can update the weblink with the description "Edit weblink" to the text "www.google2.com"
+And I "delete" the row 1
+And the table "Web links" has 0 records
 
 
 # REP-2046

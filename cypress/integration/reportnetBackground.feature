@@ -185,6 +185,20 @@ When I select the country "Spain"
 Then I can "send" the message "Test communication"
 And I can "send" the message "Test message"
 
+Scenario Outline: ka) As a Reportnet User I can change the application date format
+
+Given  I'm logged at Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I can see the dateFormat on the "<dataflow>" as "<oldDate>"
+Then I can see the user profile page
+And I can change the visual "<option>" from "<fromFormat>" to "<toFormat>"
+And the "action" "Dataflows" is "be.visible"
+And I can see the dateFormat on the "<dataflow>" as "<newDate>"
+
+Examples:
+  | option     | fromFormat | toFormat   | dataflow                      | oldDate    | newDate    |
+  | dateFormat | YYYY-MM-DD | DD-MM-YYYY | Dataflow Reportnet Testing | YYYY-MM-DD | DD-MM-YYYY |
+
 # REP-191
 Scenario: l) As a Reportnet User I can change the default rows per page
 
