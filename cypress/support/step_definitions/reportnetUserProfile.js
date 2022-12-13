@@ -36,8 +36,8 @@ When("I can change the visual {string} from {string} to {string}",(option, oldFo
 
 When("I can change the visual rows to {string}",(format) => {   
     cy.wait(2000)
-    cy.get(`.p-datatable .p-paginator-left-content-rowsPerPage .p-dropdown`).click({force:true})
-    cy.get(`.p-dropdown-panel .p-dropdown-item:contains(${format})`).click({force:true}) 
+    cy.get(`.settings-change-settings-help-step #rowsPage`).click({force:true})
+    cy.get(`.p-dropdown-panel .p-dropdown-item:contains(${format}):first`).click({force:true}) 
 })
 
 When("I can go to the list dataflows page",() => {
@@ -52,7 +52,9 @@ When("I can go to the dataflow page",() => {
 
 When("I can see the dateFormat on the {string} as {string}",(dataflow, format) => {
     const regEx = format === 'YYYY-MM-DD' ? defaultFormat : endFormat
-    cy.get('[class*=containerLink]:contains('+dataflow+') [class*=dateBlock]').invoke('text').should('match', new RegExp(regEx));
+    cy.get('[class*=containerLink]:contains('+dataflow+')> div > div > div >span[class*=dateBlock]').invoke('text').should('match', new RegExp(regEx));
+    //cy.get('[class*=containerLink]:contains('+dataflow+') .[class*=dateBlock]').invoke('text').should('match', new RegExp(regEx));
+
 })
 
 When("I can see the theme is {string}", (theme) => {

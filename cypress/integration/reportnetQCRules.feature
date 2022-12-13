@@ -102,6 +102,7 @@ And the qcRules list has 3 items
 Scenario: g) As a data custodian I want to include SQL fields in a message
 
 Given I'm logged at Reportnet page as "userCustodian"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -158,6 +159,7 @@ Examples:
 Scenario: j) As a data custodian I can delete a QC Rule
 
 Given I'm logged at Reportnet page as "userCustodian"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -268,11 +270,12 @@ Then I can create data collections with a technical acceptance step for the repo
 Scenario: r) As a custodian, I want to know the total cost of a SQL QC
 
 Given I'm logged at Reportnet page as "userCustodian"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
-Then I can click on "Create field constraint"
-When I can "create" the field constraint rule with fields
+When I can click on "Create field constraint"
+Then I can "create" the field constraint rule with fields
   | Table2 | Field1 | SQLEvaluate | SQL Evaluate | SQL Info | Evaluate rule test | INFO |
 And I can "Evaluate" a table relation "SQL sentence" with fields
   | SELECT |
@@ -282,11 +285,12 @@ And I can "Evaluate" a table relation "SQL sentence" with fields
 Scenario: s) As a custodian, I want to run a SQL QC
 
 Given I'm logged at Reportnet page as "userCustodian"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
-Then I can click on "Create field constraint"
-When I can "create" the field constraint rule with fields
+When I can click on "Create field constraint"
+Then I can "create" the field constraint rule with fields
   | Table2 | Field1 | SQLRun | SQL Run | SQL Info | Run rule test | INFO |
 And I can "Run" a table relation "SQL sentence" with fields
   | SELECT |
