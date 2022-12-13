@@ -22,40 +22,6 @@ And the "action" "Edit" is "be.visible"
 Then I can "Save" a dataflow with name "Test edited" and description "old description Test2" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
 
 
-#REP-1994
-@ignore
-Scenario Outline: c) As a Reportnet User I can filter the dataflow list
-
-Given I'm logged at Reportnet page as 'userCustodian'
-And the dataflow list has 2 items
-Then I can filter by "<type>" with "<filter>"
-And the dataflow list has <total> items
-
-  Examples:
-    | type        | filter    | total |
-    | name        | reportnet | 1     |
-    | description | dataflow  | 1     |
-    | Status      | DESIGN    | 1     |
-    | Role        | CUSTODIAN | 2     |
-
-
-#REP-1994
-@ignore
-Scenario Outline: d) As a Reportnet User I can clear filters in the dataflow list
-
-Given I'm logged at Reportnet page as 'userCustodian'
-And the dataflow list has 2 items
-When I can filter by "<type>" with "<filter>"
-And the dataflow list has <total> items
-Then I can clear dataflow filters
-And the dataflow list has 2 items
-
-  Examples:
-    | type        | filter    | total |
-    | name        | reportnet | 1     |
-    | name        | reportnet | 1     |
-    | description | dataflow  | 1     |
-
 #REP-1496
 Scenario: e) As a registered user I can import a zip file through an external integration
 
@@ -90,15 +56,16 @@ Scenario: g) As a custodian/steward, I want to be able to create a Reference dat
 Given I'm logged at Reportnet page as 'userCustodian'
 And I can click on "Reference dataflows"
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reference dataflow with name "Reference dataflow1" and description "new description Reference Test"
-And I click on "Reference dataflow1"
+And I "Create" a reference dataflow with name "Reference dataflow" and description "new description Reference Test"
+When I filter the dataflow list by "name" with "Reference dataflow"
+And I click on "Reference dataflow"
 And I can click on element "New schema"
 And I can "create" a dataset schema with name "DS-Reference-Test"
 And I can click on element "DS-Reference-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
   | code  | code description  | Number - Integer |  | true  |
   | label | label description | Text             |  | false |
-Then I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
+And I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
   | code  | code description  | Number - Integer |  | false |
   | label | label description | Text             |  | false |
 And I click on table "Table1"
@@ -118,19 +85,17 @@ And I see the message: "SUCCESS"
 Scenario: h) As a custodian I want to be able to filter reference dataflows
 
 Given I'm logged at Reportnet page as 'userCustodian'
-And I can go to the list dataflows page
 And I can click on "Reference dataflows"
-And I can filter by "name" with "Reference dataflow1"
-And I can click on "Reference dataflow1"
-And the "action" "Referencing dataflows" is "be.visible"
+And I can filter by "name" with "Reference dataflow"
+And I can click on "Reference dataflow"
 
 #REP-1438
 Scenario: i) As a custodian/steward, I want to be able to update data in a reference dataset if it is marked as updatable.
 
 Given I'm logged at Reportnet page as 'userCustodian'
 And I can click on "Reference dataflows"
-And I can filter by "name" with "Reference dataflow1"
-And I click on "Reference dataflow1"
+And I can filter by "name" with "Reference dataflow"
+And I click on "Reference dataflow"
 And I can click on element "DS-Reference-Test"
 And I "can not" update the cell with the text "test1" to the text "test4" in a "reference dataset"
 And the "action" "Update status" is "be.visible"

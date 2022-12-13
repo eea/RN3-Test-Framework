@@ -54,3 +54,7 @@ Then(/^I can download the document$/, () => {
 
   }
 );
+
+When("I click on country {string}",(input) => {
+  cy.get('.class= PublicCountries_titleWrap__1uGiC').contains(`[id=${input}]`).click({force:true})
+})

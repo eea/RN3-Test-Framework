@@ -143,6 +143,7 @@ Then I can see the field "Key2" has 0 error
 Scenario: j) As a custodian/steward, I want to be able to create an external link to a reference dataset inside a reference dataflow.
 
 Given I'm logged at Reportnet page as "userCustodian"
+When I filter the dataflow list by "name" with "DatasetSchema Test"
 And I click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
 Then I can fill a dataset schema with name "Table7", description "description Table7" and with following fields
@@ -237,7 +238,6 @@ Given I'm logged at Reportnet page as "userCustodian"
 And I click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "create" a dataset schema with name "DS-Import"
-And I reload the page
 And I can click on element "DS-Import"
 And I can fill a dataset schema with name "Tabletest", description "description Tabletest" and with following fields
   | tabletestf1 | description 1 | Number - Integer |  | false |

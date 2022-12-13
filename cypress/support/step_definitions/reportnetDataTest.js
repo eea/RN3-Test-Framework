@@ -176,6 +176,17 @@ When("the {string} {string} is {string}", (type, button, property) => {
   cy.wait(1000)
 });
 
+When('the {string} is {string}', (visibility_status)=>{
+  if (visibility_status=="visible")
+  {
+    cy.get('[data-for="validationsStatus"]').should('be.visible')
+  }
+  else if(visibility_status=="not visible")
+  {
+    cy.get('[data-for="validationsStatus"]').should('not.be.visible')
+  }
+})
+
 When("the button {string} is {string}", (button, property) => {
   let loc = property === 'visible' ? '[class*=BigButton_schemaDataset]' : '[class*=BigButton_bigButtonDisabled]'
   cy.get(`[class*=BigButtonList_datasetItem]> :contains(${button})> ${loc} `)
@@ -522,6 +533,14 @@ When("I sort the dataflow list by {string}", (field) => {
   cy.get('[class*=Filters_dataflowsFilters]').get(':nth-child(' + sortPositions.indexOf(field) + ') > .p-button > .pi').first().click({ force: true })
 })
 
+When("I filter the dataflow list by {string} with {string}", (field, name) => {
+  bddGeneratedValues.get(name)
+  cy.wait(2000)
+  if (field === 'name') {
+    cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
+    cy.get('.p-button-text.p-c').contains('Filter').click({force:true})}
+  })
+
 When("The first dataflow is {string} and the last dataflow is {string}", (first, last) => {
   cy.get('[class*=containerLink]:first:contains(' + first + ')')
   cy.get('[class*=containerLink]:last:contains(' + last + ')')
@@ -783,8 +802,9 @@ When("I click the check to {string} the reporting", (status) => {
   cy.wait(1000)
 })
 
-When("I can see the information on {string} with {string} {string} {string}", (dataflow, country, type, acceptance) => {
-  cy.contains(dataflow).click()
+When("I can see the information on {string} with {string} {string} {string}", (name, country, type, acceptance) => {
+  bddGeneratedValues.get(name)
+  cy.contains(bddGeneratedValues.get(name)).click()
   cy.contains(country)
   type === 'released' && cy.get(`tr:contains(${country})>>>>svg[data-icon=check]`)
   type === 'not released' && cy.get(`tr:contains(${country})> :nth-child(2):contains(-)`)
@@ -793,18 +813,19 @@ When("I can see the information on {string} with {string} {string} {string}", (d
 })
 
 
-When("I can see the list of dataflows for {string}", (country, fields) => {
+When("I can see the list of dataflows for {string}", (fields,name) => {
+  bddGeneratedValues.get(name)
   const data = fields.rawTable[0]
-  cy.get('.p-column-title:contains(Name)').click({ force: true })
+  cy.get('.p-column-title:contains(' + bddGeneratedValues.get(name) + ')').click({ force: true })
   cy.get(`tr:contains(${data[0]}):contains(${data[1]}):contains(${data[2]}):contains(${data[3]})`)
   data[4] === 'delivered' && cy.get(`tr:contains(${data[0]})>>>svg[data-icon=check]`)
 })
 
 
 When("I can add unique constraint on {string} with {string}", (table, field) => {
-  cy.get('.p-dialog-footer .p-button-text:contains(Add unique constraint)').click();
-  cy.get(`[aria-label=${table}]`).click();
-  cy.get(`[aria-label=${field}]`).click();
+  cy.get('.p-dialog-footer .p-button-text:contains(Add unique constraint)').click({force:true});
+  cy.get(`[aria-label=${table}]`).click({force:true});
+  cy.get(`[aria-label=${field}]`).click({force:true});
   cy.get('.p-dialog-footer .p-button-text:contains(Create)').click();
 })
 
@@ -837,9 +858,10 @@ When("I filter by value {string}", (value) => {
 })
 
 Then("I {string} a dataflow with name {string}", (action, name) => {
+  bddGeneratedValues.get(name)
   if (action === "can edit") {
     cy.contains('Edit').click({ force: true })
-    cy.get("#dataflowName").clear().type(name)
+    cy.get("#dataflowName").clear().type(bddGeneratedValues.get(name))
     cy.get('.p-button-text:contains(Save)').click({ force: true })
     cy.wait(3000)
   }
