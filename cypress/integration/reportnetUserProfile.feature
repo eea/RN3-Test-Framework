@@ -2,7 +2,6 @@ Feature: Reportnet User Profile - As a Reportnet User, I want to be able to mana
 
 # REP-191
 Scenario Outline: a) As a Reportnet User I can add a user image (avatar)
-
 Given  I'm logged at Reportnet page as "userProvider"
 And I can see the user profile page
 And I can add a user "<image>"

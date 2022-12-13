@@ -185,6 +185,7 @@ When I select the country "Spain"
 Then I can "send" the message "Test communication"
 And I can "send" the message "Test message"
 
+
 Scenario Outline: ka) As a Reportnet User I can change the application date format
 
 Given  I'm logged at Reportnet page as "userProvider"
@@ -214,6 +215,7 @@ And I am in "DS-Test" dataset
 And the dataset table "Table1" has 5 records
 And I can see the user profile page
 Then I can change the visual rows to "10"
+When I can change the visual rows to "10"
 And the "action" "Dataflows" is "be.visible"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
