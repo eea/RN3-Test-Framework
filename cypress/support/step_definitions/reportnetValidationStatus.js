@@ -34,7 +34,7 @@ When('dataset column has clickable links', ()=>
     })
 
 
-Then ('the validations status button is not visible',()=>
+Then ('the {string} button is not visible',()=>
   {
     cy.get('[class="p-dialog-title"]').should('not.exist')
   })
