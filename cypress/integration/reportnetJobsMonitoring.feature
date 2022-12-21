@@ -42,3 +42,17 @@ Given I'm logged at Reportnet page as "userAdmin"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by 'Status' with 'FAILED'
+
+Scenario: f) As a Custodian  I can filter by Job Id in the Jobs monitoring window
+
+Given I'm logged at Reportnet page as "userCustodian"
+When the Jobs Monitoring button is "visible"
+Then I click on the Jobs Monitoring button
+And I can filter in Jobs monitoring window by 'jobId' with '56'
+
+Scenario: g) As an Custodian  I can filter by Status in the Jobs monitoring window
+
+Given I'm logged at Reportnet page as "userCustodian"
+When the Jobs Monitoring button is "visible"
+Then I click on the Jobs Monitoring button
+And I can filter in Jobs monitoring window by 'Status' with 'IN PROGRESS'
