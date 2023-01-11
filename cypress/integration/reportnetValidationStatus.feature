@@ -31,7 +31,7 @@ Examples:
 Scenario: c) As an Observer I cannot see the validations status window
 
 Given I'm logged at Reportnet page as "userObserver"
-Then the validations status button is not visible
+Then the "validations status" button is not visible
 
 #REP-151313
 Scenario: d) As a Data Custodian I can redirect to the reporting dataset from the validation status window
