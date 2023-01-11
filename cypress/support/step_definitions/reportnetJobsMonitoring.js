@@ -27,12 +27,13 @@ When('the Jobs Monitoring button is {string}', (visibility_status)=>{
         cy.get('[class="p-dialog-title"]').contains("Jobs Monitoring").should('not.be.visible')}
     })
 
-    Then("I can filter in Jobs monitoring window by {string} with {string}", (field,filter) => {
+    Then("I can filter in Jobs monitoring window by {string} with {string}", (field, filter) => {
         if (field === 'jobId' || field === 'dataflowId' || field === "providerId" || field === "datasetId" || field === "creatorUsername_input") {
           cy.get(`[id='${field}_input']`).type(filter)
         }
         else if (field === 'Status') {
           cy.get('#jobStatus').click().children().contains(filter).click({force: true})
+         
           cy.wait(3000)
         }
         else if (field === 'Type') {
