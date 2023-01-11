@@ -33,7 +33,6 @@ When('the Jobs Monitoring button is {string}', (visibility_status)=>{
         }
         else if (field === 'Status') {
           cy.get('#jobStatus').click().children().contains(filter).click({force: true})
-         
           cy.wait(3000)
         }
         else if (field === 'Type') {
