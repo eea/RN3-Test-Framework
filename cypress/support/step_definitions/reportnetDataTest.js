@@ -256,6 +256,7 @@ When("I delete the table data", () => {
 When("I see the message: {string}", message => {
   cy.wait(1500)
   cy.contains(message)
+  cy.wait(1000)
 });
 
 When("I see the message for pinned dataflow {string}", (name) => {
@@ -901,28 +902,6 @@ When("I can see the list of webforms", (fields) => {
   cy.get(`tr:contains(${data[0]}):contains(${data[1]})`)
 })
 
-When("I can see the updated list of webforms {string}", (name) => {
- let dataflow = bddGeneratedValues.get(name)
- findInPage(dataflow)
-})
-
-function findInPage(dataflow) {
-  let found = false;
-
-  cy.get('.p-dialog-content .p-datatable-row').each(($row) => {   
-    if ($row.find('td:first-child').text() == dataflow) {
-      found = true;
-      cy.log("found")
-    }
-  }).then(() => {
-    if (found == false) {
-      cy.log("not found")
-      cy.get('.p-dialog-content .p-paginator-next').should('not.be.disabled')
-      cy.get('.p-dialog-content .p-paginator-next').click()
-      findInPage(dataflow)
-    }
- })
-}
 
 
 When("I can add a new webform {string} and {string}", (name, type) => {
