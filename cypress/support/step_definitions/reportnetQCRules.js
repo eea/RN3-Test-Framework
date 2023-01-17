@@ -10,8 +10,11 @@ Then("I can {string} the field constraint rule with fields",(action, fields) => 
   
     cy.get('[id*=createValidation__table]').click({force:true})
     action !== 'edit' && cy.get('.p-dropdown-item:visible').contains(dataFields[0]).click({force:true})
+    cy.wait(5000)
     action !== 'edit' && cy.get('[id*=createValidation__field]').click({force:true})
+    cy.wait(5000)
     action !== 'edit' && cy.get('.p-dropdown-item:visible').contains(dataFields[1]).click({force:true})
+    cy.wait(5000)
     cy.get('[id*=createValidation__shortCode]').clear().type(dataFields[2])
     cy.get('[id*=createValidation__name]').clear().type(dataFields[3])
     cy.get('[id*=createValidation__description]').clear().type(dataFields[4])

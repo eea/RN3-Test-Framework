@@ -1,7 +1,5 @@
 Feature: Business Dataflow - As an existing user on the Repornet system I want to test the actions with business dataflow data
 
-#REP-1604
-@sanity
 Scenario: a) As an admin, I want to be able to create a Business dataflow.
 
 Given I'm logged at Reportnet page as 'userAdmin'
@@ -12,7 +10,7 @@ Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "test.custodian@abc.com" with permissions "CUSTODIAN"
 
-#REP-1687
+
 Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
 
 Given I'm logged at Reportnet page as 'userCustodian'
@@ -66,7 +64,6 @@ Then the public table "Documents" has 1 records
 And I'm logged at Reportnet page as "userCustodian"
 
 
-#REP-1841
 Scenario: e) As a Custodian I want to be able to assign a Lead Reporter whose email doesn't exist to a Dataflow
 
 Given I'm logged at Reportnet page as 'userCustodian'
@@ -78,7 +75,6 @@ And I can click on element "Manage lead reporters"
 Then I can see a tag next to the invalid lead reporter email
 
 
-#REP-153679
 Scenario: f) As an admin, I want to be able to select countries in a Business dataflow.
 
 Given I'm logged at Reportnet page as 'userAdmin'
@@ -97,7 +93,7 @@ Then I can click on element "Manage lead reporters"
 And representative should contain Countries
 And representing field should include all "countries.json"
 
-#REP-154980
+
 Scenario: g) As a lead reporter I want to be able to see the label for ongoing imports
 
 Given I'm logged at Reportnet page as 'userCustodian2'
@@ -113,8 +109,8 @@ And I click on "Test import message"
 And I can click on element "New schema"
 And I can "create" a dataset schema with name "test import status"
 And I can click on element "test import status"
-And I can fill a dataset schema with name "Test2", description "Test2" and with following fields
-| Test2 | testt | Text | | true  |
+And I can fill a dataset schema with name "Test7", description "Test7" and with following fields
+| Test7 | testt | Text | | true  |
 Then I click on the import dataset data button
-And I import a "zip" file "Test2.zip"
+And I import a "zip" file "Test7.zip"
 And Import is locked is visible

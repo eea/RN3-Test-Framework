@@ -15,8 +15,10 @@ Then("I can save a copy with description {string}", (description) => {
 Then("I can {string} a dataset copy", (action) => {
   if(action === 'delete'){
     cy.get('[class*=SnapshotItem_listActions] > .warning > .p-button-text:first').click({force:true});
+    cy.wait(10000)
   } else {
     cy.get('[class^=SnapshotItem_listActions] >button').first().click({force:true});
+    cy.wait(10000)
   }  
   setDialog("Yes");
 });
