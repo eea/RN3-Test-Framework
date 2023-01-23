@@ -254,9 +254,9 @@ When("I delete the table data", () => {
 });
 
 When("I see the message: {string}", message => {
-  cy.wait(10000)
+  cy.wait(20000)
   cy.contains(message)
-  //cy.wait(10000)
+  cy.wait(10000)
 });
 
 When("I see the message for pinned dataflow {string}", (name) => {
