@@ -50,7 +50,7 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   fields.rawTable.map(fields => {
     cy.wait(1000)
     cy.get('input:visible:last').should('have.attr', 'placeholder', 'Field name').type(fields[0],{force:true})
-    cy.wait(500)
+    cy.wait(10000)
     if(fields[4]==="true") {
       cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:first').click()
     }
