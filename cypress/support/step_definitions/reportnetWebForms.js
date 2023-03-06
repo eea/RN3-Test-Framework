@@ -36,8 +36,10 @@ When("I will see an icon in the table {string} which are configured in the webfo
 })
 
 When("I can see the updated list of webforms {string}", (name) => {
-    let dataflow = bddGeneratedValues.get(name)
-    findInPage(dataflow)
+    //let dataflow = bddGeneratedValues.get(name)
+    //findInPage(dataflow)
+    bddGeneratedValues.get(name)
+    findInPage(bddGeneratedValues.get(name))
    })
    
    function findInPage(dataflow) {

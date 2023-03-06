@@ -44,6 +44,7 @@ Then ('the {string} button is not visible',()=>
     cy.get('.p-datatable-wrapper tbody tr:nth-child(1) td:nth-child(2) a').click()
     //cy.contains('Design').should('not.exist')
     cy.get('.TabularSwitch_tabLabel__3BOUp').should('not.exist')
+    cy.wait(1000)
 
   })
 

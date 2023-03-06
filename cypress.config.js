@@ -20,8 +20,9 @@ reporterOptions: {
     fixturesFolder: 'cypress/fixtures',
     screenshotsFolder:  'cypress/reports/html/screenshots',
     video: false,
-    projectId: 'rujz2d',
+    //projectId: 'rujz2d',
     defaultCommandTimeout: 50000,
+    projectId: "tyj4t4",
 
     e2e: {
 
@@ -43,7 +44,7 @@ reporterOptions: {
       },
 
       env: {
-        TAGS: 'not @ignore',
+        TAGS: '@smoke', 
         allureReuseAfterSpec: true
       },
       
