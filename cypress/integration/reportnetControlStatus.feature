@@ -20,7 +20,7 @@ And I can click on element "Create data collections"
 And I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I see the message: "SUCCESS"
 
-Scenario: As an Admin I am able to delete dataset data from Control status window
+Scenario: b) As an Admin I am able to delete dataset data from Control status window
 
 Given I'm logged at Reportnet page as "userProvider"
 And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"

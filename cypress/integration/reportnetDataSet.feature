@@ -154,7 +154,6 @@ And I'm logged at Reportnet page as 'userCustodian'
 
 
 # REP-1432
-@ignore
 Scenario Outline: l) As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page
@@ -170,7 +169,6 @@ And I'm logged at Reportnet page as 'userCustodian'
 
 
 #REP-822 #REP-1669 #REP-2284
-@ignore
 Scenario: m) As a custodian, I can see the manual technical acceptance dialogue
 
 Given I'm logged at Reportnet page as 'userCustodian'

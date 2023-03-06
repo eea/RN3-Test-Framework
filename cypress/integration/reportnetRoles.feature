@@ -125,7 +125,6 @@ Then I can see the specified record in the table
 
 
 # REP-1349
-@ignore
 Scenario: k) As a NC I can see all the users of the dataflow for this country
 
 Given I'm logged at Reportnet page as "userNC"

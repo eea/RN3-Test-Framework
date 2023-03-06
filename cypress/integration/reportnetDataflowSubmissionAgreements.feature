@@ -19,6 +19,7 @@ And I can see the information from ROD3 with obligation "(C) Information on the 
 Scenario: c) As a data custodian I can edit the obligations on a dataflow 
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Submission Agreement Test"
 And I click on "Submission Agreement Test"
 And the "action" "Edit" is "be.visible"
 Then I can "Save" a dataflow with name "Submission Agreement Test Edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
@@ -46,7 +47,6 @@ Then I can see the "<submission>" on "Dataflow Reportnet Testing"
     | (C) Information on the assessment regime (Article 7) |
 
 # REP-416 REP-415
-@ignore
 Scenario Outline: As a Reportnet User I can filter the dataflow list by instruments and obligations 
 
 Given I'm logged at Reportnet page as 'userCustodian'
@@ -71,7 +71,7 @@ Then I "Create" a reporting dataflow with name "Submission Agreement Search Test
 Scenario: g) As a data custodian I can delete a data flow Submission Agreement Test Edited
 
 Given I'm logged at Reportnet page as 'userCustodian'
-And I can click on "Submission Agreement Test Edited"
+And I click on "Submission Agreement Test Edited"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "Submission Agreement Test Edited"
 And I see the message: "SUCCESS"

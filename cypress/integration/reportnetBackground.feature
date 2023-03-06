@@ -1,5 +1,6 @@
 Feature: Main application testing
 
+@smoke
 Scenario Outline: a) As a provider I cannot add a dataflow
 
 Given I'm logged at Reportnet page as "userProvider"
@@ -7,6 +8,7 @@ Then the "action" "Create new dataflow" is "<visible>"
  Examples: 
  | visible     |
  | not.exist   | 
+
 
 Scenario: b) As a data custodian I can add a new data flow with obligations
 
@@ -230,7 +232,7 @@ Given I'm logged at Reportnet page as "userProvider"
 And I click on "Dataflow Reportnet Testing"
 Then the "button" "Test dataset" is "not.exist"
 
-@ignore
+
 Scenario: o) As an NC, I want to have access to all dataflows of my country.
 
 Given I'm logged at Reportnet page as "userNC"
@@ -350,7 +352,6 @@ And I can click on element "Dashboards"
 Then I can see the Release status dashboard and Validation dashboards
 
 # REP-1192 REP-1312 REP-1432 REP-1275
-@ignore
 Scenario Outline: za) As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page

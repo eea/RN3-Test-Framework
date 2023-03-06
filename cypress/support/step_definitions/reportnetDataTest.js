@@ -85,8 +85,8 @@ When("I {string} see the publicly dataflow {string}", (visibility, name) => {
 When("I can see for dataflow {string} the instrument {string}, status {string}", (name, instrument, status) => {
   bddGeneratedValues.get(name)
   cy.get(`[class*=PublicDataflows_content] > div:contains(${bddGeneratedValues.get(name)})`)
-  cy.get(`[class*=PublicDataflows_content] > div:contains(${dataflow}):contains(${instrument})`)
-  cy.get(`[class*=PublicDataflows_content] > div:contains(${dataflow}):contains(${status})`)
+  cy.get(`[class*=PublicDataflows_content] > div:contains(${instrument})`)
+  cy.get(`[class*=PublicDataflows_content] > div:contains(${status})`)
 })
 
 
@@ -254,9 +254,9 @@ When("I delete the table data", () => {
 });
 
 When("I see the message: {string}", message => {
-  cy.wait(20000)
+  cy.wait(1000)
   cy.contains(message)
-  cy.wait(10000)
+  cy.wait(1000)
 });
 
 When("I see the message for pinned dataflow {string}", (name) => {
@@ -1037,5 +1037,6 @@ Then("I click on the import dataset data button", () => {
 
 When("Import is locked is visible", () => {
   cy.get('.p-toolbar-group-left button:first-child .p-button-text').contains('Import is locked').should('be.visible')
+  cy.wait(1000)
   //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
 })
