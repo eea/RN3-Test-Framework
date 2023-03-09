@@ -334,6 +334,7 @@ When("I {string} the row {int}", (action, row) => {
     .find(type)
     .click({ force: true });
   action === 'delete' && setDialog("Yes");
+  cy.wait(1000)
 });
 
 When("I reload the page", () => {
