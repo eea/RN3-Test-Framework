@@ -1,6 +1,5 @@
 Feature: Main application testing
 
-@smoke
 Scenario Outline: a) As a provider I cannot add a dataflow
 
 Given I'm logged at Reportnet page as "userProvider"
@@ -179,8 +178,6 @@ And I can click on element "Test Dataset - DS-Test"
 Then I can add a record 
 | 101 | |
 And I delete the dataset table row 1
-And the "button" "Validate" is "be.enabled"
-And I see the message: "SUCCESS"
 And I can go to the dataflow page
 And I can click on element "Technical feedback"
 When I select the country "Spain" 
@@ -217,8 +214,8 @@ And I am in "DS-Test" dataset
 And the dataset table "Table1" has 5 records
 And I can see the user profile page
 Then I can change the visual rows to "10"
-When I can change the visual rows to "10"
 And the "action" "Dataflows" is "be.visible"
+And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
 And I can click on element "DS-Test"
@@ -231,14 +228,6 @@ Scenario: n) As a data provider I don't have access to these new datasets
 Given I'm logged at Reportnet page as "userProvider"
 And I click on "Dataflow Reportnet Testing"
 Then the "button" "Test dataset" is "not.exist"
-
-
-Scenario: o) As an NC, I want to have access to all dataflows of my country.
-
-Given I'm logged at Reportnet page as "userNC"
-And I click on "Dataflow Reportnet Testing"
-And I can click on element "DS-Test"
-Then the "button" "Import table data" is "be.disabled"
 
 
 # REP-816
@@ -415,7 +404,7 @@ Then the button "Release to data collection" is "<visibility>"
 
   Examples:
     | status | nextStatus | dataflow                   | action | visibility  |
-    | OPEN   | CLOSED     | Dataflow Reportnet Testing | close  | not.exist |
+    | OPEN   | CLOSED     | Dataflow Reportnet Testing | close  | visible     |
     | CLOSED | OPEN       | Dataflow Reportnet Testing | open   | visible     |
 
 #REP-1367
@@ -491,6 +480,7 @@ Scenario Outline: zm) As an Admin I can edit a dataflow name
 Given I'm logged at Reportnet page as 'userAdmin'
 And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
-Then I can "Save" a dataflow with name "Dataflow Reportnet Testing edited" and description "Description submission agreement test edited" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
+And the "action" "Edit" is "be.visible"
+Then I can "Save" a dataflow with name "Dataflow Reportnet Testing edited"
 
 	

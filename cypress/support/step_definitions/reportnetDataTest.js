@@ -254,11 +254,9 @@ When("I delete the table data", () => {
 });
 
 When("I see the message: {string}", message => {
-
-  cy.wait(1000)
-
+  cy.wait(1500)
   cy.contains(message)
-  cy.wait(10000)
+  cy.wait(1000)
 });
 
 When("I see the message for pinned dataflow {string}", (name) => {
@@ -404,6 +402,19 @@ Then("I can {string} a dataflow with name {string} and description {string} and 
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000);
 });
+
+Then("I can {string} a dataflow with name {string}", (action, name) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.wait(5000);
+});
+
+
+
 
 Then("I can {string} a business dataflow with name {string} and description {string} and obligation {string} and company {string} with fmeUser {string}", (action, name, description, obligation, company, fmeUser) => {
   cy.get("#dataflowName").clear().type(name);
