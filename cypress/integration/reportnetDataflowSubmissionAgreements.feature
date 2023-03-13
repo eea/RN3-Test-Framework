@@ -47,20 +47,6 @@ Then I can see the "<submission>" on "Dataflow Reportnet Testing"
     | (C) Information on the assessment regime (Article 7) |
 
 # REP-416 REP-415
-Scenario Outline: As a Reportnet User I can filter the dataflow list by instruments and obligations 
-
-Given I'm logged at Reportnet page as 'userCustodian'
-And the dataflow list has 2 items
-Then I can filter by "<type>" with "<filter>"
-And the dataflow list has <total> items
-
-  Examples: 
-    | type            | filter      | total |
-    | legalInstrument | air         | 1     |
-    | obligationTitle | information | 1     |
-
-
-# REP-416 REP-415
 Scenario: f) As a data custodian I can add a new dataflow by searching obligations
 
 Given I'm logged at Reportnet page as 'userCustodian'

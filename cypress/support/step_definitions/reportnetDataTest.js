@@ -1017,6 +1017,28 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.wait(5000)
 })
 
+When("I can see the updated list of webforms {string}", (name) => {
+  let dataflow = bddGeneratedValues.get(name)
+  findInPage(dataflow)
+  function findInPage(dataflow) {
+    let found = false;
+  
+    cy.get('.p-dialog-content .p-datatable-row').each(($row) => {   
+      if ($row.find('td:first-child').text() == dataflow) {
+        found = true;
+        cy.log("found")
+      }
+    }).then(() => {
+      if (found == false) {
+        cy.log("not found")
+        cy.get('.p-dialog-content .p-paginator-next').should('not.be.disabled')
+        cy.get('.p-dialog-content .p-paginator-next').click()
+        findInPage(dataflow)
+      }
+   })
+  }
+ })
+
 Then("I {string} a citizen dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
   const typeValue = name + dynamicallyGeneratedName;

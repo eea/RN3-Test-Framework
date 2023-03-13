@@ -21,8 +21,7 @@ And I can create data collections with a technical acceptance step for the repor
 And I see the message: "SUCCESS"
 
 
-Scenario: b) As an Admin I am able to delete dataset data from Control status window
-
+Scenario: b) As a provider I can release to data collection
 
 Given I'm logged at Reportnet page as "userProvider"
 And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
@@ -30,12 +29,13 @@ And I click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
 When the "button" "Import table data" is "be.enabled"
 And I import a file "t7.csv"
-And I reload the page
 And I can go to the dataflow page
 And I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
 And I see the message SUCCESS RELEASE TO DATA COLLECTION
-And I logout
+
+Scenario: c) As an Admin I am able to delete dataset data from Control status window
+
 And I'm logged at Reportnet page as "userCustodian"
 And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
