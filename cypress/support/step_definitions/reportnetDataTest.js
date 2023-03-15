@@ -256,7 +256,7 @@ When("I delete the table data", () => {
 When("I see the message: {string}", message => {
   cy.wait(1500)
   cy.contains(message)
-  cy.wait(1000)
+  //cy.wait(1000)
 });
 
 When("I see the message for pinned dataflow {string}", (name) => {
@@ -294,8 +294,12 @@ Then("I can click on the link to be redirected to another page", () => {
   cy.get('a > .svg-inline--fa > path').click()
 });
 
-Then("the public table {string} has {} record(s)", (table, records) => {
-  cy.get('[class*=PublicDataflowInformation_container] > :contains(' + table + ')>>>>tbody>tr').should("have.length", records);
+// Then("the public table {string} has {} record(s)", (table, records) => {
+//   cy.get('[class*=PublicDataflowInformation_container] > :contains(' + table + ')>>>>tbody>tr').should("have.length", records);
+// });
+
+Then("the public table Documents has {} record(s)", (records) => {
+  cy.get('.PublicDataflowInformation_dataTableWrapper__XQCgZ:last tbody tr').should("have.length", records);
 });
 
 Then(
