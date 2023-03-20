@@ -56,7 +56,7 @@ When('I click on the dataProviderId field', ()=>{
 })
 
 When("I see the message SUCCESS RELEASE TO DATA COLLECTION",() => {
-    cy.wait(30000)
+    cy.wait(20000)
     cy.contains('SUCCESS')
     cy.wait(10000)
   });

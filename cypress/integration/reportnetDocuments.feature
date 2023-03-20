@@ -114,7 +114,7 @@ Given I'm in Reportnet page
 When I can click on "View by obligation dataflow"
 Then I "can" see the publicly dataflow "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
-And the public table Documents has 1 records
+And the table Documents has 1 records
 And I'm logged at Reportnet page as "userCustodian2"
 
 

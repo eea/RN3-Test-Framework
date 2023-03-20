@@ -124,17 +124,6 @@ Then I can see the specified record in the table
 |   NATIONAL COORDINATOR |  testobserver@reportnet.net  |
 
 
-# REP-1349
-Scenario: k) As a NC I can see all the users of the dataflow for this country
-
-Given I'm logged at Reportnet page as "userNC"
-And I can filter by "dataflowName" with "Roles Reportnet Testing"
-And I click on "Roles Reportnet Testing"
-And the "action" "All dataflows user list" is "be.visible"
-Then I can see the specified record in the table
-| national.spain@reportnet.net | NATIONAL COORDINATOR |
-| test.custodian2@abc.com | REPORTER WRITE       |
-| test.provider@abc.com   | LEAD REPORTER        |
 
 
 # REP-1349
@@ -412,3 +401,15 @@ Given I'm logged at Reportnet page as "userAdmin"
 Then I can not filter by "role"
      
 
+
+# REP-1349
+Scenario: zc) As a NC I can see all the users of the dataflow for this country
+
+Given I'm logged at Reportnet page as "userObserver2"
+And I can filter by "dataflowName" with "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
+And the "action" "All dataflows user list" is "be.visible"
+Then I can see the specified record in the table
+| testobserver@reportnet.net | NATIONAL COORDINATOR |
+| test.custodian2@abc.com    | REPORTER WRITE       |
+| test.provider@abc.com   | LEAD REPORTER        |

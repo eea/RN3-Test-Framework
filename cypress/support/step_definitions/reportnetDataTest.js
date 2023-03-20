@@ -245,7 +245,7 @@ When("I import a file {string}", file => {
     })
   cy.wait(2000)
   cy.contains("Upload").click()
-  cy.wait(2000)
+  cy.wait(32000)
 });
 
 When("I delete the table data", () => {
@@ -255,6 +255,12 @@ When("I delete the table data", () => {
 
 When("I see the message: {string}", message => {
   cy.wait(1500)
+  cy.contains(message)
+  //cy.wait(1000)
+});
+
+When("I can see the message: {string}", message => {
+  cy.wait(500)
   cy.contains(message)
   //cy.wait(1000)
 });
@@ -294,11 +300,11 @@ Then("I can click on the link to be redirected to another page", () => {
   cy.get('a > .svg-inline--fa > path').click()
 });
 
-// Then("the public table {string} has {} record(s)", (table, records) => {
-//   cy.get('[class*=PublicDataflowInformation_container] > :contains(' + table + ')>>>>tbody>tr').should("have.length", records);
-// });
+ Then("the public table {string} has {} record(s)", (table, records) => {
+   cy.get('[class*=PublicDataflowInformation_container] > :contains(' + table + ')>>>>tbody>tr').should("have.length", records);
+ });
 
-Then("the public table Documents has {} record(s)", (records) => {
+Then("the table Documents has {} record(s)", (records) => {
   cy.get('.PublicDataflowInformation_dataTableWrapper__XQCgZ:last tbody tr').should("have.length", records);
 });
 

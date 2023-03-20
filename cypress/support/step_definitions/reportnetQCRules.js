@@ -162,8 +162,8 @@ When("I can view the historic changes of the rule {string}", (rule) => {
 When("I can see the history with following fields",(fields) => {
     const data = fields.rawTable[0]
     cy.get(`.p-datatable-row:contains(${data[0]})`)
-    data[1] === 'true' && cy.get(`.p-datatable-row:contains(testcustodian) > :nth-child(3) svg[data-icon=check]`)
-    data[2] === 'true' && cy.get(`.p-datatable-row:contains(testcustodian) > :nth-child(4) svg[data-icon=check]`)
-    data[3] === 'true' && cy.get(`.p-datatable-row:contains(testcustodian) > :nth-child(5) svg[data-icon=check]`)
+    data[1] === 'true' && cy.get(`.p-datatable-row:contains(test.custodian) > :nth-child(3) svg[data-icon=check]`)
+    data[2] === 'true' && cy.get(`.p-datatable-row:contains(test.custodian) > :nth-child(4) svg[data-icon=check]`)
+    data[3] === 'true' && cy.get(`.p-datatable-row:contains(test.custodian) > :nth-child(5) svg[data-icon=check]`)
 })
 

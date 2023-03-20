@@ -34,6 +34,7 @@ And I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
 And I see the message SUCCESS RELEASE TO DATA COLLECTION
 
+
 Scenario: c) As an Admin I am able to delete dataset data from Control status window
 
 And I'm logged at Reportnet page as "userCustodian"

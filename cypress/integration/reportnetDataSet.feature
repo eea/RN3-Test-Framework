@@ -139,7 +139,7 @@ And I delete the dataset table row 1
 And I can go to the dataflow page
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I see the message: "SUCCESS"
+And I see the message SUCCESS RELEASE TO DATA COLLECTION
 
 
 #REP-1817
@@ -172,6 +172,7 @@ And I'm logged at Reportnet page as 'userCustodian'
 Scenario: m) As a custodian, I can see the manual technical acceptance dialogue
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Manual technical acceptance"
 When I see the datasets with manual technical acceptance for dataflow "Dataset Reportnet Testing"
@@ -257,6 +258,7 @@ Then the dataset table "Table1" has 2 records
 Scenario: u) Delete dataset table row
 
 Given I'm logged at Reportnet page as 'userProvider'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
 And the dataset table "Table1" has 2 records
@@ -314,7 +316,7 @@ Then the "action" "Release data visibility" is "be.visible"
 And I "can not" change to public in the visibility modal
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "restrict to public"
-And I see the message: "SUCCESS"
+And I see the message SUCCESS RELEASE TO DATA COLLECTION
 Then the "action" "Release data visibility" is "be.visible"
 And I "can" change to public in the visibility modal  
 Then the "action" "Release data visibility" is "be.visible"
