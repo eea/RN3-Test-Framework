@@ -124,16 +124,6 @@ Then I can see the specified record in the table
 |   NATIONAL COORDINATOR |  testobserver@reportnet.net  |
 
 
-# REP-1349
-Scenario: k) As a NC I can see all the users of the dataflow for this country
-
-Given I'm logged at Reportnet page as "userNC"
-And the "action" "All dataflows user list" is "be.visible"
-And I can filter by "dataflowName" with "Roles Reportnet Testing"
-Then I can see the specified record in the table
-| national.spain@reportnet.net | NATIONAL COORDINATOR |
-| test.custodian2@abc.com | REPORTER WRITE       |
-| test.provider@abc.com   | LEAD REPORTER        |
 
 
 # REP-1349
@@ -163,7 +153,8 @@ And I can go to the dataflow page
 And I can click on element "Spain"
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I see the message: "SUCCESS"
+And I see the message SUCCESS RELEASE TO DATA COLLECTION
+
 
 
 #REP-2230
@@ -410,3 +401,15 @@ Given I'm logged at Reportnet page as "userAdmin"
 Then I can not filter by "role"
      
 
+
+# REP-1349
+Scenario: zc) As a NC I can see all the users of the dataflow for this country
+
+Given I'm logged at Reportnet page as "userObserver2"
+And I can filter by "dataflowName" with "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
+And the "action" "All dataflows user list" is "be.visible"
+Then I can see the specified record in the table
+| testobserver@reportnet.net | NATIONAL COORDINATOR |
+| test.custodian2@abc.com    | REPORTER WRITE       |
+| test.provider@abc.com   | LEAD REPORTER        |

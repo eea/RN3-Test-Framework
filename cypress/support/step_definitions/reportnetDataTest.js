@@ -66,6 +66,21 @@ Given(
   }
 );
 
+
+Given(
+  "I'm logged at production Reportnet page as {string}",
+  (user) => {
+    cy.visit('/');
+    //homePage.clickonLoginLink();
+    cy.contains('Login').click()
+    cy.get("input[type=text]").type(Cypress.env(user).username);
+    cy.get("#whoamiContainerId button[name='whoamiSubmit']").click({force:true})
+    cy.get("input[name=password]").type(Cypress.env(user).password);
+    cy.get("#loginForm input[type='submit']").click({force:true})
+    cy.wait(2000)
+  }
+);
+
 Given("I'm in Reportnet page", () => {
   cy.visit('/');
   //cy.visit('https://rn3test.eionet.europa.eu/');  //=>TEST
@@ -245,7 +260,7 @@ When("I import a file {string}", file => {
     })
   cy.wait(2000)
   cy.contains("Upload").click()
-  cy.wait(2000)
+  cy.wait(32000)
 });
 
 When("I delete the table data", () => {
@@ -254,11 +269,15 @@ When("I delete the table data", () => {
 });
 
 When("I see the message: {string}", message => {
-
-  cy.wait(1000)
-
+  cy.wait(1500)
   cy.contains(message)
-  cy.wait(10000)
+  //cy.wait(1000)
+});
+
+When("I can see the message: {string}", message => {
+  cy.wait(500)
+  cy.contains(message)
+  //cy.wait(1000)
 });
 
 When("I see the message for pinned dataflow {string}", (name) => {
@@ -296,8 +315,12 @@ Then("I can click on the link to be redirected to another page", () => {
   cy.get('a > .svg-inline--fa > path').click()
 });
 
-Then("the public table {string} has {} record(s)", (table, records) => {
-  cy.get('[class*=PublicDataflowInformation_container] > :contains(' + table + ')>>>>tbody>tr').should("have.length", records);
+ Then("the public table {string} has {} record(s)", (table, records) => {
+   cy.get('[class*=PublicDataflowInformation_container] > :contains(' + table + ')>>>>tbody>tr').should("have.length", records);
+ });
+
+Then("the table Documents has {} record(s)", (records) => {
+  cy.get('.PublicDataflowInformation_dataTableWrapper__XQCgZ:last tbody tr').should("have.length", records);
 });
 
 Then(
@@ -336,6 +359,7 @@ When("I {string} the row {int}", (action, row) => {
     .find(type)
     .click({ force: true });
   action === 'delete' && setDialog("Yes");
+  cy.wait(1000)
 });
 
 When("I reload the page", () => {
@@ -404,6 +428,19 @@ Then("I can {string} a dataflow with name {string} and description {string} and 
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000);
 });
+
+Then("I can {string} a dataflow with name {string}", (action, name) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.wait(5000);
+});
+
+
+
 
 Then("I can {string} a business dataflow with name {string} and description {string} and obligation {string} and company {string} with fmeUser {string}", (action, name, description, obligation, company, fmeUser) => {
   cy.get("#dataflowName").clear().type(name);
@@ -1004,6 +1041,28 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000)
 })
+
+When("I can see the updated list of webforms {string}", (name) => {
+  let dataflow = bddGeneratedValues.get(name)
+  findInPage(dataflow)
+  function findInPage(dataflow) {
+    let found = false;
+  
+    cy.get('.p-dialog-content .p-datatable-row').each(($row) => {   
+      if ($row.find('td:first-child').text() == dataflow) {
+        found = true;
+        cy.log("found")
+      }
+    }).then(() => {
+      if (found == false) {
+        cy.log("not found")
+        cy.get('.p-dialog-content .p-paginator-next').should('not.be.disabled')
+        cy.get('.p-dialog-content .p-paginator-next').click()
+        findInPage(dataflow)
+      }
+   })
+  }
+ })
 
 Then("I {string} a citizen dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);

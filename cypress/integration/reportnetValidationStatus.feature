@@ -46,6 +46,7 @@ Then I can "create" a dataset schema with name "DS-Test"
 And I can click on element "DS-Test"
 And I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
 | table1f1 | description 1 | Number - Integer |  | true |
+| table1f2 | description 2 | Text             |  |      |
 And the "button" "Validate" is "be.enabled"
 And I see the message: "SUCCESS"
 And I can go to the list dataflows page

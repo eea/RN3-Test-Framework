@@ -57,10 +57,11 @@ And I see the "descriptionDocumentFileUpload" input with error
 Scenario: d) As a data custodian I can edit documents to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian2"
+When I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "Dataflow help"
 When I "edit" the row 1
-And I "edit" the document "Table1.csv" with description "description edited" and language "Spanish" marked as "private"
+And I "edit" the document "Table1.csv" with description "description edited" and language "Spanish" marked as "public"
 Then I see the message: "INFO"
 And I see the message: "SUCCESS"
 And the table "Supporting documents" has 2 records
@@ -113,6 +114,7 @@ Given I'm in Reportnet page
 When I can click on "View by obligation dataflow"
 Then I "can" see the publicly dataflow "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
-And the public table "Documents" has 1 records
+And the table Documents has 1 records
 And I'm logged at Reportnet page as "userCustodian2"
+
 

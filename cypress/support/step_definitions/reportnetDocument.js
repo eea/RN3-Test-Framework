@@ -13,8 +13,8 @@ Then(/^I can download the document$/, () => {
       //cy.get("select[name=lang]").select(language);
       cy.get('[id=selectLanguage]').click({force: true});
       cy.wait(500)
-      cy.get('.p-dropdown-items>li:nth-child(6)').click({force: true});
-      //cy.get(`.p-dropdown-items>:contains(${language})`).click({force: true})
+      //cy.get('.p-dropdown-items>li:nth-child(6)').click({force: true});
+      cy.get(`.p-dropdown-items>:contains(${language})`).click({force: true})
       //cy.contains(language).click();
 
       if(isPublic === 'public')
@@ -29,7 +29,7 @@ Then(/^I can download the document$/, () => {
           force: true
         })
       cy.wait(2000)
-      action === 'upload' ? cy.get("span.pi-plus").click({force: true}) : cy.contains("Save").click()
+      action === 'upload' ? cy.get("span.pi-plus").click({force: true}) : cy.contains("Save").click({force: true})
       cy.wait(2000)
     }
   );

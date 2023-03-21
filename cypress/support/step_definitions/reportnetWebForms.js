@@ -35,28 +35,6 @@ When("I will see an icon in the table {string} which are configured in the webfo
     cy.get('.p-toolbar-group-left :contains(' + name + '):visible>.pi').should("have.length", 1)
 })
 
-When("I can see the updated list of webforms {string}", (name) => {
-    //let dataflow = bddGeneratedValues.get(name)
-    //findInPage(dataflow)
-    bddGeneratedValues.get(name)
-    findInPage(bddGeneratedValues.get(name))
-   })
+
    
-   function findInPage(dataflow) {
-     let found = false;
-   
-     cy.get('.p-dialog-content .p-datatable-row').each(($row) => {   
-       if ($row.find('td:first-child').text() == dataflow) {
-         found = true;
-         cy.log("found")
-       }
-     }).then(() => {
-       if (found == false) {
-         cy.log("not found")
-         cy.get('.p-dialog-content .p-paginator-next').should('not.be.disabled')
-         cy.get('.p-dialog-content .p-paginator-next').click()
-         findInPage(dataflow)
-       }
-    })
-   }
    
