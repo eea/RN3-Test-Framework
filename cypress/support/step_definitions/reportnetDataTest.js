@@ -66,6 +66,21 @@ Given(
   }
 );
 
+
+Given(
+  "I'm logged at production Reportnet page as {string}",
+  (user) => {
+    cy.visit('/');
+    //homePage.clickonLoginLink();
+    cy.contains('Login').click()
+    cy.get("input[type=text]").type(Cypress.env(user).username);
+    cy.get("#whoamiContainerId button[name='whoamiSubmit']").click({force:true})
+    cy.get("input[name=password]").type(Cypress.env(user).password);
+    cy.get("#loginForm input[type='submit']").click({force:true})
+    cy.wait(2000)
+  }
+);
+
 Given("I'm in Reportnet page", () => {
   cy.visit('/');
   //cy.visit('https://rn3test.eionet.europa.eu/');  //=>TEST
