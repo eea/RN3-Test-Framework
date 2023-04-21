@@ -100,8 +100,8 @@ And the "action" "Dataflows" is "be.visible"
 And I click on "Dataset Reportnet Testing"
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I see the message: "ERROR"
-And I see the message: "You can't release data with blocker errors. Please check it and try again."
+And I can see the message: "ERROR"
+And I can see the message: "You can't release data with blocker errors. Please check it and try again."
 
 
 #REP-822

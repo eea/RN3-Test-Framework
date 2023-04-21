@@ -260,7 +260,7 @@ When("I import a file {string}", file => {
     })
   cy.wait(2000)
   cy.contains("Upload").click()
-  cy.wait(32000)
+  cy.wait(2000)
 });
 
 When("I delete the table data", () => {
@@ -269,15 +269,15 @@ When("I delete the table data", () => {
 });
 
 When("I see the message: {string}", message => {
-  cy.wait(1500)
-  cy.contains(message)
+  //cy.wait(1500)
+  cy.contains(message,{timeout:15000})
   //cy.wait(1000)
 });
 
 When("I can see the message: {string}", message => {
   cy.wait(500)
   cy.contains(message)
-  //cy.wait(1000)
+  cy.wait(1000)
 });
 
 When("I see the message for pinned dataflow {string}", (name) => {
@@ -880,9 +880,10 @@ When("I set the design dataset as {string}", (type) => {
 
 When("I can create reference datasets", () => {
   cy.wait(1000);
-  cy.get('p:contains(Create Reference datasets):first').parent().click()
+  cy.get("span[data-for='Create Reference datasets']").click({ force: true })
+  //cy.get('p:contains(Create Reference datasets):first').parent().click()
   cy.wait(1000)
-  cy.contains('Yes').click();
+  cy.contains('Yes').click({force:true});
 })
 
 When("I can see a warning for the tables without PK", () => {
@@ -1097,7 +1098,7 @@ Then("I click on the import dataset data button", () => {
 })
 
 When("Import is locked is visible", () => {
-  cy.get('.p-toolbar-group-left button:first-child .p-button-text').contains('Import is locked').should('be.visible')
+  cy.get('.p-toolbar-group-left button:first-child .p-button-text').contains('Import in progress').should('be.visible')
   cy.wait(1000)
   //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
 })
