@@ -27,7 +27,7 @@ Examples:
    |visibility_status| display_status|
    |visible          | displayed     |  
      
-     
+   
 Scenario: c) As an Observer I cannot see the validations status window
 
 Given I'm logged at Reportnet page as "userObserver"
@@ -48,6 +48,7 @@ And I can fill a dataset schema with name "Table1", description "description Tab
 | table1f1 | description 1 | Number - Integer |  | true |
 | table1f2 | description 2 | Text             |  |      |
 And the "button" "Validate" is "be.enabled"
+And I see the message: "INFO"
 And I see the message: "SUCCESS"
 And I can go to the list dataflows page
 And the validations status button is "visible"
