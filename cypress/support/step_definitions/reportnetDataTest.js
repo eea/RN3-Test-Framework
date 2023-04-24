@@ -77,7 +77,7 @@ Given(
     cy.get("#whoamiContainerId button[name='whoamiSubmit']").click({force:true})
     cy.get("input[name=password]").type(Cypress.env(user).password);
     cy.get("#loginForm input[type='submit']").click({force:true})
-    cy.wait(2000)
+    cy.wait(5000)
   }
 );
 
@@ -1022,12 +1022,12 @@ When("I click on data collection {string}", (name) => {
   cy.wait(1000);
 });
 
-//And ("I can click on {string}", (name)=>{
-//cy.wait(1000);
-//cy.contains(name).click({ force: true })
-//cy.wait(1000)
+When ("I can click on dataflow {string}", (name)=>{
+  cy.wait(1000);
+  cy.contains(name).click({ force: true })
+  cy.wait(1000)
 
-//});
+});
 
 Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
