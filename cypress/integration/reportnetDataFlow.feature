@@ -1,6 +1,5 @@
 Feature: Reportnet Dataflow - As an existing user on the Repornet system I want to test the actions with dataflow data
 
-
 Scenario: a) As a data custodian I can add a new data flow
 
 Given I'm logged at Reportnet page as "userCustodian2"
@@ -41,7 +40,6 @@ Then I see the message: "SUCCESS"
 And the "action" "Notifications" is "be.visible"
 Then I see the notification "Loaded data completed at DS-Test" in the notification received list
 
-
 Scenario: f) As a data custodian I can delete a data flow
 
 Given I'm logged at Reportnet page as 'userCustodian2'
@@ -80,7 +78,6 @@ And I can go to the dataflow page
 And I can create reference datasets
 And I can see a warning for the tables without PK
 And I see the message: "SUCCESS"
-
 
 Scenario: h) As a custodian I want to be able to filter reference dataflows
 
@@ -132,6 +129,32 @@ Then I can click on "Reference dataflow1"
 And I can go to the list dataflows page
 And I can click on "Citizen science dataflows"
 Then I can click on "Citizen test"
+
+Scenario: l) As a custodian I want to create new datasets available in public view by default in Reporting dataflow
+
+Given I'm logged at Reportnet page as "userCustodian2"
+And the "action" "Create new dataflow" is "be.visible"
+Then I "Create" a reporting dataflow with name "New Test public available" and description "new description New Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I click on "New Test public available"
+And I can click on element "New schema"
+And I can create a dataset schema public available with name "DS-public"
+And Confirm new dataset schema creation is visible
+And I can click on element "DS-public"
+And Available in public view is checked
+
+
+Scenario: m) As a custodian I want to create new datasets available in public view by default in Citizen dataflow
+
+Given I'm logged at Reportnet page as "userCustodian2"
+And I can click on tab "Citizen science dataflows"
+And the "action" "Create new dataflow" is "be.visible"
+Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I click on "Citizen test dataflow public available"
+And I can click on element "New schema"
+And I can create a dataset schema public available with name "DS-public"
+And Confirm new dataset schema creation is visible
+And I can click on element "DS-public"
+And Available in public view is checked
 
 
 

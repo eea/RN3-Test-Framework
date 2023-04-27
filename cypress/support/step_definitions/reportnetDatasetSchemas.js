@@ -39,6 +39,25 @@ Then("I can {string} a dataset schema with name {string}", (action, name) => {
     cy.get('[class*=BigButton_bigButton] > > ul>li').contains('Import schema').click({force:true})
   }
 })
+
+Then("I can create a dataset schema public available with name {string}", (name)  => {
+    cy.get('[class*=BigButton_bigButton] > > ul>li').contains('New empty dataset schema').click({force:true})
+    cy.get("input[name=datasetSchemaName]").clear().type(name);
+    cy.get('button:contains(Create)').click({force:true})
+    cy.wait(500)
+})
+
+Then ("Confirm new dataset schema creation is visible", ()=>{
+  cy.get('.p-dialog-title').contains('Confirm new dataset schema creation')
+  cy.get('.p-button-text:contains(Yes)').click({force:true})
+})
+
+Then ("Available in public view is checked", ()=>{
+  cy.get('#available_in_public_view input').should('be.checked')
+  //cy.get(`[class*=DatasetDesigner_datasetConfigurationButtons]> :contains(Available)> > .p-checkbox-box`).should('be.checked')
+
+})
+
   
 Then("I can fill a dataset schema with name {string}, description {string} and with following fields",(name, description, fields) => {
   cy.wait(2000)
