@@ -21,7 +21,8 @@ And the "button" "Upload" is "be.enabled"
 When I "upload" the document "test.csv" with description "public document" and language "English" marked as "public"
 And I can go to the dataflow page
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Business-Test"
+And I can create a dataset schema public available with name "DS-Business-Test"
+And Confirm new dataset schema creation is visible
 And I can click on element "DS-Business-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
   | code  | code description  | Number - Integer |  | true  |
@@ -107,7 +108,8 @@ And I logout
 And I'm logged at Reportnet page as 'userProvider'
 And I click on "Test import message"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "test import status"
+And I can create a dataset schema public available with name "test import status"
+And Confirm new dataset schema creation is visible
 And I can click on element "test import status"
 And I can fill a dataset schema with name "Test7", description "Test7" and with following fields
 | Test7 | testt | Text | | true  |

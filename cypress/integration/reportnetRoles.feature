@@ -7,7 +7,8 @@ And the "action" "Create new dataflow" is "be.visible"
 When I "Create" a reporting dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Roles Reportnet Testing"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 Then I can click on element "DS-Test"
 
 
@@ -84,9 +85,10 @@ Given I'm logged at Reportnet page as "userProvider"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage reporters" is "be.visible"
-When I can "Add" a editor "test.custodian2@abc.com" with permissions "REPORTER WRITE"
+And I can "Add" a editor "test.custodian2@abc.com" with permissions "REPORTER WRITE"
 And The user logout
 And I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "DS-Test"
 

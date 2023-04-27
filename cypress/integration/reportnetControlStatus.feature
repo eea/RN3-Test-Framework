@@ -7,7 +7,8 @@ And the "action" "Create new dataflow" is "be.visible"
 And I "Create" a reporting dataflow with name "Dataflow Reportnet Testing" and description "Dataflow description test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "New schema"
-When I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 Then I can click on element "DS-Test"
 And I can fill a dataset schema with name "t7", description "description Table1" and with following fields
  | Field1 | Field 1 description | Text             |  true |

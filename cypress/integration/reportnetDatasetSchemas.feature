@@ -8,7 +8,8 @@ And the "action" "Create new dataflow" is "be.visible"
 And I "Create" a reporting dataflow with name "DatasetSchema Test" and description "Description New Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "DatasetSchema Test"
 Then I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 And I can click on "DS-Test"
 
 
@@ -205,8 +206,7 @@ Given I'm logged at Reportnet page as "userCustodian"
 And I click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "import" a dataset schema with name "Dataflow Reportnet Testing"
-When I import a "zip" file "Dataflow Reportnet Testing.zip"
-And I see the message: "SUCCESS"
+When I import a dataset schema "zip" file "Dataflow Reportnet Testing.zip"
 Then I can click on element "IMPORTED_DS-Test"
 And I can see the fields and configurations "<readonly>"
   | Table1 | Field1 | Field 1 description | Number - Integer | required                | readonly |
@@ -237,7 +237,8 @@ Scenario: s) As a  custodian/steward/editor write I can Import CSV to create/upd
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "DatasetSchema Test"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Import"
+And I can create a dataset schema public available with name "DS-Import"
+And Confirm new dataset schema creation is visible
 And I can click on element "DS-Import"
 And I can fill a dataset schema with name "Tabletest", description "description Tabletest" and with following fields
   | tabletestf1 | description 1 | Number - Integer |  | false |

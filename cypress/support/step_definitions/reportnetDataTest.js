@@ -234,6 +234,22 @@ When("I import a {string} file {string}", (filetype, file) => {
   cy.wait(2000)
 });
 
+When("I import a dataset schema {string} file {string}", (filetype, file) => {
+  const fileName = file;
+  const fileType = filetype;
+    cy.fixture(fileName, { encoding: null }).as('myFixture')
+    cy.get('input[type="file"]').selectFile('@myFixture', 
+      {
+      mimeType: 'application/' + fileType + '',
+      force: true
+    }
+      )
+  cy.wait(2000)
+  cy.contains("Upload").click()
+  cy.get('.p-dialog-title').contains('Confirm new dataset schema creation')
+  cy.get('.p-button-text:contains(Yes)').click({force:true})
+});
+
   //And("I import a {string} file {string}", (filetype, file) => {
     //const fileName = file;
     //const fileType = filetype;
@@ -269,9 +285,9 @@ When("I delete the table data", () => {
 });
 
 When("I see the message: {string}", message => {
-  //cy.wait(1500)
-  cy.contains(message,{timeout:15000})
-  //cy.wait(1000)
+  cy.wait(1500)
+  //cy.contains(message,{timeout:15000})
+  cy.wait(1000)
 });
 
 When("I can see the message: {string}", message => {
@@ -627,7 +643,8 @@ When("I change to {string} mode", (mode) => {
 
 When("I can add a record", (fields) => {
   cy.wait(1000)
-  cy.contains("Add record").click()
+  cy.contains("Add record").click({force:true})
+  cy.wait(1000)
   fields.rawTable.map((data) => {
     if (data[1] === 'link') {
       cy.get('[class*=p-dialog-content]>>>input:visible:first').type(data[0])

@@ -37,6 +37,8 @@ Then("I can {string} a dataset schema with name {string}", (action, name) => {
     cy.get('button:contains(Clone selected dataflow)').click({force:true})
   } else if(action === 'import') {
     cy.get('[class*=BigButton_bigButton] > > ul>li').contains('Import schema').click({force:true})
+    //cy.get('.p-dialog-title').contains('Confirm new dataset schema creation')
+    //cy.get('.p-button-text:contains(Yes)').click({force:true})
   }
 })
 

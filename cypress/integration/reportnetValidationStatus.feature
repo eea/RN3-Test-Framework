@@ -42,13 +42,13 @@ And  I "Create" a reporting dataflow with name "Validation Reportnet Testing" an
 When I click on "Validation Reportnet Testing"
 And I get the dataflow ID from the url
 And I can click on element "New schema"
-Then I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 And I can click on element "DS-Test"
 And I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
 | table1f1 | description 1 | Number - Integer |  | true |
 | table1f2 | description 2 | Text             |  |      |
 And the "button" "Validate" is "be.enabled"
-And I see the message: "INFO"
 And I see the message: "SUCCESS"
 And I can go to the list dataflows page
 And the validations status button is "visible"

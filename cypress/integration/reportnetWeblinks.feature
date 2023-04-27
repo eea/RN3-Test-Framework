@@ -8,10 +8,9 @@ And the "action" "Create new dataflow" is "be.visible"
 When I "Create" a reporting dataflow with name "Weblinks Reportnet Testing" and description "Dataflow weblinks test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 When I can click on element "DS-Test"
-And publicly available check is "not.be.disabled"
-And I can toggle publicly available check
 And I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
  | Field1 | Field 1 description | Number - Integer | | true |
  | Field2 | Field 2 description | Text             | |      |

@@ -8,7 +8,8 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "New Dataflow Rules Test" and description "Description New Dataflow Rules Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "New Dataflow Rules Test"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 And I can click on element "DS-Test"
 And I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
   | Field1 | description 1 | Number - Integer |  | true |
@@ -338,7 +339,8 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Rules historic changes Test" and description "Dataflow document test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Rules historic changes Test"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 Then I can click on element "DS-Test"
 And publicly available check is "not.be.disabled"
 And I can toggle publicly available check
