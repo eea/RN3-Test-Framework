@@ -275,7 +275,7 @@ When("I import a file {string}", file => {
       force: true
     })
   cy.wait(2000)
-  cy.contains("Upload").click()
+  cy.contains("Upload").click({force: true })
   cy.wait(2000)
 });
 
@@ -643,8 +643,8 @@ When("I change to {string} mode", (mode) => {
 
 When("I can add a record", (fields) => {
   cy.wait(1000)
-  cy.contains("Add record").click({force:true})
-  cy.wait(1000)
+  cy.contains("Add record").click()
+  cy.wait(1500)
   fields.rawTable.map((data) => {
     if (data[1] === 'link') {
       cy.get('[class*=p-dialog-content]>>>input:visible:first').type(data[0])
