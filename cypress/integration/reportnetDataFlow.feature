@@ -7,7 +7,8 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "New Test" and description "new description New Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "New Test"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 And I can click on element "DS-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
  | Field1 | Field 1 description | Number - Integer | | true |
@@ -58,7 +59,8 @@ And I "Create" a reference dataflow with name "Reference dataflow" and descripti
 When I filter the dataflow list by "name" with "Reference dataflow"
 And I click on "Reference dataflow"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Reference-Test"
+And I can create a dataset schema public available with name "DS-Reference-Test"
+And Confirm new dataset schema creation is visible
 And I can click on element "DS-Reference-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
   | code  | code description  | Number - Integer |  | true  |

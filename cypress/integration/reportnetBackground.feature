@@ -26,14 +26,14 @@ Scenario: c) As a data custodian I can create new dataset schema
 Given I'm logged at Reportnet page as 'userCustodian'
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 Then I can click on element "DS-Test"
-And publicly available check is "not.be.disabled"
-And I can toggle publicly available check
 Then I can go to the list dataflows page
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS2"
+And I can create a dataset schema public available with name "DS2"
+And Confirm new dataset schema creation is visible
 And I can click on element "DS2"
 
 
@@ -73,7 +73,8 @@ Given I'm logged at Reportnet page as 'userCustodian'
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 Then I can click on element "New schema"
-And I can "create" a dataset schema with name "Reference data"
+And I can create a dataset schema public available with name "Reference data"
+And Confirm new dataset schema creation is visible
 And I can click on element "Reference data"
 And I can fill a dataset schema with name "Information", description "description Information" and with following fields
  | code  | description 1 | Text | | true |
@@ -226,6 +227,7 @@ And the dataset table "Table1" has 10 records
 Scenario: n) As a data provider I don't have access to these new datasets
 
 Given I'm logged at Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 Then the "button" "Test dataset" is "not.exist"
 
@@ -242,6 +244,7 @@ Then I can click on element "Export EU datasets"
 Scenario: q) As a data provider I cannot modify a read only table
 
 Given I'm logged at Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing" 
 And I can click on element "Spain"
 And I can click on element "DS-Test"
@@ -398,6 +401,7 @@ And I can go to the list dataflows page
 And I can see the "<nextStatus>" on "<dataflow>"
 And The user logout
 And I'm logged at Reportnet page as 'userProvider'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
 Then the button "Release to data collection" is "<visibility>"

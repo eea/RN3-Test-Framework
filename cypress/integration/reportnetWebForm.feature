@@ -8,7 +8,8 @@ And the "action" "Create new dataflow" is "be.visible"
 And I "Create" a reporting dataflow with name "Webform Test" and description "Webform Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Webform Test"
 Then I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 
 
 # REP-903 REP-921

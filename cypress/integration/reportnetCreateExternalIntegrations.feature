@@ -11,7 +11,8 @@ And I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
 And I can "Add" a editor "national.spain@reportnet.net" with permissions "CUSTODIAN"
 And I click on close button
 And I can click on element "New schema"
-And I can "create" a dataset schema with name "DS-Test"
+And I can create a dataset schema public available with name "DS-Test"
+And Confirm new dataset schema creation is visible
 Then I can click on element "DS-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
  | Field1 | Field 1 description | Number - Integer | | true |
