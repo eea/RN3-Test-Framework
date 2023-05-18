@@ -146,11 +146,11 @@ Scenario: j) As a data custodian I can add a Data provider
 Given I'm logged at Reportnet page as 'userCustodian'
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can "addToCountry" a Data provider with Representative of "EEA Member countries" and account "testleadreporter@reportnet.net" and Data provider "Spain"
+And I can "addToCountry" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "testleadreporter@reportnet.net" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can "addMore" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "France"
+And I can "addMore" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "France"
 And I can click on element "Manage lead reporters"
 And I can "Import" Lead reporters
 And I import a file "importLeadReporters.csv"

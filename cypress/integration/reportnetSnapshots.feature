@@ -16,7 +16,7 @@ And I can fill a dataset schema with name "Table1", description "description Tab
  | Field2 | Field 2 description | Text             | |      |
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
 And I can see the representative "Spain" "test.provider@abc.com"
 And I click on close button
