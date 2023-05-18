@@ -408,10 +408,9 @@ Then I can not filter by "role"
 Scenario: zc) As a NC I can see all the users of the dataflow for this country
 
 Given I'm logged at Reportnet page as "userObserver2"
-And I can filter by "dataflowName" with "Roles Reportnet Testing"
+And I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "All dataflows user list" is "be.visible"
 Then I can see the specified record in the table
-| testobserver@reportnet.net | NATIONAL COORDINATOR |
-| test.custodian2@abc.com    | REPORTER WRITE       |
-| test.provider@abc.com   | LEAD REPORTER        |
+| NATIONAL COORDINATOR |  testobserver@reportnet.net |
+| REPORTER WRITE       |  test.custodian2@abc.com   |

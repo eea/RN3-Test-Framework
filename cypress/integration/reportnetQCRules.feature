@@ -23,10 +23,11 @@ And I can fill a dataset schema with name "Table2", description "description Tab
 Scenario: b) As a data custodian in desing dataset and table is marked as mandatory, an automatic QC is created and will be blocker
 
 Given I'm logged at Reportnet page as "userCustodian"
+When I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
-When I can filter QCs by "table" with "Table1"
+And I can filter QCs by "table" with "Table1"
 And I can filter QCs by "levelError" with "BLOCKER"
 Then the code rule "Mandatory table records check" is "be.visible" on the list of rules
 And I reload the page
