@@ -58,7 +58,7 @@ Scenario: d) As a data custodian I can add a Data provider
 Given I'm logged at Reportnet page as 'userCustodian'
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
 And I can see the representative "Spain" "test.provider@abc.com"
 

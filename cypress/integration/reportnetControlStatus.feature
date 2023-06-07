@@ -15,7 +15,7 @@ And I can fill a dataset schema with name "t7", description "description Table1"
  | Field2 | Field 2 description | Text             |       |
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
-And I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can go to the dataflow page
 And I can click on element "Create data collections"
 And I can create data collections with a technical acceptance step for the reporter submissions and "public"

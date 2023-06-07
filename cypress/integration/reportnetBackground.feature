@@ -146,11 +146,11 @@ Scenario: j) As a data custodian I can add a Data provider
 Given I'm logged at Reportnet page as 'userCustodian'
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can "addToCountry" a Data provider with Representative of "EEA Member countries" and account "testleadreporter@reportnet.net" and Data provider "Spain"
+And I can "addToCountry" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "testleadreporter@reportnet.net" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can "addMore" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "France"
+And I can "addMore" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "France"
 And I can click on element "Manage lead reporters"
 And I can "Import" Lead reporters
 And I import a file "importLeadReporters.csv"
@@ -393,8 +393,9 @@ Then I can see the "Delivery status" on "Dataflow Reportnet Testing"
 Scenario Outline: zf) As a custodian, I can Close/open release process
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can see the "<status>" on "<dataflow>"
-And I can click on "<dataflow>"
+And I click on "Dataflow Reportnet Testing"
 And the "action" "Releasing status" is "be.visible"
 When I click the check to "<action>" the reporting
 And I can go to the list dataflows page

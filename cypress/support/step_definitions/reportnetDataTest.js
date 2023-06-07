@@ -315,7 +315,8 @@ Then("the dataset table {string} has {} record(s)", (table, records) => {
   cy.wait(2000)
   cy.get('span:contains(' + table + ')').click({ force: true })
   cy.wait(1000)
-  cy.get(".p-datatable-scrollable-body-table >tbody>tr:visible").should("have.length", records);
+  cy.get(".p-datatable-scrollable-body-table >tbody>tr").should("have.length", records);
+  //cy.get('.p-datatable-scrollable-body-table').should("have.length", records);
   cy.wait(2000)
 });
 

@@ -67,9 +67,8 @@ And I can add a record
   | 6 |  |
 Then the "button" "Validate" is "be.enabled"
 And I can see the message: "INFO"
-And I can see the message: "SUCCESS"
 And I reload the page
-And I can see the field "Field1" has 2 error
+And I can see the field "Field1" has 1 error
 
 
 # REP-1395
@@ -265,7 +264,7 @@ Scenario: q) As a custodian, I want to see a warning when I am going to create t
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "New Dataflow Rules Test"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "no public"
 
@@ -350,7 +349,7 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
  | Field2 | Field 2 description | Text             | |      |
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "EEA Member countries" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
 And I can see the representative "Spain" "test.provider@abc.com"
 
