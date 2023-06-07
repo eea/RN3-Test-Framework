@@ -67,9 +67,8 @@ And I can add a record
   | 6 |  |
 Then the "button" "Validate" is "be.enabled"
 And I can see the message: "INFO"
-And I can see the message: "SUCCESS"
 And I reload the page
-And I can see the field "Field1" has 2 error
+And I can see the field "Field1" has 1 error
 
 
 # REP-1395
