@@ -323,28 +323,28 @@ When I select the country "Spain"
 And the "button" "Attach file" is "be.enabled"
 Then I import a file "importLeadReporters.csv"
 
+# REP-1839
+Scenario: v) As an admin, I can send system notification to all users
+
+Given I'm logged at Reportnet page as 'userAdmin'
+And the "action" "System notifications" is "be.visible"
+When I create a system notification with "testMessage" message and "INFO" level and active "enabled"
+Then I see the notification "testMessage" in the system notifications list
+
 #REP-1839
-# Scenario: v) As an admin, I can send system notification to all users
+Scenario: w) As a custodian, I can see a system notification sent by an admin
 
-# Given I'm logged at Reportnet page as 'userAdmin'
-# And the "action" "System notifications" is "be.visible"
-# When I create a system notification with "testMessage" message and "INFO" level and active "enabled"
-# Then I see the notification "testMessage" in the system notifications list
-
-# #REP-1839
-# Scenario: w) As a custodian, I can see a system notification sent by an admin
-
-# Given I'm logged at Reportnet page as 'userCustodian'
-# Then I can see a system notification "testMessage" sent by an Admin
+Given I'm logged at Reportnet page as 'userCustodian'
+Then I can see a system notification "testMessage" sent by an Admin
 
 
 
-# #REP-1839
-# Scenario: x) As an admin, I can delete a system notification
+#REP-1839
+Scenario: x) As an admin, I can delete a system notification
 
-# Given I'm logged at Reportnet page as 'userAdmin'
-# And the "action" "System notifications" is "be.visible"
-# Then I delete a system notification with "testMessage" message
+Given I'm logged at Reportnet page as 'userAdmin'
+And the "action" "System notifications" is "be.visible"
+Then I delete a system notification with "testMessage" message
 
 
 Scenario Outline: y) As a provider I cannot see the dashboards
