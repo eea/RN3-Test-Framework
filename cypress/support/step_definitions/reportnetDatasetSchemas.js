@@ -52,6 +52,7 @@ Then("I can create a dataset schema public available with name {string}", (name)
 Then ("Confirm new dataset schema creation is visible", ()=>{
   cy.get('.p-dialog-title').contains('Confirm new dataset schema creation')
   cy.get('.p-button-text:contains(Yes)').click({force:true})
+  cy.wait(1000)
 })
 
 Then ("Available in public view is checked", ()=>{
@@ -62,27 +63,30 @@ Then ("Available in public view is checked", ()=>{
 
   
 Then("I can fill a dataset schema with name {string}, description {string} and with following fields",(name, description, fields) => {
-  cy.wait(2000)
+  cy.wait(4000)
   cy.get('.p-tabview-title:last').click({force:true})
   cy.get('input:visible[placeholder="Table name"]').clear().type(name + "{enter}",{force:true})
   cy.wait(1000)
   cy.contains(name.replace('*/+','')).click({force:true})
+  cy.wait(2000)
   cy.get('textarea[placeholder="Table description"]').type(description,{force:true})
   fields.rawTable.map(fields => {
-    cy.wait(1000)
+    cy.wait(3000)
     cy.get('input:visible:last').should('have.attr', 'placeholder', 'Field name').type(fields[0],{force:true})
-    cy.wait(10000)
+    cy.wait(6000)
     if(fields[4]==="true") {
       cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:first').click()
     }
     if(fields[5]==="true") {
       cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:last').click()
     }
+    cy.wait(4000)
     cy.get('#_description').should('have.attr', 'placeholder', 'Field description').type(fields[1])
-    cy.wait(500)
+    cy.wait(4000)
     cy.get('[class^=FieldDesigner] > .p-dropdown:last').click({force:true})
+    cy.wait(4000)
     cy.get('li:visible>div>span').contains(fields[2]).click({force:true})
-    cy.wait(500)
+    cy.wait(3000)
     if(fields[2] === 'Single select' || fields[2] ==='Multiple select') {
       let options = fields[3].replaceAll("{enter}", "; ");
       fillFields(fields[3])
@@ -93,13 +97,13 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
       cy.get('[class*=AttachmentEditor_maxSizeWrapper] > :nth-child(3)').dblclick({force:true})
        setDialog("Save")
     }
-    cy.wait(1000)
+    cy.wait(2000)
   })
 })
 
 
 Then("I can select a {string} {string} with label field {string} and linked field {string} and master field {string} and ignore case {string} for dataflow {string}", (type, table, label, linked, master, ignore, dataflow) => {
-  cy.wait(1000)
+  cy.wait(2000)
   if(type==="Link"){
   cy.get("[aria-label='"+table+"']").click()
   label && cy.get('.p-dialog-content .p-dropdown').eq(0).click() && cy.get(`.p-input-overlay-visible:contains(${label})`).click()
@@ -115,7 +119,7 @@ Then("I can select a {string} {string} with label field {string} and linked fiel
   cy.get("[aria-label='"+table+"']").click()
 }
   setDialog("Save")
-  cy.wait(1000)
+  cy.wait(2000)
 })
 
 Then("I can create a unique constraint with table {string} and field {string}", (table, field) => {
