@@ -420,7 +420,8 @@ Scenario Outline: zf) As a custodian, I can Close/open release process
 Given I'm logged at Reportnet page as 'userCustodian'
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can see the "<status>" on "<dataflow>"
-And I can click on "<dataflow>"
+And I click on "Dataflow Reportnet Testing"
+And I wait for enter
 And the "action" "Releasing status" is "be.visible"
 When I click the check to "<action>" the reporting
 And I can go to the list dataflows page
