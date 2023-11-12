@@ -74,7 +74,8 @@ Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
-And I can see the message: "SUCCESS"
+And I wait for notification
+And I see the message: "SUCCESS"
 
 
 #REP-1685

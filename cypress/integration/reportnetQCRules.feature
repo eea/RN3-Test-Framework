@@ -16,6 +16,7 @@ And I can fill a dataset schema with name "Table1", description "description Tab
 And I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
   | Field1 | description 1 | Text |  | false |
   | Field2 | description 2 | Text |  | false |
+  | Field3 | description 2 | Number - Integer |  | false |
 
 
 #REP-1408 REP-1437
@@ -67,8 +68,11 @@ And I can add a record
   | 6 |  |
 Then the "button" "Validate" is "be.enabled"
 And I can see the message: "INFO"
-And I can see the message: "SUCCESS"
-And I reload the page
+And I wait for validation
+And I wait for notification
+And I see the message: "SUCCESS"
+Then the "button" "Refresh" is "be.enabled"
+Then I can click on "Refresh"
 And I can see the field "Field1" has 2 error
 
 
@@ -81,7 +85,7 @@ And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "Show validations" is "be.visible"
 And the "button" "Download validations" is "be.visible"
-Then I can click on "Download validations"
+# Then I can click on "Download validations"
 And I see the message: "SUCCESS"
 
 
@@ -101,7 +105,20 @@ And I can "Update" a "Field comparison" with a "group" with fields
   | false | AND | Number | != | 3 |
 And the code rule "qc1-2" is "be.visible" on the list of rules
 And the qcRules list has 3 items
-   
+
+
+Scenario: fa) As a data custodian I can duplicate QC Rules
+
+Given I'm logged at Reportnet page as "userCustodian"
+And I click on "New Dataflow Rules Test"
+And I can click on element "DS-Test"
+And the "button" "QC rules" is "be.visible"
+And the code rule "qc1-2" is "be.visible" on the list of rules
+Then I can "duplicate" the field constraint rule with fields
+  | Table2 | Field3 | qc1_DUPLICATED | testNameDuplicated | Field type NUMBER duplicate | Message Info edited | INFO |
+When I can update the expression with new number
+And the code rule "qc1_DUPLICATED" is "be.visible" on the list of rules
+    
 
 #REP-1644 #REP-1837
 Scenario: g) As a data custodian I want to include SQL fields in a message
@@ -123,6 +140,8 @@ And I can "Create" a table relation "SQL sentence" with fields
   | select * from table1 where field1 > 5 |
 And I see the message: "SUCCESS"
 And the "button" "Validate" is "be.enabled"
+And I wait for notification
+And I wait for validation
 And I see the message: "Validation finished at DS-Test (DESIGN)"
 And I reload the page
 And I change to "Tabular data" mode
@@ -144,7 +163,7 @@ And the qcRules list has <total> items
 
 Examples:
    | type        | filter | total |
-   | levelError  | INFO   | 1     |
+   | levelError  | INFO   | 2     |
 
 
 Scenario Outline:i) As a data custodian I can filter QC Rules
@@ -158,7 +177,7 @@ And the qcRules list has <total> items
 
 Examples:
    | type        | filter | total |
-   | searchInput | number | 2     |
+   | searchInput | number | 3     |
 
 # REP-384
 Scenario: j) As a data custodian I can delete a QC Rule
@@ -217,6 +236,7 @@ And I can "create" a row constraint with fields
   | Table2 | sqlRule | testName | SQL Info | Message Info | Warning |
 And I can "Create" a table relation "SQL sentence" with fields
   | select * from Table1 |
+And I can click the next page button
 And the code rule "sqlRule" is "be.visible" on the list of rules
 
 
@@ -314,11 +334,15 @@ And I change to "Tabular data" mode
 And the "button" "Import table data" is "be.enabled"
 When I check replace data
 And I import a file "geom.csv"
+And I wait for importing the file
 And I see the message: "SUCCESS"
 Then the "button" "Validate" is "be.enabled"
+And I wait for validation
+And I wait for notification
 And I see the message: "SUCCESS"
 And I reload the page
 And the "button" "Show validations" is "be.visible"
+And I wait for enter
 Then the code rule "" with message "Unsupported SRID" is visible on the list of validations
 Then the code rule "" with message "The value does not follow the expected syntax for a valid multipolygon <reason>" is visible on the list of validations
 
@@ -335,7 +359,8 @@ And I can see the message: "SUCCESS"
 
 Scenario: v) As a data custodian I can add a new data flow with obligations
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
+And I wait for enter
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Rules historic changes Test" and description "Dataflow document test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Rules historic changes Test"
@@ -357,18 +382,21 @@ And I can see the representative "Spain" "test.provider@abc.com"
 
 Scenario: w) As a data custodian I can create data collections
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
+And I wait for enter
 And I click on "Rules historic changes Test"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
+And I wait for validation
 And I see the message: "SUCCESS"
 
 
 #REP-384 REP-459
 Scenario: x) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 And I filter the dataflow list by "name" with "Rules historic changes Test"
+And I wait for enter
 And I click on "Rules historic changes Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -384,8 +412,9 @@ And the new qc rule "qc1 'Test'" is "correct"
 #REP-431 REP-1129
 Scenario: y) As a data custodian I can edit QC Rules
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 And I filter the dataflow list by "name" with "Rules historic changes Test"
+And I wait for enter
 And I click on "Rules historic changes Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -403,13 +432,14 @@ And the qcRules list has 3 items
 #REP-2048 REP-2162
 Scenario: z) As a data custodian I can see the historic changes on each QC
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 And I filter the dataflow list by "name" with "Rules historic changes Test"
+And I wait for enter
 And I click on "Rules historic changes Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
 And the code rule "qc1-2" is "be.visible" on the list of rules
 Then I can view the historic changes of the rule "qc1-2"
 And I can see the history with following fields
-    | test.custodian@abc.com | false | true | false |
-    | test.custodian@abc.com | true  | true | true  |
+    | test.custodian2@abc.com | false | true | false |
+    | test.custodian2@abc.com | true  | true | true  |

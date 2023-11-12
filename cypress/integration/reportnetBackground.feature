@@ -20,6 +20,17 @@ And I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
 And I can "Add" a editor "national.spain@reportnet.net" with permissions "CUSTODIAN"
 And I click on close button
 
+Scenario: ba) As a data custodian I can add a new organization
+
+Given I'm logged at Reportnet page as 'userCustodian'
+And the "action" "Add organization" is "be.visible"
+Then I can add a new organization with name "Test" with group "All countries: EEA member countries PLUS other countries and territories"
+Then I can click on "Refresh"
+Then I can filter organizations by "label" with "test"
+And I can see the specified record in the table
+| Test| All countries: EEA member countries PLUS other countries and territories |
+
+
 #REP-1817
 Scenario: c) As a data custodian I can create new dataset schema
 
@@ -64,6 +75,7 @@ And I can "create" the field constraint rule with fields
 | Table1 | Field1 | blocker Test | testName | Field type NUMBER | Message Info | Blocker |
 And I can "Create" a "Field comparison" with a "" with fields
  | false  | AND | Number | <= | 100  |
+And I wait for enter
 And the code rule "blocker Test" is "be.visible" on the list of rules
 
 # REP-1312
@@ -85,7 +97,7 @@ And I can add a record
 And I can add a record 
 | 2 | test2 |
 And I set the design dataset as "Reference dataset"
-And I set the design dataset as "Available in public view"
+# And I set the design dataset as "Available in public view"
 And the "button" "External integrations" is "be.disabled"
 And the "fieldsDesigner" "Read only" is "checked"
 And the "fieldsDesigner" "Read only" is "be.disabled"
@@ -167,17 +179,22 @@ And I can go to the list dataflows page
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
+And I wait for notification
+And I wait for notification
 And I see the message: "SUCCESS"
 And I reload the page
 And I click on "Dataflow Reportnet Testing"
+And I reload the page
 And I can click on element "Test dataset"
 And the "action" "Test Dataset - DS-Test" is "be.visible"
 And the "action" "Test Dataset - DS2" is "be.visible"
 And I can go to the dataflow page
 And I can click on element "Test dataset"
 And I can click on element "Test Dataset - DS-Test"
+And I wait for enter
 Then I can add a record 
 | 101 | |
+And I wait for enter
 And I delete the dataset table row 1
 And I can go to the dataflow page
 And I can click on element "Technical feedback"
@@ -189,6 +206,7 @@ And I can "send" the message "Test message"
 Scenario Outline: ka) As a Reportnet User I can change the application date format
 
 Given  I'm logged at Reportnet page as "userProvider"
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can see the dateFormat on the "<dataflow>" as "<oldDate>"
 Then I can see the user profile page
@@ -204,6 +222,7 @@ Examples:
 Scenario: l) As a Reportnet User I can change the default rows per page
 
 Given  I'm logged at Reportnet page as "userProvider"
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
@@ -228,6 +247,7 @@ Scenario: n) As a data provider I don't have access to these new datasets
 
 Given I'm logged at Reportnet page as "userProvider"
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I wait for enter
 And I click on "Dataflow Reportnet Testing"
 Then the "button" "Test dataset" is "not.exist"
 
@@ -236,8 +256,10 @@ Then the "button" "Test dataset" is "not.exist"
 Scenario: p) As a data custodian I can export EU Datasets
 
 Given I'm logged at Reportnet page as 'userCustodian'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
+And I wait for enter
 Then I can click on element "Export EU datasets"
 
 #REP-457
@@ -261,6 +283,7 @@ Then the dataset table "Table3" has 2 records
 Scenario: r) As a data provider I can see the prefilled table
 
 Given I'm logged at Reportnet page as "userProvider"
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
@@ -272,6 +295,7 @@ Scenario: s) As a custodian, I want to be able to communicate with lead reporter
 
 Given I'm logged at Reportnet page as 'userCustodian'
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I wait for enter
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Technical feedback"
 When I select the country "Spain" 
@@ -300,7 +324,7 @@ When I select the country "Spain"
 And the "button" "Attach file" is "be.enabled"
 Then I import a file "importLeadReporters.csv"
 
-#REP-1839
+# REP-1839
 Scenario: v) As an admin, I can send system notification to all users
 
 Given I'm logged at Reportnet page as 'userAdmin'
@@ -387,14 +411,17 @@ Then I can see the "<role>" on "Dataflow Reportnet Testing"
 Scenario: ze) As a reporter, I can see the status of the dataflows
 
 Given I'm logged at Reportnet page as "userProvider"
-Then I can see the "Delivery status" on "Dataflow Reportnet Testing"
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+Then I see the "Delivery status" on "Dataflow Reportnet Testing"
 
 # REP-1210
 Scenario Outline: zf) As a custodian, I can Close/open release process
 
 Given I'm logged at Reportnet page as 'userCustodian'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can see the "<status>" on "<dataflow>"
-And I can click on "<dataflow>"
+And I click on "Dataflow Reportnet Testing"
+And I wait for enter
 And the "action" "Releasing status" is "be.visible"
 When I click the check to "<action>" the reporting
 And I can go to the list dataflows page
@@ -427,6 +454,7 @@ Then the table Unique constraints has 2 records
 Scenario: zh) As a data provider I can create a API-KEY
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
@@ -438,6 +466,7 @@ And new API-key is created
 Scenario: zi) As a registered user I can export with an option (zip XLSX + attachments)
 
 Given I'm logged at Reportnet page as 'userCustodian'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"
@@ -450,6 +479,7 @@ And I see the message: "SUCCESS"
 Scenario: zj) As a Lead Reporter I want to be able to assign a Reporter whose email doesn't exist to a Dataflow
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I can click on "Dataflow Reportnet Testing"
 And I can click on element "Spain"

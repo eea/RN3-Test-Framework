@@ -46,7 +46,7 @@ When("I can go to the list dataflows page",() => {
 })
 
 When("I can go to the dataflow page",() => {
-    cy.wait(1000)
+    cy.wait(2000)
     cy.get(':nth-child(5) > .p-menuitem-link > .p-menuitem-text').click({force:true})
 })
 

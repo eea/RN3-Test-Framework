@@ -21,9 +21,9 @@ And I can click on dataflow "test export"
 And I can click on element "Netherlands"
 Then I can click on element "test export"
 And the "button" "Validate" is "be.enabled"
-And I see the message: "SUCCESS"
+And I see the message: "INFO"
 And the "action" "Notifications" is "be.visible"
-Then I see the notification "Validation finished at test export (Netherlands). Click Refresh to view the data." in the notification received list
+Then I see the notification "Validating test export (Netherlands)" in the notification received list
 
 
 

@@ -40,6 +40,7 @@ And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider in a BDR with account "test.provider@abc.com" and Data provider "Company1"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
+And I wait for notification
 And I see the message: "SUCCESS"
 
 
@@ -89,9 +90,12 @@ And I click on close button
 And I logout
 And I'm logged at Reportnet page as 'userCustodian'
 And I can click on tab "Business dataflows"
+And I wait for enter
 And I click on "Business dataflow test countries"
 Then I can click on element "Manage lead reporters"
+And I wait for enter
 And representative should contain Countries
+And I wait for enter
 And representing field should include all "countries.json"
 
 
