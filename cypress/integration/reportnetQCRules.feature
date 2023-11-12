@@ -68,11 +68,8 @@ And I can add a record
   | 6 |  |
 Then the "button" "Validate" is "be.enabled"
 And I can see the message: "INFO"
-And I wait for validation
-And I wait for notification
-And I see the message: "SUCCESS"
-Then the "button" "Refresh" is "be.enabled"
-Then I can click on "Refresh"
+And I can see the message: "SUCCESS"
+And I reload the page
 And I can see the field "Field1" has 2 error
 
 
