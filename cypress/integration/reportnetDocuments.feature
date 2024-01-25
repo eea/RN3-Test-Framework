@@ -63,8 +63,8 @@ And I click on "Document Reportnet Testing"
 And I can click on element "Dataflow help"
 When I "edit" the row 1
 And I "edit" the document "Table1.csv" with description "description edited" and language "Spanish" marked as "public"
-Then I can see the message: "INFO"
-And I can see the message: "SUCCESS"
+And I see the message: "INFO"
+And I see the message: "SUCCESS"
 And the table "Supporting documents" has 2 records
 
 

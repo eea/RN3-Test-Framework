@@ -85,6 +85,8 @@ Given I'm logged at Reportnet page as 'userCustodian'
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
+And I wait for notification
+And I wait for notification
 And I see the message: "SUCCESS"
 
 
@@ -93,6 +95,7 @@ And I see the message: "SUCCESS"
 Scenario: g) As a data provider I can't release to data collection if blockers in any dataset
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -102,6 +105,7 @@ And the "action" "Dataflows" is "be.visible"
 And I click on "Dataset Reportnet Testing"
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
+And I wait for notification
 And I see the message: "ERROR"
 And I see the message: "You can't release data with blocker errors. Please check it and try again."
 
@@ -110,6 +114,7 @@ And I see the message: "You can't release data with blocker errors. Please check
 Scenario: h) As a reporter, I can see the status of the dataset in the title
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -117,16 +122,16 @@ Then I see the message: "Pending"
 
 
 #REP-2160
-@ignore
-Scenario: i) Add data to dataset with Import
+# @ignore
+# Scenario: i) Add data to dataset with Import
 
-Given I'm logged at Reportnet page as 'userProvider'
-When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
-And I click on "Dataset Reportnet Testing"
-And I can click on element "DS-Test"
-And the "button" "Import table data" is "be.enabled"
-And I import a file "test.csv"
-Then I see the message: "SUCCESS"
+# Given I'm logged at Reportnet page as 'userProvider'
+# When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
+# And I click on "Dataset Reportnet Testing"
+# And I can click on element "DS-Test"
+# And the "button" "Import table data" is "be.enabled"
+# And I import a file "test.csv"
+# Then I see the message: "SUCCESS"
 
 
 #REP-943
@@ -140,6 +145,7 @@ And I can add a record
     | 101 |  |
 And I can go to the dataflow page
 And I can click on element "DS-Test"
+When I delete the dataset table row 1
 And the "button" "Import table data" is "be.enabled"
 And I import a file "test.csv"
 Then I see the message: "SUCCESS"
@@ -147,7 +153,9 @@ And I reload the page
 And I can go to the dataflow page
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I see the message SUCCESS RELEASE TO DATA COLLECTION
+And I wait for importing the file
+And I wait for notification
+Then I see the message: "SUCCESS"
 
 
 #REP-1817
@@ -167,6 +175,7 @@ Scenario Outline: l) As a public user I can see the list of all dataflows marked
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow"
 Then I "can" see the publicly dataflow "Dataset Reportnet Testing"
+And I wait for enter
 And I can see for dataflow "Dataset Reportnet Testing" the instrument "Air Quality Directive IPR", status "Open"
 And I can see the information on "Dataset Reportnet Testing" with "<country>" "<type>" "<technicalAcceptance>"
 And I'm logged at Reportnet page as 'userCustodian'
@@ -210,9 +219,11 @@ And the table "Table1" has 2 records
 Scenario: p) Validate button is enabled for data Provider
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
+And I wait for enter
 Then the "button" "Validate" is "be.enabled"
 # And I can see the step "Validate data" is finished
 
@@ -232,6 +243,7 @@ Then I "can not" update the cell with the text "1" to the text "2" in a "dataset
 Scenario:  r) As a data provider I can't modify the number of records in this table
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -243,6 +255,7 @@ Then the "button" "Import table data" is "not.exist"
 Scenario: s) Edit dataset table row
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -254,6 +267,7 @@ Then I "can" update the cell with the text "data1" to the text "123" in a "datas
 Scenario: t) As a custodian in design dataset or a reporter in reporting dataset, I want to be able to select with a check, in the import dialogue, if I want to append rows o replace. (Improve regular import dialogue)
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -261,6 +275,7 @@ And the dataset table "Table1" has 2 records
 And the "button" "Import table data" is "be.enabled"
 When I check replace data
 And I import a file "test2.csv"
+And I wait for enter
 And I see the message: "SUCCESS"
 And I reload the page
 Then the dataset table "Table1" has 2 records
@@ -270,6 +285,7 @@ Then the dataset table "Table1" has 2 records
 Scenario: u) Delete dataset table row
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -282,6 +298,7 @@ Then the dataset table "Table1" has 1 records
 Scenario: v) Paste data to dataset
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -295,6 +312,7 @@ Then the dataset table "Table1" has 2 records
 Scenario: x) Delete table data
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -308,6 +326,7 @@ Then the dataset table "Table1" has 0 records
 Scenario: y) As a reporter, I can see the datasets marked as Final feedback
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS2"
@@ -318,6 +337,7 @@ Then I see the message: "Final feedback"
 Scenario: z) As a lead reporter, I can remove the option for a Member States to make a data private when it has been publicly released
 
 Given I'm logged at Reportnet page as 'userProvider'
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -332,7 +352,9 @@ Then the "action" "Release data visibility" is "be.visible"
 And I "can not" change to public in the visibility modal
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "restrict to public"
-And I see the message SUCCESS RELEASE TO DATA COLLECTION
+And I wait for notification
+And I wait for notification
+Then I see the message: "SUCCESS"
 Then the "action" "Release data visibility" is "be.visible"
 And I "can" change to public in the visibility modal  
 Then the "action" "Release data visibility" is "be.visible"
@@ -342,9 +364,11 @@ And I "can not" change to public in the visibility modal
 Scenario Outline: za) As Data Custodian I can see Dataset Schemas to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian"
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Dataflow help"
+And I wait for enter
 And I click on the tab "Dataset schemas"
 Then I can see the dataset schema "<datasetName>"
 
@@ -356,7 +380,9 @@ Examples:
 Scenario Outline: zb) As Data Provider I can see Dataset Schemas to dataflow
 
 Given I'm logged at Reportnet page as "userProvider"
+And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
+And I wait for enter
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Dataset schemas"

@@ -2,7 +2,7 @@ Feature: Reportnet Roles - As an existing user on the Repornet system I want to 
 
 Scenario: a) As a data custodian I can add a new data flow
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 When I "Create" a reporting dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Roles Reportnet Testing"
@@ -15,7 +15,7 @@ Then I can click on element "DS-Test"
 
 Scenario: b) As a data custodian I can add a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
@@ -24,7 +24,7 @@ Then I can "add" a Data provider with Representative of "All countries: EEA memb
 
 Scenario: c) As a data custodian I can edit a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
@@ -33,7 +33,7 @@ Then I can "edit" a Data provider with Representative of "All countries: EEA mem
 
 Scenario: d) As a data custodian I can delete a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
@@ -43,8 +43,9 @@ Then I can "delete" a Data provider with Representative of "All countries: EEA m
 # REP-708
 Scenario: e) As a CUSTODIAN or STEWARD, I want to share access rights with editors in my dataflow
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
+And I wait for enter
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
 When I can "Add" a editor "test.provider@abc.com" with permissions "EDITOR WRITE"
@@ -56,24 +57,25 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
 | table1f1 | description 1 | Number - Integer |  | true |
 
 
-@sanity
+# @sanity
 Scenario: f) As a data custodian I can add a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 Then I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 
 
-@sanity
+# @sanity
 Scenario: g) As a data custodian I can create data collections
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
+And I wait for enter
 And I see the message: "SUCCESS"
 
 
@@ -87,6 +89,7 @@ And I click on "Roles Reportnet Testing"
 And the "action" "Manage reporters" is "be.visible"
 And I can "Add" a editor "test.custodian2@abc.com" with permissions "REPORTER WRITE"
 And The user logout
+And I wait for enter
 And I'm logged at Reportnet page as "userCustodian2"
 And I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
@@ -97,7 +100,7 @@ And I can click on element "DS-Test"
 @sanity
 Scenario: i) As a data custodian I can add more representatives when a DC is already created
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
@@ -113,14 +116,14 @@ And I can click on element "Belgium"
 
 Scenario: j) As a custodian I can see all the users of the dataflow for this country
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
 And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
 
-|   CUSTODIAN            |  test.custodian@abc.com      |
+|   CUSTODIAN            |  test.custodian2@abc.com      |
 |   REPORTER WRITE       |  test.custodian2@abc.com     |
 |   LEAD REPORTER        |  test.provider@abc.com       |
 |   NATIONAL COORDINATOR |  testobserver@reportnet.net  |
@@ -129,16 +132,17 @@ Then I can see the specified record in the table
 
 
 # REP-1349
-Scenario: l) As a reporter I can see all the users of the dataflow for this country
+# @ignore
+# Scenario: l) As a reporter I can see all the users of the dataflow for this country
 
-Given I'm logged at Reportnet page as "userProvider"
-When I filter the dataflow list by "name" with "Roles Reportnet Testing"
-And I click on "Roles Reportnet Testing"
-And I can click on element "Spain"
-And the "action" "Dataflow users list" is "be.visible"
-Then I can see the specified record in the table
-| test.custodian2@abc.com   | REPORTER WRITE |
-| test.provider@abc.com     | LEAD REPORTER  |
+# Given I'm logged at Reportnet page as "userProvider"
+# When I filter the dataflow list by "name" with "Roles Reportnet Testing"
+# And I click on "Roles Reportnet Testing"
+# And I can click on element "Spain"
+# And the "action" "Dataflow users list" is "be.visible"
+# Then I can see the specified record in the table
+# | test.custodian2@abc.com   | REPORTER WRITE |
+# | test.provider@abc.com     | LEAD REPORTER  |
 
 
 @sanity
@@ -155,7 +159,8 @@ And I can go to the dataflow page
 And I can click on element "Spain"
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I see the message SUCCESS RELEASE TO DATA COLLECTION
+And I wait for notification
+And I see the message: "SUCCESS"
 
 
 
@@ -164,6 +169,7 @@ Scenario Outline: n) As a reporter in multiple providers inside a dataflow, I ca
 
 Given I'm logged at Reportnet page as "userProvider"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
+And I wait for enter
 And I can see the "<delivery status>" on "Roles Reportnet Testing"
 And I can click on "Roles Reportnet Testing"
 Then I can see the status for the "Spain" dataset
@@ -176,7 +182,7 @@ Then I can see the status for the "Spain" dataset
 # REP-1335
 Scenario: o) As a custodian, I want to see the list of current custodians/stewards and be able to add custodians/stewards/observers.
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
@@ -238,12 +244,13 @@ And I can go to the dataflow page
 # REP-1335
 Scenario: q) As a custodian, I want to see the list of current custodians/stewards and be able to remove observer users for a dataflow.
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
 When I can "delete" a editor " test.observer@abc.com" with permissions "OBSERVER"
 And The user logout
+And I wait for enter
 And I'm logged at Reportnet page as "userObserver"
 Then The reporting Dataflow "Roles Reportnet Testing" doesn't exist
 
@@ -251,13 +258,13 @@ Then The reporting Dataflow "Roles Reportnet Testing" doesn't exist
 # REP-1336 REP-1858
 Scenario: r) As a custodian, I want to see the list of all users in a dataflow
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Users list by country" is "be.visible"
 Then I can see the specified records in the table
 
-    | CUSTODIAN             | test.custodian@abc.com            |         |
+    | CUSTODIAN             | test.custodian2@abc.com           |         |
     | STEWARD               | testleadreporter@reportnet.net    |         |
     | LEAD REPORTER         | test.provider@abc.com             | Belgium |
     | LEAD REPORTER         | test.provider@abc.com             | Spain   |
@@ -266,6 +273,19 @@ Then I can see the specified records in the table
 And I can click on "Download users list"
 And I see the message: "SUCCESS"
 
+Scenario: ra) As a userProvider, I want to see and download the list of all users in a dataflow
+
+Given I'm logged at Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
+And I can click on element "Spain"
+And the "action" "Dataflow users list" is "be.visible"
+Then I can see the specified record in the table
+
+   | test.custodian2@abc.com   | REPORTER WRITE |
+   | test.provider@abc.com     | LEAD REPORTER  |
+And I can click on "Download users list"
+And I see the message: "SUCCESS"
 
 # REP-1478
 Scenario: s) As an admin, I want to be able to see a helpdesk inside a dataflow containing info about all the datasets
@@ -286,7 +306,7 @@ Then I can see the specified records in the table
 # REP-2046
 Scenario: t) As a custodian, I want to be able to add a new role called STEWARD SUPPORT in manage requesters
 
-Given I'm logged at Reportnet page as "userCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
@@ -361,6 +381,7 @@ And I click on the tab "Web links"
 And the "button" "Add" is "be.enabled"
 Then I add a weblink with description "Test webLink" and url "www.google.es" marked as "private"
 And the table "Web links" has 1 records
+And I wait for enter
 And I can update the weblink with the description "Edit weblink" to the text "www.google2.com"
 And I "delete" the row 1
 And the table "Web links" has 0 records
@@ -410,7 +431,7 @@ Scenario: zc) As a NC I can see all the users of the dataflow for this country
 Given I'm logged at Reportnet page as "userObserver2"
 And I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
-And the "action" "All dataflows user list" is "be.visible"
+And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
 | NATIONAL COORDINATOR |  testobserver@reportnet.net |
 | REPORTER WRITE       |  test.custodian2@abc.com   |

@@ -89,7 +89,8 @@ When("I can {string} Lead reporters",(action) => {
 
 When("I can {string} a editor {string} with permissions {string}",(action, editor, permission) => {
   if(action === 'Add'){
-    cy.contains(action).click()
+    cy.wait(1000)
+    cy.contains('button','Add').click({force:true})
     cy.get("[id=rolesDropdown]").click();
     cy.get(`.p-dropdown-items`).contains(new RegExp(permission)).click();
     cy.get("[id=accountInput]").type(editor+'{enter}');
@@ -98,7 +99,7 @@ When("I can {string} a editor {string} with permissions {string}",(action, edito
   } else {
     cy.get('.p-datatable-tbody > tr:contains(test.observer) >>>[class*=ActionsColumn_deleteRowButton] > .p-button-text').click({force:true})
     cy.get(".p-button > .p-button-text:contains(Yes)").click({force:true})
-    cy.wait(5000)
+    cy.wait(7000)
   }
 })
 
@@ -119,40 +120,41 @@ When("I can see the representative {string} {string}", (country, email) => {
 })
 
 When("I can see the specified record in the table", (fields) => {
-  cy.wait(1000)
+  cy.wait(2000)
   fields.rawTable.map((data) => {
     cy.get(`.p-datatable-tbody>tr:contains(${data[0]}):contains(${data[1]})`)
   })
 })
 
 When("I can see the specified records in the table", (fields) => {
-  cy.wait(1000)
+  cy.wait(2000)
   fields.rawTable.map((data) => {
     cy.get(`.p-datatable-tbody>tr:contains(${data[0]}):contains(${data[1]}):contains(${data[2]})`)
   })
 })
 
 When("I can check enable automatic delete reporter data and snaphots", () => {
+  cy.wait(1000)
   cy.get(".p-dialog:contains(Automatic delete)>> .p-checkbox").click({force:true})
   cy.contains("Save").click();
 })
 
 When("I can add a national coordinator with email {string} for country {string}", (email, country) => {
   cy.get('[class *= ManageNationalCoordinators_buttonsDialogFooter] > .p-button-primary > .p-button-text').click({force:true})
-  cy.wait(1000)
+  cy.wait(2000)
   cy.get('#name').type(email)
-  cy.wait(1000)
+  cy.wait(2000)
   cy.get('#groupOfCountries > .p-dropdown-label').children().click()
   cy.get('.p-input-overlay-visible > .p-dropdown-items-wrapper > .p-dropdown-items >').contains(country).click()
   cy.get('.p-dialog-footer > div > [data-for="confirmTooltipId"] > .p-button > .p-button-text').click({force:true})
-  cy.wait(5000)
+  cy.wait(6000)
   cy.get('.p-dialog-content').contains(email).siblings().contains(country)
 })
 
 When("I can not filter by {string}", (filter) => {
   if(filter === "role") {
     cy.get('#userRole_dropdown').should('not.exist')
-    cy.wait(3000)
+    cy.wait(4000)
   }
 })
 
