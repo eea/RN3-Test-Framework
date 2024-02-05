@@ -47,6 +47,7 @@ Then("I can see a system notification {string} sent by an Admin", (message) => {
 
 Then("I delete a system notification with {string} message", (message) => {
   cy.wait(2000)
+  cy.wait(1000)
   cy.get('[class*=p-datatable-tbody]').children().contains(message).siblings().find('[class*=SystemNotificationsList_actionsColumnButtons] > [class*=ActionsColumn_actionTemplate] > [class*=ActionsColumn_deleteRowButton] > .p-button-text').click({force:true})
   cy.wait(5000)
 })

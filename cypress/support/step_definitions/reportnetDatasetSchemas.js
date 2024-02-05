@@ -53,6 +53,7 @@ Then ("Confirm new dataset schema creation is visible", ()=>{
   cy.get('.p-dialog-title').contains('Confirm new dataset schema creation')
   cy.get('.p-button-text:contains(Yes)').click({force:true})
   cy.wait(1000)
+  cy.wait(1000)
 })
 
 Then ("Available in public view is checked", ()=>{
@@ -70,23 +71,29 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   cy.wait(1000)
   cy.contains(name.replace('*/+','')).click({force:true})
   cy.wait(2000)
+  cy.wait(2000)
   cy.get('textarea[placeholder="Table description"]').type(description,{force:true})
   fields.rawTable.map(fields => {
     cy.wait(3000)
+    cy.wait(3000)
     cy.get('input:visible:last').should('have.attr', 'placeholder', 'Field name').type(fields[0],{force:true})
-    cy.wait(10000)
+    cy.wait(6000)
     if(fields[4]==="true") {
       cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:first').click()
     }
     if(fields[5]==="true") {
       cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:last').click()
     }
+    cy.wait(4000)
     cy.get('#_description').should('have.attr', 'placeholder', 'Field description').type(fields[1])
     cy.wait(2000)
+    cy.wait(4000)
     cy.get('[class^=FieldDesigner] > .p-dropdown:last').click({force:true})
     cy.wait(2000)
+    cy.wait(4000)
     cy.get('li:visible>div>span').contains(fields[2]).click({force:true})
     cy.wait(1000)
+    cy.wait(3000)
     if(fields[2] === 'Single select' || fields[2] ==='Multiple select') {
       let options = fields[3].replaceAll("{enter}", "; ");
       fillFields(fields[3])
@@ -138,6 +145,7 @@ Then("I can select a {string} {string} with label field {string} and linked fiel
   cy.get("[aria-label='"+table+"']").click()
 }
   setDialog("Save")
+  cy.wait(2000)
   cy.wait(2000)
 })
 
