@@ -3,7 +3,7 @@ Feature: Reportnet Web links - As an existing user on the Repornet system I want
 @sanity
 Scenario: a) As a data custodian I can add a new data flow with obligations
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
 When I "Create" a reporting dataflow with name "Weblinks Reportnet Testing" and description "Dataflow weblinks test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Weblinks Reportnet Testing"
@@ -17,7 +17,6 @@ And I can fill a dataset schema with name "Table1", description "description Tab
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
 And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
-And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
 Then I can see the representative "Spain" "test.provider@abc.com"
 
@@ -26,7 +25,7 @@ Then I can see the representative "Spain" "test.provider@abc.com"
 @sanity
 Scenario: b) As a data custodian I can add weblinks to dataflow
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
@@ -40,7 +39,7 @@ And The first record is "New webLink" and the last record is "Test webLink"
 
 Scenario: c) As a data custodian I can edit weblinks to dataflow
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
@@ -49,7 +48,7 @@ Then I can update the weblink with the description "Edit weblink" to the text "w
 
 Scenario: d) As a data custodian I can remove weblinks to dataflow
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
@@ -60,7 +59,7 @@ Then the table "Web links" has 1 records
 #REP-1685
 Scenario: e) As a custodian/steward, I want to be able to set the links as public
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
@@ -71,7 +70,7 @@ When I add a weblink with description "Public webLink" and url "www.google.es" m
 @sanity
 Scenario: f) As a data custodian I can create data collections
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
@@ -88,4 +87,4 @@ And I can click on "View by obligation dataflow"
 And I can filter obligation dataflow by "name" with "Weblinks Reportnet Testing"
 And I click on "Weblinks Reportnet Testing"
 Then the public table "Web links" has 1 records
-And I'm logged at Reportnet page as "userCustodian2"
+And I'm logged at Reportnet page as "userCustodian"

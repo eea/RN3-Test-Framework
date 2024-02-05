@@ -57,16 +57,45 @@ Given(
   "I'm logged at Reportnet page as {string}",
   (user) => {
     cy.visit('/');
+    cy.wait(2000)
     //homePage.clickonLoginLink();
     cy.contains('Login').click()
+    cy.wait(500)
     cy.get("input[type=text]").type(Cypress.env(user).username);
     cy.get("input[type=password]").type(Cypress.env(user).password);
     cy.get("#kc-login").click();
-    cy.wait(5500)
-  }
+    cy.wait(7000)
+    }
 );
 
-
+Given(
+  "I'm logged at Reportnet3 page as {string}",
+  (user) => {
+    cy.visit('/');
+    cy.wait(1000)
+    //homePage.clickonLoginLink();
+    cy.contains('Login').click()
+    cy.wait(500)
+    cy.get("input[type=text]").type(Cypress.env(user).username);
+    cy.get("input[type=password]").type(Cypress.env(user).password);
+    cy.get("#kc-login").click();
+    cy.wait(5000)
+  }
+);
+Given(
+  "I'm logged at Reportnet3 page as {string}",
+  (user) => {
+    cy.visit('/');
+    cy.wait(1000)
+    //homePage.clickonLoginLink();
+    cy.contains('Login').click()
+    cy.wait(500)
+    cy.get("input[type=text]").type(Cypress.env(user).username);
+    cy.get("input[type=password]").type(Cypress.env(user).password);
+    cy.get("#kc-login").click();
+    cy.wait(5000)
+  }
+);
 Given(
   "I'm logged at production Reportnet page as {string}",
   (user) => {
@@ -83,10 +112,12 @@ Given(
 
 Given("I'm in Reportnet page", () => {
   cy.visit('/');
+  cy.wait(1000)
   //cy.visit('https://rn3test.eionet.europa.eu/');  //=>TEST
 })
 
 When("I {string} see the publicly dataflow {string}", (visibility, name) => {
+  cy.wait(1000)
   cy.wait(1000)
   if (visibility === 'can') {
     bddGeneratedValues.get(name)
@@ -107,7 +138,9 @@ When("I can see for dataflow {string} the instrument {string}, status {string}",
 
 When("The user logout", () => {
   cy.wait(1000)
+  cy.wait(1000)
   cy.get(".fa-power-off:last").click({ force: true });
+  cy.wait(1000)
   cy.wait(1000)
   setDialog("Yes")
 })
@@ -122,13 +155,17 @@ When("I can see the dataflows page", () => {
 
 When("I can click on {string}", element => {
   cy.wait(3000);
+  cy.wait(3000);
   cy.contains(element).click({ force: true })
+  cy.wait(2500);
   cy.wait(2500);
 })
 
 When("I can click on tab {string}", element => {
   cy.wait(3000);
+  cy.wait(3000);
   cy.contains(element).click({ force: true })
+  cy.wait(3000);
   cy.wait(2000);
 })
 
@@ -143,8 +180,10 @@ Then("The reporting Dataflow {string} doesn't exist", (name) => {
 
 
 When("I can click on element {string}", element => {
+  cy.wait(5000);
   cy.wait(3000);
   cy.get('p:contains(' + element + '):first').parent().click()
+  cy.wait(3500)
   cy.wait(2000)
 });
 
@@ -152,11 +191,13 @@ When("I can click on the button with text {string}", (element) => {
   cy.wait(4000)
   cy.get('button').contains(element).click()
   cy.wait(2000)
+  cy.wait(2000)
 });
 
 When("I can check on the checkbox ignore case", element => {
   cy.wait(4000)
   cy.get('#ignoreCaseInLinks_check').click()
+  cy.wait(2000)
   cy.wait(2000)
 });
 
@@ -164,10 +205,11 @@ When("I click on the tab {string}", element => {
   cy.wait(4000)
   cy.get('span:contains(' + element + ')').first().parent().click({ force: true })
   cy.wait(2000)
+  cy.wait(2000)
 });
 
 When("the {string} {string} is {string}", (type, button, property) => {
-  cy.wait(2000)
+  cy.wait(3000)
   if (type === 'action') {
     cy.contains(button).and(property)
   } else if (type === 'fieldsDesigner') {
@@ -188,6 +230,7 @@ When("the {string} {string} is {string}", (type, button, property) => {
   if (button === "Validate" && property === 'be.enabled') {
     setDialog("Yes")
   }
+  cy.wait(3000)
   cy.wait(3000)
 });
 
@@ -276,7 +319,7 @@ When("I import a file {string}", file => {
     })
   cy.wait(2000)
   cy.contains("Upload").click({force: true })
-  cy.wait(3000)
+  cy.wait(2000)
 });
 
 When("I delete the table data", () => {
@@ -287,11 +330,11 @@ When("I delete the table data", () => {
 When("I see the message: {string}", message => {
   cy.wait(6000)
   //cy.contains(message,{timeout:15000})
-  cy.wait(2000)
+  cy.wait(1000)
 });
 
 When("I can see the message: {string}", message => {
-  cy.wait(500)
+  cy.wait(3500)
   cy.contains(message)
   cy.wait(1000)
 });
@@ -313,7 +356,7 @@ Then("the dataset table {string} has {} record(s)", (table, records) => {
   // cy.wait(2000)
   // cy.get('.p-button-text:contains(Refresh):visible').click({force:true})
   cy.wait(3000)
-  cy.get('span:contains(' + table + ')').click({ force: true })
+  cy.get('span:contains(' + table + ')').first().parent().click({ force: true })
   cy.wait(1000)
   cy.get(".p-datatable-scrollable-body-table >tbody>tr").should("have.length", records);
   //cy.get('.p-datatable-scrollable-body-table').should("have.length", records);
@@ -371,6 +414,7 @@ When("I delete the dataset table row {int}", row => {
 
 When("I {string} the row {int}", (action, row) => {
   const type = action === 'delete' ? '.pi-trash' : '.pi-pencil'
+  cy.wait(2000)
   cy.get("tbody>tr:last")
     .eq(row - 1)
     .find(type)
@@ -394,11 +438,11 @@ When("I wait for validation", () => {
 })
 
 When("I wait for enter", () => {
-  cy.wait(8000);
+  cy.wait(8500);
 })
 
 When("I wait for importing the file", () => {
-  cy.wait(80000);
+  cy.wait(95000);
 })
 
 When("I am in {string} dataset", location => {
@@ -1020,6 +1064,7 @@ When("I click on close button", () => {
 When("I logout", () => {
   cy.get(".fa-power-off:first").click({ force: true });
   setDialog("Yes")
+  cy.wait(2000);
 })
 
 Then("representative should contain Countries", () => {
@@ -1054,11 +1099,31 @@ Then("I create a business dataflow with name {string} and description {string} a
   cy.wait(5000);
 });
 
+Then("I create a business dataflow with name {string} and description {string} and obligation {string} and company {string} in a big dataflow with fmeUser {string}", (name, description, obligation, company, fmeUser) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get("#dataflowDescription").clear().type(description);
+  cy.get('[class*=ManageBusinessDataflow_search] > .p-button').click({ force: true })
+  cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+  cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('[class*=ManageBusinessDataflow_groupOfCompaniesWrapper] > .p-dropdown-label').click({ force: true })
+  cy.contains(company).click({ force: true })
+  cy.get('[class*=ManageBusinessDataflow_fmeUsersWrapper] > .p-dropdown-label').click({ force: true })
+  cy.contains(fmeUser).click({ force: true })
+  cy.get('#bigDataCheckbox > .p-checkbox-box').click({ force: true })
+  cy.get(".p-button-text:contains('Create')").click({ force: true })
+  cy.wait(5000);
+});
+
+
 When("I click on {string}", (name) => {
-  cy.wait(2500);
+  cy.wait(3500);
   bddGeneratedValues.get(name)
   cy.contains(bddGeneratedValues.get(name)).click({ force: true })
-  cy.wait(2000);
+  cy.wait(3000);
 });
 
 When("I click on data collection {string}", (name) => {
@@ -1088,6 +1153,22 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000)
 })
+
+Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} in big data storage with {string}", (action, name, description, obligation, filtered, filters) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get("#dataflowDescription").clear().type(description);
+  cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
+  cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+  cy.get('#bigDataCheckbox > .p-checkbox-box').click({ force: true })
+  cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.wait(5000)
+})
+
 
 When("I can see the updated list of webforms {string}", (name) => {
   let dataflow = bddGeneratedValues.get(name)
@@ -1149,6 +1230,49 @@ When("Import is locked is visible", () => {
   //cy.get('.p-button-text.p-c').contains("Import is locked").should('be.visible')
 })
 
+Given(
+  "I'm logged at DHL Reportnet page as {string}",
+  (user) => {
+    cy.visit('/');
+    //homePage.clickonLoginLink();
+   
+    cy.contains('Login').click()
+    cy.get("input[type=text]").type(Cypress.env(user).username);
+    cy.get("input[type=password]").type(Cypress.env(user).password);
+    cy.get("#kc-login").click();
+    cy.wait(3500)
+    
+  }
+);
+
+Then ("I can add a new organization with name {string} with group {string}", ( orgName, groupName) =>{
+  cy.get('.undefined > .p-button-text:contains("Add")').click({ force: true })
+  const dynamicallyName = Math.random().toString(36).substring(2, 7);
+  const typeName = orgName + dynamicallyName;
+  bddGeneratedValues.set(orgName, typeName);
+  
+  console.log(bddGeneratedValues);
+  cy.get("#organizationNameInput").clear().type(typeName);
+  cy.get('#groupsDropdown').click();
+  cy.wait(1000)
+  cy.get('.p-input-overlay-visible > .p-dropdown-items-wrapper > .p-dropdown-items').contains(groupName).click({ force: true })
+  cy.wait(1000)
+  cy.get('[data-for="confirmTooltipId"] > .p-button > .p-button-text:visible').click({force:true})
+}) 
+
+Then("I can filter organizations by {string} with {string}", (field,filter) => {
+  if (field === 'label' || field === 'code'){
+    cy.get(`[id='${field}_input']`).type(filter)
+  }else{
+    cy.get('#groupId_dropdown').click().children().contains(filter).click()
+    cy.wait(3000)
+  
+  }
+  cy.wait(1000)
+  cy.get('.Filters_lineItems__2Nj0X > .Filters_buttonWrapper__sgK_8 > .Filters_filterButton__1OEWb > .p-button > .p-button-text').click({ force: true })
+  cy.wait(2000)
+
+})
 Given(
   "I'm logged at DHL Reportnet page as {string}",
   (user) => {

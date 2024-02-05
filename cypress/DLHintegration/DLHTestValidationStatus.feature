@@ -3,7 +3,7 @@ Feature: Validations status button - As an existing user on the Repornet system 
 #REP-151313
 Scenario Outline: a) As a Data Custodian I can see the validations status window
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And the validations status button is "visible"
 When I click on the validations status button
 Then the validations status window is "display_status"
@@ -36,7 +36,7 @@ Then the "validations status" button is not visible
 #REP-151313
 Scenario: d) As a Data Custodian I can redirect to the reporting dataset from the validation status window
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
 And  I "Create" a reporting dataflow with name "Validation Reportnet Testing" and description "Dataflow validation test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 When I click on "Validation Reportnet Testing"
@@ -49,7 +49,6 @@ And I can fill a dataset schema with name "Table1", description "description Tab
 | table1f1 | description 1 | Number - Integer |  | true |
 | table1f2 | description 2 | Text             |  |      |
 And the "button" "Validate" is "be.enabled"
-And I wait for notification
 And I wait for notification
 And I see the message: "SUCCESS"
 And I can go to the list dataflows page

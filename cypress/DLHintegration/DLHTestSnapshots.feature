@@ -3,7 +3,7 @@ Feature: Reportnet Snapshots - As an existing user on the Repornet system I want
 @sanity
 Scenario: a) As a data custodian I can add a new data flow
 
-Given I'm logged at Reportnet page as "userCustodian2"
+Given I'm logged at Reportnet page as "userCustodian"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Snapshot dataflow Test" and description "Snapshot dataflow Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Snapshot dataflow Test"
@@ -28,7 +28,7 @@ When I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
 @sanity
 Scenario: b) As a data provider I can save a copy of a dataset
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet page as "userDLHProvider"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"
@@ -38,7 +38,7 @@ Then I can save a copy with description "New copy"
 @sanity
 Scenario: c) As a data provider I can restore a copy of a dataset
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet page as "userDLHProvider"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"
@@ -47,7 +47,7 @@ Then I can "restore" a dataset copy
 
 Scenario: d) As a data provider I can delete a copy of a dataset
 
-Given  I'm logged at Reportnet page as "userProvider"
+Given  I'm logged at Reportnet page as "userDLHProvider"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"

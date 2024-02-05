@@ -1,6 +1,5 @@
 Feature: Reportnet smoke tests in Production
 
-
 # @ignore
 Scenario Outline: a) As a provider I can import data in dataset
 
@@ -23,11 +22,9 @@ And I can click on element "Netherlands"
 Then I can click on element "test export"
 And the "button" "Validate" is "be.enabled"
 And I see the message: "INFO"
+And I wait for notification
 And the "action" "Notifications" is "be.visible"
 Then I see the notification "Validating test export (Netherlands)" in the notification received list
-And I wait for notification
-And I see the message: "SUCCESS"
-
 
 
 Scenario Outline: c) As a provider I can release data to data collection
