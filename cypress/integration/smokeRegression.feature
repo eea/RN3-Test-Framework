@@ -1,6 +1,6 @@
 Feature: Reportnet smoke tests in Production
 
-@ignore
+# @ignore
 Scenario Outline: a) As a provider I can import data in dataset
 
 Given I'm logged at production Reportnet page as "userProdProvider"
@@ -11,9 +11,9 @@ Then I click on the import dataset data button
 And I import a "zip" file "test export.zip" 
 Then I see the message: "SUCCESS"
 And the "action" "Notifications" is "be.visible"
-Then I see the notification "Loaded data completed for table1 at Netherlands" in the notification received list
+Then I see the notification "Loaded data completed at Netherlands" in the notification received list
 
-@ignore
+# @ignore
 Scenario Outline: b) As a provider I can validate data in dataset
 
 Given I'm logged at production Reportnet page as "userProdProvider"
@@ -22,9 +22,9 @@ And I can click on element "Netherlands"
 Then I can click on element "test export"
 And the "button" "Validate" is "be.enabled"
 And I see the message: "INFO"
+And I wait for notification
 And the "action" "Notifications" is "be.visible"
 Then I see the notification "Validating test export (Netherlands)" in the notification received list
-
 
 
 Scenario Outline: c) As a provider I can release data to data collection

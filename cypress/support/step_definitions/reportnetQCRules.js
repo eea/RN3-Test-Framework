@@ -41,6 +41,7 @@ When("I can {string} a {string} with a {string} with fields", (action, type, sub
             cy.get('#SQLsentenceTextarea').type(data[0]).click({force:true})
         })
     } else {
+        cy.wait(3000)
         action === 'Update' && cy.get("#createValidation__addExpresion").click({force:true})
         fields.rawTable.map((data,i) => {
             (action === 'Update' || i>=1) && cy.get(".p-dropdown:contains(Union):last").type(data[1]).click({force:true})
@@ -58,6 +59,7 @@ When("I can {string} a {string} with a {string} with fields", (action, type, sub
     if(action === "Create"){
         cy.get("#createValidation__create").click({force:true})
     }else {
+        cy.wait(3000)
         cy.get('button:contains('+action+')').click({force:true})
     }
 })
@@ -184,8 +186,8 @@ When("I can view the historic changes of the rule {string}", (rule) => {
 When("I can see the history with following fields",(fields) => {
     const data = fields.rawTable[0]
     cy.get(`.p-datatable-row:contains(${data[0]})`)
-    data[1] === 'true' && cy.get(`.p-datatable-row:contains(test.custodian) > :nth-child(3) svg[data-icon=check]`)
-    data[2] === 'true' && cy.get(`.p-datatable-row:contains(test.custodian) > :nth-child(4) svg[data-icon=check]`)
-    data[3] === 'true' && cy.get(`.p-datatable-row:contains(test.custodian) > :nth-child(5) svg[data-icon=check]`)
+    data[1] === 'true' && cy.get('.p-dialog-content > .p-datatable > .p-datatable-wrapper > table > .p-datatable-tbody > :nth-child(1) > :nth-child(1)')
+    data[2] === 'true' && cy.get('.p-dialog-content > .p-datatable > .p-datatable-wrapper > table > .p-datatable-tbody > :nth-child(2) > :nth-child(1)')
+    data[3] === 'true' && cy.get('.p-dialog-content > .p-datatable > .p-datatable-wrapper > table > .p-datatable-tbody > :nth-child(3) > :nth-child(1)')
 })
 

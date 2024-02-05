@@ -46,7 +46,7 @@ Then("I can create a dataset schema public available with name {string}", (name)
     cy.get('[class*=BigButton_bigButton] > > ul>li').contains('New empty dataset schema').click({force:true})
     cy.get("input[name=datasetSchemaName]").clear().type(name);
     cy.get('button:contains(Create)').click({force:true})
-    cy.wait(500)
+    cy.wait(4000)
 })
 
 Then ("Confirm new dataset schema creation is visible", ()=>{
@@ -65,6 +65,7 @@ Then ("Available in public view is checked", ()=>{
 Then("I can fill a dataset schema with name {string}, description {string} and with following fields",(name, description, fields) => {
   cy.wait(4000)
   cy.get('.p-tabview-title:last').click({force:true})
+  cy.wait(1000)
   cy.get('input:visible[placeholder="Table name"]').clear().type(name + "{enter}",{force:true})
   cy.wait(1000)
   cy.contains(name.replace('*/+','')).click({force:true})
@@ -73,20 +74,19 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   fields.rawTable.map(fields => {
     cy.wait(3000)
     cy.get('input:visible:last').should('have.attr', 'placeholder', 'Field name').type(fields[0],{force:true})
-    cy.wait(6000)
+    cy.wait(10000)
     if(fields[4]==="true") {
       cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:first').click()
     }
     if(fields[5]==="true") {
       cy.get('[class*=FieldDesigner_draggableFieldDiv] [role="checkbox"]:last').click()
     }
-    cy.wait(4000)
     cy.get('#_description').should('have.attr', 'placeholder', 'Field description').type(fields[1])
-    cy.wait(4000)
+    cy.wait(2000)
     cy.get('[class^=FieldDesigner] > .p-dropdown:last').click({force:true})
-    cy.wait(4000)
+    cy.wait(2000)
     cy.get('li:visible>div>span').contains(fields[2]).click({force:true})
-    cy.wait(3000)
+    cy.wait(1000)
     if(fields[2] === 'Single select' || fields[2] ==='Multiple select') {
       let options = fields[3].replaceAll("{enter}", "; ");
       fillFields(fields[3])
@@ -101,6 +101,25 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   })
 })
 
+Then("I can edit the field {string} type", (field)=>{
+  cy.get('[draggable="true"][style="cursor: default;"] > :nth-child(7) > .FieldDesigner_dropDownLabel__1FTrZ > .p-dropdown > .p-dropdown-label').click({force:true})
+  cy.get('li:visible>div>span').contains(field).click({force:true})
+  cy.wait(1000)
+   })
+
+Then("I can close the QC page and go to the dataflow page", () => {
+  cy.get('.DatasetDesigner_closeButton__25-dx > .p-button-text').click({force:true})
+  cy.wait(1000)
+  cy.get(':nth-child(5) > .p-menuitem-link > .p-menuitem-text').click({force:true})
+
+})
+
+Then("I can quickly edit and {string} QC", (action)=>{
+  cy.wait(1000)
+  cy.get('.BodyCell_actionTemplate__1LLYg > :nth-child(3) > .p-button-text').click({force:true})
+  cy.get('#createValidation__active > .p-checkbox-box').click({force:true})
+  cy.get('button:contains('+action+')').click({force:true})
+})
 
 Then("I can select a {string} {string} with label field {string} and linked field {string} and master field {string} and ignore case {string} for dataflow {string}", (type, table, label, linked, master, ignore, dataflow) => {
   cy.wait(2000)

@@ -105,6 +105,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 And I click on "Document Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
+And I wait for notification
 And I see the message: "SUCCESS"
 
 
@@ -112,8 +113,8 @@ And I see the message: "SUCCESS"
 Scenario: i) As a custodian/steward I can see all the public documents in the dataflow public page as extra information if the dataflow is public
 
 Given I'm in Reportnet page
-When I can click on "View by obligation dataflow"
-Then I "can" see the publicly dataflow "Document Reportnet Testing"
+And I can click on "View by obligation dataflow"
+And I can filter obligation dataflow by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And the table Documents has 1 records
 And I'm logged at Reportnet page as "userCustodian2"

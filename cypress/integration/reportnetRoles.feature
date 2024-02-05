@@ -19,7 +19,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
 
 
 Scenario: c) As a data custodian I can edit a Data provider
@@ -37,7 +37,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "delete" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "France"
+Then I can "delete" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "France"
 
 
 # REP-708
@@ -48,9 +48,9 @@ When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I wait for enter
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
-When I can "Add" a editor "test.provider@abc.com" with permissions "EDITOR WRITE"
+When I can "Add" a editor "test.provider2@abc.com" with permissions "EDITOR WRITE"
 And The user logout
-And I'm logged at Reportnet page as "userProvider"
+And I'm logged at Reportnet page as "userProvider2"
 And I can click on "Roles Reportnet Testing"
 And I can click on element "DS-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
@@ -64,7 +64,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 Then I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
-And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
+And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
 
 
 # @sanity
@@ -75,7 +75,8 @@ When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
-And I wait for enter
+And I wait for notification
+And I wait for notification
 And I see the message: "SUCCESS"
 
 
@@ -83,7 +84,8 @@ And I see the message: "SUCCESS"
 @sanity
 Scenario: h) As a LEAD REPORTER, I want to share access rights with reporters for a dataflow
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
+And I wait for enter
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage reporters" is "be.visible"
@@ -104,7 +106,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "addLast" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Belgium"
+Then I can "addLast" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Belgium"
 And I reload the page
 And I can click on element "Create new datasets"
 And I can add datasets for new Representatives
@@ -123,9 +125,9 @@ And I can click on element "Spain"
 And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
 
-|   CUSTODIAN            |  test.custodian2@abc.com      |
+|   CUSTODIAN            |  test.custodian2@abc.com     |
 |   REPORTER WRITE       |  test.custodian2@abc.com     |
-|   LEAD REPORTER        |  test.provider@abc.com       |
+|   LEAD REPORTER        |  test.provider2@abc.com       |
 |   NATIONAL COORDINATOR |  testobserver@reportnet.net  |
 
 
@@ -148,7 +150,8 @@ Then I can see the specified record in the table
 @sanity
 Scenario: m) As a LEAD REPORTER, I want to release data with validations passed.
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
+And I wait for enter
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
@@ -160,6 +163,7 @@ And I can click on element "Spain"
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
 And I wait for notification
+And I wait for notification
 And I see the message: "SUCCESS"
 
 
@@ -167,7 +171,7 @@ And I see the message: "SUCCESS"
 #REP-2230
 Scenario Outline: n) As a reporter in multiple providers inside a dataflow, I can see the status for each provider in dataflow list and inside the dataflow
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
 And I wait for enter
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I wait for enter
@@ -267,8 +271,8 @@ Then I can see the specified records in the table
 
     | CUSTODIAN             | test.custodian2@abc.com           |         |
     | STEWARD               | testleadreporter@reportnet.net    |         |
-    | LEAD REPORTER         | test.provider@abc.com             | Belgium |
-    | LEAD REPORTER         | test.provider@abc.com             | Spain   |
+    | LEAD REPORTER         | test.provider2@abc.com             | Belgium |
+    | LEAD REPORTER         | test.provider2@abc.com             | Spain   |
     | REPORTER WRITE        | test.custodian2@abc.com           | Spain   |
     | NATIONAL COORDINATOR  | testobserver@reportnet.net        | Spain   |
 And I can click on "Download users list"
@@ -276,7 +280,7 @@ And I see the message: "SUCCESS"
 
 Scenario: ra) As a userProvider, I want to see and download the list of all users in a dataflow
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
@@ -284,7 +288,7 @@ And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
 
    | test.custodian2@abc.com   | REPORTER WRITE |
-   | test.provider@abc.com     | LEAD REPORTER  |
+   | test.provider2@abc.com     | LEAD REPORTER  |
 And I can click on "Download users list"
 And I see the message: "SUCCESS"
 

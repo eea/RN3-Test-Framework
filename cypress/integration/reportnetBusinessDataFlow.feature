@@ -8,12 +8,12 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow1" and description "new description Business Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Company Group 1" with fmeUser "Reportnet3"
 Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "test.custodian@abc.com" with permissions "CUSTODIAN"
+And I can "Add" a editor "test.custodian2@abc.com" with permissions "CUSTODIAN"
 
 
 Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
 
-Given I'm logged at Reportnet page as 'userCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I can click on tab "Business dataflows"
 Then I click on "Business dataflow1"
 And I can click on element "Dataflow help"
@@ -41,12 +41,13 @@ Then I can "add" a Data provider in a BDR with account "test.provider@abc.com" a
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I wait for notification
+And I wait for notification
 And I see the message: "SUCCESS"
 
 
 Scenario Outline: c) As a provider, I should not be able to manage requesters in a Business dataflow
 
-Given I'm logged at Reportnet page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider'
 And I can click on tab "Business dataflows"
 Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "<visible>"
@@ -63,14 +64,15 @@ And I can click on "View by obligation dataflow"
 Then I "can" see the publicly dataflow "Business dataflow1"
 When I click on "Business dataflow1"
 Then the public table "Documents" has 1 records
-And I'm logged at Reportnet page as "userCustodian"
+And I'm logged at Reportnet page as "userCustodian2"
 
 
 Scenario: e) As a Custodian I want to be able to assign a Lead Reporter whose email doesn't exist to a Dataflow
 
-Given I'm logged at Reportnet page as 'userCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I can click on tab "Business dataflows"
-Then I click on "Business dataflow1"
+When I filter the dataflow list by "name" with "Business dataflow1"
+And I click on "Business dataflow1"
 And I can click on element "Manage lead reporters"
 Then I can "addMore" a Data provider in a BDR with account "temporaryLead@reportnet.net" and Data provider "Company2"
 And I can click on element "Manage lead reporters"
@@ -85,10 +87,10 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow test countries" and description " Business dataflow test countries" and obligation "(C) Information on the assessment regime (Article 7)" and company "Countries" with fmeUser "Reportnet3"
 Then I can click on "Business dataflow test countries"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "test.custodian@abc.com" with permissions "CUSTODIAN"
+And I can "Add" a editor "test.custodian2@abc.com" with permissions "CUSTODIAN"
 And I click on close button 
 And I logout
-And I'm logged at Reportnet page as 'userCustodian'
+And I'm logged at Reportnet page as 'userCustodian2'
 And I can click on tab "Business dataflows"
 And I wait for enter
 And I click on "Business dataflow test countries"
@@ -109,7 +111,7 @@ And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
 And I click on close button
 And I logout
-And I'm logged at Reportnet page as 'userProvider'
+And I'm logged at Reportnet3 page as 'userProvider'
 And I click on "Test import message"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "test import status"
