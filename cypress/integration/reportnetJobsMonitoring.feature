@@ -70,11 +70,7 @@ Examples:
 
 Scenario Outline: f) As a Provider I can filter by Status in the Jobs monitoring window
 
-<<<<<<< HEAD
 Given I'm logged at Reportnet3 page as "userProvider"
-=======
-Given I'm logged at Reportnet page as "userProvider"
->>>>>>> e8fe0bd14a202826a0adba142aa732d00a0b950a
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by "Status" with "<filter>" 
@@ -104,24 +100,6 @@ Examples:
    | COPY TO EU DATASET    |
 
 Scenario Outline: h) As a Provider  I can filter by Type in the Jobs monitoring window
-<<<<<<< HEAD
-=======
-
-Given I'm logged at Reportnet page as "userProvider"
-When the Jobs Monitoring button is "visible"
-Then I click on the Jobs Monitoring button
-And I can filter in Jobs monitoring window by "Type" with "<filter>" 
-
-Examples:
-   | filter                |  
-   | IMPORT                |
-   | VALIDATION            |
-   | RELEASE               |
-   | EXPORT                |
-   | COPY TO EU DATASET    |
-
-Scenario Outline: i) As a Custodian  I can filter by Type in the Jobs monitoring window
->>>>>>> e8fe0bd14a202826a0adba142aa732d00a0b950a
 
 Given I'm logged at Reportnet3 page as "userProvider"
 When the Jobs Monitoring button is "visible"
