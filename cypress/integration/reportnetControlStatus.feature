@@ -20,11 +20,7 @@ And I can go to the dataflow page
 And I can click on element "Create data collections"
 And I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I wait for notification
-<<<<<<< HEAD
 And I wait for notification
-=======
-And I wait for enter
->>>>>>> e8fe0bd14a202826a0adba142aa732d00a0b950a
 And I see the message: "SUCCESS"
 
 

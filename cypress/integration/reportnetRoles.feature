@@ -2,7 +2,7 @@ Feature: Reportnet Roles - As an existing user on the Repornet system I want to 
 
 Scenario: a) As a data custodian I can add a new data flow
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 When I "Create" a reporting dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Roles Reportnet Testing"
@@ -12,41 +12,38 @@ And Confirm new dataset schema creation is visible
 Then I can click on element "DS-Test"
 
 
-
 Scenario: b) As a data custodian I can add a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
-Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
+
 
 
 Scenario: c) As a data custodian I can edit a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "edit" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.custodian@reportnet.net" and Data provider "France"
 Then I can "edit" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.custodian@reportnet.net" and Data provider "France"
 
 
 Scenario: d) As a data custodian I can delete a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "delete" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "France"
-Then I can "delete" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "France"
 
 
 # REP-708
 Scenario: e) As a CUSTODIAN or STEWARD, I want to share access rights with editors in my dataflow
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I wait for enter
 And I wait for enter
@@ -62,22 +59,17 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
 
 
 # @sanity
-# @sanity
 Scenario: f) As a data custodian I can add a Data provider
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 Then I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
-And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
 
-
-# @sanity
 # @sanity
 Scenario: g) As a data custodian I can create data collections
 
-Given I'm logged at Reportnet page as "userCustodian2"
 Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
@@ -113,12 +105,10 @@ And I can click on element "DS-Test"
 Scenario: i) As a data custodian I can add more representatives when a DC is already created
 
 Given I'm logged at Reportnet page as "userCustodian2"
-Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "addLast" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Belgium"
-Then I can "addLast" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Belgium"
 And I reload the page
 And I can click on element "Create new datasets"
 And I can add datasets for new Representatives
@@ -130,7 +120,6 @@ And I can click on element "Belgium"
 
 Scenario: j) As a custodian I can see all the users of the dataflow for this country
 
-Given I'm logged at Reportnet page as "userCustodian2"
 Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
@@ -180,9 +169,6 @@ And I can confirm release to data collection with "no restrict to public"
 And I wait for notification
 And I wait for notification
 And I see the message: "SUCCESS"
-And I wait for notification
-And I see the message: "SUCCESS"
-
 
 
 #REP-2230
@@ -205,7 +191,7 @@ Then I can see the status for the "Spain" dataset
 # REP-1335
 Scenario: o) As a custodian, I want to see the list of current custodians/stewards and be able to add custodians/stewards/observers.
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
@@ -267,7 +253,7 @@ And I can go to the dataflow page
 # REP-1335
 Scenario: q) As a custodian, I want to see the list of current custodians/stewards and be able to remove observer users for a dataflow.
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
@@ -282,7 +268,7 @@ Then The reporting Dataflow "Roles Reportnet Testing" doesn't exist
 # REP-1336 REP-1858
 Scenario: r) As a custodian, I want to see the list of all users in a dataflow
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Users list by country" is "be.visible"
@@ -300,20 +286,7 @@ And I see the message: "SUCCESS"
 
 Scenario: ra) As a userProvider, I want to see and download the list of all users in a dataflow
 
-Given I'm logged at Reportnet page as "userProvider"
-When I filter the dataflow list by "name" with "Roles Reportnet Testing"
-And I click on "Roles Reportnet Testing"
-And I can click on element "Spain"
-And the "action" "Dataflow users list" is "be.visible"
-Then I can see the specified record in the table
-
-   | test.custodian2@abc.com   | REPORTER WRITE |
-   | test.provider@abc.com     | LEAD REPORTER  |
-And I can click on "Download users list"
-And I see the message: "SUCCESS"
-Scenario: ra) As a userProvider, I want to see and download the list of all users in a dataflow
-
-Given I'm logged at Reportnet3 page as "userProvider2"
+Given I'm logged at Reportnet page as "userProvider2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
@@ -324,6 +297,7 @@ Then I can see the specified record in the table
    | test.provider2@abc.com     | LEAD REPORTER  |
 And I can click on "Download users list"
 And I see the message: "SUCCESS"
+
 
 # REP-1478
 Scenario: s) As an admin, I want to be able to see a helpdesk inside a dataflow containing info about all the datasets
@@ -344,7 +318,7 @@ Then I can see the specified records in the table
 # REP-2046
 Scenario: t) As a custodian, I want to be able to add a new role called STEWARD SUPPORT in manage requesters
 
-Given I'm logged at Reportnet page as "userCustodian22"
+Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
@@ -434,11 +408,8 @@ When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Manage lead reporters"
 And I can "addToCountry" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "testleadreporter@reportnet.net" and Data provider "Belgium"
-And I can "addToCountry" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "testleadreporter@reportnet.net" and Data provider "Belgium"
 And I can click on element "Manage lead reporters"
 Then I can "delete" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "testleadreporter@reportnet.net" and Data provider "Belgium"
-Then I can "delete" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "testleadreporter@reportnet.net" and Data provider "Belgium"
-
 
 # REP-2229
 @sanity

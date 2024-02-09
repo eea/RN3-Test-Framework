@@ -82,20 +82,7 @@ Given(
     cy.wait(5000)
   }
 );
-Given(
-  "I'm logged at Reportnet3 page as {string}",
-  (user) => {
-    cy.visit('/');
-    cy.wait(1000)
-    //homePage.clickonLoginLink();
-    cy.contains('Login').click()
-    cy.wait(500)
-    cy.get("input[type=text]").type(Cypress.env(user).username);
-    cy.get("input[type=password]").type(Cypress.env(user).password);
-    cy.get("#kc-login").click();
-    cy.wait(5000)
-  }
-);
+
 Given(
   "I'm logged at production Reportnet page as {string}",
   (user) => {
@@ -118,7 +105,6 @@ Given("I'm in Reportnet page", () => {
 
 When("I {string} see the publicly dataflow {string}", (visibility, name) => {
   cy.wait(1000)
-  cy.wait(1000)
   if (visibility === 'can') {
     bddGeneratedValues.get(name)
     cy.contains(bddGeneratedValues.get(name))
@@ -138,11 +124,10 @@ When("I can see for dataflow {string} the instrument {string}, status {string}",
 
 When("The user logout", () => {
   cy.wait(1000)
-  cy.wait(1000)
   cy.get(".fa-power-off:last").click({ force: true });
   cy.wait(1000)
-  cy.wait(1000)
   setDialog("Yes")
+  cy.wait(1000)
 })
 
 When("I navigate to {string}", page => {
@@ -155,18 +140,14 @@ When("I can see the dataflows page", () => {
 
 When("I can click on {string}", element => {
   cy.wait(3000);
-  cy.wait(3000);
   cy.contains(element).click({ force: true })
-  cy.wait(2500);
   cy.wait(2500);
 })
 
 When("I can click on tab {string}", element => {
   cy.wait(3000);
-  cy.wait(3000);
   cy.contains(element).click({ force: true })
   cy.wait(3000);
-  cy.wait(2000);
 })
 
 When("The dataflow {string} doesn't exist", (dataflow) => {
@@ -181,30 +162,25 @@ Then("The reporting Dataflow {string} doesn't exist", (name) => {
 
 When("I can click on element {string}", element => {
   cy.wait(5000);
-  cy.wait(3000);
   cy.get('p:contains(' + element + '):first').parent().click()
-  cy.wait(3500)
-  cy.wait(2000)
+  cy.wait(5000)
 });
 
 When("I can click on the button with text {string}", (element) => {
   cy.wait(4000)
   cy.get('button').contains(element).click()
   cy.wait(2000)
-  cy.wait(2000)
-});
+ });
 
 When("I can check on the checkbox ignore case", element => {
   cy.wait(4000)
   cy.get('#ignoreCaseInLinks_check').click()
-  cy.wait(2000)
   cy.wait(2000)
 });
 
 When("I click on the tab {string}", element => {
   cy.wait(4000)
   cy.get('span:contains(' + element + ')').first().parent().click({ force: true })
-  cy.wait(2000)
   cy.wait(2000)
 });
 
@@ -230,7 +206,6 @@ When("the {string} {string} is {string}", (type, button, property) => {
   if (button === "Validate" && property === 'be.enabled') {
     setDialog("Yes")
   }
-  cy.wait(3000)
   cy.wait(3000)
 });
 
@@ -430,7 +405,7 @@ When("I reload the page", () => {
 });
 
 When("I wait for notification", () => {
-  cy.wait(50000);
+  cy.wait(60000);
 })
 
 When("I wait for validation", () => {
@@ -442,7 +417,7 @@ When("I wait for enter", () => {
 })
 
 When("I wait for importing the file", () => {
-  cy.wait(95000);
+  cy.wait(100000);
 })
 
 When("I am in {string} dataset", location => {
@@ -1245,34 +1220,34 @@ Given(
   }
 );
 
-Then ("I can add a new organization with name {string} with group {string}", ( orgName, groupName) =>{
-  cy.get('.undefined > .p-button-text:contains("Add")').click({ force: true })
-  const dynamicallyName = Math.random().toString(36).substring(2, 7);
-  const typeName = orgName + dynamicallyName;
-  bddGeneratedValues.set(orgName, typeName);
+// Then ("I can add a new organization with name {string} with group {string}", ( orgName, groupName) =>{
+//   cy.get('.undefined > .p-button-text:contains("Add")').click({ force: true })
+//   const dynamicallyName = Math.random().toString(36).substring(2, 7);
+//   const typeName = orgName + dynamicallyName;
+//   bddGeneratedValues.set(orgName, typeName);
   
-  console.log(bddGeneratedValues);
-  cy.get("#organizationNameInput").clear().type(typeName);
-  cy.get('#groupsDropdown').click();
-  cy.wait(1000)
-  cy.get('.p-input-overlay-visible > .p-dropdown-items-wrapper > .p-dropdown-items').contains(groupName).click({ force: true })
-  cy.wait(1000)
-  cy.get('[data-for="confirmTooltipId"] > .p-button > .p-button-text:visible').click({force:true})
-}) 
+//   console.log(bddGeneratedValues);
+//   cy.get("#organizationNameInput").clear().type(typeName);
+//   cy.get('#groupsDropdown').click();
+//   cy.wait(1000)
+//   cy.get('.p-input-overlay-visible > .p-dropdown-items-wrapper > .p-dropdown-items').contains(groupName).click({ force: true })
+//   cy.wait(1000)
+//   cy.get('[data-for="confirmTooltipId"] > .p-button > .p-button-text:visible').click({force:true})
+// }) 
 
-Then("I can filter organizations by {string} with {string}", (field,filter) => {
-  if (field === 'label' || field === 'code'){
-    cy.get(`[id='${field}_input']`).type(filter)
-  }else{
-    cy.get('#groupId_dropdown').click().children().contains(filter).click()
-    cy.wait(3000)
+// Then("I can filter organizations by {string} with {string}", (field,filter) => {
+//   if (field === 'label' || field === 'code'){
+//     cy.get(`[id='${field}_input']`).type(filter)
+//   }else{
+//     cy.get('#groupId_dropdown').click().children().contains(filter).click()
+//     cy.wait(3000)
   
-  }
-  cy.wait(1000)
-  cy.get('.Filters_lineItems__2Nj0X > .Filters_buttonWrapper__sgK_8 > .Filters_filterButton__1OEWb > .p-button > .p-button-text').click({ force: true })
-  cy.wait(2000)
+//   }
+//   cy.wait(1000)
+//   cy.get('.Filters_lineItems__2Nj0X > .Filters_buttonWrapper__sgK_8 > .Filters_filterButton__1OEWb > .p-button > .p-button-text').click({ force: true })
+//   cy.wait(2000)
 
-})
+// })
 Given(
   "I'm logged at DHL Reportnet page as {string}",
   (user) => {

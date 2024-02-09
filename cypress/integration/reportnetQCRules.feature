@@ -447,6 +447,7 @@ Then I can "edit" the field constraint rule with fields
   | Table1 | Field1 | qc1-2 | testNameEdited | Field type NUMBER edited | Message Info edited | INFO |
 And I can "Update" a "Field comparison" with a "group" with fields
   | false | AND | Number | != | 3 |
+And I wait for enter
 And the code rule "qc1-2" is "be.visible" on the list of rules
 And the qcRules list has 3 items
 
