@@ -26,8 +26,3 @@ yarn-error.log*
 *.png
 *.html
 *.mp4
-allure-report
-allure-results
-cypress/downloads
-cypress.config.js
-package.json

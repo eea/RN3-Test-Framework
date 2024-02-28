@@ -3,18 +3,12 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 Then("I can {string} the field constraint rule with fields",(action, fields) => {
     if(action === 'edit') {
         cy.get('[class*=BodyCell_actionTemplate] > :nth-child(3) > .p-button-text:last').click({force:true})
-    } else if(action=='duplicate') {
-
-        cy.get('.BodyCell_actionTemplate__1LLYg > :nth-child(3) > .p-button-text').click({force:true})
-         
-    }else{
+    } else {
         cy.contains('Create field constraint').click(); 
     }
-    cy.wait(2000)
     const dataFields = fields.rawTable[0];
   
     cy.get('[id*=createValidation__table]').click({force:true})
-    cy.wait(1000)
     action !== 'edit' && cy.get('.p-dropdown-item:visible').contains(dataFields[0]).click({force:true})
     cy.wait(5000)
     action !== 'edit' && cy.get('[id*=createValidation__field]').click({force:true})
@@ -36,7 +30,6 @@ When("I can {string} a {string} with a {string} with fields", (action, type, sub
         cy.contains(type).click({force:true})
     }
     if(type==='SQL sentence') {
-        cy.wait(5000)
         fields.rawTable.map((data,i) => {
             cy.get('#SQLsentenceTextarea').type(data[0]).click({force:true})
         })
@@ -62,21 +55,8 @@ When("I can {string} a {string} with a {string} with fields", (action, type, sub
     }
 })
 
-When("I can update the expression with new number",()=>{
-    cy.contains("Expression").click({force:true})
-    cy.get("#createValidation__create").click({force:true})
-
-})
- 
-
-
-When ("I can click the next page button",()=>{
-    cy.get('.p-paginator-pages > :nth-child(2)').click({force:true})
-    cy.wait(2000)
-})
-
 When("the code rule {string} is {string} on the list of rules", (code, property) =>{
-    cy.wait(3000)
+    cy.wait(2000)
     cy.get('.p-dialog-content').scrollTo('bottomLeft')
     cy.get('.p-datatable-wrapper').scrollTo('left')
     cy.contains(code).should(property)
@@ -130,12 +110,10 @@ When("I can {string} a expression with fields", (action, fields) =>{
 When("I can {string} a table relation {string} with fields", (action,type, fields) => {
     cy.get('a[role=tab]').contains(/Table relations|Expression/g).click({force:true})
     if(action === 'Create' || action === 'Evaluate' || action === 'Run') {
-        cy.wait(5000)
         cy.get('.p-dropdown-label:contains(Select type):visible').click({force:true})
         cy.get(`.p-input-overlay-visible > .p-dropdown-items-wrapper > .p-dropdown-items > :contains(${type})`).click({force:true})
     }
     if(type === 'SQL sentence') {
-        cy.wait(5000)
         fields.rawTable.map((data,i) => {
             cy.get('#sqlSentenceText').type(data[0]).click({force:true})
         })

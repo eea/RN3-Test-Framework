@@ -12,6 +12,8 @@ And I can create a dataset schema public available with name "DS-Test"
 And Confirm new dataset schema creation is visible
 And I can click on "DS-Test"
 
+
+
 Scenario: b) As a data custodian I can rename a dataset schema
 
 Given I'm logged at Reportnet page as "userCustodian"
@@ -118,8 +120,6 @@ And the "button" "Import table data" is "be.enabled"
 And I import a file "test3.csv"
 And I see the message: "SUCCESS"
 And the "button" "Validate" is "be.enabled"
-And I wait for notification
-And I wait for notification
 And I see the message: "SUCCESS"
 And I reload the page
 And I can see the field "Key2" has 2 error
@@ -136,8 +136,6 @@ And I check replace data
 And I import a "csv" file "test4.csv"
 And I see the message: "SUCCESS"
 And the "button" "Validate" is "be.enabled"
-And I wait for notification
-And I wait for notification
 And I see the message: "SUCCESS"
 And I reload the page
 Then I can see the field "Key2" has 0 error
@@ -149,7 +147,6 @@ Given I'm logged at Reportnet page as "userCustodian"
 When I filter the dataflow list by "name" with "DatasetSchema Test"
 And I click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
-And I wait for enter
 Then I can fill a dataset schema with name "Table7", description "description Table7" and with following fields
   | table7f1 | description 1 | Number        |
   | table7f2 | description 2 | External link |
@@ -210,10 +207,6 @@ And I click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "import" a dataset schema with name "Dataflow Reportnet Testing"
 When I import a dataset schema "zip" file "Dataflow Reportnet Testing.zip"
-And I wait for notification
-And I wait for notification
-And I wait for notification
-And I reload the page
 Then I can click on element "IMPORTED_DS-Test"
 And I can see the fields and configurations "<readonly>"
   | Table1 | Field1 | Field 1 description | Number - Integer | required                | readonly |
@@ -263,7 +256,6 @@ Scenario: t) As a  custodian/steward/editor write I can Export CSV to create/upd
 Given I'm logged at Reportnet page as "userCustodian"
 And I click on "DatasetSchema Test"
 And I can click on element "DS-Import"
-And I wait for enter
 When I can click on "Export definition"
 
 
@@ -294,7 +286,6 @@ Then the "button" "DS-Test2" is "not.exist"
 Scenario: y) As a data custodian I can delete a data flow
 
 Given I'm logged at Reportnet page as "userCustodian"
-And I wait for enter
 And I click on "DatasetSchema Test"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "DatasetSchema Test"
