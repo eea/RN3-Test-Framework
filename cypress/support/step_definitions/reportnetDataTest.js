@@ -87,6 +87,7 @@ Given(
   "I'm logged at production Reportnet page as {string}",
   (user) => {
     cy.visit('/');
+    cy.wait(1000)
     //homePage.clickonLoginLink();
     cy.contains('Login').click()
     cy.get("input[type=text]").type(Cypress.env(user).username);
@@ -249,7 +250,7 @@ When("I import a {string} file {string}", (filetype, file) => {
       )
   cy.wait(2000)
   cy.contains("Upload").click()
-  cy.wait(2000)
+  cy.wait(3000)
 });
 
 When("I import a dataset schema {string} file {string}", (filetype, file) => {
@@ -1070,8 +1071,9 @@ Then("I create a business dataflow with name {string} and description {string} a
   cy.contains(company).click({ force: true })
   cy.get('[class*=ManageBusinessDataflow_fmeUsersWrapper] > .p-dropdown-label').click({ force: true })
   cy.contains(fmeUser).click({ force: true })
+  cy.wait(1000);
   cy.get(".p-button-text:contains('Create')").click({ force: true })
-  cy.wait(5000);
+  cy.wait(7000);
 });
 
 Then("I create a business dataflow with name {string} and description {string} and obligation {string} and company {string} in a big dataflow with fmeUser {string}", (name, description, obligation, company, fmeUser) => {
@@ -1248,20 +1250,20 @@ Given(
 //   cy.wait(2000)
 
 // })
-Given(
-  "I'm logged at DHL Reportnet page as {string}",
-  (user) => {
-    cy.visit('/');
-    //homePage.clickonLoginLink();
+// Given(
+//   "I'm logged at DHL Reportnet page as {string}",
+//   (user) => {
+//     cy.visit('/');
+//     //homePage.clickonLoginLink();
    
-    cy.contains('Login').click()
-    cy.get("input[type=text]").type(Cypress.env(user).username);
-    cy.get("input[type=password]").type(Cypress.env(user).password);
-    cy.get("#kc-login").click();
-    cy.wait(3500)
+//     cy.contains('Login').click()
+//     cy.get("input[type=text]").type(Cypress.env(user).username);
+//     cy.get("input[type=password]").type(Cypress.env(user).password);
+//     cy.get("#kc-login").click();
+//     cy.wait(3500)
     
-  }
-);
+//   }
+// );
 
 Then ("I can add a new organization with name {string} with group {string}", ( orgName, groupName) =>{
   cy.get('.undefined > .p-button-text:contains("Add")').click({ force: true })
@@ -1291,3 +1293,9 @@ Then("I can filter organizations by {string} with {string}", (field,filter) => {
   cy.wait(2000)
 
 })
+
+When("I click on the schema {string}", element => {
+  cy.wait(4000)
+  cy.get('p:contains(' + element + ')').click({ force: true })
+  cy.wait(2000)
+});

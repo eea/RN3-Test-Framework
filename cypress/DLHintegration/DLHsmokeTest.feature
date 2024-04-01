@@ -2,7 +2,7 @@ Feature: DLH UAT
 
 Scenario: a) As a data custodian I can add a new data flow with obligations
 
-Given I'm logged at DHL Reportnet page as "DHLuserCustodian"
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "UAT DLH Testing" and description "Dataflow description test" and obligation "(C) Information on the assessment regime (Article 7)" in big data storage with "noFilters" 
 And I click on "UAT DLH Testing"
@@ -12,7 +12,7 @@ And I click on close button
 
 Scenario: b) As a data custodian I can create new dataset schema
 
-Given I'm logged at DHL Reportnet page as "DHLuserCustodian"
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
 And I click on "UAT DLH Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-DLH-Test"
@@ -23,12 +23,12 @@ And I click on "UAT DLH Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS2-DLH"
 And Confirm new dataset schema creation is visible
-And I click on the tab "DS2-DLH"
+And I can click on element "DS2-DLH"
 
 
 Scenario: c) As a data custodian I can fill a dataset schema
 
-Given I'm logged at DHL Reportnet page as "DHLuserCustodian"
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
 And I click on "UAT DLH Testing"
 And I can click on element "DS-DLH-Test"
 Then I can fill a dataset schema with name "Table1DLH", description "description Table1" and with following fields
@@ -62,7 +62,7 @@ And I reload the page
 
 Scenario: d) As a data custodian I can add a Data provider
 
-Given I'm logged at DHL Reportnet page as "DHLuserCustodian"
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
 And I click on "UAT DLH Testing"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
@@ -72,13 +72,13 @@ And I can click on element "Manage lead reporters"
 And I can "addMore" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "France"
 And I can click on element "Manage lead reporters"
 And I can "Import" Lead reporters
-And I import a file "importLeadReporters.csv"
+And I import a file "importLeadReportersDev.csv"
 And I can see the representative "Spain" "test.provider@abc.com"
 And I can see the representative "Finland" "test.provider@abc.com"
 
 Scenario: e) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
-Given I'm logged at Reportnet page as "DHLuserCustodian"
+Given I'm logged at Reportnet page as "DLHuserCustodian"
 When I filter the dataflow list by "name" with "UAT DLH Testing"
 And I click on "UAT DLH Testing"
 And I can click on element "DS-DLH-Test"
@@ -93,7 +93,7 @@ And the new qc rule "qc1 'Test'" is "correct"
 
 Scenario: f) As a user, I want to download QC list in CSV
 
-Given I'm logged at Reportnet page as "DHLuserCustodian"
+Given I'm logged at Reportnet page as "DLHuserCustodian"
 When I filter the dataflow list by "name" with "UAT DLH Testing"
 And I click on "UAT DLH Testing"
 And I can click on element "DS-DLH-Test"
@@ -103,7 +103,7 @@ And I see the message: "SUCCESS"
 
 Scenario: g) Validate button is enabled for data Provider
 
-Given I'm logged at Reportnet page as 'DHLuserCustodian'
+Given I'm logged at Reportnet page as 'DLHuserCustodian'
 When I filter the dataflow list by "name" with "UAT DLH Testing"
 And I click on "UAT DLH Testing"
 And I can click on element "DS-DLH-Test"
@@ -113,7 +113,7 @@ And I see the message: "SUCCESS"
 
 Scenario: h) As a data custodian I can create data collections
 
-Given I'm logged at DHL Reportnet page as "DHLuserCustodian"
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
 When I filter the dataflow list by "name" with "UAT DLH Testing"
 And I click on "UAT DLH Testing"
 And I can click on element "Create data collections"

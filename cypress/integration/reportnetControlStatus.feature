@@ -12,7 +12,7 @@ And Confirm new dataset schema creation is visible
 Then I can click on element "DS-Test"
 And I can fill a dataset schema with name "t7", description "description Table1" and with following fields
  | Field1 | Field 1 description | Text             |  true |
-#  | Field2 | Field 2 description | Text             |       |
+ | Field2 | Field 2 description | Text             |       |
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
 And I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
