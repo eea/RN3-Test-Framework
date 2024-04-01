@@ -37,7 +37,9 @@ And I can add a record
   | 3 | test3 |
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider in a BDR with account "test.provider@abc.com" and Data provider "Company1"
+Then I can "add" a Data provider in a BDR with account "test.provider2@abc.com" and Data provider "Company1"
+And I wait for enter
+And I reload the page
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I wait for notification
@@ -47,7 +49,7 @@ And I see the message: "SUCCESS"
 
 Scenario Outline: c) As a provider, I should not be able to manage requesters in a Business dataflow
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I can click on tab "Business dataflows"
 Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "<visible>"
@@ -108,10 +110,10 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Test import message" and description "test import message" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Test import message"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
+And I can "Add" a editor "test.provider2@abc.com" with permissions "CUSTODIAN"
 And I click on close button
 And I logout
-And I'm logged at Reportnet3 page as 'userProvider'
+And I'm logged at Reportnet3 page as 'userProvider2'
 And I click on "Test import message"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "test import status"

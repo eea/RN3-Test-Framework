@@ -34,5 +34,6 @@ And I can click on dataflow "test export"
 And I can click on element "Netherlands"
 Then I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
+And I wait for notification
 
 
