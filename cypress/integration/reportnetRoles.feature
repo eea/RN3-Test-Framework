@@ -314,6 +314,21 @@ Then I can see the specified records in the table
     | Belgium - DS-Test         | Reporting dataset | Belgium (BE) |
     | Data Collection - DS-Test | Data Collection   |              |
 
+# REP-152188
+Scenario: sa) As an custodian, I want to be able to see a helpdesk inside a dataflow containing info about all the datasets
+
+Given I'm logged at Reportnet page as "userCustodian2"
+When I filter the dataflow list by "name" with "Roles Reportnet Testing"
+And I click on "Roles Reportnet Testing"
+And the "action" "Datasets info" is "be.visible"
+Then I can see the specified records in the table
+    | DS-Test                   | Design dataset    |              |
+    | EU Dataset - DS-Test      | EU dataset        |              |
+    | Test Dataset - DS-Test    | Test dataset      |              |
+    | Spain - DS-Test           | Reporting dataset | Spain (ES)   |
+    | Belgium - DS-Test         | Reporting dataset | Belgium (BE) |
+    | Data Collection - DS-Test | Data Collection   |              |
+
 
 # REP-2046
 Scenario: t) As a custodian, I want to be able to add a new role called STEWARD SUPPORT in manage requesters

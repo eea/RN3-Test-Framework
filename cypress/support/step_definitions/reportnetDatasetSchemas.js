@@ -194,3 +194,17 @@ Then("I delete dataset data {string} tables", (type) => {
 Then("the table {string} does not exists" ,(table) => {
   cy.contains(table).should('be.not.visible')
 })
+
+Then("I can fill a dataset schema with name {string}, description {string} and with wrong {string} field",(name, description, field) => {
+  cy.wait(4000)
+  cy.get('.p-tabview-title:last').click({force:true})
+  cy.wait(1000)
+  cy.get('input:visible[placeholder="Table name"]').clear().type(name + "{enter}",{force:true})
+  cy.wait(1000)
+  cy.contains(name.replace('*/+','')).click({force:true})
+  cy.wait(2000)
+  cy.get('textarea[placeholder="Table description"]').type(description,{force:true})
+  cy.get('input:visible:last').should('have.attr', 'placeholder', 'Field name').type(field,{force:true})
+  cy.wait(10000)
+  cy.get('#_description').should('have.attr', 'placeholder', 'Field description').click({force:true}) 
+})   

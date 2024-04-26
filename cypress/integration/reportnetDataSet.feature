@@ -199,7 +199,7 @@ And I can click on element "Technical feedback"
 And I select the country "Spain"
 And I can see the message received "status changed"
 And the "action" "Notifications" is "be.visible"
-Then I see the notification "DS2 changed to Technically accepted" in the notification received list
+Then I see the notification "DS-Test changed to Technically accepted" in the notification received list
 
 
 #REP-873 #REP-1771

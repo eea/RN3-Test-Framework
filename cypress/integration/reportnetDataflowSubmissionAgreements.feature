@@ -38,7 +38,7 @@ Then I can see the "<submission>" on "Dataflow Reportnet Testing"
     
 Scenario Outline: e) As a Data Provider User I can see the instruments and obligations on the dataflow list
 
-Given I'm logged at Reportnet page as 'userProvider'
+Given I'm logged at Reportnet page as 'userProvider2'
 Then I can see the "<submission>" on "Dataflow Reportnet Testing"
 
   Examples: 

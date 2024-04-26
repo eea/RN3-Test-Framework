@@ -233,9 +233,8 @@ Scenario: r) As a requester, the characters to create table and fields are limit
 Given I'm logged at Reportnet page as "userCustodian2"
 And I click on "DatasetSchema Test"
 And I can click on element "DS-Test2"
-When I can fill a dataset schema with name "Table*/+test", description "description Tabletest" and with following fields
-  | tabletest*f1 | description 1 | Number - Integer |  | true |
-Then the table "Tabletest" has 0 records
+When I can fill a dataset schema with name "Table*/+test", description "description Tabletest" and with wrong "tabletest*f1" field
+Then I can see the message: "Invalid field name"
 
 
 #REP-1435
