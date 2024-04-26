@@ -613,6 +613,7 @@ Then("I can filter obligation dataflow by {string} with {string}", (field,name) 
 
 
 Then("I can filter QCs by {string} with {string}", (field, filter) => {
+  cy.wait(3000)
   if (field === "searchInput") {
     cy.get(`input[id=${field}]`).type(filter)
   }
