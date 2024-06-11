@@ -443,5 +443,5 @@ And the "button" "QC rules" is "be.visible"
 And the code rule "qc1-2" is "be.visible" on the list of rules
 Then I can view the historic changes of the rule "qc1-2"
 And I can see the history with following fields
-    | test1@custodian.gr | false | true | false |
-    | test1@custodian.gr | true  | true | true  |
+    | test@custodian.gr | false | true | false |
+    | test@custodian.gr | true  | true | true  |

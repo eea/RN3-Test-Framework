@@ -8,7 +8,7 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow1" and description "new description Business Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Company Group 1" with fmeUser "Reportnet3"
 Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "test1@custodian.gr" with permissions "CUSTODIAN"
+And I can "Add" a editor "test.custodian@abc.com" with permissions "CUSTODIAN"
 
 
 Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
@@ -87,7 +87,7 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow test countries" and description " Business dataflow test countries" and obligation "(C) Information on the assessment regime (Article 7)" and company "Countries" with fmeUser "Reportnet3"
 Then I can click on "Business dataflow test countries"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "test1@custodian.gr" with permissions "CUSTODIAN"
+And I can "Add" a editor "test.custodian@abc.com" with permissions "CUSTODIAN"
 And I click on close button 
 And I logout
 And I'm logged at Reportnet page as 'DLHuserCustodian'
