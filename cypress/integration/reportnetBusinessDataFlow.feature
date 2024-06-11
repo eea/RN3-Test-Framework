@@ -37,12 +37,11 @@ And I can add a record
   | 3 | test3 |
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider in a BDR with account "test.provider2@abc.com" and Data provider "Company1"
+Then I can "add" a Data provider in a BDR with account "test.provider2@abc.com" and Data provider "Company4"
 And I wait for enter
 And I reload the page
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
-And I wait for notification
 And I wait for notification
 And I see the message: "SUCCESS"
 
@@ -76,7 +75,7 @@ And I can click on tab "Business dataflows"
 When I filter the dataflow list by "name" with "Business dataflow1"
 And I click on "Business dataflow1"
 And I can click on element "Manage lead reporters"
-Then I can "addMore" a Data provider in a BDR with account "temporaryLead@reportnet.net" and Data provider "Company2"
+Then I can "addMore" a Data provider in a BDR with account "temporaryLead@reportnet.net" and Data provider "Company5"
 And I can click on element "Manage lead reporters"
 Then I can see a tag next to the invalid lead reporter email
 

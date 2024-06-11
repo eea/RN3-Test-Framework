@@ -16,19 +16,19 @@ And I can fill a dataset schema with name "Table1", description "description Tab
  | Field2 | Field 2 description | Text             | |      |
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can see the representative "Spain" "test.provider@abc.com"
+And I can see the representative "Spain" "test.provider2@abc.com"
 And I click on close button
 And I can go to the dataflow page
 And the "action" "Manage requesters" is "be.visible"
-When I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"
+When I can "Add" a editor "test.provider2@abc.com" with permissions "CUSTODIAN"
 
 
 @sanity
 Scenario: b) As a data provider I can save a copy of a dataset
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet page as "userProvider2"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"
@@ -38,7 +38,7 @@ Then I can save a copy with description "New copy"
 @sanity
 Scenario: c) As a data provider I can restore a copy of a dataset
 
-Given I'm logged at Reportnet page as "userProvider"
+Given I'm logged at Reportnet page as "userProvider2"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"
@@ -47,7 +47,7 @@ Then I can "restore" a dataset copy
 
 Scenario: d) As a data provider I can delete a copy of a dataset
 
-Given  I'm logged at Reportnet page as "userProvider"
+Given  I'm logged at Reportnet page as "userProvider2"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"

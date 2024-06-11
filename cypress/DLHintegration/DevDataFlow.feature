@@ -110,7 +110,7 @@ Scenario: j) As a custodian, I want to be able to create a Citizen and science d
 Given I'm logged at Reportnet page as 'DLHuserCustodian'
 And I can click on tab "Citizen science dataflows"
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a citizen dataflow with name "Citizen test dataflow" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Marine LitterWatch" with "noFilters"
 
 
 #REP-1647
@@ -150,8 +150,7 @@ Scenario: m) As a custodian I want to create new datasets available in public vi
 Given I'm logged at Reportnet page as "DLHuserCustodian"
 And I can click on tab "Citizen science dataflows"
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
-And I click on "Citizen test dataflow public available"
+Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Marine LitterWatch" with "noFilters"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-public"
 And Confirm new dataset schema creation is visible

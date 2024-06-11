@@ -33,7 +33,7 @@ Before(() => {
   console.log("start execution");
 });
 
-After(() => {
+After({ tags: '@ui' },() => {
   cy.get(".fa-power-off:first").click({ force: true });
   setDialog("Yes");
   console.log("end execution");
@@ -64,7 +64,7 @@ Given(
     cy.get("input[type=text]").type(Cypress.env(user).username);
     cy.get("input[type=password]").type(Cypress.env(user).password);
     cy.get("#kc-login").click();
-    cy.wait(7000)
+    cy.wait(3000)
     }
 );
 
@@ -79,7 +79,7 @@ Given(
     cy.get("input[type=text]").type(Cypress.env(user).username);
     cy.get("input[type=password]").type(Cypress.env(user).password);
     cy.get("#kc-login").click();
-    cy.wait(5000)
+    cy.wait(2000)
   }
 );
 
@@ -146,7 +146,7 @@ When("I can click on {string}", element => {
 })
 
 When("I can click on tab {string}", element => {
-  cy.wait(3000);
+  cy.wait(5000);
   cy.contains(element).click({ force: true })
   cy.wait(3000);
 })
@@ -1170,7 +1170,7 @@ When("I can see the updated list of webforms {string}", (name) => {
   }
  })
 
-Then("I {string} a citizen dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
+Then("I {string} a citizen dataflow with name {string} and description {string} and obligation {string} and company {string} with {string}", (action, name, description, obligation,company, filtered, filters) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
   const typeValue = name + dynamicallyGeneratedName;
   bddGeneratedValues.set(name, typeValue);
@@ -1180,6 +1180,8 @@ Then("I {string} a citizen dataflow with name {string} and description {string} 
   cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
   cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
   cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('.ManageDataflowForm_dropdownsWrapper__IlLYg > .p-dropdown > .p-dropdown-label').click({ force: true })
+  cy.contains(company).click({ force: true })
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000)
 })
