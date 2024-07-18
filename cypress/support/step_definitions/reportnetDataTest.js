@@ -402,11 +402,11 @@ When("I {string} the row {int}", (action, row) => {
 When("I reload the page", () => {
   cy.wait(3000)
   cy.reload();
-  cy.wait(2000)
+  cy.wait(3000)
 });
 
 When("I wait for notification", () => {
-  cy.wait(60000);
+  cy.wait(70000);
 })
 
 When("I wait for validation", () => {
@@ -690,22 +690,22 @@ When("I can add a record", (fields) => {
   fields.rawTable.map((data) => {
     if (data[1] === 'link') {
       cy.get('[class*=p-dialog-content]>>>input:visible:first').type(data[0])
-      cy.wait(2000)
+      cy.wait(3000)
       cy.get('label:contains(-- None --)').click({ force: true })
-      cy.wait(2000)
+      cy.wait(3000)
       cy.get('li:contains(' + data[2] + '):visible:last').click({ force: true })
     } else if (data[1] === 'point') {
       cy.get('[class*=p-dialog-content]>>>:nth-child(1) > :nth-child(1) > .p-inputtext:first').type(data[0].toString(), { force: true })
     } else {
       cy.get('[class*=p-dialog-content]>>>input[value=""]:visible:first').type(data[0].toString(), { force: true })
-      cy.wait(1000)
+      cy.wait(2000)
       for (let i = 1; i <= data.length - 1; i++) {
         data[i] && cy.get('[class*=p-dialog-content]>>>input[value=""]:visible:first').type(data[i].toString(), { force: true })
       }
     }
-    cy.wait(2000)
+    cy.wait(2500)
     setDialog("Save")
-    cy.wait(3000)
+    cy.wait(6000)
   })
 })
 
@@ -757,11 +757,13 @@ When("I mark the table as a {string}", (type) => {
     loc = ':nth-child(1) > > .p-checkbox-box'
   } else if (type === 'not mandatory table') {
     loc = ':nth-child(4) > > .p-checkbox-box'
-  } else {
+  } else if( type== 'available for manual editting'){
+    loc = ':nth-child(5) > > .p-checkbox-box'
+  }else{
     loc = ':nth-child(3) > > .p-checkbox-box'
   }
   cy.get('[class*=FieldsDesigner_switchDiv] >' + loc).click({ force: true })
-  cy.wait(2000)
+  cy.wait(3000)
 })
 
 When("new API-key is created", () => {
@@ -1301,4 +1303,41 @@ When("I click on the schema {string}", element => {
   cy.wait(4000)
   cy.get('p:contains(' + element + ')').click({ force: true })
   cy.wait(2000)
+});
+
+Then ("I can click the edit records manually checkbox", ()=>{
+  cy.wait(3000)
+  cy.get('#check_edit_records_manually > .p-checkbox-box').click({force:true})
+  cy.wait(6000)
+})
+
+Then ("The add record button is visible", ()=>{
+  cy.get('[style="float: left;"] > .p-button-text').should('be.visible')
+})
+
+When("I import a file {string} with S3", file => {
+  const fileName = file;
+  //cy.fixture(fileName).then(contents => {
+    cy.fixture(fileName, { encoding: null }).as('myFixture')
+    cy.get('input[type="file"]').selectFile('@myFixture',{
+      fileName,
+      mimeType: "text/plain",
+      force: true
+    })
+  cy.wait(2000)
+  cy.get('#s3Checkbox > .p-checkbox-box').click({force:true})
+  cy.contains("Upload").click({force: true })
+  cy.wait(2000)
+});
+
+Then("The attach file button is enabled on the field",()=>{
+  cy.wait(3000)
+  cy.get('.DataViewerHooks_attachment__3LkU2 > .p-button > .pi').click({force:true})
+  cy.wait(2000)
+})
+
+When("I can confirm that the Release to data collection button is disable", () => {
+  cy.wait(1000)
+  cy.get('.BigButton_datasetItem__jrfmu:last').should('have.class','BigButton_datasetItemDisabled__36IiJ')
+  cy.wait(1000)
 });

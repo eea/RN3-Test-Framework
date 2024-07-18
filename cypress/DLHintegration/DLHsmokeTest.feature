@@ -1,4 +1,4 @@
-Feature: DLH UAT
+Feature: DLH UAT Service Request 1
 
 Scenario: a) As a data custodian I can add a new data flow with obligations
 
@@ -24,7 +24,12 @@ And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS2-DLH"
 And Confirm new dataset schema creation is visible
 And I can click on element "DS2-DLH"
-
+Then I can go to the list dataflows page
+And I click on "UAT DLH Testing"
+And I can click on element "New schema"
+And I can create a dataset schema public available with name "DS3-Test-DLH"
+And Confirm new dataset schema creation is visible
+And I can click on element "DS3-Test-DLH"
 
 Scenario: c) As a data custodian I can fill a dataset schema
 
@@ -37,28 +42,70 @@ Then I can fill a dataset schema with name "Table1DLH", description "description
  | Field3 | Field 3 description | Number - Integer | |      |
 And I change to "Tabular data" mode
 And the "button" "Import table data" is "be.enabled"
-And I import a file "Table1DLH.csv"
+And I import a file "Table1DLH.csv" with S3
 And I reload the page
 And I can go to the list dataflows page
 And I click on "UAT DLH Testing"
 And I can click on element "DS2-DLH"
 Then I can fill a dataset schema with name "T1DLH", description "description T1" and with following fields
- | f1 | Field 1 description | Text             | | true |
- | f2 | Field 2 description | Number - Integer | |      |
- | f3 | Field 2 description | Text             | |      |
+ | f1 | Field 1 description | Number - Integer | | true |
+ | f2 | Field 2 description | Text             | |      |
 And I change to "Tabular data" mode
 And the "button" "Import table data" is "be.enabled"
-And I import a file "T1DLH.csv"
+And I import a file "T1DLH.csv" with S3
 And I reload the page
 And I can go to the list dataflows page
 And I click on "UAT DLH Testing"
-And I can click on element "DS-DLH-Test"
+And I can click on element "DS3-Test-DLH"
 Then I can fill a dataset schema with name "Table4DLH", description "description Table4" and with following fields
- | Field1 | Field 1 description | Number - Integer | | false | true |
+ | Field1 | Field 1 description | Number - Integer |             | true  |
+ | Field2 | Field 2 description | Attachment       | pdf,txt,csv | false |
+Then I mark the table as a "available for manual editting"
+And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
+And I can add a record
+  | 1 |
+And I wait for enter
+And I reload the page
+And The attach file button is enabled on the field
+Then I import a file "t1.csv"
+And I can click the edit records manually checkbox
+
+Scenario: ca) As a data custodian I can add the geometry field
+
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
+And I click on "UAT DLH Testing"
+And I can click on element "DS3-Test-DLH"
+And I can fill a dataset schema with name "Table5DLH", description "description Table3" and with following fields
+  | description           | description | Text              |  |       |
+  | geometry_multipolygon | geometry    | Multiple polygons |  | false |
 And I change to "Tabular data" mode
 And the "button" "Import table data" is "be.enabled"
-And I import a file "Table4DLH.csv"
+When I check replace data
+And I import a file "Table5DLH.csv"
+And I wait for importing the file
+And I see the message: "SUCCESS"
 And I reload the page
+And the "button" "QC rules" is "be.visible"
+And the code rule "Field type MULTIPOLYGON" is "be.visible" on the list of rules
+
+Scenario: cb) As a data custodian I can set the table to be available for manual editting
+
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
+And I click on "UAT DLH Testing"
+And I can click on element "DS-DLH-Test"
+Then I mark the table as a "available for manual editting"
+And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
+And The add record button is visible
+Then the "button" "Import dataset data" is "be.disabled"
+And I reload the page
+And I can go to the list dataflows page
+And I click on "UAT DLH Testing"
+And I can click on element "DS2-DLH"
+Then I mark the table as a "available for manual editting"
+And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
 
 Scenario: d) As a data custodian I can add a Data provider
 
@@ -84,7 +131,7 @@ And I click on "UAT DLH Testing"
 And I can click on element "DS-DLH-Test"
 And the "button" "QC rules" is "be.visible"
 Then I can "create" the field constraint rule with fields
-  | Table4DLH | Field1 | qc1 'Test' | test "Name" | Field type "NUMBER" | Message "Info" | ERROR |
+  | Table1DLH | Field3 | qc1 'Test' | test "Name" | Field type "NUMBER" | Message "Info" | ERROR |
 And I can "Create" a "Field comparison" with a "group" with fields
   | true  | AND | Number | >= | 10  |
   | false | AND | Number | <= | 100 |
@@ -107,11 +154,39 @@ Given I'm logged at Reportnet page as 'DLHuserCustodian'
 When I filter the dataflow list by "name" with "UAT DLH Testing"
 And I click on "UAT DLH Testing"
 And I can click on element "DS-DLH-Test"
+And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
 Then the "button" "Validate" is "be.enabled"
 And I wait for notification
 And I see the message: "SUCCESS"
 
-Scenario: h) As a data custodian I can create data collections
+Scenario: h) As a data custodian, I cannot create data collections if the 'Edit Records Manually' checkbox is selected.
+
+Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
+When I filter the dataflow list by "name" with "UAT DLH Testing"
+And I click on "UAT DLH Testing"
+And I can click on element "Create data collections"
+Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
+And I can see the message: "Failed creating data collection"
+
+Scenario: ha) As a custodian I can add, edit and remove records
+
+Given I'm logged at Reportnet page as 'DLHuserCustodian'
+When I filter the dataflow list by "name" with "UAT DLH Testing"
+And I click on "UAT DLH Testing"
+And I can click on element "DS2-DLH"
+And I change to "Tabular data" mode
+And I can add a record
+  | 1 | test1 |
+And I can add a record
+  | 2 | test2 |
+And I can add a record
+  | 3 | test3 |
+Then I "can" update the cell with the text "test3" to the text "test3test3test3" in a "dataset"
+And I delete the dataset table row 1
+And I can click the edit records manually checkbox
+
+Scenario: hb) As a data custodian, I can create data collections
 
 Given I'm logged at DHL Reportnet page as "DLHuserCustodian"
 When I filter the dataflow list by "name" with "UAT DLH Testing"
@@ -121,8 +196,7 @@ Then I can create data collections with a technical acceptance step for the repo
 And I wait for notification
 And I see the message: "SUCCESS"
 
-
-Scenario: i) As a LEAD REPORTER, I want to release data with validations passed.
+Scenario: i) As a LEAD REPORTER, I can import data as a zip file and validate them
 
 Given I'm logged at DHL Reportnet page as "userProvider"
 When I filter the dataflow list by "name" with "UAT DLH Testing"
@@ -142,11 +216,10 @@ Then I see the message: "SUCCESS"
 And I reload the page
 And I can go to the dataflow page
 And I can click on element "Spain"
-And I can click on element "DS2-DLH"
-Then the "button" "Validate" is "be.enabled"
-And I wait for notification
+And I can click on element "DS3-Test-DLH"
+Then I click on the import dataset data button
+Then I import a "zip" file "DS3-Test-DLH.zip"
 And I wait for enter
-And I see the message: "SUCCESS"
 And I can go to the dataflow page
 And I can click on element "Spain"
 And I can click on element "DS-DLH-Test"
@@ -159,7 +232,36 @@ And I can click on element "Spain"
 And I can click on element "DS-DLH-Test"
 And the dataset table "Table1" has 100 records
 
-Scenario: j) As a custodian in design dataset or a reporter in reporting dataset, I want to be able to select with a check, in the import dialogue, if I want to append rows o replace. (Improve regular import dialogue)
+Scenario: ia) As a LEAD REPORTER, I can add, edit and remove manually
+
+Given I'm logged at DHL Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "UAT DLH Testing"
+And I click on "UAT DLH Testing"
+And I can click on element "Spain"
+And I can click on element "DS2-DLH"
+And I can click the edit records manually checkbox
+And I can add a record
+  | 1 | test1 |
+And I can add a record
+  | 2 | test2 |
+And I can add a record
+  | 3 | test3 |
+Then I "can" update the cell with the text "test3" to the text "test3test3test3" in a "dataset"
+And I delete the dataset table row 1
+
+Scenario: ib) As a LEAD REPORTER, I want to release data, but if the 'edit records manually' checkbox is checked for any table, the 'Release to Data Collection' button is disabled.
+
+Given I'm logged at DHL Reportnet page as "userProvider"
+When I filter the dataflow list by "name" with "UAT DLH Testing"
+And I click on "UAT DLH Testing"
+And I can click on element "Spain"
+Then I can confirm that the Release to data collection button is disable 
+And I can click on element "DS2-DLH"
+And I can click the edit records manually checkbox
+And I wait for enter
+
+
+Scenario: j) As a LEAD REPORTER, I want to release data with validations passed.
 
 Given I'm logged at DHL Reportnet page as "userProvider"
 When I filter the dataflow list by "name" with "UAT DLH Testing"

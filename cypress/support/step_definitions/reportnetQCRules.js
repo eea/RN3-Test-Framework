@@ -132,12 +132,12 @@ When("I can {string} a expression with fields", (action, fields) =>{
 When("I can {string} a table relation {string} with fields", (action,type, fields) => {
     cy.get('a[role=tab]').contains(/Table relations|Expression/g).click({force:true})
     if(action === 'Create' || action === 'Evaluate' || action === 'Run') {
-        cy.wait(5000)
+        cy.wait(7000)
         cy.get('.p-dropdown-label:contains(Select type):visible').click({force:true})
         cy.get(`.p-input-overlay-visible > .p-dropdown-items-wrapper > .p-dropdown-items > :contains(${type})`).click({force:true})
     }
     if(type === 'SQL sentence') {
-        cy.wait(5000)
+        cy.wait(7000)
         fields.rawTable.map((data,i) => {
             cy.get('#sqlSentenceText').type(data[0]).click({force:true})
         })
@@ -151,6 +151,7 @@ When("I can {string} a table relation {string} with fields", (action,type, field
     }
     if(action === 'Create')
     {
+        cy.wait(7000)
     cy.get("#createValidation__create").click({force:true})
     }
     else if (action === 'Evaluate')
@@ -160,6 +161,7 @@ When("I can {string} a table relation {string} with fields", (action,type, field
       cy.get('[class*=SqlSentence_sqlSentenceCostWrapper]')
       cy.wait(2000)
       cy.get("#createValidation__create").click({force:true})
+      cy.wait(2000)
     }
     else if (action === 'Run')
     {
@@ -170,6 +172,7 @@ When("I can {string} a table relation {string} with fields", (action,type, field
       cy.get('.p-dialog-titlebar > .p-dialog-titlebar-icons > .p-dialog-titlebar-icon > .p-dialog-titlebar-close-icon:last').click({force:true})
       cy.wait(2000)
       cy.get("#createValidation__create").click({force:true})
+      cy.wait(2000)
     }
 })
 
