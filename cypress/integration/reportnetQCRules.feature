@@ -294,6 +294,7 @@ And I can "create" a row constraint with fields
   | Table2 | sqlIncorrectRule | testName | SQL Info | Message Info | Warning |
 And I can "Create" a table relation "SQL sentence" with fields
   | select * from |
+And I wait for enter
 And the code rule "sqlIncorrectRule" is "be.visible" on the list of rules
 When I can click on "Validate QCs"
 And I see the message: "The rule sqlIncorrectRule is not valid"
