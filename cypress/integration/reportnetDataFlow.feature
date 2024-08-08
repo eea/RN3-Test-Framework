@@ -117,6 +117,8 @@ Then I "Create" a citizen dataflow with name "Citizen test dataflow public avail
 Scenario: k) As an admin, I want to be able to see all dataflows.
 
 Given I'm logged at Reportnet page as 'userAdmin'
+And I wait for enter
+And I can filter by "name" with "Dataflow Reportnet Testing"
 Then I can click on "Dataflow Reportnet Testing"
 And I can click on element "Dataflow help"
 And I can go to the list dataflows page
