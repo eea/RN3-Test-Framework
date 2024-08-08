@@ -40,6 +40,16 @@ When('the Jobs Monitoring button is {string}', (visibility_status)=>{
           cy.wait(3000)}
       cy.wait(1000)
       //cy.get('.p-dialog-content .Filters_filterButton__1OEWb').click({ force: true })
-      cy.get('.p-button-text.p-c').contains("Filter").click({ force: true })
+      cy.get('.Filters_lineItems__2Nj0X > .Filters_buttonWrapper__sgK_8 > .Filters_filterButton__1OEWb > .p-button > .p-button-text').click({ force: true })
+      
       cy.wait(5000)
+    })
+
+    Then('I click on the History tab', ()=>{
+      cy.get('.Dialog_tabMenu__1xTXc > .p-tabmenu > .p-tabmenu-nav > [aria-expanded="0"] > .p-menuitem-link').click({force:true})
+      cy.wait(1000)
+    })
+
+    Then("I can see the message on the page {string}",(message) => { 
+      cy.get(`[class*=JobsStatuses_noDataContent__1G_kt]:contains(${message})`)
     })
