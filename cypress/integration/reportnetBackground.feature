@@ -154,7 +154,7 @@ And I can add a record
 |1| |
 
 # REP-850
-Scenario: j) As a data custodian I can add a Data provider
+Scenario: j) As a data custodian I can delete all lead reporters
 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And I click on "Dataflow Reportnet Testing"
@@ -164,6 +164,17 @@ And I can click on element "Manage lead reporters"
 And I can "addToCountry" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "testleadreporter@reportnet.net" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
 And I can "addMore" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "France"
+And I can click on element "Manage lead reporters"
+Then I can delete all lead reporters
+
+
+# REP-850
+Scenario: ja) As a data custodian I can add a Data provider
+
+Given I'm logged at Reportnet page as 'userCustodian2'
+And I click on "Dataflow Reportnet Testing"
+And I can click on element "Manage lead reporters"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
 And I can "Import" Lead reporters
 And I import a file "importLeadReporters.csv"

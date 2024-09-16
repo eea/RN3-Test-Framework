@@ -14,7 +14,7 @@ Examples:
 
 Scenario Outline: b) As a Custodian I can see the Jobs Monitoring window
 
-Given I'm logged at Reportnet3 page as "DLHuserCustodian"
+Given I'm logged at Reportnet3 page as "userCustodian2"
 And I wait for enter
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
@@ -26,7 +26,7 @@ Examples:
 
 Scenario: c) As a Provider  I can see the Jobs Monitoring window
 
-Given I'm logged at Reportnet page as "DLHuserProvider"
+Given I'm logged at Reportnet page as "userProvider2"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And the Jobs Monitoring window is "display_status"
@@ -54,7 +54,7 @@ Examples:
 
 Scenario Outline: e) As an Custodian  I can filter by Status in the Jobs monitoring window
 
-Given I'm logged at Reportnet page as "DLHuserCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by "Status" with "<filter>" 
@@ -70,7 +70,7 @@ Examples:
 
 Scenario Outline: f) As a Provider I can filter by Status in the Jobs monitoring window
 
-Given I'm logged at Reportnet3 page as "DLHuserProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by "Status" with "<filter>" 
@@ -101,7 +101,7 @@ Examples:
 
 Scenario Outline: h) As a Provider  I can filter by Type in the Jobs monitoring window
 
-Given I'm logged at Reportnet3 page as "DLHuserProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by "Type" with "<filter>" 
@@ -116,7 +116,7 @@ Examples:
 
 Scenario Outline: i) As a Custodian  I can filter by Type in the Jobs monitoring window
 
-Given I'm logged at Reportnet page as "DLHuserCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by "Type" with "<filter>" 
@@ -131,7 +131,7 @@ Examples:
 
 Scenario: j) As a Custodian  I can filter by Job Id in the Jobs monitoring window
 
-Given I'm logged at Reportnet page as "DLHuserCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by 'jobId' with '240'
@@ -145,7 +145,7 @@ And I can filter in Jobs monitoring window by 'jobId' with '240'
 
 Scenario: l) As an Provider  I can filter by Job Id in the Jobs monitoring window
 
-Given I'm logged at Reportnet3 page as "DLHuserProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And I can filter in Jobs monitoring window by 'jobId' with '240'

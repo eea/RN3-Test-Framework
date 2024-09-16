@@ -307,6 +307,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 And I click on "New Dataflow Rules Test"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
+And I wait for enter
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "no public"
 
