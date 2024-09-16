@@ -12,7 +12,7 @@ Then("I can {string} a Data provider with Representative of {string} and account
       if(action === "add") {
         cy.get("[class^=p-datatable-row").children().eq(1).children().eq(1).select(provider)
         cy.contains('Lead reporter').click()
-        cy.wait(1000)
+        cy.wait(2000)
         cy.get("input:visible[placeholder='New lead reporter e-mail...']:last").type(account+'{enter}');
         
       } else if (action === 'addLast') {
@@ -37,7 +37,7 @@ Then("I can {string} a Data provider with Representative of {string} and account
       cy.get('.pi-trash:visible:first').click({force:true});
       cy.get('.p-button-danger:visible').click({force:true})
     }
-    cy.wait(1000);
+    cy.wait(2000);
     cy.get('button:contains(Close):visible').click({force:true})
   });
 
@@ -166,6 +166,13 @@ When("I can see the list of validations and a refresh button", () => {
 When("I can see the status for the {string} dataset", (dataset) => {
   cy.get(`[class*=BigButtonList_datasetItem]>:contains(${dataset})>>.fa-check-circle`).click({force:true})
   cy.contains("Final feedback")
+})
+
+When("I can delete all lead reporters", () => {
+  cy.wait(2000)
+  cy.get(':nth-child(4) > .p-button-text').click({force:true})
+  cy.get('[data-for="confirmTooltipId"] > .p-button > .p-button-text').click({force:true})
+  cy.wait(2000)
 })
 
 

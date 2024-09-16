@@ -162,7 +162,7 @@ Then("The reporting Dataflow {string} doesn't exist", (name) => {
 
 
 When("I can click on element {string}", element => {
-  cy.wait(5000);
+  cy.wait(7000);
   cy.get('p:contains(' + element + '):first').parent().click()
   cy.wait(5000)
 });
@@ -1306,9 +1306,9 @@ When("I click on the schema {string}", element => {
 });
 
 Then ("I can click the edit records manually checkbox", ()=>{
-  cy.wait(3000)
-  cy.get('#check_edit_records_manually > .p-checkbox-box').click({force:true})
-  cy.wait(6000)
+  cy.wait(4000)
+  cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68 > .null > .p-button-text').scrollIntoView().click({force:true})
+  cy.wait(10000)
 })
 
 Then ("The add record button is visible", ()=>{

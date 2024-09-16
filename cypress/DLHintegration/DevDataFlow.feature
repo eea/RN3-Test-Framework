@@ -2,7 +2,7 @@ Feature: Reportnet Dataflow - As an existing user on the Repornet system I want 
 
 Scenario: a) As a data custodian I can add a new data flow
 
-Given I'm logged at Reportnet page as "DLHuserCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "New Test" and description "new description New Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "New Test"
@@ -16,7 +16,7 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
 
 Scenario: b) As a data custodian I can edit a data flow
 
-Given I'm logged at Reportnet page as 'DLHuserCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I click on "New Test"
 And the "action" "Edit" is "be.visible"
 Then I can "Save" a dataflow with name "Test edited" and description "old description Test2" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
@@ -25,7 +25,7 @@ Then I can "Save" a dataflow with name "Test edited" and description "old descri
 #REP-1496
 Scenario: e) As a registered user I can import a zip file through an external integration
 
-Given I'm logged at Reportnet page as 'DLHuserCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I click on "Test edited"
 And I can click on element "DS-Test"
 And the "button" "External integrations" is "be.visible"
@@ -43,7 +43,7 @@ Then I see the notification "Loaded data completed at DS-Test" in the notificati
 
 Scenario: f) As a data custodian I can delete a data flow
 
-Given I'm logged at Reportnet page as 'DLHuserCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I click on "Test edited"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "Test edited"
@@ -52,7 +52,7 @@ And I see the message: "SUCCESS"
 #REP-1438 REP-1605
 Scenario: g) As a custodian/steward, I want to be able to create a Reference dataflow.
 
-Given I'm logged at Reportnet page as 'DLHuserCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I can click on "Reference dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 And I "Create" a reference dataflow with name "Reference dataflow" and description "new description Reference Test"
@@ -83,7 +83,7 @@ And I see the message: "SUCCESS"
 
 Scenario: h) As a custodian I want to be able to filter reference dataflows
 
-Given I'm logged at Reportnet page as 'DLHuserCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I can click on "Reference dataflows"
 And I can filter by "name" with "Reference dataflow"
 And I can click on "Reference dataflow"
@@ -91,7 +91,7 @@ And I can click on "Reference dataflow"
 #REP-1438
 Scenario: i) As a custodian/steward, I want to be able to update data in a reference dataset if it is marked as updatable.
 
-Given I'm logged at Reportnet page as 'DLHuserCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I can click on "Reference dataflows"
 And I can filter by "name" with "Reference dataflow"
 And I click on "Reference dataflow"
@@ -107,7 +107,7 @@ And I "can not" update the cell with the text "test2" to the text "test4" in a "
 
 Scenario: j) As a custodian, I want to be able to create a Citizen and science dataflow.
 
-Given I'm logged at Reportnet page as 'DLHuserCustodian'
+Given I'm logged at Reportnet page as 'userCustodian2'
 And I can click on tab "Citizen science dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Marine LitterWatch" with "noFilters"
@@ -134,7 +134,7 @@ Then I can click on "Citizen test"
 
 Scenario: l) As a custodian I want to create new datasets available in public view by default in Reporting dataflow
 
-Given I'm logged at Reportnet page as "DLHuserCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "New Test public available" and description "new description New Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "New Test public available"
@@ -147,7 +147,7 @@ And Available in public view is checked
 
 Scenario: m) As a custodian I want to create new datasets available in public view by default in Citizen dataflow
 
-Given I'm logged at Reportnet page as "DLHuserCustodian"
+Given I'm logged at Reportnet page as "userCustodian2"
 And I can click on tab "Citizen science dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Marine LitterWatch" with "noFilters"
