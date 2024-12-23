@@ -25,7 +25,7 @@ Scenario: ba) As a data custodian I can add a new organization
 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And the "action" "Add organization" is "be.visible"
-Then I can add a new organization with name "Test" with group "All countries: EEA member countries PLUS other countries and territories"
+Then I can add a new organization with name "Test" and code "Test" with group "All countries: EEA member countries PLUS other countries and territories"
 Then I can click on "Refresh"
 Then I can filter organizations by "label" with "test"
 And I can see the specified record in the table

@@ -58,9 +58,9 @@ Scenario: d) As a data custodian I can add a Data provider
 Given I'm logged at Reportnet page as 'userCustodian2'
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can see the representative "Spain" "test.provider@abc.com"
+And I can see the representative "Spain" "test.provider2@abc.com"
 
 
 @sanity
@@ -94,7 +94,7 @@ And I see the message: "SUCCESS"
 @sanity
 Scenario: g) As a data provider I can't release to data collection if blockers in any dataset
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -113,7 +113,7 @@ And I see the message: "You can't release data with blocker errors. Please check
 #REP-822
 Scenario: h) As a reporter, I can see the status of the dataset in the title
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -137,7 +137,7 @@ Then I see the message: "Pending"
 #REP-943
 Scenario: j) As a LEAD REPORTER, I want to release data with validations passed.
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS2"
@@ -153,9 +153,9 @@ And I reload the page
 And I can go to the dataflow page
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I wait for importing the file
 And I wait for notification
 Then I see the message: "SUCCESS"
+And I wait for importing the file
 
 
 #REP-1817
@@ -163,6 +163,7 @@ Scenario: k) In the public page I can see the automatically created export file 
 
 Given I'm in Reportnet page
 And I can click on "View by obligation dataflow"
+And I wait for importing the file
 And I can filter obligation dataflow by "name" with "Dataset Reportnet Testing"
 When I click on "Dataset Reportnet Testing"
 Then the public table "Reporting datasets" has 1 records
@@ -218,7 +219,7 @@ And the table "Table1" has 2 records
 #REP-2160
 Scenario: p) Validate button is enabled for data Provider
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -231,7 +232,7 @@ Then the "button" "Validate" is "be.enabled"
 #REP-818
 Scenario:  q) As a data provider can't change value of this read-only field
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
@@ -242,7 +243,7 @@ Then I "can not" update the cell with the text "1" to the text "2" in a "dataset
 #REP-819
 Scenario:  r) As a data provider I can't modify the number of records in this table
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -254,7 +255,7 @@ Then the "button" "Import table data" is "not.exist"
 @sanity
 Scenario: s) Edit dataset table row
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -266,7 +267,7 @@ Then I "can" update the cell with the text "data1" to the text "123" in a "datas
 @sanity
 Scenario: t) As a custodian in design dataset or a reporter in reporting dataset, I want to be able to select with a check, in the import dialogue, if I want to append rows o replace. (Improve regular import dialogue)
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -284,7 +285,7 @@ Then the dataset table "Table1" has 2 records
 @sanity
 Scenario: u) Delete dataset table row
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -297,7 +298,7 @@ Then the dataset table "Table1" has 1 records
 
 Scenario: v) Paste data to dataset
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -311,7 +312,7 @@ Then the dataset table "Table1" has 2 records
 @sanity
 Scenario: x) Delete table data
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -325,7 +326,7 @@ Then the dataset table "Table1" has 0 records
 #REP-822
 Scenario: y) As a reporter, I can see the datasets marked as Final feedback
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -336,7 +337,7 @@ Then I see the message: "Final feedback"
 #REP-2047
 Scenario: z) As a lead reporter, I can remove the option for a Member States to make a data private when it has been publicly released
 
-Given I'm logged at Reportnet3 page as 'userProvider'
+Given I'm logged at Reportnet3 page as 'userProvider2'
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
@@ -379,7 +380,7 @@ Examples:
 
 Scenario Outline: zb) As Data Provider I can see Dataset Schemas to dataflow
 
-Given I'm logged at Reportnet3 page as "userProvider"
+Given I'm logged at Reportnet3 page as "userProvider2"
 And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I wait for enter

@@ -72,9 +72,9 @@ Then I mark the table as a "available for manual editting"
 And I can click the edit records manually checkbox
 And I change to "Tabular data" mode
 And I can add a record 
-| 1 | test1 |
+| 1 | 1 |
 And I can add a record 
-| 2 | test2 |
+| 2 | 2 |
 And I can click the edit records manually checkbox
 And I set the design dataset as "Reference dataset"
 And the "button" "External integrations" is "be.disabled"
@@ -99,9 +99,9 @@ Then I mark the table as a "available for manual editting"
 And I can click the edit records manually checkbox
 And I change to "Tabular data" mode
 And I can add a record 
-|1| link | test1 |
+|1| link | 1 |
 And I can add a record 
-|2| link | test2 |
+|2| link | 2 |
 And I can click the edit records manually checkbox
 
 Scenario: f) As a data custodian I can fill a prefilled dataset schema 

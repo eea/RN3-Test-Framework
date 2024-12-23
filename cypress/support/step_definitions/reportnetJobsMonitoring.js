@@ -13,6 +13,7 @@ When('the Jobs Monitoring button is {string}', (visibility_status)=>{
   })
 
   Then('I click on the Jobs Monitoring button', ()=>{
+    cy.wait(3000)
     cy.get('[data-for="jobsMonitoring"]').click({force:true})
     cy.wait(1000)
   })

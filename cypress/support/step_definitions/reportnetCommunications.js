@@ -43,7 +43,7 @@ Then("I see the notification {string} in the notification received list", (messa
 
 Then("I can see a system notification {string} sent by an Admin", (message) => { 
   cy.get('.p-growl-item:contains('+message+')')
-})
+});
 
 Then("I delete a system notification with {string} message", (message) => {
   cy.wait(2000)
