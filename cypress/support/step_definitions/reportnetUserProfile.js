@@ -38,6 +38,7 @@ When("I can change the visual rows to {string}",(format) => {
     cy.wait(2000)
     cy.get(`.settings-change-settings-help-step #rowsPage`).click({force:true})
     cy.get(`.p-dropdown-panel .p-dropdown-item:contains(${format}):first`).click({force:true}) 
+    cy.wait(2000)
 })
 
 When("I can go to the list dataflows page",() => {

@@ -94,6 +94,7 @@ And I logout
 And I'm logged at Reportnet page as 'userCustodian2'
 And I can click on tab "Business dataflows"
 And I wait for enter
+When I filter the dataflow list by "name" with "Business dataflow test countries"
 And I click on "Business dataflow test countries"
 Then I can click on element "Manage lead reporters"
 And I wait for enter

@@ -57,14 +57,14 @@ Given(
   "I'm logged at Reportnet page as {string}",
   (user) => {
     cy.visit('/');
-    cy.wait(2000)
+    cy.wait(4000)
     //homePage.clickonLoginLink();
     cy.contains('Login').click()
     cy.wait(500)
     cy.get("input[type=text]").type(Cypress.env(user).username);
     cy.get("input[type=password]").type(Cypress.env(user).password);
     cy.get("#kc-login").click();
-    cy.wait(3000)
+    cy.wait(8000)
     }
 );
 
@@ -79,7 +79,7 @@ Given(
     cy.get("input[type=text]").type(Cypress.env(user).username);
     cy.get("input[type=password]").type(Cypress.env(user).password);
     cy.get("#kc-login").click();
-    cy.wait(2000)
+    cy.wait(4000)
   }
 );
 
@@ -140,7 +140,7 @@ When("I can see the dataflows page", () => {
 });
 
 When("I can click on {string}", element => {
-  cy.wait(3000);
+  cy.wait(5000);
   cy.contains(element).click({ force: true })
   cy.wait(2500);
 })
@@ -370,7 +370,7 @@ Then(
         cy.get('[class*=ActionsColumn_actionTemplate] > > .p-button-text:visible:first').click({ force: true })
         cy.get('input:visible').should('be.disabled')
       } else {
-        cy.get(`.p-datatable-tbody >>> :contains(${cell}):visible`).dblclick()
+        // cy.get(`.p-datatable-tbody >>> :contains(${cell}):visible`).click()
         cy.get(`input[value=${cell}]:visible`).should('not.exist')
       }
     }
@@ -946,9 +946,9 @@ When("I set the design dataset as {string}", (type) => {
 })
 
 When("I can create reference datasets", () => {
-  cy.wait(2000);
+  cy.wait(5000);
   cy.get("span[data-for='Create Reference datasets']").click({ force: true })
-  //cy.get('p:contains(Create Reference datasets):first').parent().click()
+  // cy.get('p:contains(Create Reference datasets):first').parent().click()
   cy.wait(2000)
   cy.contains('Yes').click({force:true});
 })
@@ -1270,20 +1270,23 @@ Given(
 //   }
 // );
 
-Then ("I can add a new organization with name {string} with group {string}", ( orgName, groupName) =>{
+Then ("I can add a new organization with name {string} and code {string} with group {string}", ( orgName, code, groupName) =>{
   cy.get('.undefined > .p-button-text:contains("Add")').click({ force: true })
   const dynamicallyName = Math.random().toString(36).substring(2, 7);
   const typeName = orgName + dynamicallyName;
+  const codeName = code + dynamicallyName;
   bddGeneratedValues.set(orgName, typeName);
+  bddGeneratedValues.set(code,codeName)
   
   console.log(bddGeneratedValues);
   cy.get("#organizationNameInput").clear().type(typeName);
+  cy.get('#codeInput').clear().type(codeName);
   cy.get('#groupsDropdown').click();
   cy.wait(1000)
   cy.get('.p-input-overlay-visible > .p-dropdown-items-wrapper > .p-dropdown-items').contains(groupName).click({ force: true })
   cy.wait(1000)
   cy.get('[data-for="confirmTooltipId"] > .p-button > .p-button-text:visible').click({force:true})
-}) 
+}) ;
 
 Then("I can filter organizations by {string} with {string}", (field,filter) => {
   if (field === 'label' || field === 'code'){
@@ -1297,7 +1300,7 @@ Then("I can filter organizations by {string} with {string}", (field,filter) => {
   cy.get('.Filters_lineItems__2Nj0X > .Filters_buttonWrapper__sgK_8 > .Filters_filterButton__1OEWb > .p-button > .p-button-text').click({ force: true })
   cy.wait(2000)
 
-})
+});
 
 When("I click on the schema {string}", element => {
   cy.wait(4000)
@@ -1307,13 +1310,19 @@ When("I click on the schema {string}", element => {
 
 Then ("I can click the edit records manually checkbox", ()=>{
   cy.wait(4000)
-  cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68 > .null > .p-button-text').scrollIntoView().click({force:true})
-  cy.wait(10000)
-})
+  cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68 > .null > .p-button-text').click({force:true})
+  cy.wait(15000)
+});
+
+Then ("I click the edit records manually checkbox as a provider", ()=>{
+  cy.wait(4000)
+  cy.get('.p-toolbar-group-right > .null > .p-button-text:last').click({force:true})
+  cy.wait(15000)
+});
 
 Then ("The add record button is visible", ()=>{
   cy.get('[style="float: left;"] > .p-button-text').should('be.visible')
-})
+});
 
 When("I import a file {string} with S3", file => {
   const fileName = file;
@@ -1325,16 +1334,16 @@ When("I import a file {string} with S3", file => {
       force: true
     })
   cy.wait(2000)
-  cy.get('#s3Checkbox > .p-checkbox-box').click({force:true})
+  // cy.get('#s3Checkbox > .p-checkbox-box').click({force:true})
   cy.contains("Upload").click({force: true })
   cy.wait(2000)
 });
 
 Then("The attach file button is enabled on the field",()=>{
   cy.wait(3000)
-  cy.get('.DataViewerHooks_attachment__3LkU2 > .p-button > .pi').click({force:true})
+  cy.get('.DataViewerHooks_attachment__3LkU2 > .p-button > .pi').should('be.visible').click({force:true})
   cy.wait(2000)
-})
+});
 
 When("I can confirm that the Release to data collection button is disable", () => {
   cy.wait(1000)
