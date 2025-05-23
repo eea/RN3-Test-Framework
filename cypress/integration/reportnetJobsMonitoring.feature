@@ -41,7 +41,9 @@ Given I'm logged at Reportnet page as "userAdmin"
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And the Jobs Monitoring window is "display_status"
+And I wait for enter
 And I click on the History tab
+And I wait for enter
 Then I can see the message on the page "There are no jobs with the selected parameters"
 
 Scenario Outline: bb) As a Custodian I can see the Jobs History window
@@ -51,7 +53,9 @@ And I wait for enter
 When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And the Jobs Monitoring window is "display_status"
+And I wait for enter
 And I click on the History tab
+And I wait for enter
 Then I can see the message on the page "There are no jobs with the selected parameters"
 
 Scenario: cc) As a Provider  I can see the Jobs History window
@@ -61,6 +65,7 @@ When the Jobs Monitoring button is "visible"
 Then I click on the Jobs Monitoring button
 And the Jobs Monitoring window is "display_status"
 And I click on the History tab
+And I wait for enter
 Then I can see the message on the page "There are no jobs with the selected parameters"
 
 

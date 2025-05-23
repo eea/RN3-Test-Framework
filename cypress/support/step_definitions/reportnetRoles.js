@@ -1,11 +1,11 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Then("I can {string} a Data provider with Representative of {string} and account {string} and Data provider {string}", (action, representative, account, provider) => {
-    if(action === "add") {
-      cy.get("[class^=ManageLeadReporters_selectWrapper] .p-dropdown-trigger").click();
-      cy.contains(representative).click()
-      cy.wait(1000);
-    } 
+    // if(action === "add") {
+    //   cy.get("[class^=ManageLeadReporters_selectWrapper] .p-dropdown-trigger").click();
+    //   cy.contains(representative).click()
+    //   cy.wait(1000);
+    // } 
     if(action === 'addToCountry') {
       cy.get("input:visible[placeholder='New lead reporter e-mail...']:last").type(account+'{enter}');
     } else {

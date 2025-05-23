@@ -5,7 +5,7 @@ Scenario: a) As a data custodian I can add a new data flow with DS
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reporting dataflow with name "New Dataflow Rules Test" and description "Description New Dataflow Rules Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a reporting dataflow with name "New Dataflow Rules Test" and description "Description New Dataflow Rules Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "New Dataflow Rules Test"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -69,7 +69,6 @@ And I can add a record
 Then the "button" "Validate" is "be.enabled"
 And I can see the message: "INFO"
 And I wait for validation
-And I wait for notification
 And I see the message: "SUCCESS"
 Then the "button" "Refresh" is "be.enabled"
 Then I can click on "Refresh"
@@ -307,7 +306,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 And I click on "New Dataflow Rules Test"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
-And I wait for enter
+And I wait for notification
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "no public"
 
@@ -385,7 +384,7 @@ Scenario: v) As a data custodian I can add a new data flow with obligations
 Given I'm logged at Reportnet page as "userCustodian2"
 And I wait for enter
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reporting dataflow with name "Rules historic changes Test" and description "Dataflow document test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a reporting dataflow with name "Rules historic changes Test" and description "Dataflow document test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Rules historic changes Test"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -419,6 +418,7 @@ And I see the message: "SUCCESS"
 Scenario: x) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I wait for notification
 And I filter the dataflow list by "name" with "Rules historic changes Test"
 And I wait for enter
 And I click on "Rules historic changes Test"
@@ -437,6 +437,7 @@ And the new qc rule "qc1 'Test'" is "correct"
 Scenario: y) As a data custodian I can edit QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I wait for notification
 And I filter the dataflow list by "name" with "Rules historic changes Test"
 And I wait for enter
 And I click on "Rules historic changes Test"
@@ -463,8 +464,9 @@ And I wait for enter
 And I click on "Rules historic changes Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
+And I wait for notification
 And the code rule "qc1-2" is "be.visible" on the list of rules
 Then I can view the historic changes of the rule "qc1-2"
 And I can see the history with following fields
-    | test.custodian2@abc.com | false | true | false |
-    | test.custodian2@abc.com | true  | true | true  |
+    | seray@gmail.com | false | true | false |
+    | seray@gmail.com | true  | true | true  |

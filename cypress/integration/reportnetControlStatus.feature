@@ -4,7 +4,7 @@ Scenario: a) As a data custodian I can add a new data flow
 
 Given I'm logged at Reportnet3 page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-And I "Create" a reporting dataflow with name "Dataflow Reportnet Testing" and description "Dataflow description test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I "Create" a reporting dataflow with name "Dataflow Reportnet Testing" and description "Dataflow description test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -19,7 +19,6 @@ And I can "add" a Data provider with Representative of "All countries: EEA membe
 And I can go to the dataflow page
 And I can click on element "Create data collections"
 And I can create data collections with a technical acceptance step for the reporter submissions and "public"
-And I wait for notification
 And I wait for notification
 And I see the message: "SUCCESS"
 
@@ -36,7 +35,6 @@ And I can go to the dataflow page
 And I wait for enter
 And I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I wait for notification
 And I wait for notification
 And I see the message: "SUCCESS"
 

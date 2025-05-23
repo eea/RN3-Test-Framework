@@ -146,7 +146,7 @@ When("I can click on {string}", element => {
 })
 
 When("I can click on tab {string}", element => {
-  cy.wait(5000);
+  cy.wait(6000);
   cy.contains(element).click({ force: true })
   cy.wait(3000);
 })
@@ -162,7 +162,7 @@ Then("The reporting Dataflow {string} doesn't exist", (name) => {
 
 
 When("I can click on element {string}", element => {
-  cy.wait(7000);
+  cy.wait(9000);
   cy.get('p:contains(' + element + '):first').parent().click()
   cy.wait(5000)
 });
@@ -414,7 +414,7 @@ When("I wait for validation", () => {
 })
 
 When("I wait for enter", () => {
-  cy.wait(8500);
+  cy.wait(9500);
 })
 
 When("I wait for importing the file", () => {
@@ -485,7 +485,7 @@ Then("I can {string} a dataflow with name {string}", (action, name) => {
   bddGeneratedValues.set(name, typeValue);
   console.log(bddGeneratedValues);
   cy.get("#dataflowName").clear().type(typeValue);
-  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.get('.p-button-text:contains(' + action + ')').click({ multiple: true })
   cy.wait(5000);
 });
 
@@ -603,8 +603,8 @@ Then("I can filter obligation dataflow by {string} with {string}", (field,name) 
     cy.get(`div[id=${field}]`).click({ force: true })
     cy.contains(new RegExp("^" + filter + "$", "g")).click({ force: true })
   }
-  cy.wait(1000)
-  cy.get('[class*=Filters_filterButton]').children().click({ force: true })
+  cy.wait(4000)
+  cy.get('.Filters_filterButton__1OEWb .p-button-text.p-c').click({force:true})
   cy.wait(2000)
 })
 
@@ -635,7 +635,7 @@ When("I filter the dataflow list by {string} with {string}", (field, name) => {
   cy.wait(5000)
   if (field === 'name') {
     cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
-    cy.wait(4000)
+    cy.wait(5000)
     cy.get('.Filters_filterButton__1OEWb .p-button-text.p-c').click({force:true})}
   })
 
@@ -690,7 +690,7 @@ When("I can add a record", (fields) => {
   fields.rawTable.map((data) => {
     if (data[1] === 'link') {
       cy.get('[class*=p-dialog-content]>>>input:visible:first').type(data[0])
-      cy.wait(3000)
+      cy.wait(6000)
       cy.get('label:contains(-- None --)').click({ force: true })
       cy.wait(3000)
       cy.get('li:contains(' + data[2] + '):visible:last').click({ force: true })
@@ -941,8 +941,9 @@ When("the table Unique constraints has {} records", (records) => {
 })
 
 When("I set the design dataset as {string}", (type) => {
-  cy.get(`[class*=DatasetDesigner_datasetConfigurationButtons]> :contains(${type}) > .p-checkbox`).click()
-  cy.wait(500)
+  cy.wait(5000)
+  cy.get(`[class*=DatasetDesigner_datasetConfigurationButtons]> :contains(${type}) > .p-checkbox`).click({force:true});
+  cy.wait(2500)
 })
 
 When("I can create reference datasets", () => {
@@ -1120,13 +1121,16 @@ When ("I can click on dataflow {string}", (name)=>{
 
 });
 
-Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
+Then("I {string} a reporting dataflow with name {string} and description {string} and representative {string} and obligation {string} with {string}", (action, name, description, representative,obligation, filtered, filters) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
   const typeValue = name + dynamicallyGeneratedName;
   bddGeneratedValues.set(name, typeValue);
   console.log(bddGeneratedValues);
   cy.get("#dataflowName").clear().type(typeValue);
   cy.get("#dataflowDescription").clear().type(description);
+  cy.get('.ManageDataflowForm_dropdownsWrapper__IlLYg > .p-dropdown > .p-dropdown-trigger > .p-dropdown-trigger-icon').click()
+  cy.contains(representative).click()
+  cy.wait(1000);
   cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
   cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
   cy.get('button:contains(OK):visible').click({ force: true })
@@ -1309,9 +1313,9 @@ When("I click on the schema {string}", element => {
 });
 
 Then ("I can click the edit records manually checkbox", ()=>{
-  cy.wait(4000)
+  cy.wait(7000)
   cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68 > .null > .p-button-text').click({force:true})
-  cy.wait(15000)
+  cy.wait(18000)
 });
 
 Then ("I click the edit records manually checkbox as a provider", ()=>{
@@ -1350,3 +1354,20 @@ When("I can confirm that the Release to data collection button is disable", () =
   cy.get('.BigButton_datasetItem__jrfmu:last').should('have.class','BigButton_datasetItemDisabled__36IiJ')
   cy.wait(1000)
 });
+
+When("I can see the edit icon on the dataset block", () => {
+  cy.wait(1000)
+  cy.get(':nth-child(14) > .BigButton_bigButton__3JXhs > span'); 
+
+  cy.contains("One or more datasets for this provider have been updated after release");
+  cy.wait(1000)
+});
+
+Then("I can Flag this dataflow for deletion {string}", (name) => {
+  cy.wait(3000)
+  bddGeneratedValues.get(name)
+  cy.contains("Flag this dataflow for deletion").click({ force: true });
+  cy.get("input:visible").type(bddGeneratedValues.get(name), { force: true });
+  cy.wait(2000)
+  cy.get('.p-button-danger:visible').click()
+})

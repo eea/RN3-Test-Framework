@@ -5,7 +5,7 @@ Scenario: a) As a data custodian I can create new dataflow and dataset schema
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-And I "Create" a reporting dataflow with name "DatasetSchema Test" and description "Description New Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I "Create" a reporting dataflow with name "DatasetSchema Test" and description "Description New Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "DatasetSchema Test"
 Then I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"

@@ -8,7 +8,7 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow1" and description "new description Business Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Company Group 1" with fmeUser "Reportnet3"
 Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "test.custodian2@abc.com" with permissions "CUSTODIAN"
+And I can "Add" a editor "seray@gmail.com" with permissions "CUSTODIAN"
 
 
 Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
@@ -61,7 +61,7 @@ And the "action" "Manage requesters" is "<visible>"
 Scenario:  d) As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page
-And I can click on "View by obligation dataflow"
+And I can click on "View by obligation status"
 Then I "can" see the publicly dataflow "Business dataflow1"
 When I click on "Business dataflow1"
 Then the public table "Documents" has 1 records
@@ -83,12 +83,13 @@ Then I can see a tag next to the invalid lead reporter email
 Scenario: f) As an admin, I want to be able to select countries in a Business dataflow.
 
 Given I'm logged at Reportnet page as 'userAdmin'
+And I wait for enter
 And I can click on tab "Business dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow test countries" and description " Business dataflow test countries" and obligation "(C) Information on the assessment regime (Article 7)" and company "Countries" with fmeUser "Reportnet3"
 Then I can click on "Business dataflow test countries"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "test.custodian2@abc.com" with permissions "CUSTODIAN"
+And I can "Add" a editor "seray@gmail.com" with permissions "CUSTODIAN"
 And I click on close button 
 And I logout
 And I'm logged at Reportnet page as 'userCustodian2'
@@ -107,7 +108,7 @@ Scenario: g) As a lead reporter I want to be able to see the label for ongoing i
 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reporting dataflow with name "Test import message" and description "test import message" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a reporting dataflow with name "Test import message" and description "test import message" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Test import message"
 And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "test.provider2@abc.com" with permissions "CUSTODIAN"

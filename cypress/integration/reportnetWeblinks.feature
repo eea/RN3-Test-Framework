@@ -5,7 +5,7 @@ Scenario: a) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-When I "Create" a reporting dataflow with name "Weblinks Reportnet Testing" and description "Dataflow weblinks test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+When I "Create" a reporting dataflow with name "Weblinks Reportnet Testing" and description "Dataflow weblinks test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Weblinks Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -83,7 +83,7 @@ And I see the message: "SUCCESS"
 Scenario: g) As a custodian/steward I can see all the public links in the dataflow public page as extra information if the dataflow is public
 
 Given I'm in Reportnet page
-And I can click on "View by obligation dataflow"
+And I can click on "View by obligation status"
 And I can filter obligation dataflow by "name" with "Weblinks Reportnet Testing"
 And I click on "Weblinks Reportnet Testing"
 Then the public table "Web links" has 1 records
