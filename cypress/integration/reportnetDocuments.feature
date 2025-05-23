@@ -6,7 +6,7 @@ Scenario: a) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reporting dataflow with name "Document Reportnet Testing" and description "Dataflow document test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a reporting dataflow with name "Document Reportnet Testing" and description "Dataflow document test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Document Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -39,6 +39,7 @@ And I reload the page
 And the "button" "Upload" is "be.enabled"
 And I "upload" the document "Table1.csv" with description "table description" and language "English" marked as "private"
 And I see the message: "INFO"
+And I wait for enter
 And I see the message: "SUCCESS"
 Then the table "Supporting documents" has 2 records
 And The first record is "table description" and the last record is "test description"
@@ -113,8 +114,9 @@ And I see the message: "SUCCESS"
 Scenario: i) As a custodian/steward I can see all the public documents in the dataflow public page as extra information if the dataflow is public
 
 Given I'm in Reportnet page
-And I can click on "View by obligation dataflow"
+And I can click on "View by obligation status"
 And I can filter obligation dataflow by "name" with "Document Reportnet Testing"
+And I wait for enter
 And I click on "Document Reportnet Testing"
 And the table Documents has 1 records
 And I'm logged at Reportnet page as "userCustodian2"

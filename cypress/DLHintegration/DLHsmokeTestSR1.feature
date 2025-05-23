@@ -99,10 +99,12 @@ Given I'm logged at DHL Reportnet page as "userCustodian2"
 And I click on "UAT DLH Testing"
 And I can click on element "DS-DLH-Test"
 And I can click the edit records manually checkbox
+And I wait for enter
 And I change to "Tabular data" mode
 And The add record button is visible
 Then the "button" "Import dataset data" is "be.disabled"
 And I can click the edit records manually checkbox
+And I wait for enter
 And I reload the page
 And I can go to the list dataflows page
 And I click on "UAT DLH Testing"
@@ -213,12 +215,14 @@ And I can click on element "DS2-DLH"
 Then I click on the import dataset data button
 And I import a "zip" file "DS2-DLH.zip"
 And I wait for validation
+And I wait for enter
 And I can go to the dataflow page
 And I can click on element "Spain"
 And I can click on element "DS-DLH-Test"
 Then I click on the import dataset data button
 And I import a "zip" file "DS-DLH-Test.zip"
 And I wait for validation
+And I wait for enter
 Then I see the message: "SUCCESS"
 And I reload the page
 And I can go to the dataflow page
@@ -226,6 +230,7 @@ And I can click on element "Spain"
 And I can click on element "DS3-Test-DLH"
 Then I click on the import dataset data button
 Then I import a "zip" file "DS3-Test-DLH.zip"
+And I wait for enter
 And I wait for enter
 And I can go to the dataflow page
 And I can click on element "Spain"

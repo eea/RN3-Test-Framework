@@ -208,3 +208,20 @@ Then("I can fill a dataset schema with name {string}, description {string} and w
   cy.wait(10000)
   cy.get('#_description').should('have.attr', 'placeholder', 'Field description').click({force:true}) 
 })   
+
+Then("I can click the info button near the table name", () => {
+  cy.wait(2000)
+  cy.get('#TabsDesigner_header_0 > span:nth-child(1) > button > span:nth-child(1)').click({force:true})
+})
+
+When("I can see the last import date, the number of records imported, and the file extension of the imported file on the table info page", (name) => {
+  cy.wait(1500)
+  cy.contains("Last import date")
+  cy.contains("Number of records imported")
+  cy.contains("Last import file extension")
+});
+
+When("I can see the {string} on the validation page", message => {
+  cy.wait(1500)
+  cy.contains(message)
+ });

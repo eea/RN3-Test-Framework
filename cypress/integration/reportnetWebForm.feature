@@ -5,7 +5,7 @@ Scenario: a) As a data custodian I can create new dataflow and dataset schema wi
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-And I "Create" a reporting dataflow with name "Webform Test" and description "Webform Test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I "Create" a reporting dataflow with name "Webform Test" and description "Webform Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Webform Test"
 Then I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -38,8 +38,8 @@ Scenario: d) As an admin I can manage webforms
 Given I'm logged at Reportnet page as "userAdmin"
 And the "action" "Manage webforms" is "be.visible"
 And I can see the list of webforms
-    | Governance Regulation | PaMs   |
-    | National Systems      | Q&A    |
+    | EnergyCommunity         | PaMs     |
+    | AnnexBQuantitativeData  | Tables   |
 And I can add a new webform "test" and "Tables"
 And the "button" "Select file" is "be.enabled"
 When I upload the webform from file "Tables webform example.json"

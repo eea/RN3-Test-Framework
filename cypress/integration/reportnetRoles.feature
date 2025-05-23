@@ -4,7 +4,7 @@ Scenario: a) As a data custodian I can add a new data flow
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
-When I "Create" a reporting dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+When I "Create" a reporting dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Roles Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -112,6 +112,7 @@ Then I can "addLast" a Data provider with Representative of "All countries: EEA 
 And I reload the page
 And I can click on element "Create new datasets"
 And I can add datasets for new Representatives
+And I wait for enter
 And I see the message: "SUCCESS"
 And I can click on element "Belgium"
 
@@ -127,8 +128,8 @@ And I can click on element "Spain"
 And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
 
-|   CUSTODIAN            |  test.custodian2@abc.com     |
-|   CUSTODIAN            |  test.custodian2@abc.com      |
+|   CUSTODIAN            |  seray@gmail.com     |
+|   CUSTODIAN            |  seray@gmail.com      |
 |   REPORTER WRITE       |  test.custodian2@abc.com     |
 |   LEAD REPORTER        |  test.provider2@abc.com       |
 |   NATIONAL COORDINATOR |  testobserver@reportnet.net  |
@@ -166,7 +167,6 @@ And I can go to the dataflow page
 And I can click on element "Spain"
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I wait for notification
 And I wait for notification
 And I see the message: "SUCCESS"
 
@@ -274,8 +274,8 @@ And I click on "Roles Reportnet Testing"
 And the "action" "Users list by country" is "be.visible"
 Then I can see the specified records in the table
 
-    | CUSTODIAN             | test.custodian2@abc.com           |         |
-    | CUSTODIAN             | test.custodian2@abc.com           |         |
+    | CUSTODIAN             | seray@gmail.com         |         |
+    | CUSTODIAN             | seray@gmail.com        |         |
     | STEWARD               | testleadreporter@reportnet.net    |         |
     | LEAD REPORTER         | test.provider2@abc.com             | Belgium |
     | LEAD REPORTER         | test.provider2@abc.com             | Spain   |
@@ -403,6 +403,7 @@ Scenario: x) As a steward support, I want to be able to upload, edit and delete 
 Given I'm logged at Reportnet page as "userStewardSupport"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
+And I wait for enter
 And I can click on element "Dataflow help"
 And I click on the tab "Web links"
 And the "button" "Add" is "be.enabled"

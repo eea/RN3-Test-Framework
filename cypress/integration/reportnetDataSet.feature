@@ -6,7 +6,7 @@ Scenario: a) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And the "action" "Create new dataflow" is "be.visible"
-Then  I "Create" a reporting dataflow with name "Dataset Reportnet Testing" and description "Dataflow dataset test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then  I "Create" a reporting dataflow with name "Dataset Reportnet Testing" and description "Dataflow dataset test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 
 
 @sanity 
@@ -58,9 +58,9 @@ Scenario: d) As a data custodian I can add a Data provider
 Given I'm logged at Reportnet page as 'userCustodian2'
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "seraykilinc35@gmail.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can see the representative "Spain" "test.provider2@abc.com"
+And I can see the representative "Spain" "seraykilinc35@gmail.com"
 
 
 @sanity
@@ -162,7 +162,7 @@ And I wait for importing the file
 Scenario: k) In the public page I can see the automatically created export file if the dataset was set to public during the data release
 
 Given I'm in Reportnet page
-And I can click on "View by obligation dataflow"
+And I can click on "View by obligation status"
 And I wait for importing the file
 And I can filter obligation dataflow by "name" with "Dataset Reportnet Testing"
 When I click on "Dataset Reportnet Testing"
@@ -174,7 +174,7 @@ And I'm logged at Reportnet page as 'userCustodian2'
 Scenario Outline: l) As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page
-And I can click on "View by obligation dataflow"
+And I can click on "View by obligation status"
 And I can filter obligation dataflow by "name" with "Dataset Reportnet Testing"
 And I wait for enter
 And I can see for dataflow "Dataset Reportnet Testing" the instrument "Air Quality Directive IPR", status "Open"

@@ -4,7 +4,7 @@ Scenario: a) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reporting dataflow with name "Dataflow Reportnet Testing" and description "Dataflow description test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a reporting dataflow with name "Dataflow Reportnet Testing" and description "Dataflow description test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 And I click on "Dataflow Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "test.provider@abc.com" with permissions "CUSTODIAN"

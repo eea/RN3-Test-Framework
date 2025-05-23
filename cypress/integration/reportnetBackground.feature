@@ -13,7 +13,7 @@ Scenario: b) As a data custodian I can add a new data flow with obligations
 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And the "action" "Create new dataflow" is "be.visible"
-Then I "Create" a reporting dataflow with name "Dataflow Reportnet Testing" and description "Dataflow description test" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+Then I "Create" a reporting dataflow with name "Dataflow Reportnet Testing" and description "Dataflow description test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
 When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
@@ -24,6 +24,7 @@ And I click on close button
 Scenario: ba) As a data custodian I can add a new organization
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I wait for enter
 And the "action" "Add organization" is "be.visible"
 Then I can add a new organization with name "Test" and code "Test" with group "All countries: EEA member countries PLUS other countries and territories"
 Then I can click on "Refresh"
@@ -177,6 +178,16 @@ And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
 And I can "Import" Lead reporters
+And I import a file "importLeadReporter1.csv"
+And I can see the representative "Spain" "test.provider2@abc.com"
+And I can see the representative "Finland" "test.provider@abc.com"
+
+Scenario: jb) As a data custodian I can Import and replace lead reporters
+
+Given I'm logged at Reportnet page as 'userCustodian2'
+And I click on "Dataflow Reportnet Testing"
+And I can click on element "Manage lead reporters"
+And I can "Import and replace" Lead reporters
 And I import a file "importLeadReporters.csv"
 And I can see the representative "Spain" "test.provider2@abc.com"
 And I can see the representative "Finland" "test.provider2@abc.com"
@@ -384,8 +395,10 @@ Then I can see the Release status dashboard and Validation dashboards
 Scenario Outline: za) As a public user I can see the list of all dataflows marked as publicly available
 
 Given I'm in Reportnet page
-And I can click on "View by obligation dataflow"
+And I can click on "View by obligation status"
+And I wait for enter
 And I can filter obligation dataflow by "name" with "Dataflow Reportnet Testing"
+And I wait for enter
 And I can see for dataflow "Dataflow Reportnet Testing" the instrument "Air Quality Directive IPR", status "Open"
 And I can see the information on "Dataflow Reportnet Testing" with "<country>" "<type>" "<technicalAcceptance>"
 And I'm logged at Reportnet page as "userCustodian2"
@@ -528,6 +541,5 @@ Given I'm logged at Reportnet page as 'userAdmin'
 And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And the "action" "Edit" is "be.visible"
+And I wait for enter
 Then I can "Save" a dataflow with name "Dataflow Reportnet Testing edited"
-
-	
