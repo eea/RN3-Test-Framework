@@ -38,7 +38,7 @@ Scenario: d) As an admin I can manage webforms
 Given I'm logged at Reportnet page as "userAdmin"
 And the "action" "Manage webforms" is "be.visible"
 And I can see the list of webforms
-    | EnergyCommunity         | PaMs     |
+    | 1464AttributesProgress  | PaMs     |
     | AnnexBQuantitativeData  | Tables   |
 And I can add a new webform "test" and "Tables"
 And the "button" "Select file" is "be.enabled"
