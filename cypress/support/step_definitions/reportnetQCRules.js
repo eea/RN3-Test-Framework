@@ -84,6 +84,18 @@ When("the code rule {string} is {string} on the list of rules", (code, property)
     cy.contains(code).should(property)
 })
 
+When("the code rule {string} is {string} on the QC rules page", (code, property) =>{
+    cy.wait(3000)
+    cy.get('.p-dialog-content').scrollTo('bottomLeft')
+    cy.get('.p-datatable-wrapper').scrollTo('left')
+    cy.get('.p-editable-column')
+  .eq(1)
+  .scrollIntoView()
+  .should(property, code)
+
+})
+
+
 When("I can delete the rule {string}",(codeRule) => {
     cy.get('[class*=QCList_deleteRowButton] > .p-button-text:last').click({force:true})
     cy.get('.p-button-text:contains(Yes):visible').click({force:true})

@@ -76,7 +76,6 @@ And I click on "Roles Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I wait for notification
-And I wait for notification
 And I wait for enter
 And I see the message: "SUCCESS"
 
@@ -122,6 +121,7 @@ And I can click on element "Belgium"
 Scenario: j) As a custodian I can see all the users of the dataflow for this country
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I wait for enter
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
@@ -198,9 +198,9 @@ And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "testleadreporter@reportnet.net" with permissions "STEWARD"
 And I can see the specified record in the table
 | testleadreporter@reportnet.net | STEWARD |
-And I can "Add" a editor "test.observer@abc.com" with permissions "OBSERVER"
+And I can "Add" a editor "testobserver@reportnet.net" with permissions "OBSERVER"
 And I can see the specified record in the table
-| test.observer@abc.com | OBSERVER |
+| testobserver@reportnet.net | OBSERVER |
 
 
 Scenario: oa) As a custodian, I want to see the list of current custodians/stewards and be able to add custodians/stewards/observers.
@@ -208,7 +208,7 @@ Then I'm logged at Reportnet page as "userLeadReporter"
 And  I click on "Roles Reportnet Testing"
 And I can click on element "DS-Test"
 And The user logout
-And I'm logged at Reportnet page as "userObserver"
+And I'm logged at Reportnet page as "userObserver2"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Dashboards"
 And I can see the Release status dashboard and Validation dashboards
@@ -223,7 +223,7 @@ And the "button" "Copy Data Collections to EU Datasets" is "not.exist"
 # REP-1304 REP-1503
 Scenario: p) As a observer user I am able to see (read only) help
 
-Given I'm logged at Reportnet page as "userObserver"
+Given I'm logged at Reportnet page as "userObserver2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 When I click on "Roles Reportnet Testing"
 Then I can click on element "Dataflow help"
@@ -257,11 +257,13 @@ Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
-When I can "delete" a editor " test.observer@abc.com" with permissions "OBSERVER"
+And I wait for enter
+And I wait for enter
+When I can "delete" a editor "testobserver@reportnet.net" with permissions "OBSERVER"
 And The user logout
 And I wait for enter
 And I wait for enter
-And I'm logged at Reportnet page as "userObserver"
+And I'm logged at Reportnet page as "userObserver2"
 Then The reporting Dataflow "Roles Reportnet Testing" doesn't exist
 
 
@@ -459,7 +461,6 @@ Scenario: zc) As a NC I can see all the users of the dataflow for this country
 Given I'm logged at Reportnet page as "userObserver2"
 And I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
-And the "action" "Dataflow users list" is "be.visible"
 And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
 | NATIONAL COORDINATOR |  testobserver@reportnet.net |

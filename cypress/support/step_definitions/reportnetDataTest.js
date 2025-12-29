@@ -57,14 +57,14 @@ Given(
   "I'm logged at Reportnet page as {string}",
   (user) => {
     cy.visit('/');
-    cy.wait(4000)
+    cy.wait(1000)
     //homePage.clickonLoginLink();
     cy.contains('Login').click()
     cy.wait(500)
     cy.get("input[type=text]").type(Cypress.env(user).username);
     cy.get("input[type=password]").type(Cypress.env(user).password);
     cy.get("#kc-login").click();
-    cy.wait(8000)
+    cy.wait(2000)
     }
 );
 
@@ -91,9 +91,10 @@ Given(
     //homePage.clickonLoginLink();
     cy.contains('Login').click()
     cy.get("input[type=text]").type(Cypress.env(user).username);
-    cy.get("#whoamiContainerId button[name='whoamiSubmit']").click({force:true})
+    // cy.get("#whoamiContainerId button[name='whoamiSubmit']").click({force:true})
     cy.get("input[name=password]").type(Cypress.env(user).password);
-    cy.get("#loginForm input[type='submit']").click({force:true})
+    // cy.get("#loginForm input[type='submit']").click({force:true})
+    cy.get("#kc-login").click();
     cy.wait(5000)
   }
 );
@@ -219,6 +220,17 @@ When('the {string} is {string}', (visibility_status)=>{
   {
     cy.get('[data-for="validationsStatus"]').should('not.be.visible')
   }
+})
+
+Then("I can set the default severity as a {string}", (name) => {
+  cy.wait(3000)
+  cy.get('.DatasetDesigner_qcDialogFooterWrapper__XCSpe > :nth-child(6) > .p-button-text').click()
+  cy.wait(2000)
+  cy.get('#severityDropdown > .p-dropdown-trigger > .p-dropdown-trigger-icon').click();
+  cy.contains('.p-dropdown-item', name).click();
+  cy.get('.p-dialog-footer > .p-button-animated-blink > .p-button-text').click();
+  cy.get('.DatasetDesigner_closeButton__25-dx').click();
+
 })
 
 When("the button {string} is {string}", (button, property) => {
@@ -912,10 +924,10 @@ When("I click the check to {string} the reporting", (status) => {
 When("I can see the information on {string} with {string} {string} {string}", (name, country, type, acceptance) => {
   bddGeneratedValues.get(name)
   cy.contains(bddGeneratedValues.get(name)).click()
-  cy.contains(country)
+  cy.contains(country).scrollIntoView({ block: "center" }).should("be.visible")
   type === 'released' && cy.get(`tr:contains(${country})>>>>svg[data-icon=check]`)
-  type === 'not released' && cy.get(`tr:contains(${country})> :nth-child(2):contains(-)`)
-  type === 'technical acceptance' && cy.get(`tr:contains(${country})> :nth-child(3):contains(${acceptance})`)
+  type === 'not released' && cy.get(`tr:contains(${country})> :nth-child(3):contains(-)`)
+  type === 'technical acceptance' && cy.get(`tr:contains(${country})> :nth-child(4):contains(${acceptance})`)
   type === 'reference data' && cy.get(`[class*=PublicDataflowInformation_container] > :contains(Reference datasets)>>>>tbody>tr>>>svg[data-icon=file-archive]`)
 })
 
@@ -1048,7 +1060,7 @@ When("I logout", () => {
 })
 
 Then("representative should contain Countries", () => {
-  cy.get('.ManageLeadReporters_dataProvidersDropdown__1CF6Z label span').contains("Countries")
+  cy.get('.ManageLeadReporters_selectWrapper__8IRtz > :nth-child(2) > label').contains("Countries")
 })
 
 When("representing field should include all {string}", file => {
@@ -1137,7 +1149,21 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
   cy.wait(5000)
 })
-
+Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
+  const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
+  const typeValue = name + dynamicallyGeneratedName;
+  bddGeneratedValues.set(name, typeValue);
+  console.log(bddGeneratedValues);
+  cy.get("#dataflowName").clear().type(typeValue);
+  cy.get("#dataflowDescription").clear().type(description);
+ 
+  cy.wait(1000);
+  cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
+  cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
+  cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
+  cy.wait(5000)
+})
 Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} in big data storage with {string}", (action, name, description, obligation, filtered, filters) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
   const typeValue = name + dynamicallyGeneratedName;

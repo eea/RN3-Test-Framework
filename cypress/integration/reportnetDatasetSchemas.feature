@@ -119,7 +119,6 @@ And I import a file "test3.csv"
 And I see the message: "SUCCESS"
 And the "button" "Validate" is "be.enabled"
 And I wait for notification
-And I wait for notification
 And I see the message: "SUCCESS"
 And I reload the page
 And I can see the field "Key2" has 2 error
@@ -136,7 +135,6 @@ And I check replace data
 And I import a "csv" file "test4.csv"
 And I see the message: "SUCCESS"
 And the "button" "Validate" is "be.enabled"
-And I wait for notification
 And I wait for notification
 And I see the message: "SUCCESS"
 And I reload the page
@@ -210,8 +208,6 @@ And I click on "DatasetSchema Test"
 And I can click on element "New schema"
 And I can "import" a dataset schema with name "Dataflow Reportnet Testing"
 When I import a dataset schema "zip" file "Dataflow Reportnet Testing.zip"
-And I wait for notification
-And I wait for notification
 And I wait for notification
 And I reload the page
 Then I can click on element "IMPORTED_DS-Test"

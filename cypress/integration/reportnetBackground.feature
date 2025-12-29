@@ -203,7 +203,6 @@ And I click on "Dataflow Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I wait for notification
-And I wait for notification
 And I see the message: "SUCCESS"
 And I reload the page
 And I click on "Dataflow Reportnet Testing"

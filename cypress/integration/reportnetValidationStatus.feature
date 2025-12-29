@@ -50,7 +50,6 @@ And I can fill a dataset schema with name "Table1", description "description Tab
 | table1f2 | description 2 | Text             |  |      |
 And the "button" "Validate" is "be.enabled"
 And I wait for notification
-And I wait for notification
 And I see the message: "SUCCESS"
 And I can go to the list dataflows page
 And the validations status button is "visible"

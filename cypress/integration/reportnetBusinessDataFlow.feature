@@ -14,6 +14,7 @@ And I can "Add" a editor "seray@gmail.com" with permissions "CUSTODIAN"
 Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I wait for enter
 And I can click on tab "Business dataflows"
 Then I click on "Business dataflow1"
 And I can click on element "Dataflow help"

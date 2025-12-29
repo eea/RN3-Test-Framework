@@ -60,7 +60,7 @@ Then("I can {string} a Data provider with Representative of {string} and account
       {
         cy.get("[class^=p-datatable-row").last().children().eq(1).children().eq(1).select(provider)
         cy.contains('Lead reporter').click()
-        cy.wait(1000)
+        cy.wait(4000)
         cy.get("input:visible[placeholder='New lead reporter e-mail...']:last").type(account+'{enter}');
       }
     if(action === "edit") {
@@ -97,7 +97,7 @@ When("I can {string} a editor {string} with permissions {string}",(action, edito
     cy.get(".p-button > .p-button-text:contains(Save)").click({force:true})
     cy.wait(7000)
   } else {
-    cy.get('.p-datatable-tbody > tr:contains(test.observer) >>>[class*=ActionsColumn_deleteRowButton] > .p-button-text').click({force:true})
+    cy.get('.p-datatable-tbody > tr:contains(testobserver) >>>[class*=ActionsColumn_deleteRowButton] > .p-button-text').click({force:true})
     cy.get(".p-button > .p-button-text:contains(Yes)").click({force:true})
     cy.wait(7000)
   }

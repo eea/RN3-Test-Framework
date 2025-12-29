@@ -58,9 +58,9 @@ Scenario: d) As a data custodian I can add a Data provider
 Given I'm logged at Reportnet page as 'userCustodian2'
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Manage lead reporters"
-Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "seraykilinc35@gmail.com" and Data provider "Spain"
+Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
 And I can click on element "Manage lead reporters"
-And I can see the representative "Spain" "seraykilinc35@gmail.com"
+And I can see the representative "Spain" "test.provider2@abc.com"
 
 
 @sanity
@@ -86,7 +86,6 @@ And I click on "Dataset Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
 And I wait for notification
-And I wait for notification
 And I see the message: "SUCCESS"
 
 
@@ -105,7 +104,7 @@ And the "action" "Dataflows" is "be.visible"
 And I click on "Dataset Reportnet Testing"
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
-And I wait for notification
+And I wait for enter
 And I see the message: "ERROR"
 And I see the message: "You can't release data with blocker errors. Please check it and try again."
 
@@ -155,7 +154,7 @@ When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
 And I wait for notification
 Then I see the message: "SUCCESS"
-And I wait for importing the file
+
 
 
 #REP-1817
@@ -163,7 +162,6 @@ Scenario: k) In the public page I can see the automatically created export file 
 
 Given I'm in Reportnet page
 And I can click on "View by obligation status"
-And I wait for importing the file
 And I can filter obligation dataflow by "name" with "Dataset Reportnet Testing"
 When I click on "Dataset Reportnet Testing"
 Then the public table "Reporting datasets" has 1 records
@@ -178,6 +176,7 @@ And I can click on "View by obligation status"
 And I can filter obligation dataflow by "name" with "Dataset Reportnet Testing"
 And I wait for enter
 And I can see for dataflow "Dataset Reportnet Testing" the instrument "Air Quality Directive IPR", status "Open"
+And I wait for enter
 And I can see the information on "Dataset Reportnet Testing" with "<country>" "<type>" "<technicalAcceptance>"
 And I'm logged at Reportnet page as 'userCustodian2'
 
@@ -353,7 +352,6 @@ Then the "action" "Release data visibility" is "be.visible"
 And I "can not" change to public in the visibility modal
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "restrict to public"
-And I wait for notification
 And I wait for notification
 Then I see the message: "SUCCESS"
 Then the "action" "Release data visibility" is "be.visible"

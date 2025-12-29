@@ -11,6 +11,16 @@ And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
 And Confirm new dataset schema creation is visible
 And I can click on element "DS-Test"
+
+
+Scenario: ab) As a data custodian in desing dataset and table is marked as mandatory, an automatic QC is created and will be blocker
+
+Given I'm logged at Reportnet page as "userCustodian2"
+When I filter the dataflow list by "name" with "New Dataflow Rules Test"
+And I click on "New Dataflow Rules Test"
+And I can click on element "DS-Test"
+And the "button" "QC rules" is "be.visible"
+And I can set the default severity as a "BLOCKER"
 And I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
   | Field1 | description 1 | Number - Integer |  | true |
 And I can fill a dataset schema with name "Table2", description "description Table2" and with following fields
@@ -30,7 +40,7 @@ And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
 And I can filter QCs by "table" with "Table1"
 And I can filter QCs by "levelError" with "BLOCKER"
-Then the code rule "Mandatory table records check" is "be.visible" on the list of rules
+Then the code rule "Mandatory table records check" is "be.visible" on the QC rules page
 And I reload the page
 And I mark the table as a "not mandatory table"
 And I reload the page

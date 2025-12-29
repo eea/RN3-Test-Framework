@@ -53,6 +53,7 @@ And I see the message: "SUCCESS"
 Scenario: g) As a custodian/steward, I want to be able to create a Reference dataflow.
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I wait for enter
 And I can click on "Reference dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 And I "Create" a reference dataflow with name "Reference dataflow" and description "new description Reference Test"
@@ -92,7 +93,9 @@ And I can click on "Reference dataflow"
 Scenario: i) As a custodian/steward, I want to be able to update data in a reference dataset if it is marked as updatable.
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I wait for enter
 And I can click on "Reference dataflows"
+And I wait for enter
 And I can filter by "name" with "Reference dataflow"
 And I click on "Reference dataflow"
 And I can click on element "DS-Reference-Test"
@@ -108,7 +111,9 @@ And I "can not" update the cell with the text "test2" to the text "test4" in a "
 Scenario: j) As a custodian, I want to be able to create a Citizen and science dataflow.
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I wait for enter
 And I can click on tab "Citizen science dataflows"
+And I wait for enter
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Marine LitterWatch" with "noFilters"
 

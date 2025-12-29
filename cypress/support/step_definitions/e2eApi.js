@@ -10,7 +10,7 @@ Given("I'm logged at Reportnet api as {string}", (user) => {
     cy.request ({
         method: "POST",
         url: "https://sandbox-api.reportnet.europa.eu/user/generateToken",
-        qs:{"username":"test.custodian2",
+        qs:{"username":"seray_custodian",
     "password":"1234"}
    }).then((response)=>{
         
