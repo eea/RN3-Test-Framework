@@ -37,6 +37,7 @@ And I can see the specified record in the table
 Scenario: c) As a data custodian I can create new dataset schema
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -53,6 +54,7 @@ And I can click on element "DS2"
 Scenario: d) As a data custodian I can fill a dataset schema
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
@@ -93,11 +95,13 @@ And I can click on element "Reference data"
 And I can fill a dataset schema with name "Information", description "description Information" and with following fields
  | code  | description 1 | Text | | true |
  | label | description 2 | Text | | true |
+And I can click the edit records manually checkbox
 And I change to "Tabular data" mode
 And I can add a record 
 | 1 | test1 |
 And I can add a record 
 | 2 | test2 |
+And I can click the edit records manually checkbox
 And I set the design dataset as "Reference dataset"
 # And I set the design dataset as "Available in public view"
 And the "button" "External integrations" is "be.disabled"
@@ -118,32 +122,38 @@ Then I can fill a dataset schema with name "Table2", description "description Ta
  | Field1 | Field 1 description | Number - Integer | | |
  | Field2 | Field 2 description | Link | | |
 And I can select a "Link" "Table1 - Field1" with label field "" and linked field "" and master field "" and ignore case "" for dataflow ""
+And I can click the edit records manually checkbox
 And I change to "Tabular data" mode
 And I can add a record 
 |1| |
 And I can add a record 
 |2| |
+And I can click the edit records manually checkbox
 Then I mark the table as a "read only"
 
 #REP-458
 Scenario: h) As a data custodian I can fill a prefilled dataset schema 
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
 And I can fill a dataset schema with name "Table3", description "description Table3" and with following fields
  | Field1 | Field 1 description | Number - Integer | | |
 And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
 And I can add a record 
 |3| |
 And I can add a record 
 |4| |
+And I can click the edit records manually checkbox
 Then I mark the table as a "prefilled"
 
 #REP-818 REP-819
 Scenario: i) As a Custodian, I am able to mark a field as read-only and fixed number of records so reporters can't change value of this field and can't modify the number of records
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "DS-Test"
 Then I can fill a dataset schema with name "Table4", description "description Table4" and with following fields
@@ -151,13 +161,16 @@ Then I can fill a dataset schema with name "Table4", description "description Ta
 And I mark the table as a "prefilled"
 And I mark the table as a "fixed number of records"
 And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
 And I can add a record 
 |1| |
+And I can click the edit records manually checkbox
 
 # REP-850
 Scenario: j) As a data custodian I can delete all lead reporters
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
@@ -173,6 +186,7 @@ Then I can delete all lead reporters
 Scenario: ja) As a data custodian I can add a Data provider
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
@@ -185,6 +199,7 @@ And I can see the representative "Finland" "test.provider@abc.com"
 Scenario: jb) As a data custodian I can Import and replace lead reporters
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can click on element "Manage lead reporters"
 And I can "Import and replace" Lead reporters
@@ -196,6 +211,7 @@ And I can see the representative "Finland" "test.provider2@abc.com"
 Scenario: k) As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
 And I click on "Dataflow Reportnet Testing"
 And I can change on "DS-Test" the type of field "Field 2" on table "Table2" to "Text"
 And I can go to the list dataflows page
@@ -215,10 +231,12 @@ And I can go to the dataflow page
 And I can click on element "Test dataset"
 And I can click on element "Test Dataset - DS-Test"
 And I wait for enter
+And I click the edit records manually checkbox as a provider 
 Then I can add a record 
 | 101 | |
 And I wait for enter
 And I delete the dataset table row 1
+And I click the edit records manually checkbox as a provider 
 And I can go to the dataflow page
 And I can click on element "Technical feedback"
 When I select the country "Spain" 

@@ -30,12 +30,14 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
   | label | label description | Text             |  | false |
 And I click on table "Table1"
 And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
 And I can add a record
   | 1 | test1 |
 And I can add a record
   | 2 | test2 |
 And I can add a record
   | 3 | test3 |
+And I can click the edit records manually checkbox
 And I can go to the dataflow page
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider in a BDR with account "test.provider2@abc.com" and Data provider "Company4"
@@ -110,12 +112,14 @@ Scenario: g) As a lead reporter I want to be able to see the label for ongoing i
 Given I'm logged at Reportnet page as 'userCustodian2'
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Test import message" and description "test import message" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I filter the dataflow list by "name" with "Test import message"
 And I click on "Test import message"
 And the "action" "Manage requesters" is "be.visible"
 And I can "Add" a editor "test.provider2@abc.com" with permissions "CUSTODIAN"
 And I click on close button
 And I logout
 And I'm logged at Reportnet3 page as 'userProvider2'
+And I filter the dataflow list by "name" with "Test import message"
 And I click on "Test import message"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "test import status"

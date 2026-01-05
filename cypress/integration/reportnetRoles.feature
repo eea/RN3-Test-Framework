@@ -5,6 +5,7 @@ Scenario: a) As a data custodian I can add a new data flow
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 When I "Create" a reporting dataflow with name "Roles Reportnet Testing" and description "Description Roles Reportnet Testing" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -45,7 +46,6 @@ Scenario: e) As a CUSTODIAN or STEWARD, I want to share access rights with edito
 
 Given I'm logged at Reportnet page as "userCustodian2"
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
-And I wait for enter
 And I wait for enter
 And I click on "Roles Reportnet Testing"
 And the "action" "Manage requesters" is "be.visible"
@@ -121,7 +121,6 @@ And I can click on element "Belgium"
 Scenario: j) As a custodian I can see all the users of the dataflow for this country
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I wait for enter
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
@@ -161,8 +160,10 @@ When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Spain"
 And I can click on element "DS-Test"
+And I click the edit records manually checkbox as a provider
 And I can add a record
     | 101 |  |
+And I click the edit records manually checkbox as a provider
 And I can go to the dataflow page
 And I can click on element "Spain"
 When I can click on element "Release to data collection"
@@ -175,9 +176,7 @@ And I see the message: "SUCCESS"
 Scenario Outline: n) As a reporter in multiple providers inside a dataflow, I can see the status for each provider in dataflow list and inside the dataflow
 
 Given I'm logged at Reportnet3 page as "userProvider2"
-And I wait for enter
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
-And I wait for enter
 And I wait for enter
 And I can see the "<delivery status>" on "Roles Reportnet Testing"
 And I can click on "Roles Reportnet Testing"
@@ -205,10 +204,12 @@ And I can see the specified record in the table
 
 Scenario: oa) As a custodian, I want to see the list of current custodians/stewards and be able to add custodians/stewards/observers.
 Then I'm logged at Reportnet page as "userLeadReporter"
+When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And  I click on "Roles Reportnet Testing"
 And I can click on element "DS-Test"
 And The user logout
 And I'm logged at Reportnet page as "userObserver2"
+When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Dashboards"
 And I can see the Release status dashboard and Validation dashboards
@@ -261,7 +262,6 @@ And I wait for enter
 And I wait for enter
 When I can "delete" a editor "testobserver@reportnet.net" with permissions "OBSERVER"
 And The user logout
-And I wait for enter
 And I wait for enter
 And I'm logged at Reportnet page as "userObserver2"
 Then The reporting Dataflow "Roles Reportnet Testing" doesn't exist
@@ -320,6 +320,7 @@ Then I can see the specified records in the table
 Scenario: sa) As an custodian, I want to be able to see a helpdesk inside a dataflow containing info about all the datasets
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I wait for enter
 When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And the "action" "Datasets info" is "be.visible"
@@ -352,9 +353,11 @@ When I filter the dataflow list by "name" with "Roles Reportnet Testing"
 And I click on "Roles Reportnet Testing"
 And I can click on element "Test dataset"
 And I can click on element "Test Dataset - DS-Test"
+And I click the edit records manually checkbox as a provider
 Then I can add a record 
 | 101 | |
 And I delete the dataset table row 1
+And I click the edit records manually checkbox as a provider
 
 
 # REP-2046

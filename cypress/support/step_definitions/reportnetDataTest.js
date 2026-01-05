@@ -204,11 +204,12 @@ When("the {string} {string} is {string}", (type, button, property) => {
     property === "be.visible" && cy.contains(button).click({ force: true });
   } else {
     property === "be.visible" && cy.get(`[class*=dataflowList-left-side]:contains(${button})>a`).click({ force: true });
+    cy.wait(3000)
   }
   if (button === "Validate" && property === 'be.enabled') {
     setDialog("Yes")
   }
-  cy.wait(3000)
+  cy.wait(5000)
 });
 
 When('the {string} is {string}', (visibility_status)=>{
@@ -367,6 +368,13 @@ Then("I can click on the link to be redirected to another page", () => {
    cy.get('[class*=PublicDataflowInformation_container] > :contains(' + table + ')>>>>tbody>tr').should("have.length", records);
  });
 
+ When("I click the Imported Files button, I can see the imported {} files", (fileNumbers) => {
+   cy.get('.p-toolbar-group-right > :nth-child(1) > .p-button-text').should('be.visible').click();
+   cy.get('.p-datatable .p-datatable-tbody tr:visible').should('have.length', fileNumbers);
+   cy.contains('button, .p-button', 'Close').should('be.visible').click()
+ });
+
+
 Then("the table Documents has {} record(s)", (records) => {
   cy.get('.PublicDataflowInformation_dataTableWrapper__XQCgZ:last tbody tr').should("have.length", records);
 });
@@ -418,7 +426,7 @@ When("I reload the page", () => {
 });
 
 When("I wait for notification", () => {
-  cy.wait(70000);
+  cy.wait(40000);
 })
 
 When("I wait for validation", () => {
@@ -647,8 +655,9 @@ When("I filter the dataflow list by {string} with {string}", (field, name) => {
   cy.wait(5000)
   if (field === 'name') {
     cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
-    cy.wait(5000)
+    cy.wait(7000)
     cy.get('.Filters_filterButton__1OEWb .p-button-text.p-c').click({force:true})}
+    cy.wait(7000)
   })
 
 When("The first dataflow is {string} and the last dataflow is {string}", (first, last) => {
@@ -878,7 +887,8 @@ Then(
     cy.get(':nth-child(2) > .p-dropdown > .p-dropdown-label').click({ force: true })
     cy.contains(type).click({ force: true })
     cy.wait(500)
-    cy.get('#pageContent').click()
+    // cy.get('#pageContent').click()
+    cy.get('body').type('{esc}');
     cy.contains("div", newFormat)
   }
 );
@@ -1008,7 +1018,7 @@ When("I can change the Restrict from public view inside {string} context menu to
 })
 
 When("I {string} change to public in the visibility modal", (action) => {
-  cy.wait(2000)
+  cy.wait(6000)
   if (action === 'can not') {
     cy.get('[class*=Dataflow_restrictFromPublicNote]:contains(Released data has already been publicly available)')
     cy.contains("Cancel").click()
@@ -1340,7 +1350,27 @@ When("I click on the schema {string}", element => {
 
 Then ("I can click the edit records manually checkbox", ()=>{
   cy.wait(7000)
-  cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68 > .null > .p-button-text').click({force:true})
+ cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68 > .null > .p-button-text').click({force:true})
+  
+// cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68').within(() => {
+//     cy.contains('button', 'Enable editing').click({ force: true });})
+
+  cy.wait(18000)
+});
+
+Then ("I can click the edit records manually checkbox for reference dataset", ()=>{
+  cy.wait(7000)
+  cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68').within(() => {
+  cy.contains('button', 'Enable editing').click({ force: true });})
+
+  cy.wait(18000)
+});
+
+Then ("I can click the disable editing button for reference dataset", ()=>{
+  cy.wait(7000)
+  cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68').within(() => {
+  cy.contains('button', 'Disable editing').click({ force: true });})
+
   cy.wait(18000)
 });
 

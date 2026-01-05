@@ -6,6 +6,7 @@ Scenario: a) As a data custodian I can create new dataflow and dataset schema wi
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 And I "Create" a reporting dataflow with name "Webform Test" and description "Webform Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I filter the dataflow list by "name" with "Webform Test"
 And I click on "Webform Test"
 Then I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -16,6 +17,7 @@ And Confirm new dataset schema creation is visible
 Scenario: b) As a custodian, I want to configure the webform used in each dataset
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Webform Test"
 And I click on "Webform Test"
 And I can click on element "DS-Test"
 And I can click on "Configure webform"
@@ -27,6 +29,7 @@ Then I will see the webform configured
 Scenario: c) As a data custodian I can delete a data flow
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Webform Test"
 And I click on "Webform Test"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "Webform Test"

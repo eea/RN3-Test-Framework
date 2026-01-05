@@ -39,6 +39,7 @@ Scenario: d) As a Data Custodian I can redirect to the reporting dataset from th
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 And  I "Create" a reporting dataflow with name "Validation Reportnet Testing" and description "Dataflow validation test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I filter the dataflow list by "name" with "Validation Reportnet Testing"
 When I click on "Validation Reportnet Testing"
 And I get the dataflow ID from the url
 And I can click on element "New schema"

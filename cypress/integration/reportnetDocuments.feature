@@ -7,6 +7,7 @@ Scenario: a) As a data custodian I can add a new data flow with obligations
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Document Reportnet Testing" and description "Dataflow document test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -28,6 +29,7 @@ And I can see the representative "Spain" "test.provider@abc.com"
 Scenario: b) As a data custodian I can add documents to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "Dataflow help"
 And the "button" "Upload" is "be.enabled"
@@ -49,6 +51,7 @@ And The first record is "table description" and the last record is "test descrip
 Scenario: c) As a data custodian I can not upload documents with empty fields
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "Dataflow help"
 And the "button" "Upload" is "be.enabled"
@@ -73,6 +76,7 @@ And the table "Supporting documents" has 2 records
 Scenario: e) As a Reportnet User I can download documents
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "Dataflow help"
 Then I can download the document
@@ -82,6 +86,7 @@ Then I can download the document
 Scenario: f) As a data custodian I can delete documents to dataflow
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "Dataflow help"
 When I "delete" the row 1
@@ -93,6 +98,7 @@ Then the table "Supporting documents" has 1 records
 Scenario: g) As a custodian/steward, I want to be able to set the documents as public
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "Dataflow help"
 And the "button" "Upload" is "be.enabled"
@@ -103,6 +109,7 @@ When I "upload" the document "test.csv" with description "public document" and l
 Scenario: h) As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "Document Reportnet Testing"
 And I click on "Document Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"

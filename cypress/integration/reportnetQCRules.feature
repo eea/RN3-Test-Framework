@@ -6,6 +6,7 @@ Scenario: a) As a data custodian I can add a new data flow with DS
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "New Dataflow Rules Test" and description "Description New Dataflow Rules Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+When I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -72,10 +73,12 @@ And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
 And I can add a record
   | 1 |  |
 And I can add a record
   | 6 |  |
+And I can click the edit records manually checkbox
 Then the "button" "Validate" is "be.enabled"
 And I can see the message: "INFO"
 And I wait for validation
@@ -122,6 +125,7 @@ And I see the message: "SUCCESS"
 Scenario: f) As a data custodian I can edit QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -139,6 +143,7 @@ And the qcRules list has 1 items
 Scenario: fa) As a data custodian I can duplicate QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -184,6 +189,7 @@ Then the code rule "SQLMsgTest" with message "Value: <field1> doesn't match the 
 Scenario Outline: h) As a data custodian I can filter QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -198,6 +204,7 @@ Examples:
 Scenario Outline:i) As a data custodian I can filter QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -225,6 +232,7 @@ And the code rule "SQLMsgTest" is "not.exist" on the list of rules
 Scenario: k) As a data custodian I can create Row QC Rule
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 Then I can click on "Add row constraint"
@@ -273,6 +281,7 @@ And the code rule "sqlRule" is "be.visible" on the list of rules
 Scenario: n) As a custodian, I want to validate SQL QCs with a button in the list of Qcs (correct SQLs)
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -284,6 +293,7 @@ And I see the message: "SUCCESS"
 Scenario: o) As a user, I want to download QC list in CSV
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -295,6 +305,7 @@ And I see the message: "SUCCESS"
 Scenario: p) As a custodian, I want to validate SQL QCs with a button in the list of Qcs (incorrect SQLs)
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"
@@ -313,6 +324,7 @@ And I see the message: "The rule sqlIncorrectRule is not valid"
 Scenario: q) As a custodian, I want to see a warning when I am going to create the data collection in case I have invalid QCs and/or disabled Qcs
 
 Given I'm logged at Reportnet page as "userCustodian2"
+And I filter the dataflow list by "name" with "New Dataflow Rules Test"
 And I click on "New Dataflow Rules Test"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider@abc.com" and Data provider "Spain"
@@ -395,6 +407,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 And I wait for enter
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Rules historic changes Test" and description "Dataflow document test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I filter the dataflow list by "name" with "Rules historic changes Test"
 And I click on "Rules historic changes Test"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -415,7 +428,7 @@ And I can see the representative "Spain" "test.provider@abc.com"
 Scenario: w) As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I wait for enter
+And I filter the dataflow list by "name" with "Rules historic changes Test"
 And I click on "Rules historic changes Test"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
@@ -428,7 +441,6 @@ And I see the message: "SUCCESS"
 Scenario: x) As a data custodian I can create new field constraint QC Rules (quotes control on inputs)
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I wait for notification
 And I filter the dataflow list by "name" with "Rules historic changes Test"
 And I wait for enter
 And I click on "Rules historic changes Test"
@@ -447,7 +459,6 @@ And the new qc rule "qc1 'Test'" is "correct"
 Scenario: y) As a data custodian I can edit QC Rules
 
 Given I'm logged at Reportnet page as "userCustodian2"
-And I wait for notification
 And I filter the dataflow list by "name" with "Rules historic changes Test"
 And I wait for enter
 And I click on "Rules historic changes Test"
@@ -470,7 +481,6 @@ Scenario: z) As a data custodian I can see the historic changes on each QC
 
 Given I'm logged at Reportnet page as "userCustodian2"
 And I filter the dataflow list by "name" with "Rules historic changes Test"
-And I wait for enter
 And I click on "Rules historic changes Test"
 And I can click on element "DS-Test"
 And the "button" "QC rules" is "be.visible"

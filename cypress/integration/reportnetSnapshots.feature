@@ -6,6 +6,7 @@ Scenario: a) As a data custodian I can add a new data flow
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "Snapshot dataflow Test" and description "Snapshot dataflow Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I filter the dataflow list by "name" with "Snapshot dataflow Test"
 And I click on "Snapshot dataflow Test"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -29,6 +30,7 @@ When I can "Add" a editor "test.provider2@abc.com" with permissions "CUSTODIAN"
 Scenario: b) As a data provider I can save a copy of a dataset
 
 Given I'm logged at Reportnet page as "userProvider2"
+And I filter the dataflow list by "name" with "Snapshot dataflow Test"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"
@@ -39,6 +41,7 @@ Then I can save a copy with description "New copy"
 Scenario: c) As a data provider I can restore a copy of a dataset
 
 Given I'm logged at Reportnet page as "userProvider2"
+And I filter the dataflow list by "name" with "Snapshot dataflow Test"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"
@@ -48,6 +51,7 @@ Then I can "restore" a dataset copy
 Scenario: d) As a data provider I can delete a copy of a dataset
 
 Given  I'm logged at Reportnet page as "userProvider2"
+And I filter the dataflow list by "name" with "Snapshot dataflow Test"
 And I click on "Snapshot dataflow Test"
 And I can click on element "DS-Test"
 And I click on the tab "Manage copies"
