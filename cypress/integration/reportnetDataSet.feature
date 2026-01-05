@@ -13,6 +13,7 @@ Then  I "Create" a reporting dataflow with name "Dataset Reportnet Testing" and 
 Scenario: b) As a data custodian I can create new dataset schema
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -29,6 +30,7 @@ And Confirm new dataset schema creation is visible
 Scenario: c) As a data custodian I can fill a dataset schema
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
 Then I can fill a dataset schema with name "Table1", description "description Table1" and with following fields
@@ -48,14 +50,17 @@ Then I can fill a dataset schema with name "Table4", description "description Ta
 And I mark the table as a "prefilled"
 And I mark the table as a "fixed number of records"
 And I change to "Tabular data" mode
+And I can click the edit records manually checkbox
 And I can add a record 
 |1| |
+And I can click the edit records manually checkbox
 
 
 @sanity
 Scenario: d) As a data custodian I can add a Data provider
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Manage lead reporters"
 Then I can "add" a Data provider with Representative of "All countries: EEA member countries PLUS other countries and territories" and account "test.provider2@abc.com" and Data provider "Spain"
@@ -67,6 +72,7 @@ And I can see the representative "Spain" "test.provider2@abc.com"
 Scenario: e) As a data custodian I can create new field constraint QC Rules
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
 When the "button" "QC rules" is "be.visible"
@@ -82,6 +88,7 @@ And the code rule "blocker Test" is "be.visible" on the list of rules
 Scenario: f) As a data custodian I can create data collections
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "Create data collections"
 Then I can create data collections with a technical acceptance step for the reporter submissions and "public"
@@ -98,8 +105,10 @@ And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
+And I click the edit records manually checkbox as a provider
 And I can add a record
     | 101 |  |
+And I click the edit records manually checkbox as a provider    
 And the "action" "Dataflows" is "be.visible"
 And I click on "Dataset Reportnet Testing"
 When I can click on element "Release to data collection"
@@ -140,11 +149,15 @@ Given I'm logged at Reportnet3 page as 'userProvider2'
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS2"
+And I click the edit records manually checkbox as a provider
 And I can add a record
     | 101 |  |
+And I click the edit records manually checkbox as a provider    
 And I can go to the dataflow page
 And I can click on element "DS-Test"
+And I click the edit records manually checkbox as a provider
 When I delete the dataset table row 1
+And I click the edit records manually checkbox as a provider
 And the "button" "Import table data" is "be.enabled"
 And I import a file "test.csv"
 Then I see the message: "SUCCESS"
@@ -236,7 +249,9 @@ When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
 And I click on table "Table4"
+And I click the edit records manually checkbox as a provider
 Then I "can not" update the cell with the text "1" to the text "2" in a "dataset"
+And I click the edit records manually checkbox as a provider
 
 
 #REP-819
@@ -259,7 +274,9 @@ And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
+And I click the edit records manually checkbox as a provider
 Then I "can" update the cell with the text "data1" to the text "123" in a "dataset"
+And I click the edit records manually checkbox as a provider
 
 
 #REP-855
@@ -290,7 +307,9 @@ When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
 And the dataset table "Table1" has 2 records
+And I click the edit records manually checkbox as a provider
 When I delete the dataset table row 1
+And I click the edit records manually checkbox as a provider
 And I reload the page
 Then the dataset table "Table1" has 1 records
 
@@ -302,10 +321,12 @@ And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
+And I click the edit records manually checkbox as a provider
 And the "button" "Paste records" is "be.enabled"
 And I paste the data from file "test_paste.txt"
 And I reload the page
 Then the dataset table "Table1" has 2 records
+And I click the edit records manually checkbox as a provider
 
 
 @sanity
@@ -341,12 +362,16 @@ And I wait for enter
 When I filter the dataflow list by "name" with "Dataset Reportnet Testing"
 And I click on "Dataset Reportnet Testing"
 And I can click on element "DS-Test"
+And I click the edit records manually checkbox as a provider
 And I can add a record
     | 1 |  |
+And I click the edit records manually checkbox as a provider    
 And I can go to the dataflow page
 And I can click on element "DS2"
+And I click the edit records manually checkbox as a provider
 And I can add a record
     | 1 |  |
+And I click the edit records manually checkbox as a provider    
 And I can go to the dataflow page
 Then the "action" "Release data visibility" is "be.visible"
 And I "can not" change to public in the visibility modal
@@ -356,6 +381,8 @@ And I wait for notification
 Then I see the message: "SUCCESS"
 Then the "action" "Release data visibility" is "be.visible"
 And I "can" change to public in the visibility modal  
+And I reload the page
+And I wait for validation
 Then the "action" "Release data visibility" is "be.visible"
 And I "can not" change to public in the visibility modal  
 
@@ -391,11 +418,3 @@ Then I can see the dataset schema "<datasetName>"
 Examples:
   | datasetName |
   | DS-Test     |
-
-
-
-
-
-
-
-

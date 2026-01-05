@@ -5,6 +5,7 @@ Scenario: a) As a data custodian I can add a new data flow
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "New Test" and description "new description New Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I filter the dataflow list by "name" with "New Test"
 And I click on "New Test"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-Test"
@@ -17,6 +18,7 @@ Then I can fill a dataset schema with name "Table1", description "description Ta
 Scenario: b) As a data custodian I can edit a data flow
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I filter the dataflow list by "name" with "New Test"
 And I click on "New Test"
 And the "action" "Edit" is "be.visible"
 Then I can "Save" a dataflow with name "Test edited" and description "old description Test2" and obligation "(C) Preliminary information on the assessment regime (Article 7)" with "noFilters"
@@ -26,6 +28,7 @@ Then I can "Save" a dataflow with name "Test edited" and description "old descri
 Scenario: e) As a registered user I can import a zip file through an external integration
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I filter the dataflow list by "name" with "Test edited"
 And I click on "Test edited"
 And I can click on element "DS-Test"
 And the "button" "External integrations" is "be.visible"
@@ -44,6 +47,7 @@ Then I see the notification "Loaded data completed at DS-Test" in the notificati
 Scenario: f) As a data custodian I can delete a data flow
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I filter the dataflow list by "name" with "Test edited"
 And I click on "Test edited"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "Test edited"
@@ -71,12 +75,14 @@ And I can fill a dataset schema with name "Table2", description "description Tab
   | label | label description | Text             |  | false |
 And I click on table "Table1"
 And I change to "Tabular data" mode
+And I can click the edit records manually checkbox for reference dataset
 And I can add a record
   | 1 | test1 |
 And I can add a record
   | 2 | test2 |
 And I can add a record
   | 3 | test3 |
+And I can click the disable editing button for reference dataset
 And I can go to the dataflow page
 And I can create reference datasets
 And I can see a warning for the tables without PK
@@ -102,6 +108,7 @@ And I can click on element "DS-Reference-Test"
 And I "can not" update the cell with the text "test1" to the text "test4" in a "reference dataset"
 And the "action" "Update status" is "be.visible"
 When I "Unlock" the reference dataset
+And I click the edit records manually checkbox as a provider
 And I "can" update the cell with the text "test1" to the text "test4" in a "reference dataset"
 And the "action" "Update status" is "be.visible"
 Then I "Lock" the reference dataset
@@ -144,6 +151,7 @@ Scenario: l) As a custodian I want to create new datasets available in public vi
 Given I'm logged at Reportnet page as "userCustodian2"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a reporting dataflow with name "New Test public available" and description "new description New Test" and representative "All countries: EEA member countries PLUS other countries and territories" and obligation "(C) Information on the assessment regime (Article 7)" with "noFilters"
+And I can filter by "name" with "New Test public available"
 And I click on "New Test public available"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-public"
@@ -158,6 +166,7 @@ Given I'm logged at Reportnet page as "userCustodian2"
 And I can click on tab "Citizen science dataflows"
 And the "action" "Create new dataflow" is "be.visible"
 Then I "Create" a citizen dataflow with name "Citizen test dataflow public available" and description "new description Citizen Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Marine LitterWatch" with "noFilters" 
+And I filter the dataflow list by "name" with "Citizen test dataflow public available"
 And I click on "Citizen test dataflow public available"
 And I can click on element "New schema"
 And I can create a dataset schema public available with name "DS-public"

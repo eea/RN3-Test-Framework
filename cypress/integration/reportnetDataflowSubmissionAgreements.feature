@@ -11,6 +11,7 @@ Then I "Create" a reporting dataflow with name "Submission Agreement Test" and d
 Scenario: b) As a data custodian the dataflow properties must show the information from ROD3
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I filter the dataflow list by "name" with "Submission Agreement Test"
 When I click on "Submission Agreement Test"
 Then the "action" "Properties" is "be.visible"
 And I can see the information from ROD3 with obligation "(C) Information on the assessment regime (Article 7)" and instrument "Air Quality Directive IPR"
@@ -57,6 +58,7 @@ Then I "Create" a reporting dataflow with name "Submission Agreement Search Test
 Scenario: g) As a data custodian I can delete a data flow Submission Agreement Test Edited
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I filter the dataflow list by "name" with "Submission Agreement Test Edited"
 And I click on "Submission Agreement Test Edited"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "Submission Agreement Test Edited"
@@ -67,6 +69,7 @@ And I see the message: "SUCCESS"
 Scenario: h) As a data custodian I can delete a data flow Submission Agreement Search Test
 
 Given I'm logged at Reportnet page as 'userCustodian2'
+And I filter the dataflow list by "name" with "Submission Agreement Search Test"
 And I click on "Submission Agreement Search Test"
 And the "action" "Edit" is "be.visible"
 Then I can delete the dataflow "Submission Agreement Search Test"
