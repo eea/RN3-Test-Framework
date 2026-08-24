@@ -143,11 +143,11 @@ When("I can see the dataflows page", () => {
 When("I can click on {string}", element => {
   cy.wait(5000);
   cy.contains(element).click({ force: true })
-  cy.wait(2500);
+  cy.wait(5500);
 })
 
 When("I can click on tab {string}", element => {
-  cy.wait(6000);
+  cy.wait(10000);
   cy.contains(element).click({ force: true })
   cy.wait(3000);
 })
@@ -169,9 +169,9 @@ When("I can click on element {string}", element => {
 });
 
 When("I can click on the button with text {string}", (element) => {
-  cy.wait(4000)
+  cy.wait(6000)
   cy.get('button').contains(element).click()
-  cy.wait(2000)
+  cy.wait(4000)
  });
 
 When("I can check on the checkbox ignore case", element => {
@@ -207,9 +207,9 @@ When("the {string} {string} is {string}", (type, button, property) => {
     cy.wait(3000)
   }
   if (button === "Validate" && property === 'be.enabled') {
-    setDialog("Yes")
+    cy.get('.p-dialog-content > :nth-child(1) > .p-button > .p-button-text').click({ force: true });
+  cy.wait(7000)
   }
-  cy.wait(5000)
 });
 
 When('the {string} is {string}', (visibility_status)=>{
@@ -263,7 +263,7 @@ When("I import a {string} file {string}", (filetype, file) => {
       )
   cy.wait(2000)
   cy.contains("Upload").click()
-  cy.wait(3000)
+  cy.wait(1000)
 });
 
 When("I import a dataset schema {string} file {string}", (filetype, file) => {
@@ -426,7 +426,7 @@ When("I reload the page", () => {
 });
 
 When("I wait for notification", () => {
-  cy.wait(40000);
+  cy.wait(70000);
 })
 
 When("I wait for validation", () => {
@@ -591,9 +591,9 @@ Then("I can filter by {string} with {string}", (field,filter) => {
     cy.get(`div[id=${field}]`).click({ force: true })
     cy.contains(new RegExp("^" + filter + "$", "g")).click({ force: true })
   }
-  cy.wait(1000)
+  cy.wait(3000)
   cy.get('[class*=Filters_filterButton]').children().click({ force: true })
-  cy.wait(2000)
+  cy.wait(3000)
 })
 
 
@@ -655,9 +655,9 @@ When("I filter the dataflow list by {string} with {string}", (field, name) => {
   cy.wait(5000)
   if (field === 'name') {
     cy.get(`[id='${field}_input']`).type(bddGeneratedValues.get(name))
-    cy.wait(7000)
+    cy.wait(9000)
     cy.get('.Filters_filterButton__1OEWb .p-button-text.p-c').click({force:true})}
-    cy.wait(7000)
+    cy.wait(8000)
   })
 
 When("The first dataflow is {string} and the last dataflow is {string}", (first, last) => {
@@ -1156,8 +1156,9 @@ Then("I {string} a reporting dataflow with name {string} and description {string
   cy.get('[class*=ManageDataflowForm_search] > .p-button').click({ force: true })
   cy.get('.p-datatable-row:contains(' + obligation + ') .p-checkbox').click({ force: true })
   cy.get('button:contains(OK):visible').click({ force: true })
+  cy.get('#officialReportingCheckbox > .p-checkbox-box').click({ force: true })
   cy.get('.p-button-text:contains(' + action + ')').click({ force: true })
-  cy.wait(5000)
+    cy.wait(5000)
 })
 Then("I {string} a reporting dataflow with name {string} and description {string} and obligation {string} with {string}", (action, name, description, obligation, filtered, filters) => {
   const dynamicallyGeneratedName = Math.random().toString(36).substring(2, 7);
@@ -1363,7 +1364,7 @@ Then ("I can click the edit records manually checkbox for reference dataset", ()
   cy.get('.DatasetDesigner_datasetConfigurationButtons__2mW68').within(() => {
   cy.contains('button', 'Enable editing').click({ force: true });})
 
-  cy.wait(18000)
+  cy.wait(20000)
 });
 
 Then ("I can click the disable editing button for reference dataset", ()=>{

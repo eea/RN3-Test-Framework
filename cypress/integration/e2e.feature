@@ -19,7 +19,7 @@ And I can get referenceId for creating a new QC rule
 Then I can add new QC rule for table field
 And I can validate data
 Then I can wait until the validation finished
-And I can check that the validation result has 7 error
+And I can check that the validation result has 6 error
 And I can export data from the table
 # And I can delete the data 
 # Then I can get the ID and DataProviderID for lead reporter

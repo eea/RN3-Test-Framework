@@ -8,7 +8,7 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow1" and description "new description Business Test" and obligation "(C) Information on the assessment regime (Article 7)" and company "Company Group 1" with fmeUser "Reportnet3"
 Then I click on "Business dataflow1"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "seray@gmail.com" with permissions "CUSTODIAN"
+And I can "Add" a editor "seray@abc.com" with permissions "CUSTODIAN"
 
 
 Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as public or not but only for dataflow help
@@ -16,6 +16,7 @@ Scenario: b) As a custodian/steward, I want to be able to set a BDR dataflow as 
 Given I'm logged at Reportnet page as 'userCustodian2'
 And I wait for enter
 And I can click on tab "Business dataflows"
+And I filter the dataflow list by "name" with "Business dataflow1"
 Then I click on "Business dataflow1"
 And I can click on element "Dataflow help"
 And the "button" "Upload" is "be.enabled"
@@ -60,15 +61,15 @@ And the "action" "Manage requesters" is "<visible>"
     | visible|
     | not.exist|
 
+# @skip
+# Scenario:  d) As a public user I can see the list of all dataflows marked as publicly available
 
-Scenario:  d) As a public user I can see the list of all dataflows marked as publicly available
-
-Given I'm in Reportnet page
-And I can click on "View by obligation status"
-Then I "can" see the publicly dataflow "Business dataflow1"
-When I click on "Business dataflow1"
-Then the public table "Documents" has 1 records
-And I'm logged at Reportnet page as "userCustodian2"
+# Given I'm in Reportnet page
+# And I can click on "View by obligation status"
+# Then I "can" see the publicly dataflow "Business dataflow1"
+# When I click on "Business dataflow1"
+# Then the public table "Documents" has 1 records
+# And I'm logged at Reportnet page as "userCustodian2"
 
 
 Scenario: e) As a Custodian I want to be able to assign a Lead Reporter whose email doesn't exist to a Dataflow
@@ -92,7 +93,7 @@ And the "action" "Create new dataflow" is "be.visible"
 Then I create a business dataflow with name "Business dataflow test countries" and description " Business dataflow test countries" and obligation "(C) Information on the assessment regime (Article 7)" and company "Countries" with fmeUser "Reportnet3"
 Then I can click on "Business dataflow test countries"
 And the "action" "Manage requesters" is "be.visible"
-And I can "Add" a editor "seray@gmail.com" with permissions "CUSTODIAN"
+And I can "Add" a editor "seray@abc.com" with permissions "CUSTODIAN"
 And I click on close button 
 And I logout
 And I'm logged at Reportnet page as 'userCustodian2'

@@ -42,7 +42,7 @@ And I can click on the list element with the name "ZIP (.zip)"
 And I import a "zip" file "DS-Test.zip"
 Then I see the message: "SUCCESS"
 And the "action" "Notifications" is "be.visible"
-Then I see the notification "Loaded data completed at DS-Test" in the notification received list
+Then I see the notification "The import for dataset DS-Test was successful" in the notification received list
 
 Scenario: f) As a data custodian I can delete a data flow
 

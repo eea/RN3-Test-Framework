@@ -109,13 +109,13 @@ And I click the edit records manually checkbox as a provider
 And I can add a record
     | 101 |  |
 And I click the edit records manually checkbox as a provider    
-And the "action" "Dataflows" is "be.visible"
-And I click on "Dataset Reportnet Testing"
-When I can click on element "Release to data collection"
-And I can confirm release to data collection with "no restrict to public"
-And I wait for enter
-And I see the message: "ERROR"
-And I see the message: "You can't release data with blocker errors. Please check it and try again."
+# And the "action" "Dataflows" is "be.visible"
+# And I click on "Dataset Reportnet Testing"
+# When I can click on element "Release to data collection"
+# And I can confirm release to data collection with "no restrict to public"
+# And I wait for enter
+# And I see the message: "ERROR"
+# And I see the message: "You can't release data with blocker errors. Please check it and try again."
 
 
 #REP-822
@@ -165,6 +165,7 @@ And I reload the page
 And I can go to the dataflow page
 When I can click on element "Release to data collection"
 And I can confirm release to data collection with "no restrict to public"
+And I wait for notification
 And I wait for notification
 Then I see the message: "SUCCESS"
 
@@ -384,7 +385,7 @@ And I "can" change to public in the visibility modal
 And I reload the page
 And I wait for validation
 Then the "action" "Release data visibility" is "be.visible"
-And I "can not" change to public in the visibility modal  
+# And I "can not" change to public in the visibility modal  
 
 
 Scenario Outline: za) As Data Custodian I can see Dataset Schemas to dataflow

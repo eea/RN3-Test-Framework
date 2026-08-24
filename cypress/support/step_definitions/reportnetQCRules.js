@@ -177,7 +177,7 @@ When("I can {string} a table relation {string} with fields", (action,type, field
     }
     else if (action === 'Run')
     {
-      cy.get('[class*=SqlSentence_runButton] > .p-button-text').click({force:true})
+      cy.get('.SqlSentence_controlsStack__KswmA > :nth-child(2) > .p-button-text').click({force:true})
       cy.wait(2000)
       cy.get('[class*=SqlSentence_noDataMessage]')
       cy.wait(2000)

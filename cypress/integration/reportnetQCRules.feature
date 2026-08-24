@@ -488,5 +488,5 @@ And I wait for notification
 And the code rule "qc1-2" is "be.visible" on the list of rules
 Then I can view the historic changes of the rule "qc1-2"
 And I can see the history with following fields
-    | seray@gmail.com | false | true | false |
-    | seray@gmail.com | true  | true | true  |
+    | seray@abc.com | false | true | false |
+    | seray@abc.com | true  | true | true  |

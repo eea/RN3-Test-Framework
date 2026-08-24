@@ -30,7 +30,7 @@ Then(/^I can download the document$/, () => {
         })
       cy.wait(2000)
       action === 'upload' ? cy.get("span.pi-plus").click({force: true}) : cy.contains("Save").click({force: true})
-      cy.wait(2000)
+      cy.wait(5000)
     }
   );
 
