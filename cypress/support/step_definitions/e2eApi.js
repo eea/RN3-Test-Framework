@@ -329,8 +329,8 @@ Then('I can add new QC rule for table field', ()=>{
         whenCondition: {
           operator: "FIELD_AND",
           params: [
-            { operator: "FIELD_GTEQ", params: ["VALUE", 1] },
-            { operator: "FIELD_LTEQ", params: ["VALUE", 10] }
+            { operator: "FIELD_LTEQ", params: ["VALUE", 1] },
+            { operator: "FIELD_GTEQ", params: ["VALUE", 10] }
           ]
         }
       };

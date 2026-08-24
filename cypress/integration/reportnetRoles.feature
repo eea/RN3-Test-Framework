@@ -127,8 +127,8 @@ And I can click on element "Spain"
 And the "action" "Dataflow users list" is "be.visible"
 Then I can see the specified record in the table
 
-|   CUSTODIAN            |  seray@gmail.com     |
-|   CUSTODIAN            |  seray@gmail.com      |
+|   CUSTODIAN            |  seray@abc.com     |
+|   CUSTODIAN            |  seray@abc.com      |
 |   REPORTER WRITE       |  test.custodian2@abc.com     |
 |   LEAD REPORTER        |  test.provider2@abc.com       |
 |   NATIONAL COORDINATOR |  testobserver@reportnet.net  |
@@ -276,8 +276,8 @@ And I click on "Roles Reportnet Testing"
 And the "action" "Users list by country" is "be.visible"
 Then I can see the specified records in the table
 
-    | CUSTODIAN             | seray@gmail.com         |         |
-    | CUSTODIAN             | seray@gmail.com        |         |
+    | CUSTODIAN             | seray@abc.com         |         |
+    | CUSTODIAN             | seray@abc.com        |         |
     | STEWARD               | testleadreporter@reportnet.net    |         |
     | LEAD REPORTER         | test.provider2@abc.com             | Belgium |
     | LEAD REPORTER         | test.provider2@abc.com             | Spain   |

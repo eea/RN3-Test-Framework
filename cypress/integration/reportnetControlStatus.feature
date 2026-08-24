@@ -39,6 +39,16 @@ And I can confirm release to data collection with "no restrict to public"
 And I wait for notification
 And I see the message: "SUCCESS"
 
+Scenario: ba) As an Admin user, I can see the 'Silent Release to data collection' button and start it
+
+And I'm logged at Reportnet page as "userAdmin"
+And I filter the dataflow list by "name" with "Dataflow Reportnet Testing"
+And I click on "Dataflow Reportnet Testing"
+And I can click on element "Spain"
+And I can click on element "Silent Release to data collection"
+And I can confirm release to data collection with "no restrict to public"
+And I wait for notification
+
 
 Scenario: c) As an Admin I am able to delete dataset data from Control status window
 

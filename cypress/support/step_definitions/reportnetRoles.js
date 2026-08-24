@@ -12,7 +12,7 @@ Then("I can {string} a Data provider with Representative of {string} and account
       if(action === "add") {
         cy.get("[class^=p-datatable-row").children().eq(1).children().eq(1).select(provider)
         cy.contains('Lead reporter').click()
-        cy.wait(2000)
+        cy.wait(6000)
         cy.get("input:visible[placeholder='New lead reporter e-mail...']:last").type(account+'{enter}');
         
       } else if (action === 'addLast') {
@@ -25,12 +25,13 @@ Then("I can {string} a Data provider with Representative of {string} and account
       {
         cy.get("[class^=p-datatable-row").last().children().eq(1).children().eq(1).select(provider)
         cy.contains('Lead reporter').click()
-        cy.wait(1000)
+        cy.wait(3000)
         cy.get("input:visible[placeholder='New lead reporter e-mail...']:last").type(account+'{enter}');
       }
     }
     if(action === "edit") {
       cy.get("[class^=p-datatable-row").children().eq(1).children().eq(1).select(provider)
+      cy.wait(4000)
       cy.get("input:visible:last").clear().type(account+'{enter}');
     }
     if(action === 'delete') {
@@ -47,7 +48,7 @@ Then("I can {string} a Data provider with Representative of {string} and account
     } else if(action === "add") {
         cy.get("[class^=p-datatable-row").children().eq(1).children().eq(1).select(provider)
         cy.contains('Lead reporter').click()
-        cy.wait(1000)
+        cy.wait(4000)
         cy.get("input:visible[placeholder='New lead reporter e-mail...']:last").type(account+'{enter}');
         
       } else if (action === 'addLast') {
@@ -58,9 +59,10 @@ Then("I can {string} a Data provider with Representative of {string} and account
       }
       else if (action === 'addMore')
       {
+        cy.wait(3000)
         cy.get("[class^=p-datatable-row").last().children().eq(1).children().eq(1).select(provider)
         cy.contains('Lead reporter').click()
-        cy.wait(4000)
+        cy.wait(5000)
         cy.get("input:visible[placeholder='New lead reporter e-mail...']:last").type(account+'{enter}');
       }
     if(action === "edit") {

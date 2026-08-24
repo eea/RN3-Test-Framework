@@ -11,7 +11,7 @@ Then I click on the import dataset data button
 And I import a "zip" file "test export.zip" 
 Then I see the message: "SUCCESS"
 And the "action" "Notifications" is "be.visible"
-Then I see the notification "Loaded data completed at Netherlands" in the notification received list
+Then I see the notification "The import for dataset Netherlands was successful." in the notification received list
 
 # @ignore
 Scenario Outline: b) As a provider I can validate data in dataset
